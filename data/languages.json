@@ -17,330 +17,8 @@
       "install": "Download from python.org or use: pip install"
     },
     "topics": [
-      {
-        "id": "variables",
-        "title": "Variables",
-        "difficulty": "Beginner",
-        "explanation": "Variables are names that store data values. In Python, you don't need to declare the type — it's inferred automatically.",
-        "keyTerms": [
-          {"term": "Variable", "definition": "A name attached to a value."},
-          {"term": "Assignment", "definition": "Giving a value to a variable using '='."}
-        ],
-        "codeExample": [
-          "x = 5",
-          "message = 'Hello'"
-        ],
-        "expectedOutput": "",
-        "starterCode": "",
-        "solution": [
-          "name = 'Alice'",
-          "age = 30"
-        ],
-        "commonMistakes": [
-          "Using undefined variables.",
-          "Trying to declare types like in C (not needed)."
-        ],
-        "challenge": "Create a variable called greeting with the value 'Welcome'.",
-        "challengeHint": "Assign using the '=' sign.",
-        "challengeSolution": [
-          "greeting = 'Welcome'"
-        ],
-        "terminalNote": "Run with python file.py"
-      },
-      {
-        "id": "lists",
-        "title": "Lists",
-        "difficulty": "Beginner",
-        "explanation": "Lists are Python's built-in data structure for holding an ordered sequence of items.",
-        "keyTerms": [
-          {"term": "List", "definition": "An ordered, mutable collection of items."},
-          {"term": "Index", "definition": "The position of an item in a list."}
-        ],
-        "codeExample": [
-          "numbers = [1, 2, 3]",
-          "print(numbers[1])"
-        ],
-        "expectedOutput": "2",
-        "starterCode": "",
-        "solution": [
-          "fruits = ['apple', 'banana', 'cherry']"
-        ],
-        "commonMistakes": [
-          "Indexing out of range.",
-          "Using parentheses instead of brackets."
-        ],
-        "challenge": "Make a list of 3 colors and print the last one.",
-        "challengeHint": "Remember that lists use brackets [].",
-        "challengeSolution": [
-          "colors = ['red', 'green', 'blue']",
-          "print(colors[2])"
-        ],
-        "terminalNote": "Run with python file.py"
-      },
-      {
-        "id": "loops",
-        "title": "Loops",
-        "difficulty": "Beginner",
-        "explanation": "Loops allow you to repeat a block of code multiple times. The 'for' loop iterates over items.",
-        "keyTerms": [
-          {"term": "For loop", "definition": "Repeats code for each item in a sequence."},
-          {"term": "Iteration", "definition": "One round through a loop."}
-        ],
-        "codeExample": [
-          "for i in range(3):",
-          "    print(i)"
-        ],
-        "expectedOutput": "0\n1\n2",
-        "starterCode": "for item in ____:\n    print(item)",
-        "solution": [
-          "for item in [1, 2, 3]:",
-          "    print(item)"
-        ],
-        "commonMistakes": [
-          "Forgetting indentation.",
-          "Misusing range parameters."
-        ],
-        "challenge": "Print 'Hello' five times using a loop.",
-        "challengeHint": "Use range(5) to loop five times.",
-        "challengeSolution": [
-          "for _ in range(5):",
-          "    print('Hello')"
-        ],
-        "terminalNote": "Run with python file.py"
-      },
-      {
-        "id": "functions",
-        "title": "Functions",
-        "difficulty": "Beginner",
-        "explanation": "Functions in Python group code into reusable blocks. Use 'def' to define one.",
-        "keyTerms": [
-          {"term": "Function", "definition": "A block of code that can be called by name."},
-          {"term": "Parameter", "definition": "A variable in the function definition."}
-        ],
-        "codeExample": [
-          "def greet(name):",
-          "    print(f'Hello, {name}!')",
-          "greet('Bob')"
-        ],
-        "expectedOutput": "Hello, Bob!",
-        "starterCode": "def ____():\n    print('Hi')",
-        "solution": [
-          "def say_hello():",
-          "    print('Hi')"
-        ],
-        "commonMistakes": [
-          "Missing colon in function definition.",
-          "Not using indentation."
-        ],
-        "challenge": "Write a function add(a, b) that returns the sum.",
-        "challengeHint": "Use 'return' to send a value back.",
-        "challengeSolution": [
-          "def add(a, b):",
-          "    return a + b"
-        ],
-        "terminalNote": "Run with python file.py"
-      },
-      {
-        "id": "dictionaries",
-        "title": "Dictionaries",
-        "difficulty": "Intermediate",
-        "explanation": "Dictionaries store key-value pairs and allow for fast lookup by key.",
-        "keyTerms": [
-          {"term": "Dictionary", "definition": "A collection of key-value pairs."},
-          {"term": "Key", "definition": "The identifier for a value in a dictionary."}
-        ],
-        "codeExample": [
-          "person = {'name': 'Eve', 'age': 25}",
-          "print(person['name'])"
-        ],
-        "expectedOutput": "Eve",
-        "starterCode": "",
-        "solution": [
-          "car = {'make': 'Toyota', 'year': 2020}"
-        ],
-        "commonMistakes": [
-          "Using parentheses instead of curly braces.",
-          "Missing quotes around string keys."
-        ],
-        "challenge": "Create a dictionary for a book with keys: title and author.",
-        "challengeHint": "Use curly braces and key: value pairs.",
-        "challengeSolution": [
-          "book = {'title': '1984', 'author': 'Orwell'}"
-        ],
-        "terminalNote": "Run with python file.py"
-      },
-      {
-        "id": "classes",
-        "title": "Classes",
-        "difficulty": "Intermediate",
-        "explanation": "Classes provide a way to create user-defined objects with data and functions.",
-        "keyTerms": [
-          {"term": "Class", "definition": "A template for creating objects."},
-          {"term": "Object", "definition": "An instance of a class."}
-        ],
-        "codeExample": [
-          "class Dog:",
-          "    def __init__(self, name):",
-          "        self.name = name",
-          "dog = Dog('Rex')",
-          "print(dog.name)"
-        ],
-        "expectedOutput": "Rex",
-        "starterCode": "",
-        "solution": [
-          "class Cat:",
-          "    def __init__(self, name):",
-          "        self.name = name"
-        ],
-        "commonMistakes": [
-          "Forgetting 'self' in methods.",
-          "Omitting __init__."
-        ],
-        "challenge": "Create a class Car with attribute model.",
-        "challengeHint": "Use __init__ for initialization.",
-        "challengeSolution": [
-          "class Car:",
-          "    def __init__(self, model):",
-          "        self.model = model"
-        ],
-        "terminalNote": "Run with python file.py"
-      },
-      {
-        "id": "fileio",
-        "title": "File IO",
-        "difficulty": "Intermediate",
-        "explanation": "File IO allows you to read from and write to files using built-in functions like open().",
-        "keyTerms": [
-          {"term": "File Object", "definition": "An object representing a file."},
-          {"term": "Mode", "definition": "Specifies reading or writing ('r', 'w')."}
-        ],
-        "codeExample": [
-          "with open('example.txt', 'w') as f:",
-          "    f.write('Hello World')"
-        ],
-        "expectedOutput": "",
-        "starterCode": "",
-        "solution": [
-          "with open('myfile.txt', 'r') as f:",
-          "    content = f.read()"
-        ],
-        "commonMistakes": [
-          "Forgetting to close the file.",
-          "Wrong file path."
-        ],
-        "challenge": "Write code to append 'Done' to a file 'tasks.txt'.",
-        "challengeHint": "Open file with mode 'a' for append.",
-        "challengeSolution": [
-          "with open('tasks.txt', 'a') as f:",
-          "    f.write('Done\\n')"
-        ],
-        "terminalNote": "Run with python file.py"
-      },
-      {
-        "id": "modules",
-        "title": "Modules",
-        "difficulty": "Intermediate",
-        "explanation": "Modules group reusable code. You import a module with 'import'.",
-        "keyTerms": [
-          {"term": "Module", "definition": "A file containing Python code."},
-          {"term": "Import", "definition": "Brings functions or classes into your script."}
-        ],
-        "codeExample": [
-          "import math",
-          "print(math.sqrt(16))"
-        ],
-        "expectedOutput": "4.0",
-        "starterCode": "",
-        "solution": [
-          "import sys",
-          "print(sys.version)"
-        ],
-        "commonMistakes": [
-          "Misspelling module names.",
-          "Forgetting to install external modules."
-        ],
-        "challenge": "Import the random module and print a random number between 1 and 10.",
-        "challengeHint": "Use random.randint.",
-        "challengeSolution": [
-          "import random",
-          "print(random.randint(1, 10))"
-        ],
-        "terminalNote": "Run with python file.py"
-      },
-      {
-        "id": "exceptions",
-        "title": "Exceptions",
-        "difficulty": "Intermediate",
-        "explanation": "Exceptions are errors detected during execution. Use try/except to handle them.",
-        "keyTerms": [
-          {"term": "Exception", "definition": "An event that disrupts normal program flow."},
-          {"term": "try/except", "definition": "Block that catches and handles errors."}
-        ],
-        "codeExample": [
-          "try:",
-          "    a = 1 / 0",
-          "except ZeroDivisionError:",
-          "    print('Cannot divide by zero')"
-        ],
-        "expectedOutput": "Cannot divide by zero",
-        "starterCode": "",
-        "solution": [
-          "try:",
-          "    value = int('a')",
-          "except ValueError:",
-          "    print('Not a number')"
-        ],
-        "commonMistakes": [
-          "Missing indentation.",
-          "Catching incorrect exception types."
-        ],
-        "challenge": "Handle file not found when opening 'abc.txt'.",
-        "challengeHint": "Catch FileNotFoundError.",
-        "challengeSolution": [
-          "try:",
-          "    open('abc.txt')",
-          "except FileNotFoundError:",
-          "    print('File not found')"
-        ],
-        "terminalNote": "Run with python file.py"
-      },
-      {
-        "id": "apis",
-        "title": "APIs",
-        "difficulty": "Advanced",
-        "explanation": "You can access web APIs using modules like 'requests' to fetch data from the internet.",
-        "keyTerms": [
-          {"term": "API", "definition": "Application Programming Interface, a way for programs to talk to each other."},
-          {"term": "HTTP Request", "definition": "A message sent to a server to retrieve or send data."}
-        ],
-        "codeExample": [
-          "import requests",
-          "response = requests.get('https://api.github.com')",
-          "print(response.status_code)"
-        ],
-        "expectedOutput": "200",
-        "starterCode": "",
-        "solution": [
-          "import requests",
-          "data = requests.get('https://api.github.com')",
-          "print(data.json())"
-        ],
-        "commonMistakes": [
-          "Forgetting to use 'pip install requests'.",
-          "Not checking status code."
-        ],
-        "challenge": "Fetch JSON data from a public API and print a value.",
-        "challengeHint": "Use .json() method on the response.",
-        "challengeSolution": [
-          "import requests",
-          "res = requests.get('https://api.agify.io/?name=michael')",
-          "print(res.json()['age'])"
-        ],
-        "terminalNote": "Run with python file.py"
-      }
     ]
   },
-
   {
     "id": "javascript",
     "name": "JavaScript",
@@ -359,339 +37,8 @@
       "install": "Install Node.js from nodejs.org"
     },
     "topics": [
-      {
-        "id": "variables",
-        "title": "Variables",
-        "difficulty": "Beginner",
-        "explanation": "Variables in JavaScript can be declared using var, let, or const. Use let or const for modern code.",
-        "keyTerms": [
-          {"term": "Variable", "definition": "A container for storing data."},
-          {"term": "Declaration", "definition": "Creating a new variable."}
-        ],
-        "codeExample": [
-          "let x = 10;",
-          "const name = 'Joe';"
-        ],
-        "expectedOutput": "",
-        "starterCode": "",
-        "solution": [
-          "let age = 25;"
-        ],
-        "commonMistakes": [
-          "Using var when let/const is preferred.",
-          "Re-declaring a const variable."
-        ],
-        "challenge": "Declare a variable city with value 'Paris'.",
-        "challengeHint": "Use let or const.",
-        "challengeSolution": [
-          "let city = 'Paris';"
-        ],
-        "terminalNote": "Run with node file.js"
-      },
-      {
-        "id": "arrays",
-        "title": "Arrays",
-        "difficulty": "Beginner",
-        "explanation": "Arrays are used to store multiple values in a single variable.",
-        "keyTerms": [
-          {"term": "Array", "definition": "List-like object for storing sequences."},
-          {"term": "Index", "definition": "Numeric position of an item in an array."}
-        ],
-        "codeExample": [
-          "let scores = [90, 80, 70];",
-          "console.log(scores[1]);"
-        ],
-        "expectedOutput": "80",
-        "starterCode": "",
-        "solution": [
-          "let fruits = ['apple', 'banana', 'orange'];"
-        ],
-        "commonMistakes": [
-          "Trying to access out of bounds index.",
-          "Using () instead of []."
-        ],
-        "challenge": "Make an array of 3 programming languages and print the first.",
-        "challengeHint": "Arrays use bracket notation [].",
-        "challengeSolution": [
-          "let langs = ['Python', 'JavaScript', 'Go'];",
-          "console.log(langs[0]);"
-        ],
-        "terminalNote": "Run with node file.js"
-      },
-      {
-        "id": "functions",
-        "title": "Functions",
-        "difficulty": "Beginner",
-        "explanation": "Functions are reusable blocks of code. Declare them using function or arrow syntax.",
-        "keyTerms": [
-          {"term": "Function", "definition": "Code you can call with arguments."},
-          {"term": "Parameter", "definition": "A variable to accept value in the function."}
-        ],
-        "codeExample": [
-          "function greet(name) {",
-          "  console.log('Hello, ' + name);",
-          "}",
-          "greet('Rob');"
-        ],
-        "expectedOutput": "Hello, Rob",
-        "starterCode": "",
-        "solution": [
-          "const add = (a, b) => a + b;"
-        ],
-        "commonMistakes": [
-          "Forgetting function keyword.",
-          "Missing return in regular function."
-        ],
-        "challenge": "Write a function sayHello that logs 'Hi!'.",
-        "challengeHint": "Use function keyword or arrow function.",
-        "challengeSolution": [
-          "function sayHello() {",
-          "  console.log('Hi!');",
-          "}"
-        ],
-        "terminalNote": "Run with node file.js"
-      },
-      {
-        "id": "dom",
-        "title": "DOM",
-        "difficulty": "Intermediate",
-        "explanation": "The Document Object Model is a programming interface for web documents. You can interact with HTML using JavaScript.",
-        "keyTerms": [
-          {"term": "DOM", "definition": "A tree representation of web page structure."},
-          {"term": "Element", "definition": "A single node in the DOM, like <div>."}
-        ],
-        "codeExample": [
-          "document.getElementById('myBtn').textContent = 'Click Me!';"
-        ],
-        "expectedOutput": "",
-        "starterCode": "",
-        "solution": [
-          "document.querySelector('h1').textContent = 'Hello DOM';"
-        ],
-        "commonMistakes": [
-          "Selecting non-existent elements.",
-          "Misspelling query selector."
-        ],
-        "challenge": "Change the background color of the body to yellow.",
-        "challengeHint": "Use document.body.style.",
-        "challengeSolution": [
-          "document.body.style.backgroundColor = 'yellow';"
-        ],
-        "terminalNote": "Run in browser console"
-      },
-      {
-        "id": "events",
-        "title": "Events",
-        "difficulty": "Intermediate",
-        "explanation": "Events let JavaScript respond to user actions like clicks or keypresses.",
-        "keyTerms": [
-          {"term": "Event", "definition": "An action by the user or browser."},
-          {"term": "Event Listener", "definition": "A function that runs when an event occurs."}
-        ],
-        "codeExample": [
-          "document.getElementById('btn').addEventListener('click', function() {",
-          "  alert('Clicked!');",
-          "});"
-        ],
-        "expectedOutput": "",
-        "starterCode": "",
-        "solution": [
-          "window.addEventListener('load', function() {",
-          "  console.log('Page loaded');",
-          "});"
-        ],
-        "commonMistakes": [
-          "Forgetting to pass function as argument.",
-          "Typo in event type."
-        ],
-        "challenge": "Log 'Button clicked' when a button is pressed.",
-        "challengeHint": "Use addEventListener with 'click'.",
-        "challengeSolution": [
-          "document.querySelector('button').addEventListener('click', function() {",
-          "  console.log('Button clicked');",
-          "});"
-        ],
-        "terminalNote": "Run in browser with a button element"
-      },
-      {
-        "id": "promises",
-        "title": "Promises",
-        "difficulty": "Intermediate",
-        "explanation": "Promises handle asynchronous operations. They represent a value not available yet.",
-        "keyTerms": [
-          {"term": "Promise", "definition": "An object for asynchronous results."},
-          {"term": ".then()", "definition": "Handles resolved promise."}
-        ],
-        "codeExample": [
-          "let p = new Promise(function(resolve) { resolve(42); });",
-          "p.then(x => console.log(x));"
-        ],
-        "expectedOutput": "42",
-        "starterCode": "",
-        "solution": [
-          "Promise.resolve('OK').then(console.log);"
-        ],
-        "commonMistakes": [
-          "Not returning a promise.",
-          "Forgetting to handle errors."
-        ],
-        "challenge": "Create a promise that resolves to 'Done'.",
-        "challengeHint": "Use new Promise.",
-        "challengeSolution": [
-          "let p = new Promise(resolve => resolve('Done'));",
-          "p.then(console.log);"
-        ],
-        "terminalNote": "Run with node file.js"
-      },
-      {
-        "id": "asyncawait",
-        "title": "Async Await",
-        "difficulty": "Intermediate",
-        "explanation": "'async' and 'await' provide a way to write asynchronous code that looks synchronous.",
-        "keyTerms": [
-          {"term": "async", "definition": "Marks a function as asynchronous."},
-          {"term": "await", "definition": "Waits for promise resolution."}
-        ],
-        "codeExample": [
-          "async function foo() {",
-          "  let result = await Promise.resolve(10);",
-          "  console.log(result);",
-          "}",
-          "foo();"
-        ],
-        "expectedOutput": "10",
-        "starterCode": "",
-        "solution": [
-          "async function main() {",
-          "  await Promise.resolve();",
-          "}"
-        ],
-        "commonMistakes": [
-          "Using await outside an async function.",
-          "Missing error handling."
-        ],
-        "challenge": "Write an async function that awaits 1 second then logs 'Waited'.",
-        "challengeHint": "Use setTimeout with a Promise.",
-        "challengeSolution": [
-          "async function waitLog() {",
-          "  await new Promise(r => setTimeout(r, 1000));",
-          "  console.log('Waited');",
-          "}"
-        ],
-        "terminalNote": "Run with node file.js"
-      },
-      {
-        "id": "classes",
-        "title": "Classes",
-        "difficulty": "Intermediate",
-        "explanation": "Classes provide a template for creating objects. Methods and properties are included.",
-        "keyTerms": [
-          {"term": "Class", "definition": "A blueprint for objects."},
-          {"term": "Constructor", "definition": "Method for initializing an object."}
-        ],
-        "codeExample": [
-          "class Car {",
-          "  constructor(model) {",
-          "    this.model = model;",
-          "  }",
-          "}",
-          "let c = new Car('Ford');",
-          "console.log(c.model);"
-        ],
-        "expectedOutput": "Ford",
-        "starterCode": "",
-        "solution": [
-          "class Animal {",
-          "  constructor(name) {",
-          "    this.name = name;",
-          "  }",
-          "}"
-        ],
-        "commonMistakes": [
-          "Forgetting 'this'.",
-          "Omitting constructor."
-        ],
-        "challenge": "Create a class Book with title property and a constructor.",
-        "challengeHint": "Set this.title inside constructor.",
-        "challengeSolution": [
-          "class Book {",
-          "  constructor(title) {",
-          "    this.title = title;",
-          "  }",
-          "}"
-        ],
-        "terminalNote": "Run with node file.js"
-      },
-      {
-        "id": "modules",
-        "title": "Modules",
-        "difficulty": "Advanced",
-        "explanation": "Modules allow you to organize JavaScript in separate files and import/export pieces as needed.",
-        "keyTerms": [
-          {"term": "Module", "definition": "ES6 feature to encapsulate code in files."},
-          {"term": "Export", "definition": "Makes a variable/function accessible in other files."}
-        ],
-        "codeExample": [
-          "// math.js",
-          "export function add(a, b) { return a + b }",
-          "// main.js",
-          "import { add } from './math.js';",
-          "console.log(add(2, 3));"
-        ],
-        "expectedOutput": "5",
-        "starterCode": "",
-        "solution": [
-          "// user.js",
-          "export const user = { name: 'Mo' };"
-        ],
-        "commonMistakes": [
-          "Forgetting to use '.js' in import path.",
-          "Not setting 'type': 'module' in package.json."
-        ],
-        "challenge": "Export a function greet() from a file and import it elsewhere.",
-        "challengeHint": "Use export and import syntax.",
-        "challengeSolution": [
-          "// greet.js",
-          "export function greet() { console.log('Hi!'); }",
-          "// main.js",
-          "import { greet } from './greet.js';",
-          "greet();"
-        ],
-        "terminalNote": "Use ES6 modules with node (requires 'type': 'module')"
-      },
-      {
-        "id": "fetchapi",
-        "title": "Fetch API",
-        "difficulty": "Advanced",
-        "explanation": "Fetch API lets JavaScript get resources from servers via HTTP requests.",
-        "keyTerms": [
-          {"term": "Fetch", "definition": "A method to make network requests."},
-          {"term": "Promise", "definition": "Used to handle async result of a fetch."}
-        ],
-        "codeExample": [
-          "fetch('https://api.github.com').then(res => res.json()).then(console.log);"
-        ],
-        "expectedOutput": "",
-        "starterCode": "",
-        "solution": [
-          "fetch('https://api.github.com').then(r => r.json()).then(data => console.log(data));"
-        ],
-        "commonMistakes": [
-          "Not returning or waiting for .json()",
-          "Not handling errors."
-        ],
-        "challenge": "Fetch JSON from an API and log a top-level key.",
-        "challengeHint": "Use .then() and .json().",
-        "challengeSolution": [
-          "fetch('https://api.agify.io?name=bob')",
-          "  .then(res => res.json())",
-          "  .then(data => console.log(data.age));"
-        ],
-        "terminalNote": "Run in browser console"
-      }
     ]
   },
-
   {
     "id": "typescript",
     "name": "TypeScript",
@@ -710,325 +57,478 @@
       "install": "npm install -g typescript"
     },
     "topics": [
+    ]
+  },
+
+  {
+    "id": "c",
+    "name": "C",
+    "type": "Compiled",
+    "year": 1972,
+    "creator": "Dennis Ritchie",
+    "difficulty": "Intermediate",
+    "description": "C is a general-purpose programming language that provides a foundational base for many modern languages. It is known for performance and control.",
+    "usedFor": "Operating systems, embedded systems, system programming.",
+    "funFact": "The Unix operating system was written in C.",
+    "color": "#A8B9CC",
+    "terminalCommands": {
+      "windows": "gcc file.c -o file.exe && file.exe",
+      "mac": "gcc file.c -o file && ./file",
+      "linux": "gcc file.c -o file && ./file",
+      "install": "Install GCC from mingw (Windows) or via package manager (Linux/Mac)."
+    },
+    "topics": [
       {
         "id": "variables",
         "title": "Variables",
         "difficulty": "Beginner",
-        "explanation": "Variables in TypeScript are declared with let, const, or var, but you can also provide a type annotation.",
+        "explanation": "Variables in C are named memory locations. You must declare the type of variable before using it.",
         "keyTerms": [
-          {"term": "Type Annotation", "definition": "Explicitly assigning a type to a variable."},
-          {"term": "let/const", "definition": "Modern ways to declare variables."}
+          {"term": "Declaration", "definition": "Specifies the variable name and type."},
+          {"term": "Initialization", "definition": "Assigning a value at the time of declaration."}
         ],
         "codeExample": [
-          "let count: number = 5;",
-          "const name: string = 'TypeScript';"
+          "int a = 5;",
+          "float b = 2.0;"
         ],
         "expectedOutput": "",
         "starterCode": "",
         "solution": [
-          "let age: number = 23;"
+          "int num1 = 10;",
+          "char letter = 'A';"
         ],
         "commonMistakes": [
-          "Assigning value not matching the type.",
-          "Using var unnecessarily."
+          "Using variables without declaring.",
+          "Wrong data type assignments."
         ],
-        "challenge": "Declare a variable 'active' of type boolean set to true.",
-        "challengeHint": "Use let and : boolean.",
+        "challenge": "Declare an integer variable 'age' and assign it 21.",
+        "challengeHint": "Use int type and '=' operator.",
         "challengeSolution": [
-          "let active: boolean = true;"
+          "int age = 21;"
         ],
-        "terminalNote": "Compile with tsc file.ts then run node file.js"
+        "terminalNote": "Compile with gcc file.c -o file; run with ./file"
       },
       {
-        "id": "types",
-        "title": "Types",
+        "id": "arrays",
+        "title": "Arrays",
         "difficulty": "Beginner",
-        "explanation": "TypeScript supports basic types like number, string, boolean, as well as custom types and interfaces.",
+        "explanation": "Arrays store multiple values of the same type in contiguous memory locations.",
         "keyTerms": [
-          {"term": "Primitive", "definition": "Built-in connected types, e.g. number, string."},
-          {"term": "Interface", "definition": "Declaration of shape for objects."}
+          {"term": "Array", "definition": "A collection of variables of the same type."},
+          {"term": "Index", "definition": "Position of element in the array, beginning from 0."}
         ],
         "codeExample": [
-          "interface User {",
-          "  name: string;",
-          "  age: number;",
-          "}",
-          "const user: User = { name: 'Ava', age: 28 };"
+          "int scores[3] = {100, 95, 90};",
+          "printf(\"%d\", scores[1]);"
         ],
-        "expectedOutput": "",
+        "expectedOutput": "95",
         "starterCode": "",
         "solution": [
-          "type Point = { x: number; y: number; };"
+          "float nums[2] = {1.2, 3.4};"
         ],
         "commonMistakes": [
-          "Misspelled property names.",
-          "Assigning values of wrong type."
+          "Accessing index out of bounds.",
+          "Incorrect initialization syntax."
         ],
-        "challenge": "Define a Person interface with name:string and age:number.",
-        "challengeHint": "Start with interface then curly braces.",
+        "challenge": "Declare an array of 5 integers.",
+        "challengeHint": "Use int arr[5];",
         "challengeSolution": [
-          "interface Person {",
-          "  name: string;",
-          "  age: number;",
-          "}"
+          "int arr[5];"
         ],
-        "terminalNote": "Compile with tsc file.ts"
+        "terminalNote": "Compile with gcc file.c -o file"
+      },
+      {
+        "id": "pointers",
+        "title": "Pointers",
+        "difficulty": "Intermediate",
+        "explanation": "A pointer is a variable that stores the memory address of another variable.",
+        "keyTerms": [
+          {"term": "Pointer", "definition": "Variable that holds a memory address."},
+          {"term": "Dereference", "definition": "Access the value a pointer points to."}
+        ],
+        "codeExample": [
+          "int n = 10;",
+          "int *p = &n;",
+          "printf(\"%d\", *p);"
+        ],
+        "expectedOutput": "10",
+        "starterCode": "",
+        "solution": [
+          "double val = 3.14;",
+          "double *ptr = &val;"
+        ],
+        "commonMistakes": [
+          "Dereferencing uninitialized pointers.",
+          "Using wrong types in pointer assignment."
+        ],
+        "challenge": "Declare a pointer to int named 'iptr'.",
+        "challengeHint": "int *iptr;",
+        "challengeSolution": [
+          "int *iptr;"
+        ],
+        "terminalNote": "Compile with gcc file.c -o file"
       },
       {
         "id": "functions",
         "title": "Functions",
         "difficulty": "Beginner",
-        "explanation": "Functions can have typed parameters and return values to catch mistakes early.",
+        "explanation": "Functions group code into reusable units. You must declare a return type and parameters.",
         "keyTerms": [
-          {"term": "Function Signature", "definition": "Declaration including parameter and return types."}
+          {"term": "Function", "definition": "Named section of code that performs a task."},
+          {"term": "Parameter", "definition": "Variable used to receive data inside function."}
         ],
         "codeExample": [
-          "function add(a: number, b: number): number {",
+          "int add(int a, int b) {",
           "  return a + b;",
           "}"
         ],
         "expectedOutput": "",
         "starterCode": "",
         "solution": [
-          "const double = (x: number): number => x * 2;"
-        ],
-        "commonMistakes": [
-          "Forgetting to specify return type.",
-          "Type mismatch in function body."
-        ],
-        "challenge": "Declare a function greet that takes a string and returns void.",
-        "challengeHint": "Use (name: string): void.",
-        "challengeSolution": [
-          "function greet(name: string): void {",
-          "  console.log('Hello, ' + name);",
+          "void greet() {",
+          "  printf(\"Hello\");",
           "}"
         ],
-        "terminalNote": "Compile with tsc file.ts"
-      },
-      {
-        "id": "interfaces",
-        "title": "Interfaces",
-        "difficulty": "Intermediate",
-        "explanation": "Interfaces define the shape of objects, making code robust and self-documenting.",
-        "keyTerms": [
-          {"term": "Interface", "definition": "Type describing object structure."},
-          {"term": "Implement", "definition": "An object follows an interface shape."}
-        ],
-        "codeExample": [
-          "interface Product {",
-          "  id: number;",
-          "  price: number;",
-          "}",
-          "const pen: Product = { id: 1, price: 2.5 };"
-        ],
-        "expectedOutput": "",
-        "starterCode": "",
-        "solution": [
-          "interface Animal { name: string; age: number }"
-        ],
         "commonMistakes": [
-          "Omitting required properties.",
-          "Name/type typos."
+          "Not specifying return type.",
+          "Forgetting to declare function prototypes."
         ],
-        "challenge": "Define an interface Book with title:string.",
-        "challengeHint": "interface Book { title: string }",
+        "challenge": "Write a function multiply that returns product of two ints.",
+        "challengeHint": "Return int, take two int parameters.",
         "challengeSolution": [
-          "interface Book {",
-          "  title: string;",
+          "int multiply(int x, int y) {",
+          "  return x * y;",
           "}"
         ],
-        "terminalNote": "Compile with tsc file.ts"
+        "terminalNote": "Compile with gcc file.c -o file"
       },
       {
-        "id": "classes",
-        "title": "Classes",
+        "id": "structs",
+        "title": "Structs",
         "difficulty": "Intermediate",
-        "explanation": "TypeScript classes let you structure code using object-oriented programming with type safety.",
+        "explanation": "Structs are custom data types that group variables under one name.",
         "keyTerms": [
-          {"term": "Class", "definition": "A user-defined type."},
-          {"term": "Member", "definition": "A property or method of a class."}
+          {"term": "Struct", "definition": "User-defined data type grouping variables."},
+          {"term": "Member", "definition": "Individual variable in a struct."}
         ],
         "codeExample": [
-          "class Point {",
-          "  constructor(public x: number, public y: number) {}",
-          "}",
-          "const pt = new Point(2, 3);"
+          "struct Point { int x; int y; };",
+          "struct Point p = {2, 3};"
         ],
         "expectedOutput": "",
         "starterCode": "",
         "solution": [
-          "class User { name: string; constructor(name: string) { this.name = name } }"
+          "struct Car { char model[20]; int year; };"
         ],
         "commonMistakes": [
-          "Omitting access modifiers.",
-          "Missing 'this.'"
+          "Forgetting semicolon after struct definition.",
+          "Accessing members with dot operator incorrectly."
         ],
-        "challenge": "Create a class Person with a private id:number.",
-        "challengeHint": "Use private keyword.",
+        "challenge": "Declare a struct Student with name and grade.",
+        "challengeHint": "Use char array for name, int for grade.",
         "challengeSolution": [
-          "class Person {",
-          "  private id: number;",
-          "  constructor(id: number) { this.id = id; }",
+          "struct Student { char name[50]; int grade; };"
+        ],
+        "terminalNote": "Compile with gcc file.c -o file"
+      },
+      {
+        "id": "fileio",
+        "title": "File IO",
+        "difficulty": "Intermediate",
+        "explanation": "C allows reading and writing files using FILE pointer and functions like fopen, fprintf, fscanf.",
+        "keyTerms": [
+          {"term": "FILE pointer", "definition": "Pointer to structure controlling a file."},
+          {"term": "fopen", "definition": "Opens a file."}
+        ],
+        "codeExample": [
+          "FILE *f = fopen(\"test.txt\", \"w\");",
+          "fprintf(f, \"Hello\");",
+          "fclose(f);"
+        ],
+        "expectedOutput": "",
+        "starterCode": "",
+        "solution": [
+          "FILE *f = fopen(\"out.txt\", \"r\");",
+          "if (f) fclose(f);"
+        ],
+        "commonMistakes": [
+          "Forgetting to close the file.",
+          "Not checking if file opened successfully."
+        ],
+        "challenge": "Open a file data.txt for appending.",
+        "challengeHint": "Use mode \"a\".",
+        "challengeSolution": [
+          "FILE *f = fopen(\"data.txt\", \"a\");"
+        ],
+        "terminalNote": "Compile with gcc file.c -o file"
+      },
+      {
+        "id": "memory",
+        "title": "Memory",
+        "difficulty": "Intermediate",
+        "explanation": "C gives direct control over memory allocation with malloc and free.",
+        "keyTerms": [
+          {"term": "malloc", "definition": "Allocates a block of memory."},
+          {"term": "free", "definition": "Releases memory back to the system."}
+        ],
+        "codeExample": [
+          "int *arr = malloc(3 * sizeof(int));",
+          "free(arr);"
+        ],
+        "expectedOutput": "",
+        "starterCode": "",
+        "solution": [
+          "float *p = malloc(10 * sizeof(float));",
+          "free(p);"
+        ],
+        "commonMistakes": [
+          "Forgetting to free memory.",
+          "Dereferencing freed pointers."
+        ],
+        "challenge": "Allocate memory for 5 chars.",
+        "challengeHint": "Use malloc and sizeof.",
+        "challengeSolution": [
+          "char *buf = malloc(5 * sizeof(char));"
+        ],
+        "terminalNote": "Compile with gcc file.c -o file"
+      },
+      {
+        "id": "strings",
+        "title": "Strings",
+        "difficulty": "Intermediate",
+        "explanation": "Strings in C are arrays of characters ending with null character.",
+        "keyTerms": [
+          {"term": "Null terminator", "definition": "Special '\\0' character marking string end."},
+          {"term": "char array", "definition": "An array of type char."}
+        ],
+        "codeExample": [
+          "char name[] = \"Bob\";",
+          "printf(\"%s\", name);"
+        ],
+        "expectedOutput": "Bob",
+        "starterCode": "",
+        "solution": [
+          "char hello[6] = \"Hello\";"
+        ],
+        "commonMistakes": [
+          "Omitting space for null character.",
+          "Treating char* as int."
+        ],
+        "challenge": "Print length of string \"Hello\".",
+        "challengeHint": "Use strlen from string.h.",
+        "challengeSolution": [
+          "#include <string.h>",
+          "printf(\"%zu\", strlen(\"Hello\"));"
+        ],
+        "terminalNote": "Compile with gcc file.c -o file"
+      },
+      {
+        "id": "loops",
+        "title": "Loops",
+        "difficulty": "Beginner",
+        "explanation": "Loops are used to repeat a block of code for a certain number of times or until a condition is met.",
+        "keyTerms": [
+          {"term": "for loop", "definition": "Repeats code a specific number of times."},
+          {"term": "while loop", "definition": "Repeats code while a condition holds."}
+        ],
+        "codeExample": [
+          "for(int i=0;i<3;i++)",
+          "    printf(\"%d\\n\",i);"
+        ],
+        "expectedOutput": "0\n1\n2",
+        "starterCode": "",
+        "solution": [
+          "int j = 0;",
+          "while(j < 2) {",
+          " printf(\"%d\", j);",
+          " j++;",
           "}"
         ],
-        "terminalNote": "Compile with tsc file.ts"
+        "commonMistakes": [
+          "Infinite loops from bad conditions.",
+          "Off-by-one errors."
+        ],
+        "challenge": "Print numbers 1 to 5 using a loop.",
+        "challengeHint": "Start at 1, end at <=5.",
+        "challengeSolution": [
+          "for(int i=1; i<=5; i++)",
+          "    printf(\"%d\\n\", i);"
+        ],
+        "terminalNote": "Compile with gcc file.c -o file"
       },
       {
-        "id": "generics",
-        "title": "Generics",
+        "id": "preprocessor",
+        "title": "Preprocessor",
         "difficulty": "Intermediate",
-        "explanation": "Generics enable classes and functions to work with different types while maintaining type safety.",
+        "explanation": "The C preprocessor runs before compilation, handling tasks like including files, defining macros, and conditional code.",
         "keyTerms": [
-          {"term": "Generic", "definition": "A type variable for flexible functions/classes."}
+          {"term": "#include", "definition": "Inserts another file's contents."},
+          {"term": "#define", "definition": "Defines constants or macros."}
         ],
         "codeExample": [
-          "function identity<T>(x: T): T {",
-          "  return x;",
-          "}",
-          "let val = identity<string>('test');"
+          "#define PI 3.14",
+          "printf(\"%f\", PI);"
+        ],
+        "expectedOutput": "3.140000",
+        "starterCode": "",
+        "solution": [
+          "#include <stdio.h>",
+          "#define SIZE 10"
+        ],
+        "commonMistakes": [
+          "Using macros as variables.",
+          "Misspelling directive names."
+        ],
+        "challenge": "Define a macro SQUARE(x) that multiplies x by itself.",
+        "challengeHint": "#define SQUARE(x) ((x)*(x))",
+        "challengeSolution": [
+          "#define SQUARE(x) ((x)*(x))"
+        ],
+        "terminalNote": "Compile with gcc file.c -o file"
+      }
+    ]
+  },
+
+  {
+    "id": "cpp",
+    "name": "C++",
+    "type": "Compiled",
+    "year": 1985,
+    "creator": "Bjarne Stroustrup",
+    "difficulty": "Advanced",
+    "description": "C++ extends the C language with object-oriented, generic, and functional features. It is used for performance-critical applications.",
+    "usedFor": "System/software, games, real-time, embedded, high-performance computing.",
+    "funFact": "C++ was originally named 'C with Classes'.",
+    "color": "#00599C",
+    "terminalCommands": {
+      "windows": "g++ file.cpp -o file.exe && file.exe",
+      "mac": "g++ file.cpp -o file && ./file",
+      "linux": "g++ file.cpp -o file && ./file",
+      "install": "Install g++ from mingw (Windows) or via package manager (Linux/Mac)."
+    },
+    "topics": [
+      {
+        "id": "variables",
+        "title": "Variables",
+        "difficulty": "Beginner",
+        "explanation": "Variables store data in C++. You must specify the type explicitly for strong type safety.",
+        "keyTerms": [
+          {"term": "Declaration", "definition": "Defines the type and name."},
+          {"term": "Initialization", "definition": "Assigning a value on creation."}
+        ],
+        "codeExample": [
+          "int age = 30;",
+          "double pi = 3.1415;"
         ],
         "expectedOutput": "",
         "starterCode": "",
-        "solution": [
-          "function pair<T, U>(x: T, y: U): [T, U] { return [x, y]; }"
-        ],
+        "solution": ["string name = \"Alex\";"],
         "commonMistakes": [
-          "Forgetting <T> syntax.",
-          "Misusing generic types."
+          "Not including required headers.",
+          "Type mismatch during assignment."
         ],
-        "challenge": "Write a generic function that returns its argument.",
-        "challengeHint": "Use function<T>(arg: T): T.",
-        "challengeSolution": [
-          "function wrap<T>(val: T): T { return val; }"
-        ],
-        "terminalNote": "Compile with tsc file.ts"
+        "challenge": "Declare a float variable 'temp' with value 98.6.",
+        "challengeHint": "Use float type.",
+        "challengeSolution": ["float temp = 98.6;"],
+        "terminalNote": "Compile with g++ file.cpp -o file"
       },
       {
-        "id": "enums",
-        "title": "Enums",
-        "difficulty": "Intermediate",
-        "explanation": "Enums allow you to define named constant values to use as types.",
+        "id": "arrays",
+        "title": "Arrays",
+        "difficulty": "Beginner",
+        "explanation": "Arrays in C++ are collections of fixed-size elements of the same type. Variables are ordered in memory.",
         "keyTerms": [
-          {"term": "Enum", "definition": "A set of named constants."}
+          {"term": "Array", "definition": "Container of elements."},
+          {"term": "Index", "definition": "Zero-based position in array."}
         ],
         "codeExample": [
-          "enum Direction {",
-          "  Up, Down, Left, Right",
-          "}",
-          "let d: Direction = Direction.Up;"
+          "int numbers[5] = {1, 2, 3, 4, 5};",
+          "cout << numbers[0];"
+        ],
+        "expectedOutput": "1",
+        "starterCode": "",
+        "solution": ["double values[3] = {2.2, 3.3, 4.4};"],
+        "commonMistakes": [
+          "Array index out of bounds.",
+          "Wrong size in initialization."
+        ],
+        "challenge": "Create an array of 10 chars.",
+        "challengeHint": "Use char arr[10];",
+        "challengeSolution": ["char arr[10];"],
+        "terminalNote": "Compile with g++ file.cpp -o file"
+      }
+    ]
+  },
+  {
+    "id": "csharp",
+    "name": "C#",
+    "type": "Compiled",
+    "year": 2000,
+    "creator": "Anders Hejlsberg, Microsoft",
+    "difficulty": "Intermediate",
+    "description": "C# is a modern, object-oriented language designed for flexibility and productivity on the .NET platform.",
+    "usedFor": "Desktop/web/mobile apps, Unity games, cloud services.",
+    "funFact": "C# is heavily influenced by both C++ and Java.",
+    "color": "#239120",
+    "terminalCommands": {
+      "windows": "dotnet run",
+      "mac": "dotnet run",
+      "linux": "dotnet run",
+      "install": "Install .NET SDK from dotnet.microsoft.com"
+    },
+    "topics": [
+      {
+        "id": "variables",
+        "title": "Variables",
+        "difficulty": "Beginner",
+        "explanation": "Variables in C# store information. Type must be specified or inferred using 'var'.",
+        "keyTerms": [
+          {"term": "Declaration", "definition": "Defining a variable with type."},
+          {"term": "var", "definition": "Type inference keyword."}
+        ],
+        "codeExample": [
+          "int score = 100;",
+          "var name = \"Daniel\";"
         ],
         "expectedOutput": "",
         "starterCode": "",
-        "solution": [
-          "enum Status { Idle, Running, Stopped }"
-        ],
+        "solution": ["bool isActive = true;"],
         "commonMistakes": [
-          "Using enums as strings by mistake.",
-          "Misspelling enum names."
+          "Not assigning value.",
+          "Type mismatch errors."
         ],
-        "challenge": "Define an enum Color with Red, Green, Blue.",
-        "challengeHint": "Use enum syntax.",
+        "challenge": "Declare a double variable price with 9.99.",
+        "challengeHint": "Use double for decimal.",
         "challengeSolution": [
-          "enum Color {",
-          "  Red, Green, Blue",
-          "}"
+          "double price = 9.99;"
         ],
-        "terminalNote": "Compile with tsc file.ts"
+        "terminalNote": "Run with dotnet run"
       },
       {
-        "id": "typealiases",
-        "title": "Type Aliases",
-        "difficulty": "Intermediate",
-        "explanation": "Type aliases assign a custom name to a type, making complex types easier to use.",
+        "id": "arrays",
+        "title": "Arrays",
+        "difficulty": "Beginner",
+        "explanation": "Arrays hold several values of the same type in a single variable.",
         "keyTerms": [
-          {"term": "Type Alias", "definition": "A custom name for a type."}
+          {"term": "Array", "definition": "A fixed-size sequential collection."}
         ],
         "codeExample": [
-          "type ID = string | number;",
-          "let userId: ID = 123;"
-        ],
-        "expectedOutput": "",
-        "starterCode": "",
-        "solution": [
-          "type Point = { x: number; y: number }"
-        ],
-        "commonMistakes": [
-          "Confusing types with interfaces.",
-          "Naming collisions."
-        ],
-        "challenge": "Alias a type UserName as string.",
-        "challengeHint": "Use 'type UserName = string;'",
-        "challengeSolution": [
-          "type UserName = string;"
-        ],
-        "terminalNote": "Compile with tsc file.ts"
-      },
-      {
-        "id": "modules",
-        "title": "Modules",
-        "difficulty": "Advanced",
-        "explanation": "Modules structure your program into self-contained units. Use export/import keywords.",
-        "keyTerms": [
-          {"term": "Module", "definition": "A file containing code you can export/import."},
-          {"term": "Export", "definition": "Makes code visible to other files."}
-        ],
-        "codeExample": [
-          "// utils.ts",
-          "export function double(x: number) { return x * 2 }",
-          "// main.ts",
-          "import { double } from './utils';",
-          "console.log(double(5));"
+          "int[] numbers = {10, 20, 30};",
+          "Console.WriteLine(numbers[0]);"
         ],
         "expectedOutput": "10",
         "starterCode": "",
-        "solution": [
-          "// greeting.ts",
-          "export function hello() { return 'Hello'; }"
-        ],
+        "solution": ["string[] names = {\"Ali\", \"Dina\"};"],
         "commonMistakes": [
-          "Incorrect import path.",
-          "Forgetting to use .ts extension in imports."
+          "Using incorrect index.",
+          "Not specifying size when required."
         ],
-        "challenge": "Export a constant PI from a separate file.",
-        "challengeHint": "Use export const PI.",
+        "challenge": "Create a string array of 3 cities.",
+        "challengeHint": "string[] cities = { ... };",
         "challengeSolution": [
-          "// constants.ts",
-          "export const PI = 3.14;",
-          "// main.ts",
-          "import { PI } from './constants';",
-          "console.log(PI);"
+          "string[] cities = {\"Rome\", \"Zurich\", \"Oslo\"};"
         ],
-        "terminalNote": "Compile with tsc then run node main.js"
-      },
-      {
-        "id": "typeguards",
-        "title": "Type Guards",
-        "difficulty": "Advanced",
-        "explanation": "Type guards are TypeScript features that narrow types using runtime checks to improve safety.",
-        "keyTerms": [
-          {"term": "Type Guard", "definition": "A construct to test and narrow type at runtime."}
-        ],
-        "codeExample": [
-          "function isString(x: unknown): x is string {",
-          "  return typeof x === 'string';",
-          "}",
-          "let result = isString('abc');"
-        ],
-        "expectedOutput": "",
-        "starterCode": "",
-        "solution": [
-          "function isNum(x: any): x is number { return typeof x === 'number'; }"
-        ],
-        "commonMistakes": [
-          "Forgetting to return boolean.",
-          "Improper guard check."
-        ],
-        "challenge": "Write a type guard to check if input is array.",
-        "challengeHint": "Use Array.isArray.",
-        "challengeSolution": [
-          "function isArray(x: any): x is any[] { return Array.isArray(x); }"
-        ],
-        "terminalNote": "Compile with tsc file.ts"
+        "terminalNote": "Run with dotnet run"
       }
     ]
   }
