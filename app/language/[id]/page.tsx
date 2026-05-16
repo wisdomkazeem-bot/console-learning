@@ -1,92 +1,71 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import languages from "@/data/languages.json";
 
-const lessons = [
-  {
-    id: 1,
-    title: "Variables and Data Types",
-    read: {
-      explanation:
-        "In Python, variables are used to store information that can be referenced and manipulated in a program. Data types specify the kind of value a variable holds.",
-      keyTerms: [
-        { term: "Variable", def: "A named storage for a value." },
-        { term: "Data Type", def: "The classification of a value (e.g., int, str)." },
-      ],
-      example:
-        `# Assigning a value to a variable
-age = 25
-name = "Alice"`
-    },
-    watch: {
-      code: [
-        'age = 25',
-        'name = "Alice"',
-        'print("My name is", name)',
-        'print("I am", age, "years old")',
-      ]
-    },
-    assignment: {
-      prompt:
-        "Write a Python function that takes two numbers and returns their sum.",
-      expected: "15",
-      exampleCall: "add(7, 8)"
-    },
-    terminal: {
-      windows: {
-        install: "py -m pip install python",
-        run: "py lesson1.py"
-      },
-      mac: {
-        install: "brew install python",
-        run: "python3 lesson1.py"
-      },
-      linux: {
-        install: "sudo apt-get install python3",
-        run: "python3 lesson1.py"
-      },
-      expectedOutput: [
-        "My name is Alice",
-        "I am 25 years old"
-      ]
-    },
-    challenge: {
-      prompt:
-        "Write a Python function that takes a list of numbers and returns the largest number.",
-      hint: "Loop through the list and keep track of the max.",
-      solution: [
-        "def max_num(nums):",
-        "    m = nums[0]",
-        "    for n in nums[1:]:",
-        "        if n > m:",
-        "            m = n",
-        "    return m"
-      ]
-    }
-  },
-  // You can add more lessons as needed...
-];
-
-function getLessonProgress(idx: number) {
-  return {
-    number: idx + 1,
-    total: lessons.length,
-    title: lessons[idx].title
+// --- Fixes for lint errors ---
+// Type corrections for languages.json structure
+type Language = {
+  id: string;
+  name: string;
+  // Correct usage for terminal commands in the provided languages.json structure
+  terminalCommands: {
+    windows: string;
+    mac: string;
+    linux: string;
+    install: string;
+    runExample: string;
   };
-}
+  topics: Topic[];
+  // Other fields omitted for brevity (not used directly in UI)
+};
 
+type Topic = {
+  id: string | number;
+  title: string;
+  read: {
+    explanation: string;
+    keyTerms: { term: string; def: string }[];
+    example: string;
+  };
+  watch: {
+    code: string[];
+  };
+  assignment: {
+    prompt: string;
+    expected: string; // expected output as string
+    exampleCall?: string;
+    testInput?: any;
+    lang?: string;
+    hint?: string;
+  };
+  terminal?: {
+    expectedOutput?: string[];
+  };
+  challenge: {
+    prompt: string;
+    hint: string;
+    solution: string[];
+  };
+};
+
+// Utility/styles
 function classNames(...classes: (string | boolean | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function LanguageLessonPage({
-  params,
-}: {
-  params: { id: string }
-}) {
+// Updated safe language getter for new structure
+function getLanguageById(id: string): Language | undefined {
+  return (languages as any[]).find(
+    (lang) => lang.id === id || lang.id?.toLowerCase?.() === id.toLowerCase()
+  ) as Language | undefined;
+}
+
+export default function LanguageLessonPage({ params }: { params: { id: string } }) {
+  const language = getLanguageById(params.id);
   const [selectedLessonIdx, setSelectedLessonIdx] = useState(0);
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
-  const [step, setStep] = useState(1); // 1=Read, 2=Watch, 3=Assignment, 4=Terminal, 5=Challenge
+  const [step, setStep] = useState(1); // Step 1-5
   const [assignmentInput, setAssignmentInput] = useState("");
   const [assignmentStatus, setAssignmentStatus] = useState<"idle" | "success" | "error">("idle");
   const [assignmentHint, setAssignmentHint] = useState(false);
@@ -96,12 +75,98 @@ export default function LanguageLessonPage({
   const [challengeHintOpen, setChallengeHintOpen] = useState(false);
   const [challengeSolutionOpen, setChallengeSolutionOpen] = useState(false);
 
-  const lesson = lessons[selectedLessonIdx];
-  const progress = getLessonProgress(selectedLessonIdx);
-  const languageName = params.id.charAt(0).toUpperCase() + params.id.slice(1);
+  // If no language, show not found
+  if (!language) {
+    return (
+      <div className="max-w-3xl mx-auto px-4 pt-32 font-sans text-zinc-700">
+        <h2 className="text-2xl font-semibold mb-4">Language not found</h2>
+        <a href="/language" className="underline text-blue-700 dark:text-blue-400">
+          Back to language home
+        </a>
+      </div>
+    );
+  }
 
-  // Helper for code line numbers
-  const renderCodeBlock = (lines: string[], lang: string = "python") => (
+  const lessons = language.topics;
+  const lesson = lessons[selectedLessonIdx];
+
+  // Progress data
+  const progress = {
+    number: selectedLessonIdx + 1,
+    total: lessons.length,
+    title: lesson.title,
+    completed: completedLessons.length
+  };
+  // Progress as a percentage (0-100)
+  const percent = lessons.length
+    ? Math.round((completedLessons.length / lessons.length) * 100)
+    : 0;
+
+  const progressBarColor = percent < 100 ? "bg-blue-600" : "bg-green-600";
+
+  // Locked/unlocked/complete state helpers
+  const isLessonUnlocked = (idx: number) => {
+    if (idx === 0) return true;
+    return completedLessons.includes(idx - 1);
+  };
+  const canGoNextLesson = completedLessons.includes(selectedLessonIdx);
+
+  // ---- Terminal commands extraction according to new data shape ----
+  // languages.json: { terminalCommands: { windows, mac, linux, install, runExample } }
+  // 'install' and 'runExample' keys have per-OS values joined via newlines; extract per-OS
+  const parseTerminalInstall = (commands: string, os: "windows" | "mac" | "linux") => {
+    // commands is the install string; if multiline, may have OS labels
+    // If a structure with all OS keys: prefer direct.
+    // For boot.dev style, we expect per-OS already set.
+    if (!commands) return "";
+    // Accepts both: direct command for each OS OR
+    // a single string for all (rare)
+    return commands;
+  };
+  const parseRunCommand = (commands: string, os: "windows" | "mac" | "linux") => {
+    if (!commands) return "";
+    return commands;
+  };
+
+  const terminalCommands = language.terminalCommands
+    ? {
+        windows: {
+          install: parseTerminalInstall(language.terminalCommands.windows || language.terminalCommands.install || "", "windows"),
+          run:
+            language.terminalCommands.runExample && language.terminalCommands.runExample.includes("windows")
+              ? language.terminalCommands.runExample
+              : parseRunCommand(language.terminalCommands.windows || language.terminalCommands.runExample || "", "windows"),
+        },
+        mac: {
+          install: parseTerminalInstall(language.terminalCommands.mac || language.terminalCommands.install || "", "mac"),
+          run:
+            language.terminalCommands.runExample && language.terminalCommands.runExample.includes("mac")
+              ? language.terminalCommands.runExample
+              : parseRunCommand(language.terminalCommands.mac || language.terminalCommands.runExample || "", "mac"),
+        },
+        linux: {
+          install: parseTerminalInstall(language.terminalCommands.linux || language.terminalCommands.install || "", "linux"),
+          run:
+            language.terminalCommands.runExample && language.terminalCommands.runExample.includes("linux")
+              ? language.terminalCommands.runExample
+              : parseRunCommand(language.terminalCommands.linux || language.terminalCommands.runExample || "", "linux"),
+        },
+      }
+    : {
+        windows: { install: "", run: "" },
+        mac: { install: "", run: "" },
+        linux: { install: "", run: "" }
+      };
+
+  // For terminal panel, get expectedOutput from lesson.terminal if present, else use lesson.assignment.expected
+  const terminalExpectedOutput =
+    lesson.terminal?.expectedOutput ||
+    (lesson.assignment?.expected && lesson.assignment.expected !== ""
+      ? [lesson.assignment.expected]
+      : []);
+
+  // Helper for code line numbers/code block
+  const renderCodeBlock = (lines: string[], lang: string = "text") => (
     <div className="relative bg-[#18181b] rounded-lg p-4 mt-2 text-sm font-mono text-zinc-100 overflow-x-auto">
       {/* Copy button */}
       <button
@@ -110,8 +175,8 @@ export default function LanguageLessonPage({
           navigator.clipboard.writeText(lines.join("\n"));
         }}
         aria-label="Copy code"
-        tabIndex={0}
         type="button"
+        tabIndex={0}
       >
         Copy
       </button>
@@ -126,21 +191,79 @@ export default function LanguageLessonPage({
     </div>
   );
 
-  // Assignment run logic (simulate)
+  // General runner for assignment
   function runAssignment() {
-    // For demo, just check if the code contains a def returning sum and add(7,8) returns 15
+    // Defensive for TS
+    if (!language) return;
+
+    const lang = (lesson.assignment.lang || language.id).toLowerCase();
+    let out: string | undefined = undefined;
     let pass = false;
     try {
-      // eslint-disable-next-line no-new-func
-      const fn = new Function(assignmentInput + "\nreturn add(7,8);");
-      const result = fn();
-      pass = (String(result) === lesson.assignment.expected);
-    } catch (err) {
+      // Slightly improved cross-language heuristics, NOT real interpreters!
+      if (lang === "python") {
+        const fnNameMatch = lesson.assignment.exampleCall
+          ? lesson.assignment.exampleCall.match(/^([A-Za-z_][A-Za-z0-9_]*)\(/)
+          : null;
+        const fnName = fnNameMatch && fnNameMatch[1];
+        if (
+          fnName &&
+          assignmentInput.includes("def " + fnName) &&
+          assignmentInput.includes("return")
+        ) {
+          if (fnName === "add") {
+            // Return test for add(7,8)
+            if (
+              assignmentInput.match(/\breturn\s+(a\s*\+\s*b|b\s*\+\s*a)[\s$]/) ||
+              assignmentInput.replace(/\s/g, "").includes("returna+b")
+            ) {
+              out = "15";
+            }
+          }
+        }
+        if (out === lesson.assignment.expected) pass = true;
+      } else if (lang === "javascript" || lang === "js" || lang === "node") {
+        let fn, result;
+        if (lesson.assignment.exampleCall) {
+          // eslint-disable-next-line no-new-func
+          fn = new Function(
+            assignmentInput + `\nreturn (${lesson.assignment.exampleCall});`
+          );
+          result = fn();
+          if (String(result) === String(lesson.assignment.expected)) pass = true;
+        }
+      } else if (lang === "java") {
+        if (
+          assignmentInput.includes("public static") &&
+          assignmentInput.includes("return") &&
+          assignmentInput.includes(String(lesson.assignment.expected))
+        ) pass = true;
+      } else if (lang === "go") {
+        if (
+          assignmentInput.includes("func main()") &&
+          assignmentInput.includes(`fmt.Println(${lesson.assignment.expected})`)
+        ) pass = true;
+      } else if (lang === "c" || lang === "cpp" || lang === "c++") {
+        if (
+          assignmentInput.includes("printf") &&
+          assignmentInput.includes(String(lesson.assignment.expected))
+        ) pass = true;
+      } else if (lang === "ruby") {
+        if (
+          assignmentInput.includes("puts") &&
+          assignmentInput.includes(String(lesson.assignment.expected))
+        ) pass = true;
+      } else {
+        // Fallback
+        if (assignmentInput.includes(String(lesson.assignment.expected)))
+          pass = true;
+      }
+    } catch {
       pass = false;
     }
+
     if (pass) {
       setAssignmentStatus("success");
-      // Progress to next step after short delay
       setTimeout(() => setStep(4), 1200);
       if (!completedLessons.includes(selectedLessonIdx)) {
         setCompletedLessons([...completedLessons, selectedLessonIdx]);
@@ -152,13 +275,25 @@ export default function LanguageLessonPage({
   }
 
   function runChallenge() {
-    // For demo, just check code includes return max, crude check for max_num
+    if (!language) return;
     let pass = false;
-    if (
-      challengeInput.includes("def max_num") &&
-      (challengeInput.includes("for") || challengeInput.includes("max("))
-    ) {
-      pass = true;
+    const lang = (lesson.assignment.lang || language.id).toLowerCase();
+    try {
+      if (lang === "python") {
+        if (
+          challengeInput.includes("def max_num") &&
+          (challengeInput.includes("for") || challengeInput.includes("max("))
+        )
+          pass = true;
+      } else if (lang === "js" || lang === "javascript" || lang === "node") {
+        if (challengeInput.includes("function")) pass = true;
+      } else if (lang === "java") {
+        if (challengeInput.includes("public static")) pass = true;
+      } else {
+        if (challengeInput && challengeInput.trim().length > 10) pass = true;
+      }
+    } catch {
+      pass = false;
     }
     if (pass) {
       setChallengeStatus("success");
@@ -170,21 +305,35 @@ export default function LanguageLessonPage({
     }
   }
 
-  // Access management
-  const isLessonUnlocked = (idx: number) => {
-    // First lesson always unlocked; others only if all before are completed
-    if (idx === 0) return true;
-    return completedLessons.includes(idx - 1);
-  };
-  const canGoNextLesson = completedLessons.includes(selectedLessonIdx);
-
+  // ========== Layout ==========
   return (
     <div className="font-sans bg-zinc-50 dark:bg-black min-h-screen">
+      {/* Progress Bar at very top */}
+      <div className="w-full py-3 px-0 mb-0 bg-white dark:bg-black border-b border-zinc-100 dark:border-zinc-900">
+        <div className="max-w-3xl mx-auto flex items-start px-4 py-0 pt-0 flex-col">
+          <div className="w-full h-2 bg-zinc-200 dark:bg-zinc-900 rounded-full overflow-hidden">
+            <div
+              className={classNames(
+                "h-2 transition-all duration-500",
+                progressBarColor
+              )}
+              style={{
+                width: `${percent}%`,
+                minWidth: percent > 0 ? "2rem" : "0"
+              }}
+            />
+          </div>
+          <div className="mt-1 text-xs text-zinc-600 dark:text-zinc-400 font-sans">
+            {progress.completed} of {progress.total} lessons completed
+          </div>
+        </div>
+      </div>
+      {/* Top bar */}
       <div className="bg-white dark:bg-black shadow-sm">
         <div className="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
-          {/* Top Bar */}
+          {/* Left: Language + lesson */}
           <div>
-            <span className="text-lg font-medium">{languageName}</span>
+            <span className="text-lg font-medium">{language.name}</span>
             <span className="mx-2 text-zinc-300 select-none">|</span>
             <span className="text-base font-normal">{progress.title}</span>
           </div>
@@ -194,10 +343,8 @@ export default function LanguageLessonPage({
         </div>
       </div>
       <div className="max-w-3xl mx-auto flex gap-8 mt-8 px-4">
-        {/* Left Panel (lessons list) */}
-        <nav
-          className="w-52 shrink-0 hidden md:block"
-        >
+        {/* Left Panel: Lessons list */}
+        <nav className="w-52 shrink-0 hidden md:block">
           <ul className="space-y-1">
             {lessons.map((l, idx) => {
               const unlocked = isLessonUnlocked(idx);
@@ -208,9 +355,14 @@ export default function LanguageLessonPage({
                   key={l.id}
                   className={classNames(
                     "flex items-center rounded-lg px-3 py-2 text-sm cursor-pointer select-none font-sans transition",
-                    current && unlocked && "bg-zinc-100 dark:bg-zinc-900 font-semibold text-black dark:text-zinc-100",
-                    !current && unlocked && "hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-600 dark:text-zinc-400",
-                    !unlocked && "text-zinc-400 dark:text-zinc-600 opacity-70 bg-transparent cursor-not-allowed"
+                    current &&
+                      unlocked &&
+                      "bg-zinc-100 dark:bg-zinc-900 font-semibold text-black dark:text-zinc-100",
+                    !current &&
+                      unlocked &&
+                      "hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-600 dark:text-zinc-400",
+                    !unlocked &&
+                      "text-zinc-400 dark:text-zinc-600 opacity-70 bg-transparent cursor-not-allowed"
                   )}
                   onClick={() => {
                     if (unlocked) {
@@ -226,27 +378,35 @@ export default function LanguageLessonPage({
                     }
                   }}
                 >
-                  <span className="mr-2 px-2 py-0.5 text-xs rounded-full border font-sans"
-                        style={{
-                          background: current ? "#a1a1aa" : "#fff",
-                          color: current ? "#fff" : "#a1a1aa",
-                          borderColor: current ? "#a1a1aa" : "#e4e4e7"
-                        }}
+                  <span
+                    className="mr-2 px-2 py-0.5 text-xs rounded-full border font-sans"
+                    style={{
+                      background: current ? "#a1a1aa" : "#fff",
+                      color: current ? "#fff" : "#a1a1aa",
+                      borderColor: current ? "#a1a1aa" : "#e4e4e7",
+                    }}
                   >
                     {idx + 1}
                   </span>
                   <span className="flex-1">{l.title}</span>
                   {completed && (
-                    <svg className="ml-2 text-green-500 w-4 h-4" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
+                    <svg
+                      className="ml-2 text-green-500 w-4 h-4"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={3}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <polyline points="20 6 12 18 6 12" />
                     </svg>
                   )}
                   {!unlocked && (
                     <svg className="ml-2 text-zinc-300 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd"
-                            d="M10 2a4 4 0 00-4 4v2a1 1 0 01-2 0V6a6 6 0 0112 0v2a1 1 0 01-2 0V6a4 4 0 00-4-4z"
-                            clipRule="evenodd" />
+                        d="M10 2a4 4 0 00-4 4v2a1 1 0 01-2 0V6a6 6 0 0112 0v2a1 1 0 01-2 0V6a4 4 0 00-4-4z"
+                        clipRule="evenodd" />
                       <path d="M4 10a6 6 0 1112 0v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4z"/>
                     </svg>
                   )}
@@ -255,32 +415,22 @@ export default function LanguageLessonPage({
             })}
           </ul>
         </nav>
-        {/* Main Panel */}
+        {/* Main Panel (content) */}
         <div className="flex-1 min-w-0 bg-white dark:bg-black p-6 rounded-xl shadow-lg border border-zinc-100 dark:border-zinc-900 font-sans text-zinc-600 dark:text-zinc-400">
-          {/* Step Progress Header */}
+          {/* Step progress header */}
           <div className="mb-8 flex gap-3 items-center">
-            <span className={classNames(
-              "rounded-full px-3 py-1 text-xs font-medium bg-zinc-100 dark:bg-zinc-800",
-              step === 1 && "ring-2 ring-blue-400"
-            )}>Read</span>
-            <span className={classNames(
-              "rounded-full px-3 py-1 text-xs font-medium bg-zinc-100 dark:bg-zinc-800",
-              step === 2 && "ring-2 ring-blue-400"
-            )}>Watch</span>
-            <span className={classNames(
-              "rounded-full px-3 py-1 text-xs font-medium bg-zinc-100 dark:bg-zinc-800",
-              step === 3 && "ring-2 ring-blue-400"
-            )}>Assignment</span>
-            <span className={classNames(
-              "rounded-full px-3 py-1 text-xs font-medium bg-zinc-100 dark:bg-zinc-800",
-              step === 4 && "ring-2 ring-blue-400"
-            )}>Terminal</span>
-            <span className={classNames(
-              "rounded-full px-3 py-1 text-xs font-medium bg-zinc-100 dark:bg-zinc-800",
-              step === 5 && "ring-2 ring-blue-400"
-            )}>Challenge</span>
+            {["Read", "Watch", "Assignment", "Terminal", "Challenge"].map((label, i) => (
+              <span key={label}
+                className={classNames(
+                  "rounded-full px-3 py-1 text-xs font-medium bg-zinc-100 dark:bg-zinc-800",
+                  step === i + 1 && "ring-2 ring-blue-400"
+                )}
+              >
+                {label}
+              </span>
+            ))}
           </div>
-          {/* Step panels */}
+          {/* Steps panels */}
           {step === 1 && (
             <section>
               <h2 className="text-xl font-semibold mb-4">Step 1: Read</h2>
@@ -310,7 +460,7 @@ export default function LanguageLessonPage({
           {step === 2 && (
             <section>
               <h2 className="text-xl font-semibold mb-4">Step 2: Watch Complete Code Example</h2>
-              {renderCodeBlock(lesson.watch.code)}
+              {renderCodeBlock(lesson.watch.code, lesson.assignment?.lang || language.id)}
               <div className="mt-6 flex justify-end">
                 <button
                   className="rounded-full bg-zinc-900 text-white px-6 py-2 hover:bg-zinc-700 font-sans text-sm transition"
@@ -326,16 +476,23 @@ export default function LanguageLessonPage({
               <h2 className="text-xl font-semibold mb-4">Step 3: Assignment</h2>
               <div className="mb-2">{lesson.assignment.prompt}</div>
               <div className="bg-zinc-50 dark:bg-zinc-900 rounded p-4 text-sm mb-2">
-                Call example: <span className="font-mono bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded">{lesson.assignment.exampleCall}</span>
-                <div className="mt-1">Expected Output: <span className="font-mono font-semibold">{lesson.assignment.expected}</span></div>
+                {lesson.assignment.exampleCall && (
+                  <div>
+                    Call example:{" "}
+                    <span className="font-mono bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded">{lesson.assignment.exampleCall}</span>
+                  </div>
+                )}
+                <div className="mt-1">
+                  Expected Output:{" "}
+                  <span className="font-mono font-semibold">{lesson.assignment.expected}</span>
+                </div>
               </div>
-              {/* Code Editor with line numbers */}
               <div
                 className="mb-3 flex rounded border border-zinc-200 dark:border-zinc-800 overflow-hidden"
                 style={{ minHeight: 160, background: "inherit" }}
               >
                 <div className="bg-zinc-100 dark:bg-zinc-900 px-3 py-2 text-xs text-zinc-400 font-mono select-none text-right"
-                     style={{ minWidth: 28, userSelect: "none" }}>
+                  style={{ minWidth: 28, userSelect: "none" }}>
                   {[...Array((assignmentInput.match(/\n/g)?.length || 0) + 5).keys()].map((n) => (
                     <div key={n}>{n + 1}</div>
                   ))}
@@ -349,7 +506,7 @@ export default function LanguageLessonPage({
                   className="flex-1 px-3 py-2 font-mono text-sm bg-zinc-50 dark:bg-black border-0 outline-none resize-none text-zinc-900 dark:text-zinc-100"
                   spellCheck={false}
                   style={{ minHeight: 160, lineHeight: 1.4 }}
-                  placeholder="# Start typing your Python code here"
+                  placeholder="# Start typing your code here"
                   rows={Math.max(5, (assignmentInput.match(/\n/g)?.length || 0) + 2)}
                   tabIndex={0}
                 />
@@ -362,9 +519,9 @@ export default function LanguageLessonPage({
               {assignmentStatus === "error" && (
                 <div className="bg-red-100 border border-red-300 rounded px-4 py-2 mb-2 text-red-800 dark:bg-red-900 dark:border-red-700 dark:text-red-200">
                   Not quite. Check your code and try again.
-                  {assignmentHint && (
+                  {assignmentHint && lesson.assignment.hint && (
                     <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-200">
-                      Hint: Make sure your function is named <b>add</b>, and that it returns the sum of two inputs.
+                      Hint: {lesson.assignment.hint}
                     </div>
                   )}
                 </div>
@@ -382,7 +539,10 @@ export default function LanguageLessonPage({
           {step === 4 && (
             <section>
               <h2 className="text-xl font-semibold mb-4">Step 4: Terminal Usage</h2>
-              <TabTerminalPanel lesson={lesson.terminal} />
+              <TabTerminalPanel
+                commands={terminalCommands}
+                expectedOutput={terminalExpectedOutput}
+              />
               <div className="mt-6 flex justify-end">
                 <button
                   className="rounded-full bg-zinc-900 text-white px-6 py-2 hover:bg-zinc-700 font-sans text-sm transition"
@@ -397,13 +557,12 @@ export default function LanguageLessonPage({
             <section>
               <h2 className="text-xl font-semibold mb-4">Step 5: Challenge</h2>
               <div className="mb-2">{lesson.challenge.prompt}</div>
-              {/* Code Editor with line numbers */}
               <div
                 className="mb-3 flex rounded border border-zinc-200 dark:border-zinc-800 overflow-hidden"
                 style={{ minHeight: 160, background: "inherit" }}
               >
                 <div className="bg-zinc-100 dark:bg-zinc-900 px-3 py-2 text-xs text-zinc-400 font-mono select-none text-right"
-                     style={{ minWidth: 28, userSelect: "none" }}>
+                  style={{ minWidth: 28, userSelect: "none" }}>
                   {[...Array((challengeInput.match(/\n/g)?.length || 0) + 5).keys()].map((n) => (
                     <div key={n}>{n + 1}</div>
                   ))}
@@ -461,7 +620,7 @@ export default function LanguageLessonPage({
               )}
               {challengeSolutionOpen && (
                 <div className="mt-3">
-                  {renderCodeBlock(lesson.challenge.solution)}
+                  {renderCodeBlock(lesson.challenge.solution, lesson.assignment?.lang || language.id)}
                 </div>
               )}
               <div className="mt-6 flex justify-end gap-3">
@@ -469,7 +628,6 @@ export default function LanguageLessonPage({
                   className="rounded-full bg-zinc-900 text-white px-6 py-2 hover:bg-zinc-700 font-sans text-sm transition"
                   onClick={() => {
                     if (challengeStatus === "success") {
-                      // Mark next lesson as unlocked
                       const next = selectedLessonIdx + 1;
                       if (!completedLessons.includes(selectedLessonIdx)) {
                         setCompletedLessons([...completedLessons, selectedLessonIdx]);
@@ -483,11 +641,20 @@ export default function LanguageLessonPage({
                         setAssignmentInput("");
                         setChallengeInput("");
                         setAssignmentStatus("idle");
+                        setAssignmentHint(false);
                       }
                     }
                   }}
-                  disabled={!challengeStatus || challengeStatus !== "success" || selectedLessonIdx >= lessons.length - 1}
-                  aria-disabled={!challengeStatus || challengeStatus !== "success" || selectedLessonIdx >= lessons.length - 1}
+                  disabled={
+                    !challengeStatus ||
+                    challengeStatus !== "success" ||
+                    selectedLessonIdx >= lessons.length - 1
+                  }
+                  aria-disabled={
+                    !challengeStatus ||
+                    challengeStatus !== "success" ||
+                    selectedLessonIdx >= lessons.length - 1
+                  }
                 >
                   Next Lesson
                 </button>
@@ -515,6 +682,7 @@ export default function LanguageLessonPage({
                     setAssignmentInput("");
                     setChallengeInput("");
                     setAssignmentStatus("idle");
+                    setAssignmentHint(false);
                     setChallengeHintOpen(false);
                     setChallengeSolutionOpen(false);
                   }
@@ -527,7 +695,9 @@ export default function LanguageLessonPage({
               <button
                 className={classNames(
                   "rounded-full px-5 py-2 bg-zinc-900 text-white font-sans text-sm transition hover:bg-zinc-700",
-                  selectedLessonIdx >= lessons.length - 1 || !canGoNextLesson ? "opacity-60 cursor-not-allowed" : ""
+                  selectedLessonIdx >= lessons.length - 1 || !canGoNextLesson
+                    ? "opacity-60 cursor-not-allowed"
+                    : ""
                 )}
                 disabled={selectedLessonIdx >= lessons.length - 1 || !canGoNextLesson}
                 onClick={() => {
@@ -537,6 +707,7 @@ export default function LanguageLessonPage({
                     setAssignmentInput("");
                     setChallengeInput("");
                     setAssignmentStatus("idle");
+                    setAssignmentHint(false);
                     setChallengeHintOpen(false);
                     setChallengeSolutionOpen(false);
                   }
@@ -554,28 +725,26 @@ export default function LanguageLessonPage({
   );
 }
 
-// Terminal panel component
+// Terminal panel: tabbed install/run/expected for current language
 function TabTerminalPanel({
-  lesson,
+  commands,
+  expectedOutput = []
 }: {
-  lesson: {
+  commands: {
     windows: { install: string; run: string };
     mac: { install: string; run: string };
     linux: { install: string; run: string };
-    expectedOutput: string[]
-  }
+  };
+  expectedOutput: string[];
 }) {
   const [tab, setTab] = useState<"windows" | "mac" | "linux">("windows");
-  const data = lesson[tab];
-  const osName = { windows: "Windows", mac: "Mac", linux: "Linux" }[tab];
 
-  // Utility
   function copy(cmd: string) {
     navigator.clipboard.writeText(cmd);
   }
 
   return (
-    <div className="">
+    <div>
       <div className="flex mb-4">
         {(["windows", "mac", "linux"] as const).map((os) => (
           <button
@@ -589,38 +758,36 @@ function TabTerminalPanel({
             )}
             type="button"
           >
-            {osName === "Mac" && os === tab
-              ? "Mac"
-              : os.charAt(0).toUpperCase() + os.slice(1)}
+            {os.charAt(0).toUpperCase() + os.slice(1)}
           </button>
         ))}
       </div>
       <div>
-        <div className="mb-2 text-zinc-700 dark:text-zinc-200 text-base font-medium">Install Python</div>
+        <div className="mb-2 text-zinc-700 dark:text-zinc-200 text-base font-medium">Install</div>
         <div className="relative bg-zinc-900 rounded mb-4">
           <button
             className="absolute top-2 right-3 bg-zinc-700 text-white rounded-full px-3 py-1 text-xs hover:bg-zinc-600"
             type="button"
-            onClick={() => copy(data.install)}
+            onClick={() => copy(commands[tab].install)}
           >
             Copy
           </button>
-          <code className="block px-4 py-3 text-zinc-100 font-mono">{data.install}</code>
+          <code className="block px-4 py-3 text-zinc-100 font-mono">{commands[tab].install}</code>
         </div>
-        <div className="mb-2 text-zinc-700 dark:text-zinc-200 text-base font-medium">Run Lesson</div>
+        <div className="mb-2 text-zinc-700 dark:text-zinc-200 text-base font-medium">Run</div>
         <div className="relative bg-zinc-900 rounded">
           <button
             className="absolute top-2 right-3 bg-zinc-700 text-white rounded-full px-3 py-1 text-xs hover:bg-zinc-600"
             type="button"
-            onClick={() => copy(data.run)}
+            onClick={() => copy(commands[tab].run)}
           >
             Copy
           </button>
-          <code className="block px-4 py-3 text-zinc-100 font-mono">{data.run}</code>
+          <code className="block px-4 py-3 text-zinc-100 font-mono">{commands[tab].run}</code>
         </div>
         <div className="mb-2 mt-4 text-zinc-700 dark:text-zinc-200 text-base font-medium">Expected Terminal Output</div>
         <div className="bg-zinc-100 dark:bg-zinc-900 rounded px-4 py-3 font-mono text-sm text-zinc-800 dark:text-zinc-200">
-          {lesson.expectedOutput.map((line, i) => (
+          {expectedOutput.map((line, i) => (
             <div key={i}>{line}</div>
           ))}
         </div>
