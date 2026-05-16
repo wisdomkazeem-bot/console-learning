@@ -3,1052 +3,885 @@
     "id": "python",
     "name": "Python",
     "type": "scripting",
-    "yearCreated": 1991,
+    "year": 1991,
     "creator": "Guido van Rossum",
     "difficulty": "Beginner",
-    "description": "Python is an easy-to-learn, high-level programming language known for its readability and versatility. It is widely used for web development, scripting, automation, data science, and more. Python emphasizes code clarity and allows programmers to express concepts in fewer lines of code.",
-    "usedFor": "Web development, scripting, automation, data analysis, artificial intelligence, machine learning, scientific computing, and backend services.",
-    "funFact": "Python is named after the television series 'Monty Python’s Flying Circus,' not the snake.",
+    "description": "Python is a high-level, interpreted programming language prized for its readability and simplicity. It is widely used for web development, data analysis, automation, artificial intelligence, and much more. Its expansive ecosystem and supportive community make it a top choice for newcomers and professionals alike.",
+    "usedFor": "Web development, data science, scripting, automation, AI, education.",
+    "funFact": "Python was named after the British comedy group Monty Python, not the snake.",
     "color": "#3572A5",
-    "examples": [
+    "steps": [
       {
-        "title": "Print Hello World",
-        "code": "print('Hello, world!')",
-        "beginnerExplanation": "This line tells the computer to show the message Hello, world! on the screen.",
-        "explanation": [
-          "print('Hello, world!') - This command outputs the text inside the quotes to the screen."
-        ]
+        "stepNumber": 1,
+        "title": "Writing Your First Python Program",
+        "description": "Learn to run Python and write your first simple script using print statements.",
+        "keyFactors": ["Basic syntax", "Running scripts", "Printing"],
+        "example": "print('Hello, World!')",
+        "beginnerTip": "Make sure you have Python installed and use an online editor or IDLE to practice."
       },
       {
-        "title": "Add Two Numbers",
-        "code": "a = 5\nb = 7\nprint(a + b)",
-        "beginnerExplanation": "This code sets two values and shows their total.",
-        "explanation": [
-          "a = 5      # Store the number 5 in a variable named a",
-          "b = 7      # Store the number 7 in a variable named b",
-          "print(a + b)   # Add a and b, then print the result (12)"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Data Types",
+        "description": "Explore how to store data in variables and understand basic data types.",
+        "keyFactors": ["Variables", "Strings", "Integers", "Floats"],
+        "example": "name = 'Alice'\nage = 25\nprint(name, age)",
+        "beginnerTip": "Variable names are case sensitive and should be descriptive."
       },
       {
-        "title": "Loop through List",
-        "code": "for fruit in ['apple', 'banana', 'cherry']:\n    print(fruit)",
-        "beginnerExplanation": "This code goes through a list of fruit and prints each one.",
-        "explanation": [
-          "for fruit in ['apple', 'banana', 'cherry']:  # Go through each word in the list",
-          "    print(fruit)                             # Print the current word"
-        ]
+        "stepNumber": 3,
+        "title": "Control Flow with If Statements",
+        "description": "Introduce decision-making in code using conditional statements.",
+        "keyFactors": ["If statements", "Comparison operators", "Indentation"],
+        "example": "score = 85\nif score > 80:\n    print('Great job!')",
+        "beginnerTip": "Indentation matters in Python; be consistent (usually 4 spaces)."
       }
     ],
     "resources": {
       "youtubeQuery": "Python programming for beginners",
       "websites": [
         {
-          "title": "Python Official Documentation",
+          "title": "Official Python Documentation",
           "url": "https://docs.python.org/3/",
-          "description": "Comprehensive and official resource for Python's syntax and features."
+          "description": "Comprehensive and official reference for learning Python."
         },
         {
-          "title": "Real Python",
+          "title": "Real Python Tutorials",
           "url": "https://realpython.com/",
-          "description": "Guides and tutorials for learning Python programming effectively."
+          "description": "In-depth Python tutorials for every skill level."
         }
       ]
     }
   },
-
   {
     "id": "javascript",
     "name": "JavaScript",
     "type": "web",
-    "yearCreated": 1995,
+    "year": 1995,
     "creator": "Brendan Eich",
     "difficulty": "Beginner",
-    "description": "JavaScript is the most widely used language for building interactive websites and web applications. It allows developers to create dynamic content and control web page behavior. JavaScript can now also be used on the server side and for mobile apps.",
-    "usedFor": "Web development (frontend and backend), server-side scripting, mobile app development, browser extensions, and game development.",
-    "funFact": "JavaScript was created in only 10 days and was originally called Mocha.",
+    "description": "JavaScript is the programming language of the web, enabling interactive sites and dynamic user experiences. It is executed in browsers and is increasingly used on servers and in mobile development. Its flexibility and ubiquity have established it as a foundational skill for modern development.",
+    "usedFor": "Web development, frontend engineering, backend (Node.js), apps.",
+    "funFact": "JavaScript was created in just 10 days and was initially called Mocha.",
     "color": "#f1e05a",
-    "examples": [
+    "steps": [
       {
-        "title": "Print Message",
-        "code": "console.log('Hello, world!');",
-        "beginnerExplanation": "This code tells the computer to display Hello, world! in the console (a special output box).",
-        "explanation": [
-          "console.log('Hello, world!');  // Show the text in the console"
-        ]
+        "stepNumber": 1,
+        "title": "Hello World in the Browser",
+        "description": "Learn to write and run JavaScript in a browser using the console or a simple HTML file.",
+        "keyFactors": ["Console", "Output", "Script tags"],
+        "example": "console.log('Hello, World!');",
+        "beginnerTip": "You can run JavaScript directly in your browser's developer tools console."
       },
       {
-        "title": "Change Web Page Text",
-        "code": "document.body.innerHTML = 'Welcome!';",
-        "beginnerExplanation": "This changes everything on a web page to say Welcome!",
-        "explanation": [
-          "document.body.innerHTML = 'Welcome!';  // Set the main content of the page to 'Welcome!'"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Data Types",
+        "description": "Understand how to declare variables and explore basic data types like numbers and strings.",
+        "keyFactors": ["let", "const", "var", "Strings", "Numbers"],
+        "example": "let message = 'Welcome!';\nconsole.log(message);",
+        "beginnerTip": "Use 'let' or 'const' instead of 'var' for better code clarity."
       },
       {
-        "title": "Add Two Numbers",
-        "code": "let a = 3;\nlet b = 4;\nconsole.log(a + b);",
-        "beginnerExplanation": "This puts two numbers together and shows their sum.",
-        "explanation": [
-          "let a = 3;       // Create a variable named a with value 3",
-          "let b = 4;       // Create a variable named b with value 4",
-          "console.log(a + b); // Add a and b, then print the result (7)"
-        ]
+        "stepNumber": 3,
+        "title": "Basic Conditionals",
+        "description": "Make decisions in code using if/else statements.",
+        "keyFactors": ["if", "else", "Comparison operators"],
+        "example": "let age = 16;\nif (age >= 18) {\n  console.log('Adult');\n} else {\n  console.log('Minor');\n}",
+        "beginnerTip": "Remember JavaScript code blocks use curly braces { }."
       }
     ],
     "resources": {
-      "youtubeQuery": "JavaScript programming for beginners",
+      "youtubeQuery": "JavaScript tutorial for beginners",
       "websites": [
         {
-          "title": "JavaScript MDN Guide",
+          "title": "MDN JavaScript Guide",
           "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
-          "description": "The standard reference for all things JavaScript from Mozilla."
+          "description": "Comprehensive guide to JavaScript on Mozilla Developer Network."
         },
         {
           "title": "JavaScript.info",
           "url": "https://javascript.info/",
-          "description": "A modern and detailed tutorial for learning JavaScript step by step."
+          "description": "Modern, thorough JavaScript tutorials and explanations."
         }
       ]
     }
   },
-
   {
     "id": "typescript",
     "name": "TypeScript",
     "type": "web",
-    "yearCreated": 2012,
-    "creator": "Anders Hejlsberg (Microsoft)",
+    "year": 2012,
+    "creator": "Microsoft",
     "difficulty": "Intermediate",
-    "description": "TypeScript is a superset of JavaScript that adds static typing and advanced features. It helps developers catch errors early and build scalable, reliable applications. TypeScript code is converted to JavaScript to run in browsers or servers.",
-    "usedFor": "Large-scale web applications, backend services, and modern frontend frameworks like Angular and React.",
-    "funFact": "TypeScript was developed by the same creator as the C# programming language.",
+    "description": "TypeScript is a typed superset of JavaScript that adds optional static typing to the language. It helps developers write more reliable and maintainable code, particularly for large-scale applications. TypeScript code compiles to plain JavaScript, making it widely compatible.",
+    "usedFor": "Web development, large frontend and backend projects, tooling.",
+    "funFact": "TypeScript is open source and actively maintained by Microsoft, driven by the needs of major web frameworks.",
     "color": "#3178c6",
-    "examples": [
+    "steps": [
       {
-        "title": "Type Annotation Example",
-        "code": "let message: string = 'Hello, TypeScript!';\nconsole.log(message);",
-        "beginnerExplanation": "This code creates a message and prints it, with a note that the message is a sentence (string).",
-        "explanation": [
-          "let message: string = 'Hello, TypeScript!';  // Create a variable called message, and tell TypeScript it will be text",
-          "console.log(message);  // Print the message to the console"
-        ]
+        "stepNumber": 1,
+        "title": "Hello TypeScript",
+        "description": "Set up TypeScript and write your first typed program.",
+        "keyFactors": ["Type annotations", "Compiling"],
+        "example": "let greeting: string = 'Hello, TypeScript!';\nconsole.log(greeting);",
+        "beginnerTip": "Transpile TypeScript to JavaScript using the 'tsc' command."
       },
       {
-        "title": "Function with Types",
-        "code": "function add(a: number, b: number): number {\n  return a + b;\n}\nconsole.log(add(2, 3));",
-        "beginnerExplanation": "This creates a function (like a small machine) that adds two numbers.",
-        "explanation": [
-          "function add(a: number, b: number): number { // Create a function named add that takes 2 numbers",
-          "  return a + b;                             // Add the numbers and return the sum",
-          "}",
-          "console.log(add(2, 3)); // Call the function and print the answer (5)"
-        ]
+        "stepNumber": 2,
+        "title": "Defining Types",
+        "description": "Explore explicit variable types and function parameter types.",
+        "keyFactors": ["String", "Number", "Type inference"],
+        "example": "function add(a: number, b: number): number {\n  return a + b;\n}\nconsole.log(add(2, 3));",
+        "beginnerTip": "TypeScript helps you catch mistakes before running your code."
       },
       {
-        "title": "Interface Example",
-        "code": "interface Person {\n  name: string;\n  age: number;\n}\nconst user: Person = { name: 'Ada', age: 22 };\nconsole.log(user);",
-        "beginnerExplanation": "This code creates a blueprint for a person, then makes one named Ada, age 22.",
-        "explanation": [
-          "interface Person {           // Make a blueprint called Person",
-          "  name: string;              // Each person has a name",
-          "  age: number;               // And has an age",
-          "}",
-          "const user: Person = { name: 'Ada', age: 22 }; // Make a user from the blueprint",
-          "console.log(user);           // Show the user object"
-        ]
+        "stepNumber": 3,
+        "title": "Interfaces and Objects",
+        "description": "Define object shapes using interfaces to organize code.",
+        "keyFactors": ["Interfaces", "Objects", "Type safety"],
+        "example": "interface User {\n  name: string;\n  age: number;\n}\nconst user: User = { name: 'Sam', age: 42 };",
+        "beginnerTip": "Interfaces clarify the expected structure of your objects."
       }
     ],
     "resources": {
-      "youtubeQuery": "TypeScript for beginners",
+      "youtubeQuery": "TypeScript crash course",
       "websites": [
         {
-          "title": "TypeScript Handbook",
-          "url": "https://www.typescriptlang.org/docs/handbook/intro.html",
-          "description": "Official, in-depth guide to learning TypeScript."
+          "title": "TypeScript Documentation",
+          "url": "https://www.typescriptlang.org/docs/",
+          "description": "Official TypeScript documentation."
         },
         {
-          "title": "TypeScript Tutorial",
-          "url": "https://www.tutorialsteacher.com/typescript",
-          "description": "Beginner-friendly lessons and code samples."
+          "title": "TypeScript Deep Dive",
+          "url": "https://basarat.gitbook.io/typescript/",
+          "description": "Extensive open-source TypeScript guide."
         }
       ]
     }
   },
-
   {
     "id": "c",
     "name": "C",
     "type": "systems",
-    "yearCreated": 1972,
+    "year": 1972,
     "creator": "Dennis Ritchie",
     "difficulty": "Advanced",
-    "description": "C is a foundational systems programming language popular for its speed and direct control over hardware. It is used to write operating systems, embedded software, and performance-critical apps. C has influenced countless modern languages.",
-    "usedFor": "Operating systems, device drivers, embedded systems, compilers, databases, and hardware programming.",
-    "funFact": "The UNIX operating system and much of Linux are written in C.",
+    "description": "C is a foundational compiled programming language that has powered software for decades. Renowned for its performance and control, it is the backbone of operating systems and embedded systems. C's simplicity and efficiency make it essential for low-level programming but require rigorous attention to detail.",
+    "usedFor": "Operating systems, embedded systems, performance-critical software, system tools.",
+    "funFact": "The UNIX operating system and the C language were developed alongside each other at Bell Labs.",
     "color": "#555555",
-    "examples": [
+    "steps": [
       {
-        "title": "Hello World",
-        "code": "#include <stdio.h>\nint main() {\n  printf(\"Hello, world!\\n\");\n  return 0;\n}",
-        "beginnerExplanation": "This code tells the computer to show Hello, world! when run.",
-        "explanation": [
-          "#include <stdio.h>        // Include standard input/output library",
-          "int main() {             // Main function where the program starts",
-          "  printf(\"Hello, world!\\n\"); // Print the text to the screen",
-          "  return 0;              // End the program",
-          "}"
-        ]
+        "stepNumber": 1,
+        "title": "Your First C Program",
+        "description": "Learn the structure of a basic C program and compile/run it.",
+        "keyFactors": ["main function", "#include", "printf"],
+        "example": "#include <stdio.h>\nint main() {\n  printf(\"Hello, World!\\n\");\n  return 0;\n}",
+        "beginnerTip": "C requires compiling; use gcc or another compiler to turn your code into an executable."
       },
       {
-        "title": "Add Two Numbers",
-        "code": "#include <stdio.h>\nint main() {\n  int a = 10, b = 15;\n  printf(\"%d\\n\", a + b);\n  return 0;\n}",
-        "beginnerExplanation": "This sets two numbers and shows the result when added.",
-        "explanation": [
-          "#include <stdio.h>           // Library for printing",
-          "int main() {",
-          "  int a = 10, b = 15;        // Set two numbers",
-          "  printf(\"%d\\n\", a + b);   // Print their sum",
-          "  return 0;",
-          "}"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Data Types",
+        "description": "Declare variables and understand fixed data types.",
+        "keyFactors": ["int", "float", "char"],
+        "example": "int x = 5;\nfloat pi = 3.14;\nchar letter = 'A';",
+        "beginnerTip": "You must declare the type of each variable before using it in C."
       },
       {
-        "title": "Simple Loop",
-        "code": "#include <stdio.h>\nint main() {\n  for(int i = 0; i < 3; i++) {\n    printf(\"%d\\n\", i);\n  }\n  return 0;\n}",
-        "beginnerExplanation": "This goes through numbers 0, 1, and 2, and prints each one.",
-        "explanation": [
-          "#include <stdio.h>",
-          "int main() {",
-          "  for(int i = 0; i < 3; i++) {   // Loop 3 times",
-          "    printf(\"%d\\n\", i);         // Print the current number",
-          "  }",
-          "  return 0;",
-          "}"
-        ]
+        "stepNumber": 3,
+        "title": "Control Flow",
+        "description": "Make decisions in code using if statements.",
+        "keyFactors": ["if", "else", "curly braces", "return"],
+        "example": "if (x > 0) {\n  printf(\"Positive\\n\");\n}",
+        "beginnerTip": "Every statement in C ends with a semicolon."
       }
     ],
     "resources": {
       "youtubeQuery": "C programming for beginners",
       "websites": [
         {
-          "title": "C Programming Tutorial (GeeksforGeeks)",
+          "title": "C Programming - GeeksforGeeks",
           "url": "https://www.geeksforgeeks.org/c-programming-language/",
-          "description": "Comprehensive guides, explanations, and lots of C code examples."
+          "description": "Detailed tutorials and resources for C programming."
         },
         {
           "title": "Learn-C.org",
           "url": "https://www.learn-c.org/",
-          "description": "Interactive way to run and learn C code online."
+          "description": "Interactive C programming tutorials in the browser."
         }
       ]
     }
   },
-
   {
     "id": "cpp",
     "name": "C++",
     "type": "systems",
-    "yearCreated": 1985,
+    "year": 1985,
     "creator": "Bjarne Stroustrup",
     "difficulty": "Advanced",
-    "description": "C++ builds on C with object-oriented and generic features, allowing for complex and efficient software. Renowned for its performance and versatility, C++ powers many large-scale applications and games.",
-    "usedFor": "Game engines, desktop applications, high-performance systems, financial software, and 3D graphical applications.",
-    "funFact": "C++ enabled the creation of major game engines like Unreal Engine and Unity’s core.",
+    "description": "C++ is a powerful general-purpose language built on C, adding object-oriented and generic programming features. It is widely used for high-performance applications, game engines, and real-time systems. Mastery of C++ gives you granular control over memory and performance.",
+    "usedFor": "Game engines, high-frequency trading, real-time systems, desktop applications.",
+    "funFact": "C++ was originally called “C with Classes” before getting its current name.",
     "color": "#f34b7d",
-    "examples": [
+    "steps": [
       {
-        "title": "Hello World",
-        "code": "#include <iostream>\nint main() {\n  std::cout << \"Hello, world!\" << std::endl;\n  return 0;\n}",
-        "beginnerExplanation": "This shows Hello, world! when run.",
-        "explanation": [
-          "#include <iostream>                     // Library for printing",
-          "int main() {",
-          "  std::cout << \"Hello, world!\" << std::endl;   // Print the message",
-          "  return 0;",
-          "}"
-        ]
+        "stepNumber": 1,
+        "title": "Basic C++ Program",
+        "description": "Write and run your first C++ application.",
+        "keyFactors": ["iostream", "cout", "main function"],
+        "example": "#include <iostream>\nint main() {\n  std::cout << \"Hello, World!\" << std::endl;\n  return 0;\n}",
+        "beginnerTip": "Compile C++ code with g++ and run the output file."
       },
       {
-        "title": "Add Numbers",
-        "code": "#include <iostream>\nint main() {\n  int x = 4, y = 6;\n  std::cout << x + y << std::endl;\n  return 0;\n}",
-        "beginnerExplanation": "This puts two numbers together and shows their sum.",
-        "explanation": [
-          "#include <iostream>           // Printing library",
-          "int main() {",
-          "  int x = 4, y = 6;           // Set two numbers",
-          "  std::cout << x + y << std::endl;   // Print their sum",
-          "  return 0;",
-          "}"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Functions",
+        "description": "Declare variables, write simple functions, and understand namespaces.",
+        "keyFactors": ["Variables", "Functions", "std namespace"],
+        "example": "int add(int a, int b) {\n  return a + b;\n}\nstd::cout << add(2, 3) << std::endl;",
+        "beginnerTip": "Use std::cout for output instead of printf in C++."
       },
       {
-        "title": "Simple Loop",
-        "code": "#include <iostream>\nint main() {\n  for (int i = 0; i < 3; ++i) {\n    std::cout << i << std::endl;\n  }\n  return 0;\n}",
-        "beginnerExplanation": "This goes through numbers 0, 1, and 2, and prints each out.",
-        "explanation": [
-          "#include <iostream>",
-          "int main() {",
-          "  for (int i = 0; i < 3; ++i) {    // Loop 3 times",
-          "    std::cout << i << std::endl;   // Print current value of i",
-          "  }",
-          "  return 0;",
-          "}"
-        ]
+        "stepNumber": 3,
+        "title": "Classes and Objects",
+        "description": "Create and use a simple class.",
+        "keyFactors": ["Classes", "Methods", "Constructors"],
+        "example": "class Person {\npublic:\n  std::string name;\n  Person(std::string n) : name(n) {}\n};\nPerson p(\"Sam\");",
+        "beginnerTip": "C++ is case-sensitive and requires precise syntax, especially with classes."
       }
     ],
     "resources": {
-      "youtubeQuery": "C++ programming for beginners",
+      "youtubeQuery": "C++ programming beginner tutorial",
       "websites": [
         {
           "title": "C++ Reference",
-          "url": "https://en.cppreference.com/w/",
-          "description": "The definitive and most up-to-date guide for C++."
+          "url": "https://cplusplus.com/",
+          "description": "The go-to reference for standard C++ libraries and language features."
         },
         {
           "title": "LearnCpp.com",
           "url": "https://www.learncpp.com/",
-          "description": "Well-structured tutorials to take you from beginner to advanced."
+          "description": "Modern beginner-to-advanced C++ lessons."
         }
       ]
     }
   },
-
   {
     "id": "csharp",
     "name": "C#",
-    "type": "game",
-    "yearCreated": 2000,
-    "creator": "Anders Hejlsberg (Microsoft)",
+    "type": "web",
+    "year": 2000,
+    "creator": "Microsoft",
     "difficulty": "Intermediate",
-    "description": "C# is a modern, object-oriented programming language developed by Microsoft. It is widely used for developing games, desktop applications, and enterprise solutions, particularly with the .NET framework.",
-    "usedFor": "Game development (Unity), Windows apps, backend web APIs, mobile apps (Xamarin), and business software.",
-    "funFact": "C#'s main architect also led the creation of both Delphi and TypeScript.",
+    "description": "C# is a modern, object-oriented programming language developed by Microsoft for building a wide range of applications on the .NET framework. It is particularly known for developing desktop software, enterprise solutions, and games with Unity.",
+    "usedFor": "Desktop apps, web apps (ASP.NET), enterprise applications, game development (Unity).",
+    "funFact": "C# is pronounced 'C sharp' in reference to the musical note.",
     "color": "#178600",
-    "examples": [
+    "steps": [
       {
-        "title": "Hello World",
-        "code": "using System;\nclass Program {\n  static void Main() {\n    Console.WriteLine(\"Hello, world!\");\n  }\n}",
-        "beginnerExplanation": "This code prints Hello, world! to the screen.",
-        "explanation": [
-          "using System;                  // Give access to basic features",
-          "class Program {",
-          "  static void Main() {         // The starting point for the program",
-          "    Console.WriteLine(\"Hello, world!\"); // Print a message",
-          "  }",
-          "}"
-        ]
+        "stepNumber": 1,
+        "title": "Hello, C# World",
+        "description": "Write and run your first C# console application.",
+        "keyFactors": ["Console.WriteLine", "static void Main"],
+        "example": "using System;\nclass Program {\n  static void Main() {\n    Console.WriteLine(\"Hello, World!\");\n  }\n}",
+        "beginnerTip": "C# code must be inside a class and the Main function serves as the entry point."
       },
       {
-        "title": "Add Two Numbers",
-        "code": "int x = 7;\nint y = 9;\nConsole.WriteLine(x + y);",
-        "beginnerExplanation": "This sets two values and shows their sum.",
-        "explanation": [
-          "int x = 7;   // Store the value 7 in a variable named x",
-          "int y = 9;   // Store the value 9 in variable y",
-          "Console.WriteLine(x + y); // Add x and y, and print (16)"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Data Types",
+        "description": "Learn to declare variables and their data types.",
+        "keyFactors": ["int", "string", "float", "var"],
+        "example": "int year = 2024;\nstring name = \"C#\";",
+        "beginnerTip": "Use 'var' for automatic type inference but know the underlying type."
       },
       {
-        "title": "Simple Loop",
-        "code": "for (int i = 0; i < 3; i++) {\n  Console.WriteLine(i);\n}",
-        "beginnerExplanation": "This code goes through numbers 0, 1, and 2, and prints them.",
-        "explanation": [
-          "for (int i = 0; i < 3; i++) {    // Loop 3 times",
-          "  Console.WriteLine(i);         // Print current number",
-          "}"
-        ]
+        "stepNumber": 3,
+        "title": "Methods and Classes",
+        "description": "Define methods inside a class to organize logic.",
+        "keyFactors": ["Methods", "Classes", "Return type"],
+        "example": "class Math {\n  public int Square(int x) { return x * x; }\n}",
+        "beginnerTip": "Always end C# statements with a semicolon."
       }
     ],
     "resources": {
-      "youtubeQuery": "C# programming for beginners",
+      "youtubeQuery": "C# programming for beginners tutorial",
       "websites": [
         {
-          "title": "Microsoft C# Guide",
+          "title": "Microsoft C# Documentation",
           "url": "https://learn.microsoft.com/en-us/dotnet/csharp/",
-          "description": "The official Microsoft resource for C# language documentation."
+          "description": "Official documentation and tutorials from Microsoft."
         },
         {
-          "title": "C# Programming Yellow Book",
-          "url": "https://www.csharpcourse.com/",
-          "description": "A free digital book teaching all C# basics."
+          "title": "C# Station",
+          "url": "https://csharp-station.com/",
+          "description": "Free C# programming tutorials and resources."
         }
       ]
     }
   },
-
   {
     "id": "rust",
     "name": "Rust",
     "type": "systems",
-    "yearCreated": 2010,
-    "creator": "Graydon Hoare (Mozilla)",
+    "year": 2010,
+    "creator": "Graydon Hoare",
     "difficulty": "Advanced",
-    "description": "Rust is a systems programming language focusing on safety and performance. It removes many bugs and security flaws common in other languages through strong compile-time checks, and powers everything from web browsers to embedded hardware.",
-    "usedFor": "Operating systems, embedded devices, web browsers (e.g. Firefox), networking, and performance-critical applications.",
-    "funFact": "Rust has consistently topped Stack Overflow's 'most loved language' surveys.",
+    "description": "Rust is a systems programming language that guarantees memory safety and concurrency without sacrificing performance. It has quickly gained a reputation for reliability and minimal runtime overhead, making it popular for both systems and application-level programming.",
+    "usedFor": "Systems programming, command-line tools, web services, safety-critical apps.",
+    "funFact": "Rust was voted the 'most loved programming language' on Stack Overflow's developer survey multiple years in a row.",
     "color": "#dea584",
-    "examples": [
+    "steps": [
       {
-        "title": "Print Message",
-        "code": "fn main() {\n    println!(\"Hello, world!\");\n}",
-        "beginnerExplanation": "This code prints Hello, world! to the screen.",
-        "explanation": [
-          "fn main() {             // The main starting point",
-          "    println!(\"Hello, world!\"); // Print the message",
-          "}"
-        ]
+        "stepNumber": 1,
+        "title": "Rust Hello World",
+        "description": "Install Rust and write a hello world program.",
+        "keyFactors": ["fn main", "println! macro", "cargo run"],
+        "example": "fn main() {\n    println!(\"Hello, World!\");\n}",
+        "beginnerTip": "Use rustup to install Rust and cargo to run your programs."
       },
       {
-        "title": "Add Two Numbers",
-        "code": "fn main() {\n    let a = 8;\n    let b = 12;\n    println!(\"{}\", a + b);\n}",
-        "beginnerExplanation": "This sets two numbers and shows their sum.",
-        "explanation": [
-          "fn main() {",
-          "    let a = 8;         // Store 8 in variable a",
-          "    let b = 12;        // Store 12 in variable b",
-          "    println!(\"{}\", a + b); // Print the total",
-          "}"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Mutability",
+        "description": "Understand immutable and mutable variables.",
+        "keyFactors": ["let", "mut", "Type inference"],
+        "example": "let mut count = 1;\ncount += 1;",
+        "beginnerTip": "Variables are immutable by default; use 'mut' if you need to change them."
       },
       {
-        "title": "Simple Loop",
-        "code": "fn main() {\n    for i in 0..3 {\n        println!(\"{}\", i);\n    }\n}",
-        "beginnerExplanation": "This code prints the numbers 0, 1, and 2.",
-        "explanation": [
-          "fn main() {",
-          "    for i in 0..3 {              // Repeat for 0, 1, and 2",
-          "        println!(\"{}\", i);     // Print current number",
-          "    }",
-          "}"
-        ]
+        "stepNumber": 3,
+        "title": "Ownership and Borrowing",
+        "description": "Learn about Rust's rules for ownership and safe memory usage.",
+        "keyFactors": ["Ownership", "Borrowing", "References"],
+        "example": "fn print_str(s: &String) {\n    println!(\"{}\", s);\n}",
+        "beginnerTip": "Take your time with ownership and borrowing—they are unique to Rust."
       }
     ],
     "resources": {
-      "youtubeQuery": "Rust programming for beginners",
+      "youtubeQuery": "Rust programming beginner tutorial",
       "websites": [
         {
-          "title": "The Rust Book",
+          "title": "The Rust Programming Language",
           "url": "https://doc.rust-lang.org/book/",
-          "description": "Official and comprehensive guide to learning Rust."
+          "description": "The canonical Rust language book and beginner resource."
         },
         {
-          "title": "Rust by Example",
+          "title": "Rust By Example",
           "url": "https://doc.rust-lang.org/rust-by-example/",
-          "description": "Hands-on guide with many simple Rust code examples."
+          "description": "Collection of runnable Rust examples."
         }
       ]
     }
   },
-
   {
     "id": "go",
     "name": "Go",
     "type": "systems",
-    "yearCreated": 2009,
-    "creator": "Robert Griesemer, Rob Pike, Ken Thompson (Google)",
+    "year": 2009,
+    "creator": "Robert Griesemer, Rob Pike, Ken Thompson",
     "difficulty": "Intermediate",
-    "description": "Go, or Golang, is a statically typed language developed at Google. Its simplicity, speed, and ease of concurrent programming make it perfect for modern cloud and server applications.",
-    "usedFor": "Cloud services, web servers, command line tools, networking, and scalable backend systems.",
-    "funFact": "Go's mascot is called the 'Gopher', created by Renée French.",
+    "description": "Go (or Golang) is a fast, compiled language developed at Google for building reliable and efficient software. Its syntax is simple and its concurrency features make it excellent for modern, scalable backend systems.",
+    "usedFor": "Web servers, networking tools, cloud infrastructure, microservices.",
+    "funFact": "Go's mascot is a blue gopher, which has become an iconic symbol of the language.",
     "color": "#00ADD8",
-    "examples": [
+    "steps": [
       {
-        "title": "Print Message",
-        "code": "package main\nimport \"fmt\"\nfunc main() {\n    fmt.Println(\"Hello, world!\")\n}",
-        "beginnerExplanation": "This prints Hello, world! to the screen.",
-        "explanation": [
-          "package main           // The main Go package",
-          "import \"fmt\"            // For printing",
-          "func main() {",
-          "    fmt.Println(\"Hello, world!\") // Show message",
-          "}"
-        ]
+        "stepNumber": 1,
+        "title": "Go Hello World",
+        "description": "Write and run your first Go program.",
+        "keyFactors": ["package main", "func main", "fmt.Println"],
+        "example": "package main\nimport \"fmt\"\nfunc main() {\n fmt.Println(\"Hello, World!\")\n}",
+        "beginnerTip": "Go requires a defined main package and function; run using 'go run filename.go'."
       },
       {
-        "title": "Add Two Numbers",
-        "code": "package main\nimport \"fmt\"\nfunc main() {\n    a := 10\n    b := 5\n    fmt.Println(a + b)\n}",
-        "beginnerExplanation": "This sets two numbers and prints their sum.",
-        "explanation": [
-          "package main        // Program’s entry point",
-          "import \"fmt\"           // Print tools",
-          "func main() {",
-          "    a := 10         // Create a variable a",
-          "    b := 5          // Create a variable b",
-          "    fmt.Println(a + b) // Print the sum of a and b",
-          "}"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Types",
+        "description": "Define variables and explore Go's concise syntax.",
+        "keyFactors": ["var", "short assignment (:=)", "int", "string"],
+        "example": "var name string = \"Go\"\nage := 13",
+        "beginnerTip": "Use := for quick variable declarations and type inference."
       },
       {
-        "title": "Simple Loop",
-        "code": "package main\nimport \"fmt\"\nfunc main() {\n    for i := 0; i < 3; i++ {\n        fmt.Println(i)\n    }\n}",
-        "beginnerExplanation": "This prints out the numbers 0, 1, and 2.",
-        "explanation": [
-          "package main",
-          "import \"fmt\"",
-          "func main() {",
-          "    for i := 0; i < 3; i++ {     // Loop 3 times",
-          "        fmt.Println(i)           // Show number",
-          "    }",
-          "}"
-        ]
+        "stepNumber": 3,
+        "title": "Functions and Packages",
+        "description": "Organize code into reusable functions and import standard packages.",
+        "keyFactors": ["Functions", "Packages", "Return values"],
+        "example": "func add(a int, b int) int {\n return a + b\n}",
+        "beginnerTip": "Go encourages clear, simple function signatures."
       }
     ],
     "resources": {
-      "youtubeQuery": "Go programming for beginners",
+      "youtubeQuery": "Go language crash course beginner",
       "websites": [
+        {
+          "title": "Go Tour",
+          "url": "https://tour.golang.org/",
+          "description": "Interactive introduction to Go fundamentals."
+        },
         {
           "title": "Go by Example",
           "url": "https://gobyexample.com/",
-          "description": "Simple Go code samples and explanations."
-        },
-        {
-          "title": "Tour of Go",
-          "url": "https://tour.golang.org/welcome/1",
-          "description": "Free, interactive tour of Go and its basics."
+          "description": "Collection of practical code examples in Go."
         }
       ]
     }
   },
-
   {
     "id": "java",
     "name": "Java",
     "type": "web",
-    "yearCreated": 1995,
-    "creator": "James Gosling (Sun Microsystems)",
+    "year": 1995,
+    "creator": "James Gosling",
     "difficulty": "Intermediate",
-    "description": "Java is a popular, object-oriented language known for its portability and reliability. It powers everything from large enterprise systems to Android applications and web servers around the world.",
-    "usedFor": "Android mobile apps, web servers, enterprise software, banking systems, and scientific tools.",
-    "funFact": "Java's original name was 'Oak,' after an oak tree outside Gosling's window.",
+    "description": "Java is a versatile, object-oriented language built for portability and scalability. It powers enterprise software, Android apps, and large systems. Its wide adoption and mature ecosystem make it a mainstay in professional software engineering.",
+    "usedFor": "Enterprise applications, Android apps, backend systems.",
+    "funFact": "Java was originally designed for interactive television, but digital cable TV was not ready for it.",
     "color": "#b07219",
-    "examples": [
+    "steps": [
       {
-        "title": "Hello World",
-        "code": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello, world!\");\n  }\n}",
-        "beginnerExplanation": "This code prints Hello, world! to the screen.",
-        "explanation": [
-          "public class Main {                      // Define the Main class",
-          "  public static void main(String[] args) { // Main starting point",
-          "    System.out.println(\"Hello, world!\"); // Print message",
-          "  }",
-          "}"
-        ]
+        "stepNumber": 1,
+        "title": "Java Hello World",
+        "description": "Write and run your first Java program.",
+        "keyFactors": ["class", "public static void main", "System.out.println"],
+        "example": "public class HelloWorld {\n  public static void main(String[] args) {\n    System.out.println(\"Hello, World!\");\n  }\n}",
+        "beginnerTip": "The file name must match the public class name."
       },
       {
-        "title": "Add Numbers",
-        "code": "int a = 3;\nint b = 2;\nSystem.out.println(a + b);",
-        "beginnerExplanation": "This puts two numbers together and shows the total.",
-        "explanation": [
-          "int a = 3;               // Store the value 3",
-          "int b = 2;               // Store the value 2",
-          "System.out.println(a + b); // Add a and b, print the sum (5)"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Data Types",
+        "description": "Declare variables and learn about Java's static typing.",
+        "keyFactors": ["int", "double", "String"],
+        "example": "int age = 30;\nString name = \"Java\";",
+        "beginnerTip": "Java variable types must be declared explicitly."
       },
       {
-        "title": "Simple Loop",
-        "code": "for (int i = 0; i < 3; i++) {\n  System.out.println(i);\n}",
-        "beginnerExplanation": "This prints 0, then 1, then 2.",
-        "explanation": [
-          "for (int i = 0; i < 3; i++) {   // Loop three times",
-          "  System.out.println(i);        // Show current number",
-          "}"
-        ]
+        "stepNumber": 3,
+        "title": "Methods and Classes",
+        "description": "Understand how to write methods and create classes.",
+        "keyFactors": ["Methods", "Classes", "Return type"],
+        "example": "class Calculator {\n  int add(int a, int b) { return a + b; }\n}",
+        "beginnerTip": "Methods must be inside classes in Java."
       }
     ],
     "resources": {
       "youtubeQuery": "Java programming for beginners",
       "websites": [
         {
-          "title": "Java Tutorials (Oracle)",
+          "title": "Official Java Tutorials",
           "url": "https://docs.oracle.com/javase/tutorial/",
-          "description": "Official Java documentation for all levels."
+          "description": "In-depth official Java learning resources."
         },
         {
           "title": "w3schools Java Tutorial",
           "url": "https://www.w3schools.com/java/",
-          "description": "An easy introduction to all Java basics."
+          "description": "Clear, step-by-step Java tutorials."
         }
       ]
     }
   },
-
   {
     "id": "assembly",
     "name": "Assembly",
     "type": "systems",
-    "yearCreated": 1949,
-    "creator": "Kathleen Booth",
+    "year": 1949,
+    "creator": "Kathleen Booth (early work), others",
     "difficulty": "Advanced",
-    "description": "Assembly language is the lowest level human-readable programming language, offering direct control of the computer's hardware. Each assembly language is specific to a computer architecture.",
-    "usedFor": "Embedded systems, operating systems, device drivers, and performance-critical hardware tasks.",
-    "funFact": "Early video game consoles and computers often required developers to write in assembly for speed.",
-    "color": "#6e4c13",
-    "examples": [
+    "description": "Assembly language represents the closest abstraction to machine code, allowing direct hardware manipulation. It is used when maximum performance or tiny code size are critical. Coding in assembly requires careful attention to computer architecture and memory.",
+    "usedFor": "Embedded systems, device drivers, performance-critical code, reverse engineering.",
+    "funFact": "The first assembler was written for the Electronic Delay Storage Automatic Calculator (EDSAC) in 1949.",
+    "color": "#6E4C13",
+    "steps": [
       {
-        "title": "Hello World (x86, NASM)",
-        "code": "section .data\n    msg db 'Hello, world!',0Ah\nsection .text\n    global _start\n_start:\n    mov edx,13\n    mov ecx,msg\n    mov ebx,1\n    mov eax,4\n    int 0x80\n    mov eax,1\n    int 0x80",
-        "beginnerExplanation": "This low-level code tells a computer to print Hello, world! in a special way.",
-        "explanation": [
-          "section .data            ; Data section for variables",
-          "msg db 'Hello, world!',0Ah ; Store the message",
-          "section .text            ; Code section",
-          "global _start            ; Set entry point",
-          "_start:                  ; Start execution",
-          "mov edx,13               ; Message length",
-          "mov ecx,msg              ; Message address",
-          "mov ebx,1                ; File descriptor (stdout)",
-          "mov eax,4                ; System call (write)",
-          "int 0x80                 ; Call kernel",
-          "mov eax,1                ; System call (exit)",
-          "int 0x80                 ; Exit program"
-        ]
+        "stepNumber": 1,
+        "title": "Hello, Assembly World",
+        "description": "Write and assemble a basic program that prints text (example in NASM for x86).",
+        "keyFactors": ["section .data", "section .text", "syscall"],
+        "example": "section .data\n  msg db 'Hello, World!',0xA\nsection .text\nglobal _start\n_start:\n  mov edx,13\n  mov ecx,msg\n  mov ebx,1\n  mov eax,4\n  int 0x80\n  mov eax,1\n  int 0x80",
+        "beginnerTip": "Assembly syntax varies between processors and assemblers."
       },
       {
-        "title": "Add Numbers (x86, NASM)",
-        "code": "section .text\n    global _start\n_start:\n    mov eax,5\n    add eax,3\n    mov ebx,0\n    mov eax,1\n    int 0x80",
-        "beginnerExplanation": "This adds two numbers, but does not show the result (as that is complex in assembly).",
-        "explanation": [
-          "section .text       ; Code section",
-          "global _start       ; Program entry",
-          "_start:",
-          "mov eax,5           ; Set eax to 5",
-          "add eax,3           ; Add 3 (eax is now 8)",
-          "mov ebx,0           ; Standard exit status",
-          "mov eax,1           ; System call (exit)",
-          "int 0x80            ; Exit"
-        ]
+        "stepNumber": 2,
+        "title": "Registers and Memory",
+        "description": "Manipulate data using CPU registers and memory addresses.",
+        "keyFactors": ["MOV", "Registers", "Memory access"],
+        "example": "mov eax, 5\nmov ebx, 2\nadd eax, ebx",
+        "beginnerTip": "Always check which registers your architecture provides."
       },
       {
-        "title": "Simple Loop (x86, NASM)",
-        "code": "section .data\n    num db 0\nsection .text\n    global _start\n_start:\n    mov ecx,3\nloop_start:\n    dec ecx\n    jns loop_start\n    mov eax,1\n    int 0x80",
-        "beginnerExplanation": "This repeats a step 3 times then ends.",
-        "explanation": [
-          "section .data      ; Data for variables",
-          "num db 0           ; Define variable num",
-          "section .text      ; Code section",
-          "global _start      ; Set entry point",
-          "_start:",
-          "mov ecx,3          ; Set counter to 3",
-          "loop_start:",
-          "dec ecx            ; Decrease counter",
-          "jns loop_start     ; If not negative, repeat loop",
-          "mov eax,1          ; System call (exit)",
-          "int 0x80           ; Exit"
-        ]
+        "stepNumber": 3,
+        "title": "Branching and Loops",
+        "description": "Implement simple branching using jump instructions.",
+        "keyFactors": ["JMP", "CMP", "Conditional jumps"],
+        "example": "mov ecx, 5\nstart:\nloop start",
+        "beginnerTip": "Assembly requires careful planning of program flow."
       }
     ],
     "resources": {
-      "youtubeQuery": "Assembly programming for beginners",
+      "youtubeQuery": "Assembly language programming tutorial",
       "websites": [
         {
           "title": "PC Assembly Language",
-          "url": "https://www.drpaulcarter.com/pcasm/",
-          "description": "A comprehensive guide to x86 assembly by Paul Carter."
+          "url": "https://pacman128.github.io/static/pcasm-book.pdf",
+          "description": "Free and comprehensive guide to Assembly programming."
         },
         {
-          "title": "OnlineGDB Assembly",
-          "url": "https://www.onlinegdb.com/online_assembler",
-          "description": "Web-based assembler for trying simple code online."
+          "title": "TutorialsPoint Assembly",
+          "url": "https://www.tutorialspoint.com/assembly_programming/index.htm",
+          "description": "Beginner-friendly Assembly language tutorials."
         }
       ]
     }
   },
-
   {
     "id": "basic",
     "name": "BASIC",
     "type": "scripting",
-    "yearCreated": 1964,
-    "creator": "John G. Kemeny, Thomas E. Kurtz",
+    "year": 1964,
+    "creator": "John G. Kemeny & Thomas E. Kurtz",
     "difficulty": "Beginner",
-    "description": "BASIC (Beginner's All-purpose Symbolic Instruction Code) is a family of easy-to-learn languages designed for simplicity. Once the main language of home computers, it helped teach millions how to program.",
-    "usedFor": "Educational software, retro games, and automation on vintage computers.",
-    "funFact": "Microsoft's very first product was a BASIC interpreter developed for the Altair 8800.",
-    "color": "#ff4500",
-    "examples": [
+    "description": "BASIC was designed to be an easy-to-learn language for beginners and non-scientists. Its simple syntax and command structure made computing accessible in schools and on early personal computers.",
+    "usedFor": "Education, prototyping, simple business programs.",
+    "funFact": "BASIC stands for Beginner's All-purpose Symbolic Instruction Code.",
+    "color": "#ff0000",
+    "steps": [
       {
-        "title": "Hello World",
-        "code": "PRINT \"Hello, world!\"",
-        "beginnerExplanation": "This tells the computer to show Hello, world! on the screen.",
-        "explanation": [
-          "PRINT \"Hello, world!\"    ' Show the phrase in quotes"
-        ]
+        "stepNumber": 1,
+        "title": "Printing Your First Statement",
+        "description": "Use the PRINT command to display text on the screen.",
+        "keyFactors": ["PRINT", "Quotation marks"],
+        "example": "PRINT \"Hello, World!\"",
+        "beginnerTip": "Statement line numbers are optional in modern BASIC."
       },
       {
-        "title": "Add Numbers",
-        "code": "A = 2\nB = 5\nPRINT A + B",
-        "beginnerExplanation": "This puts two numbers together and prints the answer.",
-        "explanation": [
-          "A = 2             ' Set A to 2",
-          "B = 5             ' Set B to 5",
-          "PRINT A + B       ' Add and print the result (7)"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Input",
+        "description": "Store and display data entered by the user.",
+        "keyFactors": ["LET", "Variable assignment", "INPUT"],
+        "example": "INPUT \"What is your name? \", N$\nPRINT \"Hello, \" + N$",
+        "beginnerTip": "String variables often have a $ at the end in classic BASIC."
       },
       {
-        "title": "Simple Loop",
-        "code": "FOR I = 1 TO 3\n  PRINT I\nNEXT I",
-        "beginnerExplanation": "This shows the numbers 1, 2, and 3 one by one.",
-        "explanation": [
-          "FOR I = 1 TO 3    ' Start a loop from 1 to 3",
-          "  PRINT I         ' Show current number",
-          "NEXT I            ' Continue to next"
-        ]
+        "stepNumber": 3,
+        "title": "Branches and Loops",
+        "description": "Direct the flow of your program using IF and FOR statements.",
+        "keyFactors": ["IF", "THEN", "FOR", "NEXT"],
+        "example": "FOR I = 1 TO 5\nPRINT I\nNEXT I",
+        "beginnerTip": "Indentation helps readability, though not required."
       }
     ],
     "resources": {
-      "youtubeQuery": "BASIC programming for beginners",
+      "youtubeQuery": "BASIC programming tutorial",
       "websites": [
         {
-          "title": "Vintage BASIC",
-          "url": "https://www.vintage-basic.net/",
-          "description": "History and playable code from early home computers."
+          "title": "Vintage BASIC Programming",
+          "url": "http://www.vintage-basic.net/",
+          "description": "Classic documentation and information about BASIC."
         },
         {
-          "title": "BASIC Programming Guide",
-          "url": "https://www.bbc.co.uk/bitesize/guides/zt4j2p3/revision/1",
-          "description": "Simple explanations and usage of BASIC."
+          "title": "BASIC Programming - TutorialsPoint",
+          "url": "https://www.tutorialspoint.com/basic/index.htm",
+          "description": "Introduction to the BASIC programming language."
         }
       ]
     }
   },
-
   {
     "id": "lua",
     "name": "Lua",
-    "type": "game",
-    "yearCreated": 1993,
+    "type": "scripting",
+    "year": 1993,
     "creator": "Roberto Ierusalimschy, Luiz Henrique de Figueiredo, Waldemar Celes",
     "difficulty": "Beginner",
-    "description": "Lua is a lightweight and easy-to-embed scripting language, designed to be efficient and flexible. It is often used as an embedded scripting tool in games and applications.",
-    "usedFor": "Game scripting (Roblox, World of Warcraft), embedded firmware, and rapid prototyping.",
-    "funFact": "Roblox, one of the world's biggest user-generated game platforms, depends on Lua for its scripting.",
+    "description": "Lua is a lightweight, fast scripting language designed for embedded systems and games. It is known for simple syntax, extensibility, and fast execution.",
+    "usedFor": "Game scripting, embedded systems, configuration, robotics.",
+    "funFact": "Lua means 'moon' in Portuguese, reflecting its Brazilian roots.",
     "color": "#000080",
-    "examples": [
+    "steps": [
       {
-        "title": "Print Message",
-        "code": "print('Hello, world!')",
-        "beginnerExplanation": "This shows Hello, world! on the screen.",
-        "explanation": [
-          "print('Hello, world!')       -- Print the message"
-        ]
+        "stepNumber": 1,
+        "title": "Print Text to the Screen",
+        "description": "Use the print function to display information.",
+        "keyFactors": ["print function", "Strings"],
+        "example": "print('Hello, Lua!')",
+        "beginnerTip": "Lua uses single or double quotes interchangeably."
       },
       {
-        "title": "Add Numbers",
-        "code": "a = 4\nb = 9\nprint(a + b)",
-        "beginnerExplanation": "This adds two numbers and shows the answer.",
-        "explanation": [
-          "a = 4         -- Store 4 in a",
-          "b = 9         -- Store 9 in b",
-          "print(a + b)  -- Add a and b, print (13)"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Data Types",
+        "description": "Store numbers, strings, or tables in variables.",
+        "keyFactors": ["Local variables", "Number type", "String type"],
+        "example": "local age = 10\nlocal name = 'Lua'",
+        "beginnerTip": "Declare variables with 'local' for best practices."
       },
       {
-        "title": "Simple Loop",
-        "code": "for i = 1, 3 do\n  print(i)\nend",
-        "beginnerExplanation": "This prints numbers 1, 2, and 3.",
-        "explanation": [
-          "for i = 1, 3 do   -- Loop from 1 to 3",
-          "  print(i)        -- Print current number",
-          "end"
-        ]
+        "stepNumber": 3,
+        "title": "Loops and Branches",
+        "description": "Control your program with loops and if statements.",
+        "keyFactors": ["for loop", "if statement", "then", "end"],
+        "example": "for i=1,5 do\n  print(i)\nend",
+        "beginnerTip": "Always close if or loops with 'end'."
       }
     ],
     "resources": {
-      "youtubeQuery": "Lua programming for beginners",
+      "youtubeQuery": "Lua programming beginner tutorial",
       "websites": [
         {
-          "title": "Lua.org Manual",
-          "url": "https://www.lua.org/manual/5.4/",
-          "description": "Official Lua documentation and tutorials."
+          "title": "Lua.org Official Homepage",
+          "url": "https://www.lua.org/manual/5.4/manual.html",
+          "description": "Official Lua reference manual."
         },
         {
           "title": "Learn Lua",
           "url": "https://www.learn-lua.org/",
-          "description": "Interactive beginner-friendly Lua lessons."
+          "description": "Interactive Lua tutorials."
         }
       ]
     }
   },
-
   {
     "id": "ruby",
     "name": "Ruby",
-    "type": "web",
-    "yearCreated": 1995,
+    "type": "scripting",
+    "year": 1995,
     "creator": "Yukihiro Matsumoto",
     "difficulty": "Beginner",
-    "description": "Ruby is a dynamic programming language used for web development and scripting. It values simple, human-friendly code and powers the popular Ruby on Rails framework.",
-    "usedFor": "Web development, automation, scripting, and web applications (especially startups).",
-    "funFact": "Ruby was influenced by languages like Perl, Smalltalk, Eiffel, and Lisp, blending their best ideas.",
+    "description": "Ruby is a dynamic, open-source language focused on productivity and developer happiness. Its elegant syntax is natural to read and write, making it popular for web development.",
+    "usedFor": "Web development, automation, scripting, DevOps.",
+    "funFact": "Ruby was influenced by Perl, Smalltalk, Eiffel, Ada, and Lisp.",
     "color": "#701516",
-    "examples": [
+    "steps": [
       {
-        "title": "Print Message",
-        "code": "puts 'Hello, world!'",
-        "beginnerExplanation": "This code prints Hello, world! to the screen.",
-        "explanation": [
-          "puts 'Hello, world!'       # Show text on the screen"
-        ]
+        "stepNumber": 1,
+        "title": "Hello Ruby",
+        "description": "Write your first program outputting text.",
+        "keyFactors": ["puts", "String literals"],
+        "example": "puts 'Hello, Ruby!'",
+        "beginnerTip": "Use 'puts' for output; no parentheses are required."
       },
       {
-        "title": "Add Numbers",
-        "code": "a = 2\nb = 3\nputs a + b",
-        "beginnerExplanation": "This adds two numbers and prints the answer.",
-        "explanation": [
-          "a = 2       # Create variable a",
-          "b = 3       # Create variable b",
-          "puts a + b  # Add and print (5)"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Methods",
+        "description": "Store values and write simple methods.",
+        "keyFactors": ["Variable assignment", "Method definition"],
+        "example": "def greet(name)\n  puts \"Hello, #{name}!\"\nend\ngreet('Sam')",
+        "beginnerTip": "Methods are defined using 'def' and closed with 'end'."
       },
       {
-        "title": "Simple Loop",
-        "code": "3.times do |i|\n  puts i\nend",
-        "beginnerExplanation": "This prints 0, 1, and 2 (three numbers).",
-        "explanation": [
-          "3.times do |i|   # Repeat three times",
-          "  puts i         # Show current number",
-          "end"
-        ]
+        "stepNumber": 3,
+        "title": "Conditionals and Loops",
+        "description": "Control your program with if statements and loops.",
+        "keyFactors": ["If statement", "while loop", "end"],
+        "example": "if 5 > 3\n  puts 'Five is greater than three.'\nend",
+        "beginnerTip": "Blocks of code are delimited by 'end'."
       }
     ],
     "resources": {
       "youtubeQuery": "Ruby programming for beginners",
       "websites": [
         {
-          "title": "Ruby Official Documentation",
+          "title": "Ruby in Twenty Minutes",
           "url": "https://www.ruby-lang.org/en/documentation/quickstart/",
-          "description": "Get started with Ruby quickly and efficiently."
+          "description": "A rapid introduction to Ruby from the official website."
         },
         {
-          "title": "Learn Ruby",
-          "url": "https://www.learnruby.org/",
-          "description": "Interactive Ruby programming tutorial."
+          "title": "RubyMonk",
+          "url": "https://rubymonk.com/",
+          "description": "Interactive Ruby learning platform."
         }
       ]
     }
   },
-
   {
     "id": "swift",
     "name": "Swift",
     "type": "mobile",
-    "yearCreated": 2014,
+    "year": 2014,
     "creator": "Apple Inc.",
     "difficulty": "Intermediate",
-    "description": "Swift is a modern, safe, and powerful language created by Apple for building iOS, macOS, and other Apple platform apps. It features easy-to-read code and strong type safety.",
-    "usedFor": "iOS and macOS apps, WatchOS and tvOS applications, and cross-platform software.",
-    "funFact": "Swift is designed to be safer and faster than Objective-C, its predecessor.",
+    "description": "Swift is Apple's modern language for iOS, macOS, and more. It is fast, safe, and expressive, designed both for beginners and professionals building cutting-edge apps.",
+    "usedFor": "iOS apps, macOS software, Apple ecosystem development.",
+    "funFact": "Swift was announced at Apple's 2014 Worldwide Developers Conference as a successor to Objective-C.",
     "color": "#ffac45",
-    "examples": [
+    "steps": [
       {
-        "title": "Print Message",
-        "code": "print(\"Hello, world!\")",
-        "beginnerExplanation": "This prints Hello, world! on the screen.",
-        "explanation": [
-          "print(\"Hello, world!\")    // Show the message"
-        ]
+        "stepNumber": 1,
+        "title": "Swift Playground",
+        "description": "Run and experiment with code in Swift Playgrounds.",
+        "keyFactors": ["let", "print", "Playground"],
+        "example": "print(\"Hello, Swift!\")",
+        "beginnerTip": "Use Playgrounds on Mac or iPad for interactive learning."
       },
       {
-        "title": "Add Numbers",
-        "code": "let a = 2\nlet b = 5\nprint(a + b)",
-        "beginnerExplanation": "This puts together two numbers and prints their sum.",
-        "explanation": [
-          "let a = 2         // Set a to 2",
-          "let b = 5         // Set b to 5",
-          "print(a + b)      // Add and print (7)"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Types",
+        "description": "Declare constants/variables and understand types.",
+        "keyFactors": ["let", "var", "Type inference"],
+        "example": "let name = \"Swift\"\nvar age = 8",
+        "beginnerTip": "let creates an immutable constant; var creates a mutable variable."
       },
       {
-        "title": "Simple Loop",
-        "code": "for i in 1...3 {\n  print(i)\n}",
-        "beginnerExplanation": "This prints 1, 2, and 3.",
-        "explanation": [
-          "for i in 1...3 {      // Loop from 1 to 3",
-          "  print(i)            // Print current number",
-          "}"
-        ]
+        "stepNumber": 3,
+        "title": "Functions and Optionals",
+        "description": "Define and call simple functions; learn basics of optionals.",
+        "keyFactors": ["Function syntax", "Optionals"],
+        "example": "func greet(name: String) {\n  print(\"Hello, \\(name)!\")\n}\ngreet(name: \"World\")",
+        "beginnerTip": "Functions need a name, parameters, and curly braces."
       }
     ],
     "resources": {
-      "youtubeQuery": "Swift programming for beginners",
+      "youtubeQuery": "Swift programming beginner guide",
       "websites": [
         {
           "title": "Swift.org Documentation",
           "url": "https://docs.swift.org/swift-book/",
-          "description": "The official and complete Swift language guide."
+          "description": "The official Swift language documentation."
         },
         {
           "title": "Hacking with Swift",
           "url": "https://www.hackingwithswift.com/",
-          "description": "Tutorials and examples focused on iOS app development."
+          "description": "Extensive Swift tutorials and articles."
         }
       ]
     }
   },
-
   {
     "id": "kotlin",
     "name": "Kotlin",
     "type": "mobile",
-    "yearCreated": 2011,
+    "year": 2011,
     "creator": "JetBrains",
     "difficulty": "Intermediate",
-    "description": "Kotlin is a concise, statically typed language developed for modern multiplatform applications, especially Android. It runs on the Java Virtual Machine and works smoothly with Java code.",
-    "usedFor": "Android apps, backend web servers, desktop programs, and cross-platform development.",
-    "funFact": "Kotlin is named after the Kotlin Island near St. Petersburg, Russia.",
-    "color": "#a97bff",
-    "examples": [
+    "description": "Kotlin is a modern, concise language designed for JVM, Android, and beyond. It interoperates with Java and is now the preferred language for Android application development.",
+    "usedFor": "Android apps, JVM applications, web backend.",
+    "funFact": "Kotlin is named after an island near St. Petersburg, Russia, home to JetBrains.",
+    "color": "#A97BFF",
+    "steps": [
       {
-        "title": "Print Message",
-        "code": "fun main() {\n  println(\"Hello, world!\")\n}",
-        "beginnerExplanation": "This code prints Hello, world! to the screen.",
-        "explanation": [
-          "fun main() {            // Program starts here",
-          "  println(\"Hello, world!\") // Show the message",
-          "}"
-        ]
+        "stepNumber": 1,
+        "title": "Hello Kotlin",
+        "description": "Create and run your first Kotlin application.",
+        "keyFactors": ["fun main", "println"],
+        "example": "fun main() {\n  println(\"Hello, Kotlin!\")\n}",
+        "beginnerTip": "Kotlin scripts can be run from the command line or with an online IDE."
       },
       {
-        "title": "Add Numbers",
-        "code": "val a = 10\nval b = 12\nprintln(a + b)",
-        "beginnerExplanation": "This adds two numbers and prints their total.",
-        "explanation": [
-          "val a = 10       // Set a to 10",
-          "val b = 12       // Set b to 12",
-          "println(a + b)   // Add and print (22)"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Null Safety",
+        "description": "Use var/val for variables and learn about null safety.",
+        "keyFactors": ["val", "var", "Nullable types"],
+        "example": "val language = \"Kotlin\"\nvar version: Int? = null",
+        "beginnerTip": "Start with 'val' for safety unless mutation is needed."
       },
       {
-        "title": "Simple Loop",
-        "code": "for (i in 1..3) {\n  println(i)\n}",
-        "beginnerExplanation": "This prints 1, 2, and 3.",
-        "explanation": [
-          "for (i in 1..3) {       // Loop from 1 to 3",
-          "  println(i)            // Print current number",
-          "}"
-        ]
+        "stepNumber": 3,
+        "title": "Functions and Classes",
+        "description": "Write simple functions and define classes.",
+        "keyFactors": ["Function syntax", "Class basics"],
+        "example": "class Person(val name: String)\nfun greet(p: Person) = println(\"Hi, ${p.name}\")",
+        "beginnerTip": "Kotlin favors concise, expressive code. Use templates (${var}) for strings."
       }
     ],
     "resources": {
-      "youtubeQuery": "Kotlin programming for beginners",
+      "youtubeQuery": "Kotlin Android programming beginner",
       "websites": [
         {
-          "title": "Kotlin Lang Docs",
+          "title": "Kotlin Lang Documentation",
           "url": "https://kotlinlang.org/docs/home.html",
-          "description": "The official, thorough guide to Kotlin."
+          "description": "Official, complete Kotlin docs."
         },
         {
-          "title": "Android Developers – Kotlin",
-          "url": "https://developer.android.com/kotlin",
-          "description": "Official information about using Kotlin for Android."
+          "title": "Kotlin Bootcamp for Programmers",
+          "url": "https://developer.android.com/courses/kotlin-bootcamp/overview",
+          "description": "Free beginner-friendly Android course with Kotlin."
         }
       ]
     }
   },
-
   {
     "id": "php",
     "name": "PHP",
     "type": "web",
-    "yearCreated": 1995,
+    "year": 1995,
     "creator": "Rasmus Lerdorf",
     "difficulty": "Beginner",
-    "description": "PHP is a popular server-side scripting language best known for powering websites. It is simple to embed in HTML and dominates millions of websites, including content management systems.",
-    "usedFor": "Web development, dynamic websites, server-side scripts, and content management (WordPress, Drupal).",
-    "funFact": "Over 75% of all websites use PHP in some form.",
-    "color": "#4f5d95",
-    "examples": [
+    "description": "PHP is a server-side scripting language primarily used for web development. It's easy to start with and powers many content management systems, including WordPress.",
+    "usedFor": "Web development, content management, server scripting.",
+    "funFact": "The acronym PHP originally stood for Personal Home Page.",
+    "color": "#4F5D95",
+    "steps": [
       {
-        "title": "Print Message",
-        "code": "<?php\necho \"Hello, world!\";\n?>",
-        "beginnerExplanation": "This shows Hello, world! on a website.",
-        "explanation": [
-          "<?php                   // Start PHP code",
-          "echo \"Hello, world!\";      // Print message",
-          "?>                      // End code"
-        ]
+        "stepNumber": 1,
+        "title": "Print to the Web",
+        "description": "Embed PHP in HTML and output content to a browser.",
+        "keyFactors": ["<?php tag", "echo"],
+        "example": "<?php\necho \"Hello, PHP!\";\n?>",
+        "beginnerTip": "PHP code must start with <?php and end with ?>."
       },
       {
-        "title": "Add Numbers",
-        "code": "<?php\n$a = 2;\n$b = 5;\necho $a + $b;\n?>",
-        "beginnerExplanation": "This adds two numbers and prints out the result.",
-        "explanation": [
-          "<?php                // Start PHP code",
-          "$a = 2;              // Set first number",
-          "$b = 5;              // Set second number",
-          "echo $a + $b;        // Print the sum (7)",
-          "?>"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Types",
+        "description": "Assign values and understand dynamic typing.",
+        "keyFactors": ["$", "Strings", "Numbers"],
+        "example": "$name = \"PHP\";\n$age = 29;",
+        "beginnerTip": "Variables always begin with a $ sign in PHP."
       },
       {
-        "title": "Simple Loop",
-        "code": "<?php\nfor ($i = 1; $i <= 3; $i++) {\n  echo $i;\n}\n?>",
-        "beginnerExplanation": "This prints 1, 2, and 3 in order.",
-        "explanation": [
-          "<?php                       // Start code",
-          "for ($i = 1; $i <= 3; $i++) {   // Loop 3 times",
-          "  echo $i;                     // Print number",
-          "}",
-          "?>"
-        ]
+        "stepNumber": 3,
+        "title": "Conditionals and Loops",
+        "description": "Control program flow with if/else and loops.",
+        "keyFactors": ["if/else", "for loop", "Curly braces"],
+        "example": "for ($i = 1; $i <= 3; $i++) {\n  echo $i;\n}",
+        "beginnerTip": "PHP statements use semicolons at the end of lines."
       }
     ],
     "resources": {
-      "youtubeQuery": "PHP programming for beginners",
+      "youtubeQuery": "PHP beginner crash course",
       "websites": [
         {
           "title": "PHP Manual",
-          "url": "https://www.php.net/manual/en/index.php",
-          "description": "The official PHP documentation for all versions."
+          "url": "https://www.php.net/manual/en/",
+          "description": "Official manual and function reference."
         },
         {
           "title": "w3schools PHP Tutorial",
           "url": "https://www.w3schools.com/php/",
-          "description": "Beginner-friendly PHP code and explanations."
+          "description": "Step-by-step PHP tutorials for all levels."
         }
       ]
     }
   },
-
   {
     "id": "bash",
     "name": "Bash",
     "type": "scripting",
-    "yearCreated": 1989,
-    "creator": "Brian Fox (GNU Project)",
-    "difficulty": "Intermediate",
-    "description": "Bash (Bourne Again Shell) is the most widely used command line shell for Unix and Linux systems. Bash lets users automate tasks, manage files, and run commands in scripts.",
-    "usedFor": "System administration, task automation, server management, scripting, and data processing.",
-    "funFact": "Every command you run in your terminal can be stored in history and easily repeated using Bash.",
+    "year": 1989,
+    "creator": "Brian Fox",
+    "difficulty": "Beginner",
+    "description": "Bash is a popular Unix shell and command language, used for system scripting and automation. Through simple scripts and command-line utilities, it's a vital skill for developers and system administrators.",
+    "usedFor": "Shell scripting, automation, DevOps, system administration.",
+    "funFact": "Bash stands for 'Bourne Again SHell', a pun on its predecessor, the Bourne Shell (sh).",
     "color": "#89e051",
-    "examples": [
+    "steps": [
       {
-        "title": "Print Message",
-        "code": "echo \"Hello, world!\"",
-        "beginnerExplanation": "This command shows Hello, world! on the screen.",
-        "explanation": [
-          "echo \"Hello, world!\"   # Print the message"
-        ]
+        "stepNumber": 1,
+        "title": "Basic Bash Script",
+        "description": "Write and run your first Bash script.",
+        "keyFactors": ["Shebang", "echo", "chmod"],
+        "example": "#!/bin/bash\necho \"Hello, Bash!\"",
+        "beginnerTip": "Always start scripts with #!/bin/bash and give execute permissions using chmod +x."
       },
       {
-        "title": "Add Numbers",
-        "code": "a=5\nb=7\necho $((a + b))",
-        "beginnerExplanation": "This adds two numbers and prints the answer.",
-        "explanation": [
-          "a=5           # Set a to 5",
-          "b=7           # Set b to 7",
-          "echo $((a + b)) # Add and print sum (12)"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Arguments",
+        "description": "Store values in variables and access script arguments.",
+        "keyFactors": ["Variable assignment", "$1", "$2", "Positional parameters"],
+        "example": "name=$1\necho \"Welcome, $name!\"",
+        "beginnerTip": "No spaces around the '=' when assigning variables."
       },
       {
-        "title": "Simple Loop",
-        "code": "for i in 1 2 3; do\n  echo $i\ndone",
-        "beginnerExplanation": "This prints 1, 2, and 3 on separate lines.",
-        "explanation": [
-          "for i in 1 2 3; do  # Loop over numbers",
-          "  echo $i           # Print number",
-          "done                # Finish loop"
-        ]
+        "stepNumber": 3,
+        "title": "Loops and Conditionals",
+        "description": "Automate tasks with loops and if statements.",
+        "keyFactors": ["for loop", "if statement", "test command"],
+        "example": "for file in *.txt; do\n  echo $file\ndone",
+        "beginnerTip": "Use clear, descriptive variable names in scripts."
       }
     ],
     "resources": {
@@ -1057,180 +890,157 @@
         {
           "title": "GNU Bash Manual",
           "url": "https://www.gnu.org/software/bash/manual/bash.html",
-          "description": "The complete official reference for Bash."
+          "description": "Comprehensive and official Bash documentation."
         },
         {
-          "title": "Bash Beginner's Guide",
-          "url": "https://tldp.org/LDP/Bash-Beginners-Guide/html/",
-          "description": "A comprehensive introduction for beginners."
+          "title": "ShellCheck Online",
+          "url": "https://www.shellcheck.net/",
+          "description": "Lint and check your Bash scripts for common issues."
         }
       ]
     }
   },
-
   {
     "id": "r",
     "name": "R",
     "type": "data",
-    "yearCreated": 1993,
-    "creator": "Ross Ihaka, Robert Gentleman",
+    "year": 1993,
+    "creator": "Ross Ihaka and Robert Gentleman",
     "difficulty": "Intermediate",
-    "description": "R is a language and environment built for statistical analysis and graphical data presentation. It is a cornerstone of modern data science, offering hundreds of advanced libraries for statistics and plotting.",
-    "usedFor": "Data analysis, statistical modeling, data visualization, scientific research, and bioinformatics.",
-    "funFact": "R is named after its creators' initials and is a play on the B programming language.",
+    "description": "R is a language and environment made for statistical computing and graphics. It is favored by statisticians and data scientists for data analysis and visualization.",
+    "usedFor": "Statistical computing, data analysis, machine learning, research.",
+    "funFact": "R was named for its developers, Ross and Robert.",
     "color": "#198CE7",
-    "examples": [
+    "steps": [
       {
-        "title": "Print Message",
-        "code": "print(\"Hello, world!\")",
-        "beginnerExplanation": "This prints Hello, world! to the screen.",
-        "explanation": [
-          "print(\"Hello, world!\")  # Show message"
-        ]
+        "stepNumber": 1,
+        "title": "First Plot and Calculation",
+        "description": "Run basic calculations and plot a simple chart.",
+        "keyFactors": ["print", "plot", "Vectors"],
+        "example": "print(1 + 1)\nx <- c(1, 2, 3)\nplot(x)",
+        "beginnerTip": "Use RStudio or R GUI for interactive exploration."
       },
       {
-        "title": "Add Numbers",
-        "code": "a <- 3\nb <- 6\nprint(a + b)",
-        "beginnerExplanation": "This puts two numbers together and shows the answer.",
-        "explanation": [
-          "a <- 3         # Store 3 in a",
-          "b <- 6         # Store 6 in b",
-          "print(a + b)   # Add and print (9)"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Data Frames",
+        "description": "Store and work with data using data frames.",
+        "keyFactors": ["Data frames", "Variables", "Assignment (<-)"],
+        "example": "df <- data.frame(name = c('A', 'B'), score = c(90, 85))",
+        "beginnerTip": "<- is the assignment operator; use it instead of '=' for assignment."
       },
       {
-        "title": "Simple Loop",
-        "code": "for (i in 1:3) {\n  print(i)\n}",
-        "beginnerExplanation": "This prints 1, 2, and 3 one by one.",
-        "explanation": [
-          "for (i in 1:3) {     # Loop from 1 to 3",
-          "  print(i)           # Print number",
-          "}"
-        ]
+        "stepNumber": 3,
+        "title": "Simple Analysis and Plotting",
+        "description": "Perform basic analysis and create visualizations.",
+        "keyFactors": ["mean", "hist", "Basic stats"],
+        "example": "data <- c(1,2,3,4,5)\nmean(data)\nhist(data)",
+        "beginnerTip": "R's help pages can be opened using the ? command, e.g. ?mean."
       }
     ],
     "resources": {
       "youtubeQuery": "R programming for beginners",
       "websites": [
         {
-          "title": "The R Project",
-          "url": "https://www.r-project.org/about.html",
-          "description": "Official resource covering R, its history, and getting started."
+          "title": "R for Data Science",
+          "url": "https://r4ds.had.co.nz/",
+          "description": "Comprehensive book for learning R and data science."
         },
         {
-          "title": "Quick-R",
-          "url": "https://www.statmethods.net/",
-          "description": "Simple, practical tutorials and usage tips."
+          "title": "RProject Official Manual",
+          "url": "https://cran.r-project.org/manuals.html",
+          "description": "Official R core documentation and manuals."
         }
       ]
     }
   },
-
   {
     "id": "dart",
     "name": "Dart",
-    "type": "mobile",
-    "yearCreated": 2011,
-    "creator": "Lars Bak and Google",
+    "type": "web",
+    "year": 2011,
+    "creator": "Lars Bak and Kasper Lund",
     "difficulty": "Intermediate",
-    "description": "Dart is a modern, object-oriented language designed for client development, especially mobile and web apps. Dart powers the increasingly popular Flutter framework for building cross-platform apps.",
-    "usedFor": "Mobile apps (Flutter), web apps, server-side programming, and desktop applications.",
-    "funFact": "Dart compiles to native machine code for fast mobile apps or to JavaScript for the web.",
+    "description": "Dart is an object-oriented language by Google, used to build scalable and fast apps. Most notably, Dart powers the Flutter framework for cross-platform mobile development.",
+    "usedFor": "Mobile apps (Flutter), web development, backend services.",
+    "funFact": "Dart was introduced at the GOTO conference in Aarhus, Denmark in 2011.",
     "color": "#00B4AB",
-    "examples": [
+    "steps": [
       {
-        "title": "Print Message",
-        "code": "void main() {\n  print('Hello, world!');\n}",
-        "beginnerExplanation": "This code prints Hello, world! when you run it.",
-        "explanation": [
-          "void main() {            // Starting point",
-          "  print('Hello, world!'); // Show message",
-          "}"
-        ]
+        "stepNumber": 1,
+        "title": "Print to Console",
+        "description": "Write and run your first Dart program to print text.",
+        "keyFactors": ["main() function", "print"],
+        "example": "void main() {\n  print('Hello, Dart!');\n}",
+        "beginnerTip": "Use DartPad.dev for quick experimentation."
       },
       {
-        "title": "Add Numbers",
-        "code": "void main() {\n  var a = 2;\n  var b = 4;\n  print(a + b);\n}",
-        "beginnerExplanation": "This adds two numbers and prints their total.",
-        "explanation": [
-          "void main() {     // Program starts here",
-          "  var a = 2;     // Create variable a",
-          "  var b = 4;     // Create variable b",
-          "  print(a + b);  // Add and print (6)",
-          "}"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Types",
+        "description": "Declare variables with type inference or explicit types.",
+        "keyFactors": ["var", "int", "String"],
+        "example": "var language = 'Dart';\nint year = 2011;",
+        "beginnerTip": "Dart supports both explicit types and type inference with 'var'."
       },
       {
-        "title": "Simple Loop",
-        "code": "void main() {\n  for (var i = 1; i <= 3; i++) {\n    print(i);\n  }\n}",
-        "beginnerExplanation": "This code shows 1, 2, and 3, each on its own line.",
-        "explanation": [
-          "void main() {            // Start function",
-          "  for (var i = 1; i <= 3; i++) {     // Loop 3 times",
-          "    print(i);            // Print number",
-          "  }",
-          "}"
-        ]
+        "stepNumber": 3,
+        "title": "Functions and Classes",
+        "description": "Organize code with functions and simple classes.",
+        "keyFactors": ["Function syntax", "Class definition"],
+        "example": "class Greeter {\n  void greet() => print('Hi!');\n}",
+        "beginnerTip": "Classes and methods use curly braces or arrow notation for single expressions."
       }
     ],
     "resources": {
-      "youtubeQuery": "Dart programming for beginners",
+      "youtubeQuery": "Dart programming beginner tutorial",
       "websites": [
         {
           "title": "Dart.dev Tutorials",
           "url": "https://dart.dev/tutorials",
-          "description": "Official step-by-step Dart tutorials for all levels."
+          "description": "Official Dart tutorials and examples."
         },
         {
-          "title": "Flutter - Get Started",
-          "url": "https://flutter.dev/docs/get-started/install",
-          "description": "Official guide for using Dart in Flutter apps."
+          "title": "DartPad",
+          "url": "https://dartpad.dev/",
+          "description": "Online interactive Dart coding environment."
         }
       ]
     }
   },
-
   {
     "id": "scala",
     "name": "Scala",
-    "type": "data",
-    "yearCreated": 2004,
+    "type": "web",
+    "year": 2004,
     "creator": "Martin Odersky",
     "difficulty": "Advanced",
-    "description": "Scala combines object-oriented and functional programming in a concise language running on the Java Virtual Machine. It is well suited for data engineering, backend services, and big data analysis.",
-    "usedFor": "Big data processing (Apache Spark), backend services, and scalable distributed systems.",
-    "funFact": "Scala’s name blends 'scalable language', as it is designed to grow with your needs.",
+    "description": "Scala combines object-oriented and functional programming in one concise, high-level language. It runs on the Java Virtual Machine and is often used for distributed data processing and scalable applications.",
+    "usedFor": "Big data (Spark), back-end services, distributed systems.",
+    "funFact": "Scala stands for 'scalable language' and is designed to grow with user needs.",
     "color": "#c22d40",
-    "examples": [
+    "steps": [
       {
-        "title": "Print Message",
-        "code": "object Main extends App {\n  println(\"Hello, world!\")\n}",
-        "beginnerExplanation": "This code prints Hello, world! to the screen.",
-        "explanation": [
-          "object Main extends App {      // Define program",
-          "  println(\"Hello, world!\")   // Print message",
-          "}"
-        ]
+        "stepNumber": 1,
+        "title": "Hello Scala",
+        "description": "Write and run your first Scala application.",
+        "keyFactors": ["object", "main method", "println"],
+        "example": "object Main extends App {\n  println(\"Hello, Scala!\")\n}",
+        "beginnerTip": "Scala files end with .scala and can be run in the REPL for interactive sessions."
       },
       {
-        "title": "Add Numbers",
-        "code": "val a = 3\nval b = 5\nprintln(a + b)",
-        "beginnerExplanation": "This adds two numbers and prints their answer.",
-        "explanation": [
-          "val a = 3         // Set a to 3",
-          "val b = 5         // Set b to 5",
-          "println(a + b)    // Add and print (8)"
-        ]
+        "stepNumber": 2,
+        "title": "Variables and Immutability",
+        "description": "Learn to use val and var for immutable and mutable variables.",
+        "keyFactors": ["val", "var", "Type inference"],
+        "example": "val language = \"Scala\"\nvar version = 3",
+        "beginnerTip": "Use 'val' when possible to write safer, more predictable code."
       },
       {
-        "title": "Simple Loop",
-        "code": "for (i <- 1 to 3) {\n  println(i)\n}",
-        "beginnerExplanation": "This shows 1, 2, and 3 in order.",
-        "explanation": [
-          "for (i <- 1 to 3) {  // Loop from 1 to 3",
-          "  println(i)         // Print each number",
-          "}"
-        ]
+        "stepNumber": 3,
+        "title": "Functions and Collections",
+        "description": "Write simple functions and use Scala's powerful collection library.",
+        "keyFactors": ["Functions", "Lists", "map/filter"],
+        "example": "List(1,2,3).map(_ * 2)",
+        "beginnerTip": "Scala favors expressive, concise functions—practice functional patterns."
       }
     ],
     "resources": {
@@ -1239,12 +1049,12 @@
         {
           "title": "Scala Documentation",
           "url": "https://docs.scala-lang.org/",
-          "description": "Official Scala language docs and guides."
+          "description": "The official Scala guides and documentation."
         },
         {
-          "title": "Scala Exercises",
-          "url": "https://www.scala-exercises.org/",
-          "description": "Interactive exercises to learn Scala basics online."
+          "title": "Rock the JVM Scala Beginner",
+          "url": "https://rockthejvm.com/p/scala-beginners",
+          "description": "Beginner-friendly Scala video course."
         }
       ]
     }

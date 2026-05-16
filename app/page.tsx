@@ -1,73 +1,99 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import languages from "@/data/languages.json";
 import Link from "next/link";
+import languages from "@/data/languages.json";
 
-const TYPE_FILTERS = [
-  { label: "All", value: "all" },
-  { label: "Web", value: "web" },
-  { label: "Systems", value: "systems" },
-  { label: "Scripting", value: "scripting" },
-  { label: "Mobile", value: "mobile" },
-  { label: "Data", value: "data" },
-  { label: "Game", value: "game" },
-];
-
-type Language = {
-  id: string;
-  name: string;
-  type: string;
-  yearCreated: number;
-  creator: string;
-  difficulty: string;
-  usedFor: string;
+// Difficulty color utility (matching app/language/[id]/page.tsx)
+const DIFFICULTY_COLORS: Record<
+  string,
+  { bg: string; text: string }
+> = {
+  Beginner: {
+    bg: "bg-green-100 dark:bg-green-900",
+    text: "text-green-700 dark:text-green-300",
+  },
+  Intermediate: {
+    bg: "bg-yellow-100 dark:bg-yellow-900",
+    text: "text-yellow-700 dark:text-yellow-300",
+  },
+  Advanced: {
+    bg: "bg-red-100 dark:bg-red-900",
+    text: "text-red-700 dark:text-red-300",
+  },
 };
 
-const BEGINNER_LANGUAGES = [
-  { id: "python", name: "Python" },
-  { id: "javascript", name: "JavaScript" },
-  { id: "basic", name: "BASIC" },
+function getDifficultyColor(difficulty: string) {
+  return (
+    DIFFICULTY_COLORS[difficulty] || {
+      bg: "bg-zinc-200 dark:bg-zinc-800",
+      text: "text-zinc-700 dark:text-zinc-200",
+    }
+  );
+}
+
+const FILTERS = [
+  { label: "All", type: null },
+  { label: "Web", type: "web" },
+  { label: "Systems", type: "systems" },
+  { label: "Scripting", type: "scripting" },
+  { label: "Mobile", type: "mobile" },
+  { label: "Data", type: "data" },
+  { label: "Game", type: "game" },
 ];
 
-export default function HomePage() {
-  const [search, setSearch] = useState("");
-  const [typeFilter, setTypeFilter] = useState("all");
+function classNames(...classes: any[]) {
+  return classes.filter(Boolean).join(" ");
+}
 
-  // Only include languages with correct info for display
+export default function LanguageHomePage() {
+  const [search, setSearch] = useState("");
+  const [selectedType, setSelectedType] = useState<string | null>(null);
+
   const filteredLanguages = useMemo(() => {
-    return (languages as Language[])
-      .filter((lang) => {
-        const matchName =
-          lang.name.toLowerCase().includes(search.toLowerCase());
-        const matchType =
-          typeFilter === "all"
-            ? true
-            : lang.type.toLowerCase() === typeFilter;
-        return matchName && matchType;
-      });
-  }, [search, typeFilter]);
+    let result = languages;
+    if (selectedType) {
+      result = result.filter((lang: any) => lang.type === selectedType);
+    }
+    if (search.trim()) {
+      result = result.filter((lang: any) =>
+        lang.name.toLowerCase().includes(search.trim().toLowerCase())
+      );
+    }
+    return result;
+  }, [selectedType, search]);
+
+  const beginnerLanguages = useMemo(() => {
+    // Python, JavaScript, BASIC (filter, but BASIC may not exist in JSON)
+    const keys = ["python", "javascript", "basic"];
+    return keys
+      .map((id) => (languages as any[]).find((l) => l.id === id))
+      .filter(Boolean);
+  }, []);
 
   return (
     <div className="font-sans bg-zinc-50 dark:bg-black min-h-screen">
-      <main className="bg-white dark:bg-black max-w-3xl mx-auto py-32 px-16 text-zinc-600 dark:text-zinc-400">
+      <main className="bg-white dark:bg-black max-w-3xl mx-auto min-h-screen py-32 px-16 text-zinc-600 dark:text-zinc-400">
         {/* Beginner Section */}
-        <section className="mb-16">
-          <h1
-            className="font-bold text-3xl md:text-4xl text-zinc-900 dark:text-white mb-2"
-            style={{ fontFamily: "var(--font-geist-sans, Inter, sans-serif)" }}
+        <section className="mb-12">
+          <div
+            className="mb-4 text-3xl font-bold text-zinc-900 dark:text-white"
+            style={{
+              fontFamily:
+                "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
+            }}
           >
-            Learn to Code, Starting Simple
-          </h1>
-          <p className="mb-4 text-lg text-zinc-600 dark:text-zinc-400">
-            New to programming? Try these beginner-friendly languages:
-          </p>
-          <div className="flex gap-4 mb-2">
-            {BEGINNER_LANGUAGES.map((lang) => (
+            Where should you start?
+          </div>
+          <div className="mb-4 text-base text-zinc-700 dark:text-zinc-300 max-w-xl">
+            If you're new to coding, these languages provide a friendly introduction and have vast learning resources:
+          </div>
+          <div className="flex gap-4 flex-wrap">
+            {beginnerLanguages.map((lang: any) => (
               <Link
-                key={lang.id}
                 href={`/language/${lang.id}`}
-                className="rounded-full bg-zinc-100 dark:bg-zinc-900 px-6 py-2 font-semibold text-base text-zinc-900 dark:text-white transition hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                key={lang.id}
+                className="rounded-full bg-zinc-100 dark:bg-zinc-900 px-6 py-2 font-semibold text-base text-zinc-900 dark:text-white transition hover:bg-zinc-200 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-800"
                 style={{
                   fontFamily:
                     "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
@@ -77,43 +103,39 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
-          <div className="text-sm text-zinc-500 dark:text-zinc-500">
-            <span>
-              Python, JavaScript, and BASIC are great starting points for absolute beginners.
-            </span>
-          </div>
         </section>
 
-        {/* Search/filter */}
-        <section className="mb-8">
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+        {/* Search and filters */}
+        <section className="mb-10">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
             <input
+              type="text"
+              placeholder="Search languages..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              type="text"
-              placeholder="Search languages…"
-              className="w-full sm:w-72 rounded-full bg-zinc-100 dark:bg-zinc-900 px-5 py-2 text-base outline-none focus:bg-zinc-200 dark:focus:bg-zinc-800 transition shadow border-none"
+              className="w-full md:w-80 px-4 py-3 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900 text-base outline-none focus:ring-2 focus:ring-zinc-300 dark:focus:ring-zinc-600 transition"
               style={{
                 fontFamily:
                   "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
               }}
-              aria-label="Search for a programming language"
             />
-            <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
-              {TYPE_FILTERS.map((filter) => (
+            <div className="flex gap-2 flex-wrap">
+              {FILTERS.map((filter) => (
                 <button
-                  key={filter.value}
-                  onClick={() => setTypeFilter(filter.value)}
-                  className={`rounded-full px-4 py-1 font-medium text-sm transition ${
-                    typeFilter === filter.value
-                      ? "bg-zinc-200 dark:bg-zinc-900 text-zinc-900 dark:text-white"
-                      : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700"
-                  }`}
+                  key={filter.label}
+                  className={classNames(
+                    "rounded-full px-6 py-2 text-base font-semibold transition border",
+                    selectedType === filter.type
+                      ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-black border-zinc-900 dark:border-zinc-100"
+                      : "bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border-zinc-200 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800"
+                  )}
                   style={{
                     fontFamily:
                       "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
                   }}
-                  type="button"
+                  onClick={() =>
+                    setSelectedType(filter.type ? filter.type : null)
+                  }
                 >
                   {filter.label}
                 </button>
@@ -122,75 +144,65 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Languages grid */}
+        {/* List of languages */}
         <section>
           {filteredLanguages.length === 0 ? (
-            <div className="text-center py-12 text-zinc-400">
+            <div className="text-zinc-500 text-center mt-20 text-lg">
               No languages found.
             </div>
           ) : (
-            <div className="grid gap-6 md:grid-cols-2">
-              {filteredLanguages.map((lang) => (
-                <Link
-                  key={lang.id}
-                  href={`/language/${lang.id}`}
-                  className="block rounded-2xl border border-zinc-100 dark:border-zinc-900 bg-zinc-50 dark:bg-zinc-950 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition p-6"
-                  style={{
-                    fontFamily:
-                      "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
-                  }}
-                >
-                  <div className="flex justify-between items-baseline mb-2">
-                    <h2 className="font-bold text-xl text-zinc-900 dark:text-white truncate">
-                      {lang.name}
-                    </h2>
-                    <span
-                      className={`rounded-full px-3 py-0.5 text-xs font-medium ${
-                        lang.difficulty === "Beginner"
-                          ? "bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300"
-                          : lang.difficulty === "Intermediate"
-                          ? "bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300"
-                          : "bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300"
-                      }`}
-                      style={{
-                        fontFamily:
-                          "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
-                      }}
-                    >
-                      {lang.difficulty}
-                    </span>
-                  </div>
-                  <div className="mb-1 text-sm text-zinc-600 dark:text-zinc-400">
-                    {lang.usedFor}
-                  </div>
-                  <div className="flex justify-between items-center mt-3">
-                    <div>
-                      <div className="text-xs text-zinc-400">
-                        Year
+            <div className="grid gap-7">
+              {filteredLanguages.map((lang: any) => {
+                const difficulty = getDifficultyColor(lang.difficulty);
+                return (
+                  <Link
+                    href={`/language/${lang.id}`}
+                    key={lang.id}
+                    className="block rounded-xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-6 transition hover:shadow-md focus:outline-none group"
+                    style={{
+                      fontFamily:
+                        "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
+                    }}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <div
+                          className="text-2xl font-bold text-zinc-900 dark:text-white leading-none"
+                          style={{ minWidth: 48 }}
+                        >
+                          {lang.name}
+                        </div>
+                        <span
+                          className={classNames(
+                            "ml-2 rounded-full px-3 py-1 text-xs font-semibold",
+                            difficulty.bg,
+                            difficulty.text
+                          )}
+                        >
+                          {lang.difficulty}
+                        </span>
                       </div>
-                      <div className="font-medium text-zinc-700 dark:text-zinc-200">
-                        {lang.yearCreated}
+                      <div className="flex gap-3 items-center">
+                        <span className="text-xs bg-zinc-200 dark:bg-zinc-800 rounded-full px-3 py-1 font-medium text-zinc-700 dark:text-zinc-300">
+                          {lang.type}
+                        </span>
+                        <span className="text-xs bg-zinc-200 dark:bg-zinc-800 rounded-full px-3 py-1 font-medium text-zinc-700 dark:text-zinc-300">
+                          {lang.year || lang.yearCreated}
+                        </span>
                       </div>
                     </div>
-                    <div>
-                      <div className="text-xs text-zinc-400">
-                        Creator
-                      </div>
-                      <div className="font-medium text-zinc-700 dark:text-zinc-200 truncate max-w-[120px]">
+                    <div className="flex flex-col md:flex-row md:items-center md:gap-5">
+                      <div className="mb-1 text-sm text-zinc-700 dark:text-zinc-200">
+                        <span className="font-medium">Creator: </span>
                         {lang.creator}
                       </div>
-                    </div>
-                    <div>
-                      <div className="text-xs text-zinc-400">
-                        Type
-                      </div>
-                      <div className="font-medium text-zinc-700 dark:text-zinc-200 capitalize">
-                        {lang.type}
+                      <div className="mb-1 text-sm text-zinc-600 dark:text-zinc-400 md:ml-6">
+                        <span className="font-medium">Typical uses:</span> {lang.usedFor}
                       </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                );
+              })}
             </div>
           )}
         </section>
