@@ -1,975 +1,1166 @@
 [
   {
-    "id": "nes",
-    "name": "Nintendo Entertainment System",
-    "shortName": "NES",
+    "id": "game",
+    "name": "Game Console",
+    "shortName": "Game",
     "type": "game",
-    "manufacturer": "Nintendo",
-    "year": 1983,
-    "discontinued": 1995,
-    "cpu": "Ricoh 2A03 (6502 core), 1.79 MHz",
-    "ram": "2 KB",
-    "storage": "Cartridge",
-    "os": "None (bare metal)",
-    "description": "The NES revitalized the home video game industry with accessible hardware and iconic software libraries. It uses the 6502 CPU and has straightforward memory-mapped I/O for games.",
-    "funFact": "NES cartridges often contained additional chips to expand the system's capabilities.",
-    "difficulty": "Intermediate",
-    "color": "#e63946",
-    "codingExamples": [
-      {
-        "title": "Infinite Loop (6502 Assembly)",
-        "language": "Assembly",
-        "code": "loop:\n  jmp loop",
-        "beginnerExplanation": "This code makes the NES do nothing forever by jumping to itself. Useful for basic testing.",
-        "explanation": [
-          "Defines a loop label.",
-          "Jumps back to the loop, causing the CPU to loop forever."
-        ]
-      },
-      {
-        "title": "Hello World Print (Python, Emulation Script)",
-        "language": "Python",
-        "code": "print('Hello NES from Python!')",
-        "beginnerExplanation": "Prints a message using Python, which is used in development scripts and emulators.",
-        "explanation": [
-          "Uses the print function to display text on the screen."
-        ]
-      },
-      {
-        "title": "Output to Log (JavaScript, NES Tools)",
-        "language": "JavaScript",
-        "code": "console.log('Hello from NES JavaScript!');",
-        "beginnerExplanation": "Prints a message in JavaScript for tools and NES-related scripts.",
-        "explanation": [
-          "Calls the console.log function with a string."
-        ]
-      },
-      {
-        "title": "Console Log (TypeScript, NES Tools)",
-        "language": "TypeScript",
-        "code": "console.log('TypeScript - Hello NES!');",
-        "beginnerExplanation": "This logs a message with TypeScript, useful for NES tool development.",
-        "explanation": [
-          "Prints a message to the console."
-        ]
-      },
-      {
-        "title": "Print Output (C)",
-        "language": "C",
-        "code": "#include <stdio.h>\nint main() {\n    printf(\"Hello NES!\\n\");\n    return 0;\n}",
-        "beginnerExplanation": "Print a message to standard output using C.",
-        "explanation": [
-          "Includes stdio.h header.",
-          "Defines the main entry point.",
-          "Prints a message.",
-          "Returns zero to indicate successful completion."
-        ]
-      },
-      {
-        "title": "Print to Console (C++)",
-        "language": "C++",
-        "code": "#include <iostream>\nint main() {\n    std::cout << \"Hello NES from C++!\" << std::endl;\n    return 0;\n}",
-        "beginnerExplanation": "Outputs a message to the console using C++.",
-        "explanation": [
-          "Includes the iostream header.",
-          "Defines the main function.",
-          "Prints a message using cout.",
-          "Returns zero to finish."
-        ]
-      },
-      {
-        "title": "Write Line (C#)",
-        "language": "C#",
-        "code": "using System;\nclass Program {\n    static void Main() {\n        Console.WriteLine(\"Hello NES with C#.\");\n    }\n}",
-        "beginnerExplanation": "Prints a message in C#. Useful for desktop NES utilities.",
-        "explanation": [
-          "Uses System for console access.",
-          "Prints a message to output."
-        ]
-      },
-      {
-        "title": "Print Statement (Rust)",
-        "language": "Rust",
-        "code": "fn main() {\n    println!(\"Hello NES from Rust!\");\n}",
-        "beginnerExplanation": "Prints a message using Rust for NES tool development.",
-        "explanation": [
-          "Defines the main function.",
-          "Prints the string with println macro."
-        ]
-      },
-      {
-        "title": "Print Message (Go)",
-        "language": "Go",
-        "code": "package main\nimport \"fmt\"\nfunc main() {\n    fmt.Println(\"Hello NES from Go!\")\n}",
-        "beginnerExplanation": "Print a message with Go, often used for NES ROM tools.",
-        "explanation": [
-          "Imports the fmt package.",
-          "Defines the main function.",
-          "Prints the message."
-        ]
-      },
-      {
-        "title": "Output Message (Java)",
-        "language": "Java",
-        "code": "public class NES {\n    public static void main(String[] args) {\n        System.out.println(\"Hello NES with Java!\");\n    }\n}",
-        "beginnerExplanation": "Print text in Java, typical for NES utility tools.",
-        "explanation": [
-          "Defines the main class and function.",
-          "Prints the message to standard output."
-        ]
-      },
-      {
-        "title": "Infinite Print (BASIC)",
-        "language": "BASIC",
-        "code": "10 PRINT \"HELLO NES!\"\n20 GOTO 10",
-        "beginnerExplanation": "Keeps printing the message forever. BASIC was common for home computer programming.",
-        "explanation": [
-          "Line 10 prints the message.",
-          "Line 20 loops back to line 10."
-        ]
-      },
-      {
-        "title": "Lua Print Example",
-        "language": "Lua",
-        "code": "print('Hello NES from Lua!')",
-        "beginnerExplanation": "Outputs a message with Lua. Lua is used in many emulators.",
-        "explanation": [
-          "Uses print function to display the message."
-        ]
-      },
-      {
-        "title": "Output String (Ruby)",
-        "language": "Ruby",
-        "code": "puts 'Hello NES via Ruby!'",
-        "beginnerExplanation": "Prints a message with Ruby script, used in automation.",
-        "explanation": [
-          "Uses puts to display the message."
-        ]
-      },
-      {
-        "title": "Display Message (Swift)",
-        "language": "Swift",
-        "code": "print(\"Hello NES with Swift!\")",
-        "beginnerExplanation": "Print a message using Swift language, common for macOS tools.",
-        "explanation": [
-          "Calls print function with a string."
-        ]
-      },
-      {
-        "title": "Print (Kotlin)",
-        "language": "Kotlin",
-        "code": "fun main() {\n    println(\"Hello NES from Kotlin!\")\n}",
-        "beginnerExplanation": "Shows how to print with Kotlin, now used for scripting and desktop NES tools.",
-        "explanation": [
-          "Defines main function.",
-          "Prints the message."
-        ]
-      },
-      {
-        "title": "Echo Statement (PHP)",
-        "language": "PHP",
-        "code": "<?php\necho \"Hello NES from PHP!\\n\";",
-        "beginnerExplanation": "Echoes a message in PHP, used for web-based NES tools.",
-        "explanation": [
-          "Begins PHP script.",
-          "Echoes the message."
-        ]
-      },
-      {
-        "title": "Bash Echo",
-        "language": "Bash",
-        "code": "echo \"Hello NES from Bash!\"",
-        "beginnerExplanation": "Prints a message in Bash, useful for automation scripts.",
-        "explanation": [
-          "Runs echo command with the string."
-        ]
-      }
+    "year": 1985,
+    "difficulty": "Beginner",
+    "languages": [
+      "Python", "JavaScript", "TypeScript", "C", "C++", "C#", "Rust", "Go", "Java",
+      "Assembly", "BASIC", "Lua", "Ruby", "Swift", "Kotlin", "PHP", "Bash"
     ],
     "resources": {
-      "youtubeQuery": "NES programming tutorial",
+      "youtubeQuery": "how to program for game consoles",
       "websites": [
         {
-          "title": "NesDev Wiki",
-          "url": "https://www.nesdev.org/wiki/NES_reference_guide",
-          "description": "Technical reference and guides for NES programmers."
+          "title": "Retro Game Console Programming",
+          "url": "https://www.gamedeveloper.com/programming/retro-console-programming",
+          "description": "An overview and tutorials on game console programming."
         }
       ]
-    }
+    },
+    "codingExamples": [
+      {
+        "title": "Print Hello (Python)",
+        "language": "Python",
+        "code": "print('Hello, game console!')",
+        "beginnerExplanation": "This code tells the program to show the words 'Hello, game console!' on the screen.",
+        "explanation": [
+          "print('Hello, game console!')  # Shows the text inside the quotes on the screen"
+        ]
+      },
+      {
+        "title": "Print Hello (JavaScript)",
+        "language": "JavaScript",
+        "code": "console.log('Hello, game console!');",
+        "beginnerExplanation": "This program will display the words 'Hello, game console!' in the console output.",
+        "explanation": [
+          "console.log('Hello, game console!');  // Outputs the text in the JavaScript console"
+        ]
+      },
+      {
+        "title": "Print Hello (TypeScript)",
+        "language": "TypeScript",
+        "code": "console.log('Hello, game console!');",
+        "beginnerExplanation": "This program will show 'Hello, game console!' in the console. TypeScript works with JavaScript.",
+        "explanation": [
+          "console.log('Hello, game console!');  // Prints the message in the console output"
+        ]
+      },
+      {
+        "title": "Print Hello (C)",
+        "language": "C",
+        "code": "#include <stdio.h>\nint main() {\n    printf(\"Hello, game console!\\n\");\n    return 0;\n}",
+        "beginnerExplanation": "This code prints the words 'Hello, game console!' on the screen.",
+        "explanation": [
+          "#include <stdio.h>  // Brings in code needed for printing to the screen",
+          "int main() {        // Starts the main part of the program",
+          "    printf(\"Hello, game console!\\n\");  // Prints the message followed by a new line",
+          "    return 0;       // Ends the program, saying everything went okay",
+          "}"
+        ]
+      },
+      {
+        "title": "Print Hello (C++)",
+        "language": "C++",
+        "code": "#include <iostream>\nint main() {\n    std::cout << \"Hello, game console!\" << std::endl;\n    return 0;\n}",
+        "beginnerExplanation": "This program writes 'Hello, game console!' on the screen.",
+        "explanation": [
+          "#include <iostream>  // Includes code for input and output",
+          "int main() {         // Starts main program block",
+          "    std::cout << \"Hello, game console!\" << std::endl;  // Prints the message with a line break",
+          "    return 0;        // Ends the main block",
+          "}"
+        ]
+      },
+      {
+        "title": "Print Hello (C#)",
+        "language": "C#",
+        "code": "using System;\nclass Program {\n    static void Main() {\n        Console.WriteLine(\"Hello, game console!\");\n    }\n}",
+        "beginnerExplanation": "This program shows 'Hello, game console!' on the screen.",
+        "explanation": [
+          "using System;                    // Allows use of built-in code",
+          "class Program {                  // Defines a program",
+          "    static void Main() {         // Starting point",
+          "        Console.WriteLine(\"Hello, game console!\");  // Shows the text",
+          "    }",
+          "}"
+        ]
+      },
+      {
+        "title": "Print Hello (Rust)",
+        "language": "Rust",
+        "code": "fn main() {\n    println!(\"Hello, game console!\");\n}",
+        "beginnerExplanation": "This prints the message 'Hello, game console!' to the screen.",
+        "explanation": [
+          "fn main() {                        // Main function",
+          "    println!(\"Hello, game console!\");  // Print message and new line",
+          "}"
+        ]
+      },
+      {
+        "title": "Print Hello (Go)",
+        "language": "Go",
+        "code": "package main\nimport \"fmt\"\nfunc main() {\n    fmt.Println(\"Hello, game console!\")\n}",
+        "beginnerExplanation": "This code prints the words 'Hello, game console!' on the screen.",
+        "explanation": [
+          "package main         // Tells Go this is the main program",
+          "import \"fmt\"          // Brings in code for printing",
+          "func main() {         // Main function where code runs",
+          "    fmt.Println(\"Hello, game console!\")  // Prints message and new line",
+          "}"
+        ]
+      },
+      {
+        "title": "Print Hello (Java)",
+        "language": "Java",
+        "code": "public class Hello {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, game console!\");\n    }\n}",
+        "beginnerExplanation": "This program prints 'Hello, game console!' to the screen.",
+        "explanation": [
+          "public class Hello {                      // Creates a program called Hello",
+          "    public static void main(String[] args) {   // The starting point",
+          "        System.out.println(\"Hello, game console!\"); // Prints message",
+          "    }",
+          "}"
+        ]
+      },
+      {
+        "title": "Print Hello (Assembly)",
+        "language": "Assembly",
+        "code": "; For x86 NASM/Linux\nsection .data\n    msg db 'Hello, game console!', 0xA\n    len equ $-msg\nsection .text\n    global _start\n_start:\n    mov edx, len\n    mov ecx, msg\n    mov ebx, 1\n    mov eax, 4\n    int 0x80\n    mov eax, 1\n    int 0x80",
+        "beginnerExplanation": "This is a low-level program that prints 'Hello, game console!' to the screen on a Linux computer.",
+        "explanation": [
+          "section .data                ; Section for data",
+          "    msg db 'Hello, game console!', 0xA ; Message plus new line",
+          "    len equ $-msg            ; Get message length",
+          "section .text                ; Section for the code",
+          "    global _start            ; The program's entry point",
+          "_start:                      ; Marks beginning of code",
+          "    mov edx, len             ; Set length of message",
+          "    mov ecx, msg             ; Set address of message",
+          "    mov ebx, 1               ; File handle 1 (stdout)",
+          "    mov eax, 4               ; System call number (sys_write)",
+          "    int 0x80                 ; Call kernel",
+          "    mov eax, 1               ; Exit system call",
+          "    int 0x80                 ; Exit program"
+        ]
+      },
+      {
+        "title": "Print Hello (BASIC)",
+        "language": "BASIC",
+        "code": "PRINT \"Hello, game console!\"",
+        "beginnerExplanation": "This program shows the words 'Hello, game console!' on the screen using BASIC.",
+        "explanation": [
+          "PRINT \"Hello, game console!\"  ' Display the message"
+        ]
+      },
+      {
+        "title": "Print Hello (Lua)",
+        "language": "Lua",
+        "code": "print(\"Hello, game console!\")",
+        "beginnerExplanation": "This line tells Lua to print 'Hello, game console!' on the screen.",
+        "explanation": [
+          "print(\"Hello, game console!\")  -- Print the message"
+        ]
+      },
+      {
+        "title": "Print Hello (Ruby)",
+        "language": "Ruby",
+        "code": "puts 'Hello, game console!'",
+        "beginnerExplanation": "This Ruby code prints 'Hello, game console!' to the screen.",
+        "explanation": [
+          "puts 'Hello, game console!'  # Prints the message"
+        ]
+      },
+      {
+        "title": "Print Hello (Swift)",
+        "language": "Swift",
+        "code": "print(\"Hello, game console!\")",
+        "beginnerExplanation": "This Swift code displays 'Hello, game console!' to the screen.",
+        "explanation": [
+          "print(\"Hello, game console!\")  // Print the message"
+        ]
+      },
+      {
+        "title": "Print Hello (Kotlin)",
+        "language": "Kotlin",
+        "code": "fun main() {\n    println(\"Hello, game console!\")\n}",
+        "beginnerExplanation": "This code prints 'Hello, game console!' to the screen using Kotlin.",
+        "explanation": [
+          "fun main() {                      // Main entry point",
+          "    println(\"Hello, game console!\")  // Print message and line break",
+          "}"
+        ]
+      },
+      {
+        "title": "Print Hello (PHP)",
+        "language": "PHP",
+        "code": "<?php\necho \"Hello, game console!\\n\";\n?>",
+        "beginnerExplanation": "This code tells PHP to output 'Hello, game console!' on the web page or terminal.",
+        "explanation": [
+          "<?php                       // Start PHP code",
+          "echo \"Hello, game console!\\n\";  // Print message & new line",
+          "?>                           // End of PHP"
+        ]
+      },
+      {
+        "title": "Print Hello (Bash)",
+        "language": "Bash",
+        "code": "echo \"Hello, game console!\"",
+        "beginnerExplanation": "This Bash script prints 'Hello, game console!' to the terminal.",
+        "explanation": [
+          "echo \"Hello, game console!\"  # Print the message"
+        ]
+      }
+    ]
   },
   {
-    "id": "gameboy",
-    "name": "Game Boy",
-    "shortName": "Game Boy",
+    "id": "handheld",
+    "name": "Handheld Console",
+    "shortName": "Handheld",
     "type": "handheld",
-    "manufacturer": "Nintendo",
     "year": 1989,
-    "discontinued": 2003,
-    "cpu": "Sharp LR35902 (Z80-like), 4.19 MHz",
-    "ram": "8 KB",
-    "storage": "Cartridge",
-    "os": "None (bare metal)",
-    "description": "The Game Boy propelled handheld gaming into the mainstream, built on easy-to-learn hardware with a loyal homebrew community.",
-    "funFact": "Game Boy's screen lag and four-shade grayscale enabled creative graphics techniques.",
     "difficulty": "Beginner",
-    "color": "#6dccb1",
-    "codingExamples": [
-      {
-        "title": "Endless Loop (Z80 Assembly)",
-        "language": "Assembly",
-        "code": "LOOP:\n  JP LOOP",
-        "beginnerExplanation": "Causes the Game Boy to do nothing but loop forever. All Game Boy programs start from here.",
-        "explanation": [
-          "Declares LOOP label.",
-          "Jumps to LOOP again and again."
-        ]
-      },
-      {
-        "title": "Print with Python",
-        "language": "Python",
-        "code": "print('Hello, Game Boy!')",
-        "beginnerExplanation": "Outputs a message using Python. Helpful for Game Boy emulation tools.",
-        "explanation": [
-          "Uses print to display text."
-        ]
-      },
-      {
-        "title": "Console Log (JavaScript)",
-        "language": "JavaScript",
-        "code": "console.log('Hello Game Boy from JS!');",
-        "beginnerExplanation": "Logs a message with JavaScript.",
-        "explanation": [
-          "Uses console.log to print the string."
-        ]
-      },
-      {
-        "title": "Log Output (TypeScript)",
-        "language": "TypeScript",
-        "code": "console.log('Hello Game Boy from TS!');",
-        "beginnerExplanation": "Logs output in TypeScript for dev tools.",
-        "explanation": [
-          "Prints a message to the log."
-        ]
-      },
-      {
-        "title": "Print (C)",
-        "language": "C",
-        "code": "#include <stdio.h>\nint main() {\n    printf(\"Hello Game Boy!\\n\");\n    return 0;\n}",
-        "beginnerExplanation": "Prints a message in C, as used in emulators or cross compilers.",
-        "explanation": [
-          "Includes stdio.h.",
-          "Defines main.",
-          "Prints message.",
-          "Returns 0."
-        ]
-      },
-      {
-        "title": "C++ Output",
-        "language": "C++",
-        "code": "#include <iostream>\nint main() {\n    std::cout << \"Hello Game Boy from C++!\" << std::endl;\n    return 0;\n}",
-        "beginnerExplanation": "C++ program prints a message.",
-        "explanation": [
-          "Includes iostream.",
-          "Defines main.",
-          "Prints message.",
-          "Returns."
-        ]
-      },
-      {
-        "title": "PrintLine (C#)",
-        "language": "C#",
-        "code": "using System;\nclass Example {\n    static void Main() {\n        Console.WriteLine(\"Hello Game Boy - C#\");\n    }\n}",
-        "beginnerExplanation": "Writes output using C#.",
-        "explanation": [
-          "Imports System.",
-          "Defines Main class.",
-          "Prints a message."
-        ]
-      },
-      {
-        "title": "Println Macro (Rust)",
-        "language": "Rust",
-        "code": "fn main() {\n    println!(\"Hello Game Boy with Rust!\");\n}",
-        "beginnerExplanation": "Rust print macro prints a string.",
-        "explanation": [
-          "Uses main function.",
-          "Prints a message with println!."
-        ]
-      },
-      {
-        "title": "PrintLine (Go)",
-        "language": "Go",
-        "code": "package main\nimport \"fmt\"\nfunc main() {\n    fmt.Println(\"Hello Game Boy from Go!\")\n}",
-        "beginnerExplanation": "Print a message with Go, used in scripting.",
-        "explanation": [
-          "Imports fmt.",
-          "Defines main.",
-          "Prints the message."
-        ]
-      },
-      {
-        "title": "Java Output Example",
-        "language": "Java",
-        "code": "public class GameBoy {\n    public static void main(String[] args) {\n        System.out.println(\"Hello Game Boy from Java!\");\n    }\n}",
-        "beginnerExplanation": "Uses Java to print a message to output.",
-        "explanation": [
-          "Defines class and main.",
-          "Prints the string."
-        ]
-      },
-      {
-        "title": "Basic Print (BASIC)",
-        "language": "BASIC",
-        "code": "10 PRINT \"HELLO GAME BOY!\"\n20 GOTO 10",
-        "beginnerExplanation": "BASIC code that prints the message forever.",
-        "explanation": [
-          "Prints the message.",
-          "Jumps back to line 10."
-        ]
-      },
-      {
-        "title": "Lua Print",
-        "language": "Lua",
-        "code": "print('Hello Game Boy in Lua!')",
-        "beginnerExplanation": "Print with Lua, used in scripting and emulators.",
-        "explanation": [
-          "Calls print to show message."
-        ]
-      },
-      {
-        "title": "Print Command (Ruby)",
-        "language": "Ruby",
-        "code": "puts 'Hello Game Boy with Ruby!'",
-        "beginnerExplanation": "Ruby script print example.",
-        "explanation": [
-          "Uses puts with a string."
-        ]
-      },
-      {
-        "title": "Swift Print",
-        "language": "Swift",
-        "code": "print(\"Hello Game Boy with Swift!\")",
-        "beginnerExplanation": "Shows the Swift way to print a message.",
-        "explanation": [
-          "Prints with the print function."
-        ]
-      },
-      {
-        "title": "Kotlin Print Statement",
-        "language": "Kotlin",
-        "code": "fun main() {\n    println(\"Hello Game Boy via Kotlin!\")\n}",
-        "beginnerExplanation": "Prints a line using Kotlin.",
-        "explanation": [
-          "Defines main.",
-          "Prints the line."
-        ]
-      },
-      {
-        "title": "Echo Output (PHP)",
-        "language": "PHP",
-        "code": "<?php\necho \"Hello Game Boy from PHP!\\n\";",
-        "beginnerExplanation": "Echoes a message with PHP script.",
-        "explanation": [
-          "Begins PHP.",
-          "Echoes string."
-        ]
-      },
-      {
-        "title": "Shell Print (Bash)",
-        "language": "Bash",
-        "code": "echo \"Hello Game Boy from Bash!\"",
-        "beginnerExplanation": "Prints a message in Bash, helpful for build scripts or automation.",
-        "explanation": [
-          "Runs echo to print the message."
-        ]
-      }
+    "languages": [
+      "Python", "JavaScript", "TypeScript", "C", "C++", "C#", "Rust", "Go", "Java",
+      "Assembly", "BASIC", "Lua", "Ruby", "Swift", "Kotlin", "PHP", "Bash"
     ],
     "resources": {
-      "youtubeQuery": "Game Boy homebrew programming tutorial",
+      "youtubeQuery": "handheld console programming tutorial",
       "websites": [
         {
-          "title": "GBDev Wiki",
-          "url": "https://gbdev.io/",
-          "description": "Comprehensive guides and tools for Game Boy programming."
+          "title": "Programming for Handheld Consoles",
+          "url": "https://dev.to/topics/handheld-console",
+          "description": "Community posts and guides about developing for handheld consoles."
         }
       ]
-    }
+    },
+    "codingExamples": [
+      {
+        "title": "Add Two Numbers (Python)",
+        "language": "Python",
+        "code": "a = 3\nb = 4\nprint(a + b)",
+        "beginnerExplanation": "This code adds the numbers 3 and 4 and prints the answer, which is 7.",
+        "explanation": [
+          "a = 3        # Set a to 3",
+          "b = 4        # Set b to 4",
+          "print(a + b) # Show the sum (7)"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (JavaScript)",
+        "language": "JavaScript",
+        "code": "let a = 3;\nlet b = 4;\nconsole.log(a + b);",
+        "beginnerExplanation": "This code makes 3 + 4 and logs the answer, 7, to the console.",
+        "explanation": [
+          "let a = 3;                 // a is 3",
+          "let b = 4;                 // b is 4",
+          "console.log(a + b);        // Shows the sum (7)"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (TypeScript)",
+        "language": "TypeScript",
+        "code": "let a: number = 3;\nlet b: number = 4;\nconsole.log(a + b);",
+        "beginnerExplanation": "This script adds 3 and 4 and prints 7 in the console.",
+        "explanation": [
+          "let a: number = 3;         // a is a number, set to 3",
+          "let b: number = 4;         // b is a number, set to 4",
+          "console.log(a + b);        // Show 7"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (C)",
+        "language": "C",
+        "code": "#include <stdio.h>\nint main() {\n    int a = 3;\n    int b = 4;\n    printf(\"%d\\n\", a + b);\n    return 0;\n}",
+        "beginnerExplanation": "This C code adds 3 and 4, then displays 7.",
+        "explanation": [
+          "#include <stdio.h>               // Needed for printing",
+          "int main() {                     // Main function begins",
+          "    int a = 3;                   // Set a to 3",
+          "    int b = 4;                   // Set b to 4",
+          "    printf(\"%d\\n\", a + b);          // Print sum",
+          "    return 0;                    // End program",
+          "}"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (C++)",
+        "language": "C++",
+        "code": "#include <iostream>\nint main() {\n    int a = 3;\n    int b = 4;\n    std::cout << (a + b) << std::endl;\n    return 0;\n}",
+        "beginnerExplanation": "This adds 3 and 4, then prints the answer (7).",
+        "explanation": [
+          "#include <iostream>                 // Print to screen",
+          "int main() {                        // Starts program",
+          "    int a = 3;                      // a is 3",
+          "    int b = 4;                      // b is 4",
+          "    std::cout << (a + b) << std::endl;  // Print sum",
+          "    return 0;",
+          "}"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (C#)",
+        "language": "C#",
+        "code": "using System;\nclass Program {\n    static void Main() {\n        int a = 3;\n        int b = 4;\n        Console.WriteLine(a + b);\n    }\n}",
+        "beginnerExplanation": "C# code that adds 3 and 4, showing 7.",
+        "explanation": [
+          "using System;            // Use .NET features",
+          "class Program {",
+          "    static void Main() {",
+          "        int a = 3;        // a = 3",
+          "        int b = 4;        // b = 4",
+          "        Console.WriteLine(a + b); // Show sum",
+          "    }",
+          "}"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (Rust)",
+        "language": "Rust",
+        "code": "fn main() {\n    let a = 3;\n    let b = 4;\n    println!(\"{}\", a + b);\n}",
+        "beginnerExplanation": "This program adds 3 and 4 in Rust, then prints 7.",
+        "explanation": [
+          "fn main() {                // Start main block",
+          "    let a = 3;             // a = 3",
+          "    let b = 4;             // b = 4",
+          "    println!(\"{}\", a + b); // Print 7",
+          "}"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (Go)",
+        "language": "Go",
+        "code": "package main\nimport \"fmt\"\nfunc main() {\n    a := 3\n    b := 4\n    fmt.Println(a + b)\n}",
+        "beginnerExplanation": "This Go code adds 3 and 4, and prints 7.",
+        "explanation": [
+          "package main         // Start program",
+          "import \"fmt\"          // Print library",
+          "func main() {",
+          "    a := 3           // a = 3",
+          "    b := 4           // b = 4",
+          "    fmt.Println(a + b)  // Show sum",
+          "}"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (Java)",
+        "language": "Java",
+        "code": "public class Add {\n    public static void main(String[] args) {\n        int a = 3;\n        int b = 4;\n        System.out.println(a + b);\n    }\n}",
+        "beginnerExplanation": "This program prints 3 + 4 using Java.",
+        "explanation": [
+          "public class Add {              // Program called Add",
+          "    public static void main(String[] args) {",
+          "        int a = 3;                  // a = 3",
+          "        int b = 4;                  // b = 4",
+          "        System.out.println(a + b);  // Print sum",
+          "    }",
+          "}"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (Assembly)",
+        "language": "Assembly",
+        "code": "; For x86 NASM/Linux\nsection .data\n    res db 'Result: ', 0\nsection .bss\n    num resb 2\nsection .text\n    global _start\n_start:\n    mov al, 3\n    add al, 4\n    add al, '0'\n    mov [num], al\n    mov eax, 4\n    mov ebx, 1\n    mov ecx, num\n    mov edx, 1\n    int 0x80\n    mov eax, 1\n    int 0x80",
+        "beginnerExplanation": "This adds 3 and 4, then prints the answer as a single character.",
+        "explanation": [
+          "section .data             ; Data storage",
+          "section .bss              ; Buffer for output",
+          "section .text             ; Code section",
+          "mov al, 3                 ; Start with 3",
+          "add al, 4                 ; Add 4",
+          "add al, '0'               ; Convert number to a character",
+          "mov [num], al             ; Store in buffer",
+          "mov eax, 4; mov ebx, 1; mov ecx, num; mov edx, 1; int 0x80 ; Print character",
+          "mov eax, 1; int 0x80      ; Exit"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (BASIC)",
+        "language": "BASIC",
+        "code": "A = 3\nB = 4\nPRINT A + B",
+        "beginnerExplanation": "This shows what you get when you add 3 and 4.",
+        "explanation": [
+          "A = 3             ' Set A to 3",
+          "B = 4             ' Set B to 4",
+          "PRINT A + B       ' Show the result"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (Lua)",
+        "language": "Lua",
+        "code": "a = 3\nb = 4\nprint(a + b)",
+        "beginnerExplanation": "This Lua script prints 7 by adding 3 and 4.",
+        "explanation": [
+          "a = 3         -- Set a to 3",
+          "b = 4         -- Set b to 4",
+          "print(a + b)  -- Print 7"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (Ruby)",
+        "language": "Ruby",
+        "code": "a = 3\nb = 4\nputs a + b",
+        "beginnerExplanation": "Ruby adds 3 and 4, then prints the answer.",
+        "explanation": [
+          "a = 3          # a equals 3",
+          "b = 4          # b equals 4",
+          "puts a + b     # print sum"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (Swift)",
+        "language": "Swift",
+        "code": "let a = 3\nlet b = 4\nprint(a + b)",
+        "beginnerExplanation": "Swift adds 3 + 4 and writes 7.",
+        "explanation": [
+          "let a = 3            // a is 3",
+          "let b = 4            // b is 4",
+          "print(a + b)         // print sum"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (Kotlin)",
+        "language": "Kotlin",
+        "code": "fun main() {\n    print(\"Add Two Numbers: \")\n    val a = 3\n    val b = 4\n    println(a + b)\n}",
+        "beginnerExplanation": "Kotlin adds 3 and 4, then prints 7.",
+        "explanation": [
+          "fun main() {               // Start entry point",
+          "    print(\"Add Two Numbers: \")   // Print prompt",
+          "    val a = 3              // a is 3",
+          "    val b = 4              // b is 4",
+          "    println(a + b)         // Show sum",
+          "}"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (PHP)",
+        "language": "PHP",
+        "code": "<?php\n$a = 3;\n$b = 4;\necho $a + $b . \"\\n\";\n?>",
+        "beginnerExplanation": "This PHP code prints the result of 3 + 4.",
+        "explanation": [
+          "<?php                 // Start PHP",
+          "$a = 3;               // a is 3",
+          "$b = 4;               // b is 4",
+          "echo $a + $b . \"\\n\";  // Print sum",
+          "?>                    // End PHP"
+        ]
+      },
+      {
+        "title": "Add Two Numbers (Bash)",
+        "language": "Bash",
+        "code": "a=3\nb=4\necho $((a + b))",
+        "beginnerExplanation": "This Bash script adds 3 and 4, then prints 7.",
+        "explanation": [
+          "a=3                # Set a to 3",
+          "b=4                # Set b to 4",
+          "echo $((a + b))    # Show the sum"
+        ]
+      }
+    ]
   },
   {
-    "id": "ciscoios",
-    "name": "Cisco IOS Router",
-    "shortName": "Cisco IOS",
+    "id": "network",
+    "name": "Network Console",
+    "shortName": "Network",
     "type": "network",
-    "manufacturer": "Cisco",
-    "year": 1993,
-    "discontinued": null,
-    "cpu": "MIPS (200-800 MHz, varies by model)",
-    "ram": "32+ MB",
-    "storage": "Flash, NVRAM",
-    "os": "Cisco IOS",
-    "description": "Cisco IOS Routers power data centers and internet infrastructure worldwide. Their configuration is text-based, using a CLI for all interactions.",
-    "funFact": "The Cisco IOS CLI is used in nearly every big network, from offices to ISPs.",
+    "year": 1999,
     "difficulty": "Intermediate",
-    "color": "#2176ff",
-    "codingExamples": [
-      {
-        "title": "Note on Assembly (Not available for CLI users)",
-        "language": "Assembly",
-        "code": "; Cisco IOS is not user-programmable in low-level assembly.",
-        "beginnerExplanation": "Typical users cannot write or upload assembly to Cisco routers. All work is done via CLI commands.",
-        "explanation": [
-          "Cisco IOS is managed through CLI, not low-level code."
-        ]
-      },
-      {
-        "title": "Print Connection Status (Python)",
-        "language": "Python",
-        "code": "print('Connected to Cisco IOS!')",
-        "beginnerExplanation": "Prints a message when an automated script connects to a router.",
-        "explanation": [
-          "Prints a string using Python's print function."
-        ]
-      },
-      {
-        "title": "Log Connection (JavaScript)",
-        "language": "JavaScript",
-        "code": "console.log('Cisco IOS script started');",
-        "beginnerExplanation": "Logs to the console in JavaScript, used for automation or configuration tools.",
-        "explanation": [
-          "Uses console.log to display a message."
-        ]
-      },
-      {
-        "title": "Log Output (TypeScript)",
-        "language": "TypeScript",
-        "code": "console.log('Connecting to Cisco IOS with TypeScript');",
-        "beginnerExplanation": "Same as JavaScript but typed, for network automation scripts.",
-        "explanation": [
-          "Prints the message with console.log."
-        ]
-      },
-      {
-        "title": "Print (C)",
-        "language": "C",
-        "code": "#include <stdio.h>\nint main() {\n    printf(\"Cisco IOS C tool starting...\\n\");\n    return 0;\n}",
-        "beginnerExplanation": "C program printing connection status. Used in CLI tools.",
-        "explanation": [
-          "Includes standard headers.",
-          "Main entry point.",
-          "Prints the message.",
-          "Exits."
-        ]
-      },
-      {
-        "title": "C++ Print Example",
-        "language": "C++",
-        "code": "#include <iostream>\nint main() {\n    std::cout << \"Cisco IOS C++ script\" << std::endl;\n    return 0;\n}",
-        "beginnerExplanation": "Uses C++ to log a message for Cisco CLI automation.",
-        "explanation": [
-          "Includes iostream.",
-          "Defines main.",
-          "Prints string."
-        ]
-      },
-      {
-        "title": "Log with C#",
-        "language": "C#",
-        "code": "using System;\nclass Ciscotool {\n    static void Main() {\n        Console.WriteLine(\"Cisco IOS connection...\");\n    }\n}",
-        "beginnerExplanation": "C# standard output method. Useful for Windows-based scripts.",
-        "explanation": [
-          "Sets up a class.",
-          "Prints status message."
-        ]
-      },
-      {
-        "title": "Rust Print Statement",
-        "language": "Rust",
-        "code": "fn main() {\n    println!(\"Cisco IOS using Rust\");\n}",
-        "beginnerExplanation": "Prints with Rust for network scripting.",
-        "explanation": [
-          "Defines main.",
-          "Print statement."
-        ]
-      },
-      {
-        "title": "Go Println Example",
-        "language": "Go",
-        "code": "package main\nimport \"fmt\"\nfunc main() {\n    fmt.Println(\"Cisco IOS Go script running\")\n}",
-        "beginnerExplanation": "Outputs a line of text using Go.",
-        "explanation": [
-          "Imports fmt.",
-          "Defines main.",
-          "Prints message."
-        ]
-      },
-      {
-        "title": "Java Print",
-        "language": "Java",
-        "code": "public class CiscoIOS {\n    public static void main(String[] args) {\n        System.out.println(\"Cisco IOS tool running\");\n    }\n}",
-        "beginnerExplanation": "Java send output to terminal. Good for config tools.",
-        "explanation": [
-          "Class, main, prints."
-        ]
-      },
-      {
-        "title": "BASIC Print",
-        "language": "BASIC",
-        "code": "10 PRINT \"CISCO IOS - CLI TOOL\"\n20 END",
-        "beginnerExplanation": "Prints a single status string using BASIC.",
-        "explanation": [
-          "Prints the string.",
-          "Ends program."
-        ]
-      },
-      {
-        "title": "Lua Print Command",
-        "language": "Lua",
-        "code": "print('Cisco IOS automation')",
-        "beginnerExplanation": "Outputs text in Lua, often used in automation.",
-        "explanation": [
-          "Prints the message."
-        ]
-      },
-      {
-        "title": "Ruby Status Output",
-        "language": "Ruby",
-        "code": "puts 'Cisco IOS - Ruby script.'",
-        "beginnerExplanation": "Printed message in Ruby for CLI tools.",
-        "explanation": [
-          "Uses puts."
-        ]
-      },
-      {
-        "title": "Swift Print Statement",
-        "language": "Swift",
-        "code": "print(\"Cisco IOS - Swift script!\")",
-        "beginnerExplanation": "Swift print for scripting status.",
-        "explanation": [
-          "Prints message."
-        ]
-      },
-      {
-        "title": "Kotlin Output",
-        "language": "Kotlin",
-        "code": "fun main() {\n    println(\"Cisco IOS connection via Kotlin!\")\n}",
-        "beginnerExplanation": "Outputs status line with Kotlin.",
-        "explanation": [
-          "Defines main.",
-          "Prints line."
-        ]
-      },
-      {
-        "title": "PHP Echo Output",
-        "language": "PHP",
-        "code": "<?php\necho \"Cisco IOS PHP script\\n\";",
-        "beginnerExplanation": "Prints status message in PHP.",
-        "explanation": [
-          "Begins PHP.",
-          "Echo output."
-        ]
-      },
-      {
-        "title": "Shell Echo Statement",
-        "language": "Bash",
-        "code": "echo \"Cisco IOS connection open\"",
-        "beginnerExplanation": "Shell script prints message, useful for network scripts.",
-        "explanation": [
-          "Runs echo with string argument."
-        ]
-      }
+    "languages": [
+      "Python", "JavaScript", "TypeScript", "C", "C++", "C#", "Rust", "Go", "Java",
+      "Assembly", "BASIC", "Lua", "Ruby", "Swift", "Kotlin", "PHP", "Bash"
     ],
     "resources": {
-      "youtubeQuery": "Cisco IOS CLI tutorial",
+      "youtubeQuery": "network console programming basics",
       "websites": [
         {
-          "title": "Cisco CLI Analyzer",
-          "url": "https://cli.cloudapps.cisco.com/cli-analyzer/",
-          "description": "Interactive tool for learning and automating Cisco CLI."
+          "title": "Network Game Console Development",
+          "url": "https://www.gamedeveloper.com/programming/network-programming",
+          "description": "An introduction to building programs for network-connected consoles."
         }
       ]
-    }
+    },
+    "codingExamples": [
+      {
+        "title": "Simple TCP Client (Python)",
+        "language": "Python",
+        "code": "import socket\ns = socket.socket()\ns.connect(('example.com', 80))\ns.send(b'GET / HTTP/1.0\\r\\n\\r\\n')\ndata = s.recv(1024)\nprint(data)\ns.close()",
+        "beginnerExplanation": "This connects to a website, asks for a page, shows what comes back, and disconnects.",
+        "explanation": [
+          "import socket                   # Get tools for networking",
+          "s = socket.socket()             # Make a connection object",
+          "s.connect(('example.com', 80))  # Connect to example.com on port 80",
+          "s.send(b'GET / HTTP/1.0\\r\\n\\r\\n') # Ask for web page",
+          "data = s.recv(1024)             # Read reply",
+          "print(data)                     # Show reply data",
+          "s.close()                       # Close connection"
+        ]
+      },
+      {
+        "title": "Simple Output (JavaScript)",
+        "language": "JavaScript",
+        "code": "console.log('Network ready!');",
+        "beginnerExplanation": "This prints that the network is ready (for real network code, more setup is needed).",
+        "explanation": [
+          "console.log('Network ready!');  // Show message in console"
+        ]
+      },
+      {
+        "title": "Output Network Ready (TypeScript)",
+        "language": "TypeScript",
+        "code": "console.log('Network ready!');",
+        "beginnerExplanation": "Prints that the network is ready. Real networking in TypeScript uses libraries.",
+        "explanation": [
+          "console.log('Network ready!');  // Print ready message"
+        ]
+      },
+      {
+        "title": "Simple TCP Client (C)",
+        "language": "C",
+        "code": "#include <stdio.h>\nint main() {\n    printf(\"Network console ready!\\n\");\n    return 0;\n}",
+        "beginnerExplanation": "This prints a network ready message. (C networking needs advanced code.)",
+        "explanation": [
+          "#include <stdio.h>                      // For printing",
+          "int main() {",
+          "    printf(\"Network console ready!\\n\"); // Print message",
+          "    return 0;",
+          "}"
+        ]
+      },
+      {
+        "title": "Output Network Ready (C++)",
+        "language": "C++",
+        "code": "#include <iostream>\nint main() {\n    std::cout << \"Network console ready!\" << std::endl;\n    return 0;\n}",
+        "beginnerExplanation": "This prints that the network is ready for use.",
+        "explanation": [
+          "#include <iostream>   // For printing",
+          "int main() {",
+          "    std::cout << \"Network console ready!\" << std::endl;",
+          "    return 0;",
+          "}"
+        ]
+      },
+      {
+        "title": "Output Network Ready (C#)",
+        "language": "C#",
+        "code": "using System;\nclass Program {\n    static void Main() {\n        Console.WriteLine(\"Network console ready!\");\n    }\n}",
+        "beginnerExplanation": "Prints a message to show network is ready.",
+        "explanation": [
+          "using System;                               // Use system functions",
+          "class Program {",
+          "    static void Main() {",
+          "        Console.WriteLine(\"Network console ready!\");",
+          "    }",
+          "}"
+        ]
+      },
+      {
+        "title": "Output Network Ready (Rust)",
+        "language": "Rust",
+        "code": "fn main() {\n    println!(\"Network console ready!\");\n}",
+        "beginnerExplanation": "This Rust example prints out a ready message.",
+        "explanation": [
+          "fn main() {",
+          "    println!(\"Network console ready!\");",
+          "}"
+        ]
+      },
+      {
+        "title": "Output Network Ready (Go)",
+        "language": "Go",
+        "code": "package main\nimport \"fmt\"\nfunc main() {\n    fmt.Println(\"Network console ready!\")\n}",
+        "beginnerExplanation": "Prints a message for the user to say the network is ready.",
+        "explanation": [
+          "package main  // Main program package",
+          "import \"fmt\"    // For printing",
+          "func main() {",
+          "    fmt.Println(\"Network console ready!\")",
+          "}"
+        ]
+      },
+      {
+        "title": "Output Network Ready (Java)",
+        "language": "Java",
+        "code": "public class NetReady {\n    public static void main(String[] args) {\n        System.out.println(\"Network console ready!\");\n    }\n}",
+        "beginnerExplanation": "Java prints a message to show network readiness.",
+        "explanation": [
+          "public class NetReady {",
+          "    public static void main(String[] args) {",
+          "        System.out.println(\"Network console ready!\");",
+          "    }",
+          "}"
+        ]
+      },
+      {
+        "title": "Output Network Ready (Assembly)",
+        "language": "Assembly",
+        "code": "; NASM/Linux\nsection .data\n    msg db 'Network console ready!', 0xA\n    len equ $-msg\nsection .text\n    global _start\n_start:\n    mov edx, len\n    mov ecx, msg\n    mov ebx, 1\n    mov eax, 4\n    int 0x80\n    mov eax, 1\n    int 0x80",
+        "beginnerExplanation": "Prints a message via Assembly that the network is ready.",
+        "explanation": [
+          "section .data                      ; Store message",
+          "msg db 'Network console ready!', 0xA ; Message and newline",
+          "len equ $-msg                      ; Message length",
+          "section .text                      ; Code section",
+          "global _start",
+          "_start:",
+          "mov edx, len                       ; Message length",
+          "mov ecx, msg                       ; Message address",
+          "mov ebx, 1                         ; Stdout handle",
+          "mov eax, 4                         ; sys_write",
+          "int 0x80                           ; Print",
+          "mov eax, 1; int 0x80               ; Exit"
+        ]
+      },
+      {
+        "title": "Output Network Ready (BASIC)",
+        "language": "BASIC",
+        "code": "PRINT \"Network console ready!\"",
+        "beginnerExplanation": "Displays 'Network console ready!' on the screen.",
+        "explanation": [
+          "PRINT \"Network console ready!\"    ' Output message"
+        ]
+      },
+      {
+        "title": "Output Network Ready (Lua)",
+        "language": "Lua",
+        "code": "print(\"Network console ready!\")",
+        "beginnerExplanation": "Shows readiness in Lua.",
+        "explanation": [
+          "print(\"Network console ready!\")   -- Print message"
+        ]
+      },
+      {
+        "title": "Output Network Ready (Ruby)",
+        "language": "Ruby",
+        "code": "puts 'Network console ready!'",
+        "beginnerExplanation": "Prints a readiness message in Ruby.",
+        "explanation": [
+          "puts 'Network console ready!'     # Print message"
+        ]
+      },
+      {
+        "title": "Output Network Ready (Swift)",
+        "language": "Swift",
+        "code": "print(\"Network console ready!\")",
+        "beginnerExplanation": "Prints out readiness status in Swift.",
+        "explanation": [
+          "print(\"Network console ready!\")  // Output message"
+        ]
+      },
+      {
+        "title": "Output Network Ready (Kotlin)",
+        "language": "Kotlin",
+        "code": "fun main() {\n    println(\"Network console ready!\")\n}",
+        "beginnerExplanation": "Shows 'ready' message using Kotlin.",
+        "explanation": [
+          "fun main() {",
+          "    println(\"Network console ready!\")",
+          "}"
+        ]
+      },
+      {
+        "title": "Output Network Ready (PHP)",
+        "language": "PHP",
+        "code": "<?php\necho \"Network console ready!\\n\";\n?>",
+        "beginnerExplanation": "PHP prints a readiness statement.",
+        "explanation": [
+          "<?php                           // Begin",
+          "echo \"Network console ready!\\n\";   // Print message",
+          "?>                              // End"
+        ]
+      },
+      {
+        "title": "Output Network Ready (Bash)",
+        "language": "Bash",
+        "code": "echo \"Network console ready!\"",
+        "beginnerExplanation": "This prints the readiness statement in Bash.",
+        "explanation": [
+          "echo \"Network console ready!\"    # Output message"
+        ]
+      }
+    ]
   },
   {
-    "id": "appleiie",
-    "name": "Apple IIe",
-    "shortName": "Apple IIe",
+    "id": "computer",
+    "name": "Computer Console",
+    "shortName": "Computer",
     "type": "computer",
-    "manufacturer": "Apple",
-    "year": 1983,
-    "discontinued": 1993,
-    "cpu": "MOS 6502, 1.023 MHz",
-    "ram": "64 KB (expandable)",
-    "storage": "5.25-inch floppy, cassette",
-    "os": "Apple DOS, ProDOS, others",
-    "description": "The Apple IIe was a widely used home and classroom computer known for approachability and expandability. It features a 6502 CPU and straightforward hardware.",
-    "funFact": "Several entire companies were started building add-on cards for the Apple II series.",
+    "year": 1977,
     "difficulty": "Beginner",
-    "color": "#4cd137",
-    "codingExamples": [
-      {
-        "title": "Endless Loop (6502 Assembly)",
-        "language": "Assembly",
-        "code": "loop: JMP loop",
-        "beginnerExplanation": "This code causes the Apple IIe to run in a never-ending loop. Many Apple IIe programs start this way.",
-        "explanation": [
-          "Creates a label 'loop'.",
-          "Jumps to the loop, repeating forever."
-        ]
-      },
-      {
-        "title": "Print Output (Python)",
-        "language": "Python",
-        "code": "print('Hello from Apple IIe Python!')",
-        "beginnerExplanation": "Prints a message with Python for Apple IIe programming tools.",
-        "explanation": [
-          "Uses the print statement to show output."
-        ]
-      },
-      {
-        "title": "JavaScript Output",
-        "language": "JavaScript",
-        "code": "console.log('Apple IIe and JavaScript!');",
-        "beginnerExplanation": "Logs output using JavaScript.",
-        "explanation": [
-          "Calls console.log with the string."
-        ]
-      },
-      {
-        "title": "TypeScript Log",
-        "language": "TypeScript",
-        "code": "console.log('Apple IIe using TypeScript!');",
-        "beginnerExplanation": "Logs message in TypeScript.",
-        "explanation": [
-          "Console log prints the message."
-        ]
-      },
-      {
-        "title": "C Print",
-        "language": "C",
-        "code": "#include <stdio.h>\nint main() {\n    printf(\"Hello from Apple IIe in C!\\n\");\n    return 0;\n}",
-        "beginnerExplanation": "This prints a line using C, as used in Apple IIe dev tools.",
-        "explanation": [
-          "Includes stdio.",
-          "Defines main.",
-          "Prints string.",
-          "Exits."
-        ]
-      },
-      {
-        "title": "C++ Output",
-        "language": "C++",
-        "code": "#include <iostream>\nint main() {\n    std::cout << \"Hello Apple IIe from C++!\" << std::endl;\n    return 0;\n}",
-        "beginnerExplanation": "Print using C++ to standard out.",
-        "explanation": [
-          "Includes iostream.",
-          "Main entry.",
-          "Prints message."
-        ]
-      },
-      {
-        "title": "Print (C#)",
-        "language": "C#",
-        "code": "using System;\nclass Program {\n    static void Main() {\n        Console.WriteLine(\"Apple IIe in C#.\");\n    }\n}",
-        "beginnerExplanation": "C# write to console. Used for Apple IIe emulation and tools.",
-        "explanation": [
-          "Main entry.",
-          "Console outputs string."
-        ]
-      },
-      {
-        "title": "Rust Print",
-        "language": "Rust",
-        "code": "fn main() {\n    println!(\"Apple IIe, Rust edition!\");\n}",
-        "beginnerExplanation": "Rust println to output.",
-        "explanation": [
-          "Main function.",
-          "Prints the message."
-        ]
-      },
-      {
-        "title": "Print (Go)",
-        "language": "Go",
-        "code": "package main\nimport \"fmt\"\nfunc main() {\n    fmt.Println(\"Hello Apple IIe with Go!\")\n}",
-        "beginnerExplanation": "Go language prints to output.",
-        "explanation": [
-          "Package, import, main function.",
-          "Prints text."
-        ]
-      },
-      {
-        "title": "Java Output",
-        "language": "Java",
-        "code": "public class AppleIIe {\n    public static void main(String[] args) {\n        System.out.println(\"Apple IIe Java print\");\n    }\n}",
-        "beginnerExplanation": "Prints to output using Java.",
-        "explanation": [
-          "Defines main.",
-          "Prints string."
-        ]
-      },
-      {
-        "title": "Print in BASIC",
-        "language": "BASIC",
-        "code": "10 PRINT \"APPLE IIE FOREVER!\"\n20 END",
-        "beginnerExplanation": "BASIC program prints once and stops.",
-        "explanation": [
-          "Line 10 prints text.",
-          "Line 20 ends."
-        ]
-      },
-      {
-        "title": "Print in Lua",
-        "language": "Lua",
-        "code": "print('Apple IIe in Lua!')",
-        "beginnerExplanation": "Prints with Lua.",
-        "explanation": [
-          "Calls print."
-        ]
-      },
-      {
-        "title": "Ruby Print Statement",
-        "language": "Ruby",
-        "code": "puts 'Apple IIe and Ruby.'",
-        "beginnerExplanation": "Print output using Ruby.",
-        "explanation": [
-          "Uses puts to print the message."
-        ]
-      },
-      {
-        "title": "Swift Output",
-        "language": "Swift",
-        "code": "print(\"Hello from Apple IIe in Swift!\")",
-        "beginnerExplanation": "Displays a message using Swift's print command.",
-        "explanation": [
-          "Prints a line."
-        ]
-      },
-      {
-        "title": "Kotlin Print Function",
-        "language": "Kotlin",
-        "code": "fun main() {\n    println(\"Hello Apple IIe from Kotlin!\")\n}",
-        "beginnerExplanation": "Standard Kotlin print to output.",
-        "explanation": [
-          "Defines main.",
-          "Prints the string."
-        ]
-      },
-      {
-        "title": "Echo (PHP)",
-        "language": "PHP",
-        "code": "<?php\necho \"Apple IIe with PHP!\\n\";",
-        "beginnerExplanation": "Echoes to standard output in PHP.",
-        "explanation": [
-          "PHP opening, echo output."
-        ]
-      },
-      {
-        "title": "Bash Print",
-        "language": "Bash",
-        "code": "echo \"Apple IIe Bash output!\"",
-        "beginnerExplanation": "Prints a line in a Bash shell.",
-        "explanation": [
-          "Runs echo command with a string."
-        ]
-      }
+    "languages": [
+      "Python", "JavaScript", "TypeScript", "C", "C++", "C#", "Rust", "Go", "Java",
+      "Assembly", "BASIC", "Lua", "Ruby", "Swift", "Kotlin", "PHP", "Bash"
     ],
     "resources": {
-      "youtubeQuery": "Apple IIe programming BASIC assembly tutorial",
+      "youtubeQuery": "computer programming console basics",
       "websites": [
         {
-          "title": "Apple II Documentation Project",
-          "url": "https://apple2.org.za/gswv/a2zine/Docs/",
-          "description": "Extensive Apple IIe manuals and programming guides."
+          "title": "A Beginner's Guide to the Computer Console",
+          "url": "https://www.geeksforgeeks.org/basics-of-console-programming/",
+          "description": "Learn how to interact with the computer console in different languages."
         }
       ]
-    }
+    },
+    "codingExamples": [
+      {
+        "title": "Get User Input (Python)",
+        "language": "Python",
+        "code": "name = input('What is your name? ')\nprint('Hello, ' + name + '!')",
+        "beginnerExplanation": "This code asks your name, then greets you by name.",
+        "explanation": [
+          "name = input('What is your name? ')   # Ask for user's name",
+          "print('Hello, ' + name + '!')         # Show a hello message"
+        ]
+      },
+      {
+        "title": "Get User Input (JavaScript)",
+        "language": "JavaScript",
+        "code": "let name = prompt('What is your name?');\nconsole.log('Hello, ' + name + '!');",
+        "beginnerExplanation": "Asks your name and prints a hello using JavaScript.",
+        "explanation": [
+          "let name = prompt('What is your name?');         // Popup to ask for your name",
+          "console.log('Hello, ' + name + '!');             // Print greeting"
+        ]
+      },
+      {
+        "title": "Get User Input (TypeScript)",
+        "language": "TypeScript",
+        "code": "const name = prompt('What is your name?');\nconsole.log('Hello, ' + name + '!');",
+        "beginnerExplanation": "TypeScript version that asks your name and greets you.",
+        "explanation": [
+          "const name = prompt('What is your name?');          // Popup for name",
+          "console.log('Hello, ' + name + '!');                // Show hello"
+        ]
+      },
+      {
+        "title": "Get User Input (C)",
+        "language": "C",
+        "code": "#include <stdio.h>\nint main() {\n    char name[100];\n    printf(\"What is your name? \");\n    scanf(\"%99s\", name);\n    printf(\"Hello, %s!\\n\", name);\n    return 0;\n}",
+        "beginnerExplanation": "This code asks your name and displays a greeting.",
+        "explanation": [
+          "#include <stdio.h>                       // Input/output code",
+          "int main() {",
+          "    char name[100];                       // Room for name",
+          "    printf(\"What is your name? \");           // Ask",
+          "    scanf(\"%99s\", name);                    // Read input",
+          "    printf(\"Hello, %s!\\n\", name);            // Greet",
+          "    return 0;",
+          "}"
+        ]
+      },
+      {
+        "title": "Get User Input (C++)",
+        "language": "C++",
+        "code": "#include <iostream>\n#include <string>\nint main() {\n    std::string name;\n    std::cout << \"What is your name? \";\n    std::cin >> name;\n    std::cout << \"Hello, \" << name << \"!\" << std::endl;\n    return 0;\n}",
+        "beginnerExplanation": "C++ code that asks your name, then prints hello.",
+        "explanation": [
+          "#include <iostream> / <string>                      // Input/output",
+          "int main() {",
+          "    std::string name;                              // String for name",
+          "    std::cout << \"What is your name? \";                // Ask",
+          "    std::cin >> name;                                    // Get name",
+          "    std::cout << \"Hello, \" << name << \"!\" << std::endl; // Greet",
+          "    return 0;",
+          "}"
+        ]
+      },
+      {
+        "title": "Get User Input (C#)",
+        "language": "C#",
+        "code": "using System;\nclass Program {\n    static void Main() {\n        Console.Write(\"What is your name? \");\n        string name = Console.ReadLine();\n        Console.WriteLine(\"Hello, \" + name + \"!\");\n    }\n}",
+        "beginnerExplanation": "C# program that greets you after you type your name.",
+        "explanation": [
+          "using System;                         // Input/output",
+          "class Program {",
+          "    static void Main() {",
+          "        Console.Write(\"What is your name? \");      // Ask name",
+          "        string name = Console.ReadLine();           // Get input",
+          "        Console.WriteLine(\"Hello, \" + name + \"!\"); // Print greet",
+          "    }",
+          "}"
+        ]
+      },
+      {
+        "title": "Get User Input (Rust)",
+        "language": "Rust",
+        "code": "use std::io;\nfn main() {\n    let mut name = String::new();\n    println!(\"What is your name?\");\n    io::stdin().read_line(&mut name).unwrap();\n    let name = name.trim();\n    println!(\"Hello, {}!\", name);\n}",
+        "beginnerExplanation": "Rust asks your name, then says hi to you.",
+        "explanation": [
+          "use std::io;                            // For user input",
+          "fn main() {",
+          "    let mut name = String::new();            // Make a string",
+          "    println!(\"What is your name?\");         // Ask for input",
+          "    io::stdin().read_line(&mut name).unwrap(); // Get what was typed",
+          "    let name = name.trim();                   // Remove extra spaces",
+          "    println!(\"Hello, {}!\", name);            // Print greeting",
+          "}"
+        ]
+      },
+      {
+        "title": "Get User Input (Go)",
+        "language": "Go",
+        "code": "package main\nimport \"fmt\"\nfunc main() {\n    var name string\n    fmt.Print(\"What is your name? \")\n    fmt.Scan(&name)\n    fmt.Println(\"Hello, \" + name + \"!\")\n}",
+        "beginnerExplanation": "Go asks your name, then says hi to you.",
+        "explanation": [
+          "package main                 // Start program",
+          "import \"fmt\"                  // For printing & input",
+          "func main() {",
+          "    var name string              // Holds the name",
+          "    fmt.Print(\"What is your name? \")   // Ask name",
+          "    fmt.Scan(&name)                     // Get input",
+          "    fmt.Println(\"Hello, \" + name + \"!\") // Greet",
+          "}"
+        ]
+      },
+      {
+        "title": "Get User Input (Java)",
+        "language": "Java",
+        "code": "import java.util.Scanner;\npublic class HelloUser {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print(\"What is your name? \");\n        String name = sc.next();\n        System.out.println(\"Hello, \" + name + \"!\");\n    }\n}",
+        "beginnerExplanation": "Java code to greet the user by name.",
+        "explanation": [
+          "import java.util.Scanner;                   // For reading input",
+          "public class HelloUser {",
+          "    public static void main(String[] args) {",
+          "        Scanner sc = new Scanner(System.in);      // Set up input",
+          "        System.out.print(\"What is your name? \"); // Ask",
+          "        String name = sc.next();                  // Get name",
+          "        System.out.println(\"Hello, \" + name + \"!\"); // Greet",
+          "    }",
+          "}"
+        ]
+      },
+      {
+        "title": "Get User Input (Assembly)",
+        "language": "Assembly",
+        "code": "; Not practical for collecting input in beginner NASM, so print a message\nsection .data\n    msg db 'Hello, computer console!', 0xA\n    len equ $-msg\nsection .text\n    global _start\n_start:\n    mov edx, len\n    mov ecx, msg\n    mov ebx, 1\n    mov eax, 4\n    int 0x80\n    mov eax, 1\n    int 0x80",
+        "beginnerExplanation": "This Assembly just prints a hello, since taking user input is advanced.",
+        "explanation": [
+          "section .data                            ; Data storage",
+          "msg db 'Hello, computer console!', 0xA   ; Message & newline",
+          "len equ $-msg                            ; Message length",
+          "section .text                            ; Code section",
+          "global _start",
+          "_start:",
+          "mov edx, len                             ; Message length",
+          "mov ecx, msg                             ; Message address",
+          "mov ebx, 1                               ; Standard output",
+          "mov eax, 4                               ; Print message",
+          "int 0x80                                 ; System call",
+          "mov eax, 1; int 0x80                     ; Exit"
+        ]
+      },
+      {
+        "title": "Get User Input (BASIC)",
+        "language": "BASIC",
+        "code": "INPUT \"What is your name? \", N$\nPRINT \"Hello, \"; N$; \"!\"",
+        "beginnerExplanation": "BASIC asks you for your name and then says hello.",
+        "explanation": [
+          "INPUT \"What is your name? \", N$      ' Ask for name, store in N$",
+          "PRINT \"Hello, \"; N$; \"!\"          ' Show hello with that name"
+        ]
+      },
+      {
+        "title": "Get User Input (Lua)",
+        "language": "Lua",
+        "code": "io.write('What is your name? ')\nname = io.read()\nprint('Hello, ' .. name .. '!')",
+        "beginnerExplanation": "Asks your name and greets you using Lua.",
+        "explanation": [
+          "io.write('What is your name? ')    -- Ask",
+          "name = io.read()                   -- Get input",
+          "print('Hello, ' .. name .. '!')    -- Greet"
+        ]
+      },
+      {
+        "title": "Get User Input (Ruby)",
+        "language": "Ruby",
+        "code": "print 'What is your name? '\nname = gets.chomp\nputs \"Hello, #{name}!\"",
+        "beginnerExplanation": "Ruby script asks for your name, then greets you.",
+        "explanation": [
+          "print 'What is your name? '         # Ask",
+          "name = gets.chomp                   # Get input",
+          "puts \"Hello, #{name}!\"             # Greet"
+        ]
+      },
+      {
+        "title": "Get User Input (Swift)",
+        "language": "Swift",
+        "code": "print(\"What is your name? \", terminator: \"\")\nif let name = readLine() {\n    print(\"Hello, \\(name)!\")\n}",
+        "beginnerExplanation": "Swift will ask for your name and then say hello.",
+        "explanation": [
+          "print(\"What is your name? \", terminator: \"\") // Ask (same line)",
+          "if let name = readLine() {                       // Read input",
+          "    print(\"Hello, \\(name)!\")                    // Greet",
+          "}"
+        ]
+      },
+      {
+        "title": "Get User Input (Kotlin)",
+        "language": "Kotlin",
+        "code": "fun main() {\n    print(\"What is your name? \")\n    val name = readLine()\n    println(\"Hello, \" + name + \"!\")\n}",
+        "beginnerExplanation": "Kotlin asks for your name and says hello.",
+        "explanation": [
+          "fun main() {                        // Start main",
+          "    print(\"What is your name? \")   // Ask",
+          "    val name = readLine()           // Get input",
+          "    println(\"Hello, \" + name + \"!\")     // Greet",
+          "}"
+        ]
+      },
+      {
+        "title": "Get User Input (PHP)",
+        "language": "PHP",
+        "code": "<?php\nfwrite(STDOUT, \"What is your name? \");\n$name = trim(fgets(STDIN));\necho \"Hello, $name!\\n\";\n?>",
+        "beginnerExplanation": "PHP asks for your name and says hello using what you typed.",
+        "explanation": [
+          "<?php                                     // Start PHP",
+          "fwrite(STDOUT, \"What is your name? \");   // Ask name",
+          "$name = trim(fgets(STDIN));               // Get input",
+          "echo \"Hello, $name!\\n\";                  // Greet",
+          "?>                                        // End"
+        ]
+      },
+      {
+        "title": "Get User Input (Bash)",
+        "language": "Bash",
+        "code": "read -p \"What is your name? \" name\necho \"Hello, $name!\"",
+        "beginnerExplanation": "Bash script to ask for your name and greet you.",
+        "explanation": [
+          "read -p \"What is your name? \" name   # Ask and store in variable",
+          "echo \"Hello, $name!\"                 # Show greeting"
+        ]
+      }
+    ]
   },
   {
-    "id": "neo-geo",
-    "name": "Neo Geo MVS",
-    "shortName": "Neo Geo",
+    "id": "arcade",
+    "name": "Arcade Console",
+    "shortName": "Arcade",
     "type": "arcade",
-    "manufacturer": "SNK",
-    "year": 1990,
-    "discontinued": 2004,
-    "cpu": "Motorola 68000 (12 MHz) + Zilog Z80 (4 MHz)",
-    "ram": "64 KB (main) + 2 KB (sound)",
-    "storage": "Cartridge",
-    "os": "Custom BIOS",
-    "description": "The Neo Geo MVS was a revolutionary arcade system, famed for advanced graphics and its massive cartridge games library.",
-    "funFact": "Neo Geo MVS cartridges for consoles were nearly the size of video cassettes due to game size.",
-    "difficulty": "Advanced",
-    "color": "#eeaa00",
-    "codingExamples": [
-      {
-        "title": "Infinite Loop (68000 Assembly)",
-        "language": "Assembly",
-        "code": "Loop:\n  bra Loop",
-        "beginnerExplanation": "Keeps running the same instruction, useful for initial board tests.",
-        "explanation": [
-          "Defines a Loop label.",
-          "Branches to itself endlessly."
-        ]
-      },
-      {
-        "title": "Python Print Output",
-        "language": "Python",
-        "code": "print('Neo Geo dev output')",
-        "beginnerExplanation": "Prints output as part of tooling for Neo Geo arcade development.",
-        "explanation": [
-          "Uses print function for output."
-        ]
-      },
-      {
-        "title": "JavaScript Output Log",
-        "language": "JavaScript",
-        "code": "console.log('Neo Geo log message');",
-        "beginnerExplanation": "Prints logs for emulator or script devs.",
-        "explanation": [
-          "Uses console.log."
-        ]
-      },
-      {
-        "title": "TypeScript Console Print",
-        "language": "TypeScript",
-        "code": "console.log('TypeScript Neo Geo tool run!');",
-        "beginnerExplanation": "Logs output in a TypeScript Neo Geo program.",
-        "explanation": [
-          "Prints message using console.log."
-        ]
-      },
-      {
-        "title": "Print Output (C)",
-        "language": "C",
-        "code": "#include <stdio.h>\nint main() {\n    printf(\"Neo Geo C program!\\n\");\n    return 0;\n}",
-        "beginnerExplanation": "Prints to output in Neo Geo C tools.",
-        "explanation": [
-          "Includes stdio.",
-          "Main entry.",
-          "Prints message.",
-          "Returns zero."
-        ]
-      },
-      {
-        "title": "Output String (C++)",
-        "language": "C++",
-        "code": "#include <iostream>\nint main() {\n    std::cout << \"Neo Geo via C++!\" << std::endl;\n    return 0;\n}",
-        "beginnerExplanation": "C++ program prints a message to output.",
-        "explanation": [
-          "Stdout via iostream.",
-          "Main returns zero."
-        ]
-      },
-      {
-        "title": "Print Message (C#)",
-        "language": "C#",
-        "code": "using System;\nclass App {\n    static void Main() {\n        Console.WriteLine(\"Neo Geo message from C#\");\n    }\n}",
-        "beginnerExplanation": "Standard output via C# in Neo Geo scripting.",
-        "explanation": [
-          "Uses System namespace.",
-          "Writes out status."
-        ]
-      },
-      {
-        "title": "Rust Standard Output",
-        "language": "Rust",
-        "code": "fn main() {\n    println!(\"Neo Geo Rust print\");\n}",
-        "beginnerExplanation": "Rust program prints output for arcade scripting.",
-        "explanation": [
-          "Main runs println!."
-        ]
-      },
-      {
-        "title": "Go Println Tool",
-        "language": "Go",
-        "code": "package main\nimport \"fmt\"\nfunc main() {\n    fmt.Println(\"Neo Geo via Go!\")\n}",
-        "beginnerExplanation": "Prints a message using Go.",
-        "explanation": [
-          "Imports fmt, prints in main."
-        ]
-      },
-      {
-        "title": "Print in Java",
-        "language": "Java",
-        "code": "public class NeoGeo {\n    public static void main(String[] args) {\n        System.out.println(\"Neo Geo arcade Java output\");\n    }\n}",
-        "beginnerExplanation": "Uses Java's println to output text.",
-        "explanation": [
-          "Main function, prints to output."
-        ]
-      },
-      {
-        "title": "BASIC Print Routine",
-        "language": "BASIC",
-        "code": "10 PRINT \"NEO GEO DEMO!\"\n20 GOTO 10",
-        "beginnerExplanation": "Keeps printing the message. BASIC is familiar for arcade homebrew too.",
-        "explanation": [
-          "Line 10 prints.",
-          "Line 20 loops forever."
-        ]
-      },
-      {
-        "title": "Lua Print Function",
-        "language": "Lua",
-        "code": "print('Neo Geo Lua out')",
-        "beginnerExplanation": "Simple Lua print, often used in UI scripts.",
-        "explanation": [
-          "Runs print with string."
-        ]
-      },
-      {
-        "title": "Ruby Output Syntax",
-        "language": "Ruby",
-        "code": "puts 'Neo Geo Ruby output.'",
-        "beginnerExplanation": "Ruby prints to stdout.",
-        "explanation": [
-          "Uses puts function."
-        ]
-      },
-      {
-        "title": "Swift Print Statement",
-        "language": "Swift",
-        "code": "print(\"Neo Geo in Swift!\")",
-        "beginnerExplanation": "Swift print output.",
-        "explanation": [
-          "Prints line to terminal."
-        ]
-      },
-      {
-        "title": "Kotlin PrintLn",
-        "language": "Kotlin",
-        "code": "fun main() {\n    println(\"Neo Geo from Kotlin!\")\n}",
-        "beginnerExplanation": "Kotlin prints a message; useful in cross-dev tools.",
-        "explanation": [
-          "Defines main.",
-          "Prints a message."
-        ]
-      },
-      {
-        "title": "PHP Print Example",
-        "language": "PHP",
-        "code": "<?php\necho \"Neo Geo PHP output\\n\";",
-        "beginnerExplanation": "Echoes to output with PHP.",
-        "explanation": [
-          "Opens PHP, echoes message."
-        ]
-      },
-      {
-        "title": "Bash Echo Example",
-        "language": "Bash",
-        "code": "echo \"Neo Geo from Bash!\"",
-        "beginnerExplanation": "Prints to terminal with Bash.",
-        "explanation": [
-          "Executes echo command with message."
-        ]
-      }
+    "year": 1978,
+    "difficulty": "Beginner",
+    "languages": [
+      "Python", "JavaScript", "TypeScript", "C", "C++", "C#", "Rust", "Go", "Java",
+      "Assembly", "BASIC", "Lua", "Ruby", "Swift", "Kotlin", "PHP", "Bash"
     ],
     "resources": {
-      "youtubeQuery": "Neo Geo arcade programming tutorial",
+      "youtubeQuery": "arcade console programming basics",
       "websites": [
         {
-          "title": "NeoGeo Dev Wiki",
-          "url": "https://wiki.neogeodev.org/",
-          "description": "Documentation and resources for Neo Geo developers."
+          "title": "Arcade Game Development Basics",
+          "url": "https://www.retrogamedeveloper.com/arcade",
+          "description": "Introductory guides and projects for arcade console programming."
         }
       ]
-    }
+    },
+    "codingExamples": [
+      {
+        "title": "Display Score (Python)",
+        "language": "Python",
+        "code": "score = 123\nprint('Score:', score)",
+        "beginnerExplanation": "This program displays the score value (123) on the screen.",
+        "explanation": [
+          "score = 123                # Set score to 123",
+          "print('Score:', score)     # Print 'Score: 123'"
+        ]
+      },
+      {
+        "title": "Display Score (JavaScript)",
+        "language": "JavaScript",
+        "code": "let score = 123;\nconsole.log('Score:', score);",
+        "beginnerExplanation": "Shows your score on the screen.",
+        "explanation": [
+          "let score = 123;                  // score is 123",
+          "console.log('Score:', score);      // Print score"
+        ]
+      },
+      {
+        "title": "Display Score (TypeScript)",
+        "language": "TypeScript",
+        "code": "let score: number = 123;\nconsole.log('Score:', score);",
+        "beginnerExplanation": "Displays score of 123 in the console.",
+        "explanation": [
+          "let score: number = 123;            // Set score",
+          "console.log('Score:', score);        // Print score"
+        ]
+      },
+      {
+        "title": "Display Score (C)",
+        "language": "C",
+        "code": "#include <stdio.h>\nint main() {\n    int score = 123;\n    printf(\"Score: %d\\n\", score);\n    return 0;\n}",
+        "beginnerExplanation": "Shows the value of score (123) on the screen.",
+        "explanation": [
+          "#include <stdio.h>                          // Printing tools",
+          "int main() {",
+          "    int score = 123;                         // Set score",
+          "    printf(\"Score: %d\\n\", score);               // Print score",
+          "    return 0;",
+          "}"
+        ]
+      },
+      {
+        "title": "Display Score (C++)",
+        "language": "C++",
+        "code": "#include <iostream>\nint main() {\n    int score = 123;\n    std::cout << \"Score: \" << score << std::endl;\n    return 0;\n}",
+        "beginnerExplanation": "This C++ program displays a score.",
+        "explanation": [
+          "#include <iostream>                       // For printing",
+          "int main() {",
+          "    int score = 123;                          // Set score",
+          "    std::cout << \"Score: \" << score << std::endl; // Print score",
+          "    return 0;",
+          "}"
+        ]
+      },
+      {
+        "title": "Display Score (C#)",
+        "language": "C#",
+        "code": "using System;\nclass Program {\n    static void Main() {\n        int score = 123;\n        Console.WriteLine(\"Score: \" + score);\n    }\n}",
+        "beginnerExplanation": "Shows the score value using C#.",
+        "explanation": [
+          "using System;                       // For printing",
+          "class Program {",
+          "    static void Main() {",
+          "        int score = 123;                 // Set score",
+          "        Console.WriteLine(\"Score: \" + score); // Print score",
+          "    }",
+          "}"
+        ]
+      },
+      {
+        "title": "Display Score (Rust)",
+        "language": "Rust",
+        "code": "fn main() {\n    let score = 123;\n    println!(\"Score: {}\", score);\n}",
+        "beginnerExplanation": "Rust program printing score.",
+        "explanation": [
+          "fn main() {",
+          "    let score = 123;                   // Set score",
+          "    println!(\"Score: {}\", score);         // Print score",
+          "}"
+        ]
+      },
+      {
+        "title": "Display Score (Go)",
+        "language": "Go",
+        "code": "package main\nimport \"fmt\"\nfunc main() {\n    score := 123\n    fmt.Println(\"Score:\", score)\n}",
+        "beginnerExplanation": "Go code to print your score.",
+        "explanation": [
+          "package main         // Main package",
+          "import \"fmt\"        // Print library",
+          "func main() {",
+          "    score := 123            // Set score",
+          "    fmt.Println(\"Score:\", score) // Print score",
+          "}"
+        ]
+      },
+      {
+        "title": "Display Score (Java)",
+        "language": "Java",
+        "code": "public class ScoreDemo {\n    public static void main(String[] args) {\n        int score = 123;\n        System.out.println(\"Score: \" + score);\n    }\n}",
+        "beginnerExplanation": "Java prints score to the screen.",
+        "explanation": [
+          "public class ScoreDemo {",
+          "    public static void main(String[] args) {",
+          "        int score = 123;                          // Set score",
+          "        System.out.println(\"Score: \" + score);      // Print score",
+          "    }",
+          "}"
+        ]
+      },
+      {
+        "title": "Display Score (Assembly)",
+        "language": "Assembly",
+        "code": "; For NASM/Linux, will print 'Score: 123\\n'\nsection .data\n    msg db 'Score: 123', 0xA\n    len equ $-msg\nsection .text\n    global _start\n_start:\n    mov edx, len\n    mov ecx, msg\n    mov ebx, 1\n    mov eax, 4\n    int 0x80\n    mov eax, 1\n    int 0x80",
+        "beginnerExplanation": "This program prints 'Score: 123' in Assembly language.",
+        "explanation": [
+          "section .data                  ; Data section",
+          "msg db 'Score: 123', 0xA       ; Message & newline",
+          "len equ $-msg                  ; Message length",
+          "section .text                  ; Code section",
+          "global _start",
+          "_start:",
+          "mov edx, len                   ; Length to print",
+          "mov ecx, msg                   ; Message address",
+          "mov ebx, 1                     ; Output to screen",
+          "mov eax, 4                     ; sys_write",
+          "int 0x80                       ; Print",
+          "mov eax, 1; int 0x80           ; Exit"
+        ]
+      },
+      {
+        "title": "Display Score (BASIC)",
+        "language": "BASIC",
+        "code": "SCORE = 123\nPRINT \"Score: \"; SCORE",
+        "beginnerExplanation": "BASIC script printing the score.",
+        "explanation": [
+          "SCORE = 123          ' Set score",
+          "PRINT \"Score: \"; SCORE    ' Display it"
+        ]
+      },
+      {
+        "title": "Display Score (Lua)",
+        "language": "Lua",
+        "code": "score = 123\nprint('Score:', score)",
+        "beginnerExplanation": "Lua code printing 'Score: 123'.",
+        "explanation": [
+          "score = 123                -- Set the score",
+          "print('Score:', score)     -- Print value"
+        ]
+      },
+      {
+        "title": "Display Score (Ruby)",
+        "language": "Ruby",
+        "code": "score = 123\nputs \"Score: #{score}\"",
+        "beginnerExplanation": "Ruby example printing the score.",
+        "explanation": [
+          "score = 123                   # Set score",
+          "puts \"Score: #{score}\"           # Print it"
+        ]
+      },
+      {
+        "title": "Display Score (Swift)",
+        "language": "Swift",
+        "code": "let score = 123\nprint(\"Score: \\(score)\")",
+        "beginnerExplanation": "Swift script showing your score.",
+        "explanation": [
+          "let score = 123         // Set score",
+          "print(\"Score: \\(score)\")   // Print value"
+        ]
+      },
+      {
+        "title": "Display Score (Kotlin)",
+        "language": "Kotlin",
+        "code": "fun main() {\n    val score = 123\n    println(\"Score: \" + score)\n}",
+        "beginnerExplanation": "Kotlin code to show score.",
+        "explanation": [
+          "fun main() {                    // Start block",
+          "    val score = 123             // Set score",
+          "    println(\"Score: \" + score)    // Print it",
+          "}"
+        ]
+      },
+      {
+        "title": "Display Score (PHP)",
+        "language": "PHP",
+        "code": "<?php\n$score = 123;\necho \"Score: $score\\n\";\n?>",
+        "beginnerExplanation": "PHP script prints score 123.",
+        "explanation": [
+          "<?php                  // Begin",
+          "$score = 123;          // Set score",
+          "echo \"Score: $score\\n\"; // Print it",
+          "?>                     // End"
+        ]
+      },
+      {
+        "title": "Display Score (Bash)",
+        "language": "Bash",
+        "code": "score=123\necho \"Score: $score\"",
+        "beginnerExplanation": "Bash code showing the score.",
+        "explanation": [
+          "score=123               # Set value",
+          "echo \"Score: $score\"        # Print it"
+        ]
+      }
+    ]
   }
 ]
