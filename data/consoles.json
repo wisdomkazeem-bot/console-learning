@@ -10,296 +10,188 @@
     "cpu": "Ricoh 2A03 (6502 core), 1.79 MHz",
     "ram": "2 KB",
     "storage": "Cartridge",
-    "os": "None (custom firmware)",
-    "description": "The NES is the 8-bit home console that brought classic game franchises into living rooms worldwide.",
-    "funFact": "In Japan, the NES was called the Famicom and had a microphone in the controller.",
+    "os": "None (bare metal)",
+    "description": "The NES revitalized the home video game industry with accessible hardware and iconic software libraries. It uses the 6502 CPU and has straightforward memory-mapped I/O for games.",
+    "funFact": "NES cartridges often contained additional chips to expand the system's capabilities.",
     "difficulty": "Intermediate",
-    "emoji": "🕹️",
-    "color": "#A3A3A3",
-    "codingLanguage": "6502 Assembly",
-    "whyLearn": "It's a classic platform to understand how games work under the hood.",
+    "color": "#e63946",
     "codingExamples": [
       {
-        "title": "Change Background Color (6502 Assembly)",
-        "language": "Assembly (6502)",
-        "code": "; Set background color to blue\nLDA #$01     ; Load value 1 into A\nSTA $2001    ; Store A at PPU Mask register",
-        "beginnerExplanation": "This code changes the NES's background color. It loads a number into the computer's 'A' box, then tells the screen to use that color.",
+        "title": "Infinite Loop (6502 Assembly)",
+        "language": "Assembly",
+        "code": "loop:\n  jmp loop",
+        "beginnerExplanation": "This code makes the NES do nothing forever by jumping to itself. Useful for basic testing.",
         "explanation": [
-          "LDA #$01 loads the number 1 into the accumulator.",
-          "STA $2001 puts that number into the hardware's screen setting register (PPU Mask)."
+          "Defines a loop label.",
+          "Jumps back to the loop, causing the CPU to loop forever."
+        ]
+      },
+      {
+        "title": "Hello World Print (Python, Emulation Script)",
+        "language": "Python",
+        "code": "print('Hello NES from Python!')",
+        "beginnerExplanation": "Prints a message using Python, which is used in development scripts and emulators.",
+        "explanation": [
+          "Uses the print function to display text on the screen."
+        ]
+      },
+      {
+        "title": "Output to Log (JavaScript, NES Tools)",
+        "language": "JavaScript",
+        "code": "console.log('Hello from NES JavaScript!');",
+        "beginnerExplanation": "Prints a message in JavaScript for tools and NES-related scripts.",
+        "explanation": [
+          "Calls the console.log function with a string."
+        ]
+      },
+      {
+        "title": "Console Log (TypeScript, NES Tools)",
+        "language": "TypeScript",
+        "code": "console.log('TypeScript - Hello NES!');",
+        "beginnerExplanation": "This logs a message with TypeScript, useful for NES tool development.",
+        "explanation": [
+          "Prints a message to the console."
+        ]
+      },
+      {
+        "title": "Print Output (C)",
+        "language": "C",
+        "code": "#include <stdio.h>\nint main() {\n    printf(\"Hello NES!\\n\");\n    return 0;\n}",
+        "beginnerExplanation": "Print a message to standard output using C.",
+        "explanation": [
+          "Includes stdio.h header.",
+          "Defines the main entry point.",
+          "Prints a message.",
+          "Returns zero to indicate successful completion."
+        ]
+      },
+      {
+        "title": "Print to Console (C++)",
+        "language": "C++",
+        "code": "#include <iostream>\nint main() {\n    std::cout << \"Hello NES from C++!\" << std::endl;\n    return 0;\n}",
+        "beginnerExplanation": "Outputs a message to the console using C++.",
+        "explanation": [
+          "Includes the iostream header.",
+          "Defines the main function.",
+          "Prints a message using cout.",
+          "Returns zero to finish."
+        ]
+      },
+      {
+        "title": "Write Line (C#)",
+        "language": "C#",
+        "code": "using System;\nclass Program {\n    static void Main() {\n        Console.WriteLine(\"Hello NES with C#.\");\n    }\n}",
+        "beginnerExplanation": "Prints a message in C#. Useful for desktop NES utilities.",
+        "explanation": [
+          "Uses System for console access.",
+          "Prints a message to output."
+        ]
+      },
+      {
+        "title": "Print Statement (Rust)",
+        "language": "Rust",
+        "code": "fn main() {\n    println!(\"Hello NES from Rust!\");\n}",
+        "beginnerExplanation": "Prints a message using Rust for NES tool development.",
+        "explanation": [
+          "Defines the main function.",
+          "Prints the string with println macro."
+        ]
+      },
+      {
+        "title": "Print Message (Go)",
+        "language": "Go",
+        "code": "package main\nimport \"fmt\"\nfunc main() {\n    fmt.Println(\"Hello NES from Go!\")\n}",
+        "beginnerExplanation": "Print a message with Go, often used for NES ROM tools.",
+        "explanation": [
+          "Imports the fmt package.",
+          "Defines the main function.",
+          "Prints the message."
+        ]
+      },
+      {
+        "title": "Output Message (Java)",
+        "language": "Java",
+        "code": "public class NES {\n    public static void main(String[] args) {\n        System.out.println(\"Hello NES with Java!\");\n    }\n}",
+        "beginnerExplanation": "Print text in Java, typical for NES utility tools.",
+        "explanation": [
+          "Defines the main class and function.",
+          "Prints the message to standard output."
+        ]
+      },
+      {
+        "title": "Infinite Print (BASIC)",
+        "language": "BASIC",
+        "code": "10 PRINT \"HELLO NES!\"\n20 GOTO 10",
+        "beginnerExplanation": "Keeps printing the message forever. BASIC was common for home computer programming.",
+        "explanation": [
+          "Line 10 prints the message.",
+          "Line 20 loops back to line 10."
+        ]
+      },
+      {
+        "title": "Lua Print Example",
+        "language": "Lua",
+        "code": "print('Hello NES from Lua!')",
+        "beginnerExplanation": "Outputs a message with Lua. Lua is used in many emulators.",
+        "explanation": [
+          "Uses print function to display the message."
+        ]
+      },
+      {
+        "title": "Output String (Ruby)",
+        "language": "Ruby",
+        "code": "puts 'Hello NES via Ruby!'",
+        "beginnerExplanation": "Prints a message with Ruby script, used in automation.",
+        "explanation": [
+          "Uses puts to display the message."
+        ]
+      },
+      {
+        "title": "Display Message (Swift)",
+        "language": "Swift",
+        "code": "print(\"Hello NES with Swift!\")",
+        "beginnerExplanation": "Print a message using Swift language, common for macOS tools.",
+        "explanation": [
+          "Calls print function with a string."
+        ]
+      },
+      {
+        "title": "Print (Kotlin)",
+        "language": "Kotlin",
+        "code": "fun main() {\n    println(\"Hello NES from Kotlin!\")\n}",
+        "beginnerExplanation": "Shows how to print with Kotlin, now used for scripting and desktop NES tools.",
+        "explanation": [
+          "Defines main function.",
+          "Prints the message."
+        ]
+      },
+      {
+        "title": "Echo Statement (PHP)",
+        "language": "PHP",
+        "code": "<?php\necho \"Hello NES from PHP!\\n\";",
+        "beginnerExplanation": "Echoes a message in PHP, used for web-based NES tools.",
+        "explanation": [
+          "Begins PHP script.",
+          "Echoes the message."
+        ]
+      },
+      {
+        "title": "Bash Echo",
+        "language": "Bash",
+        "code": "echo \"Hello NES from Bash!\"",
+        "beginnerExplanation": "Prints a message in Bash, useful for automation scripts.",
+        "explanation": [
+          "Runs echo command with the string."
         ]
       }
     ],
     "resources": {
-      "youtubeQuery": "NES assembly programming intro",
+      "youtubeQuery": "NES programming tutorial",
       "websites": [
         {
-          "title": "NESDev Wiki",
+          "title": "NesDev Wiki",
           "url": "https://www.nesdev.org/wiki/NES_reference_guide",
-          "description": "Comprehensive technical documentation for NES development."
-        },
-        {
-          "title": "Making NES Games",
-          "url": "https://skilldrick.github.io/easy6502/",
-          "description": "Simple online 6502 assembler and tutorials."
-        }
-      ]
-    }
-  },
-  {
-    "id": "snes",
-    "name": "Super Nintendo Entertainment System",
-    "shortName": "SNES",
-    "type": "game",
-    "manufacturer": "Nintendo",
-    "year": 1990,
-    "discontinued": 1999,
-    "cpu": "Ricoh 5A22 (65c816 core), ~3.6 MHz",
-    "ram": "128 KB",
-    "storage": "Cartridge",
-    "os": "None (custom firmware)",
-    "description": "The SNES was Nintendo’s 16-bit powerhouse for colorful, rich games and legendary sound.",
-    "funFact": "The SNES sound chip was made by Sony!",
-    "difficulty": "Intermediate",
-    "emoji": "🎶",
-    "color": "#A678D3",
-    "codingLanguage": "65c816 Assembly",
-    "whyLearn": "Great for exploring hardware graphics and sound.",
-    "codingExamples": [
-      {
-        "title": "Set Brightness (65c816 Assembly)",
-        "language": "Assembly (65c816)",
-        "code": "; Set display brightness\nLDA #$0F    ; 0 = off, $0F = full\nSTA $2100   ; Write to INIDISP register",
-        "beginnerExplanation": "This tells the Super Nintendo to make the screen bright. It loads a number into a register, and sends it to the screen controller.",
-        "explanation": [
-          "LDA #$0F loads the number 15 (full brightness).",
-          "STA $2100 sends it to the INIDISP (screen control) register."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "SNES assembly programming beginner",
-      "websites": [
-        {
-          "title": "Super Famicom/SNES Dev Wiki",
-          "url": "https://wiki.superfamicom.org/",
-          "description": "Community SNES homebrew and development docs."
-        }
-      ]
-    }
-  },
-  {
-    "id": "n64",
-    "name": "Nintendo 64",
-    "shortName": "N64",
-    "type": "game",
-    "manufacturer": "Nintendo",
-    "year": 1996,
-    "discontinued": 2002,
-    "cpu": "NEC VR4300 (64-bit MIPS), 93.75 MHz",
-    "ram": "4 MB (up to 8 MB w/ Expansion Pak)",
-    "storage": "Cartridge",
-    "os": "None (custom SDK)",
-    "description": "Nintendo's entry into 3D introduced analog controls, Mario 64, and a new era of gaming.",
-    "funFact": "The N64 was the last major console to use cartridges.",
-    "difficulty": "Advanced",
-    "emoji": "🎮",
-    "color": "#6265AA",
-    "codingLanguage": "C",
-    "whyLearn": "A great platform for diving into 3D graphics programming.",
-    "codingExamples": [
-      {
-        "title": "Print to Debug Console (C, libultra SDK)",
-        "language": "C",
-        "code": "#include <ultra64.h>\n\nvoid mainproc(void) {\n    osSyncPrintf(\"Hello, N64 world!\\n\");\n}",
-        "beginnerExplanation": "This prints a message (“Hello, N64 world!”) using Nintendo’s N64 programmer tools. You see the output on the PC, not TV.",
-        "explanation": [
-          "#include – brings in the special code for N64 development.",
-          "mainproc is your main game function.",
-          "osSyncPrintf prints a line to the debug output window."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "N64 homebrew programming",
-      "websites": [
-        {
-          "title": "N64 Dev Wiki",
-          "url": "https://n64dev.org/",
-          "description": "Documentation and tutorials for developing on the Nintendo 64."
-        }
-      ]
-    }
-  },
-  {
-    "id": "ps1",
-    "name": "PlayStation",
-    "shortName": "PS1",
-    "type": "game",
-    "manufacturer": "Sony",
-    "year": 1994,
-    "discontinued": 2006,
-    "cpu": "MIPS R3000A, 33.8688 MHz",
-    "ram": "2 MB",
-    "storage": "CD-ROM",
-    "os": "Sony custom OS",
-    "description": "Sony’s first console brought 3D gaming and iconic games like Final Fantasy VII and Metal Gear Solid.",
-    "funFact": "It was first planned as a Nintendo product, before becoming Sony's.",
-    "difficulty": "Advanced",
-    "emoji": "🌀",
-    "color": "#9CC6EC",
-    "codingLanguage": "C",
-    "whyLearn": "Good to learn about early 3D and console hardware programming.",
-    "codingExamples": [
-      {
-        "title": "Print Text (C, PSY-Q SDK)",
-        "language": "C",
-        "code": "#include <libgte.h>\n#include <libgpu.h>\n#include <libgs.h>\n\nFntLoad(960, 256);\nFntOpen(0, 8, 320, 24, 0, 512);\nFntPrint(0, \"Hello, PlayStation!\\n\");",
-        "beginnerExplanation": "This prints the words 'Hello, PlayStation!' to the screen by using PS1’s text system from the SDK.",
-        "explanation": [
-          "Loads font graphics into memory.",
-          "Opens a text area at the top of the screen.",
-          "Prints 'Hello, PlayStation!' in that area."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "PS1 homebrew programming",
-      "websites": [
-        {
-          "title": "PSXDev",
-          "url": "https://psxdev.net/",
-          "description": "Resources and tools for PlayStation 1 homebrew and development."
-        }
-      ]
-    }
-  },
-  {
-    "id": "genesis",
-    "name": "Sega Genesis",
-    "shortName": "Genesis",
-    "type": "game",
-    "manufacturer": "Sega",
-    "year": 1988,
-    "discontinued": 1997,
-    "cpu": "Motorola 68000, 7.6 MHz; Zilog Z80 (sound), 3.58 MHz",
-    "ram": "64 KB",
-    "storage": "Cartridge",
-    "os": "None (custom firmware)",
-    "description": "Sega’s 16-bit game system was the home of Sonic the Hedgehog and Rapid Arcade Action.",
-    "funFact": "Named 'Mega Drive' everywhere but North America.",
-    "difficulty": "Advanced",
-    "emoji": "🐍",
-    "color": "#222222",
-    "codingLanguage": "C (SGDK), Assembly",
-    "whyLearn": "You learn low-level graphics and music programming for fun games.",
-    "codingExamples": [
-      {
-        "title": "Print Message (C, SGDK)",
-        "language": "C",
-        "code": "#include <genesis.h>\n\nint main() {\n  VDP_drawText(\"Hello, Genesis!\", 10, 13);\n  while(1);\n  return 0;\n}",
-        "beginnerExplanation": "This puts 'Hello, Genesis!' on the screen at position 10,13 and keeps it showing.",
-        "explanation": [
-          "Includes Genesis library.",
-          "Draws text at (10, 13).",
-          "Infinite loop keeps program from ending."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "Sega Genesis homebrew tutorial",
-      "websites": [
-        {
-          "title": "SGDK Documentation (Genesis C kit)",
-          "url": "https://github.com/Stephane-D/SGDK",
-          "description": "Official SGDK repository, tools and docs for Genesis development."
-        }
-      ]
-    }
-  },
-  {
-    "id": "xbox",
-    "name": "Xbox",
-    "shortName": "Xbox",
-    "type": "game",
-    "manufacturer": "Microsoft",
-    "year": 2001,
-    "discontinued": 2009,
-    "cpu": "Intel Pentium III, 733 MHz",
-    "ram": "64 MB",
-    "storage": "DVD-ROM, HDD",
-    "os": "Xbox OS (custom Win2000 kernel)",
-    "description": "Microsoft's first console combined PC components with console gaming and popularized online play.",
-    "funFact": "The original Xbox controller was nicknamed 'The Duke' for its large size.",
-    "difficulty": "Advanced",
-    "emoji": "🟩",
-    "color": "#107C10",
-    "codingLanguage": "C/C++",
-    "whyLearn": "Shows how consoles and PCs share common programming ideas.",
-    "codingExamples": [
-      {
-        "title": "Basic Hello (C, XDK/SDLx)",
-        "language": "C",
-        "code": "#include <hal/debug.h>\n\nvoid main() {\n  debugPrint(\"Hello, Xbox!\\n\");\n  while(1);\n}",
-        "beginnerExplanation": "This prints a message on the Xbox debug screen—like saying 'I’m alive!'",
-        "explanation": [
-          "Includes debug output.",
-          "Prints 'Hello, Xbox!'",
-          "Infinite loop keeps it running."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "Original Xbox homebrew coding",
-      "websites": [
-        {
-          "title": "Xbox Dev Wiki",
-          "url": "https://xboxdevwiki.net/",
-          "description": "Extensive Xbox hardware and homebrew info."
-        }
-      ]
-    }
-  },
-  {
-    "id": "gamecube",
-    "name": "Nintendo GameCube",
-    "shortName": "GameCube",
-    "type": "game",
-    "manufacturer": "Nintendo",
-    "year": 2001,
-    "discontinued": 2007,
-    "cpu": "IBM PowerPC 'Gekko', 485 MHz",
-    "ram": "24 MB main + 16 MB auxiliary",
-    "storage": "GameCube Optical Disc",
-    "os": "None (custom Nintendo OS)",
-    "description": "Nintendo’s purple cube played host to Super Smash Bros. and Mario Sunshine.",
-    "funFact": "Its handle let you 'carry it to a friend’s house!'",
-    "difficulty": "Advanced",
-    "emoji": "🟪",
-    "color": "#6E47A8",
-    "codingLanguage": "C (libogc/devkitPPC)",
-    "whyLearn": "Good for learning about modern embedded systems and graphics.",
-    "codingExamples": [
-      {
-        "title": "Print to Screen (C, libogc/devkitPPC)",
-        "language": "C",
-        "code": "#include <ogc/console.h>\n#include <ogc/video.h>\n\nint main() {\n  VIDEO_Init();\n  console_init(NULL, 20, 20, 40, 30, 640, NULL, 0);\n  printf(\"Hello, GameCube!\\n\");\n  while(1);\n  return 0;\n}",
-        "beginnerExplanation": "This sets up the screen and writes 'Hello, GameCube!' for you to see.",
-        "explanation": [
-          "Initializes video hardware.",
-          "Sets up a console area for text.",
-          "Prints message.",
-          "Infinite loop to keep message showing."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "GameCube homebrew setup",
-      "websites": [
-        {
-          "title": "DevKitPro",
-          "url": "https://devkitpro.org/",
-          "description": "Toolchains and docs for GameCube and Wii homebrew."
+          "description": "Technical reference and guides for NES programmers."
         }
       ]
     }
@@ -312,569 +204,770 @@
     "manufacturer": "Nintendo",
     "year": 1989,
     "discontinued": 2003,
-    "cpu": "Sharp LR35902, 4.19 MHz",
+    "cpu": "Sharp LR35902 (Z80-like), 4.19 MHz",
     "ram": "8 KB",
     "storage": "Cartridge",
-    "os": "None (custom firmware)",
-    "description": "The original handheld hit, made for playing on the go with Tetris and Pokémon.",
-    "funFact": "It could last up to 30 hours on 4 AA batteries!",
-    "difficulty": "Intermediate",
-    "emoji": "🟩",
-    "color": "#92D050",
-    "codingLanguage": "Z80 Assembly",
-    "whyLearn": "Ideal for learning fundamentals of low-level programming.",
+    "os": "None (bare metal)",
+    "description": "The Game Boy propelled handheld gaming into the mainstream, built on easy-to-learn hardware with a loyal homebrew community.",
+    "funFact": "Game Boy's screen lag and four-shade grayscale enabled creative graphics techniques.",
+    "difficulty": "Beginner",
+    "color": "#6dccb1",
     "codingExamples": [
       {
-        "title": "Infinite Loop (Z80 Assembly, RGBDS)",
-        "language": "Assembly (Z80)",
-        "code": "; Keep program running forever\nstart:\n    jp start",
-        "beginnerExplanation": "This keeps the Game Boy busy forever so it doesn’t crash. All real games use something similar for their main loop.",
+        "title": "Endless Loop (Z80 Assembly)",
+        "language": "Assembly",
+        "code": "LOOP:\n  JP LOOP",
+        "beginnerExplanation": "Causes the Game Boy to do nothing but loop forever. All Game Boy programs start from here.",
         "explanation": [
-          "start: is a label.",
-          "jp start jumps back to start—endless loop."
+          "Declares LOOP label.",
+          "Jumps to LOOP again and again."
+        ]
+      },
+      {
+        "title": "Print with Python",
+        "language": "Python",
+        "code": "print('Hello, Game Boy!')",
+        "beginnerExplanation": "Outputs a message using Python. Helpful for Game Boy emulation tools.",
+        "explanation": [
+          "Uses print to display text."
+        ]
+      },
+      {
+        "title": "Console Log (JavaScript)",
+        "language": "JavaScript",
+        "code": "console.log('Hello Game Boy from JS!');",
+        "beginnerExplanation": "Logs a message with JavaScript.",
+        "explanation": [
+          "Uses console.log to print the string."
+        ]
+      },
+      {
+        "title": "Log Output (TypeScript)",
+        "language": "TypeScript",
+        "code": "console.log('Hello Game Boy from TS!');",
+        "beginnerExplanation": "Logs output in TypeScript for dev tools.",
+        "explanation": [
+          "Prints a message to the log."
+        ]
+      },
+      {
+        "title": "Print (C)",
+        "language": "C",
+        "code": "#include <stdio.h>\nint main() {\n    printf(\"Hello Game Boy!\\n\");\n    return 0;\n}",
+        "beginnerExplanation": "Prints a message in C, as used in emulators or cross compilers.",
+        "explanation": [
+          "Includes stdio.h.",
+          "Defines main.",
+          "Prints message.",
+          "Returns 0."
+        ]
+      },
+      {
+        "title": "C++ Output",
+        "language": "C++",
+        "code": "#include <iostream>\nint main() {\n    std::cout << \"Hello Game Boy from C++!\" << std::endl;\n    return 0;\n}",
+        "beginnerExplanation": "C++ program prints a message.",
+        "explanation": [
+          "Includes iostream.",
+          "Defines main.",
+          "Prints message.",
+          "Returns."
+        ]
+      },
+      {
+        "title": "PrintLine (C#)",
+        "language": "C#",
+        "code": "using System;\nclass Example {\n    static void Main() {\n        Console.WriteLine(\"Hello Game Boy - C#\");\n    }\n}",
+        "beginnerExplanation": "Writes output using C#.",
+        "explanation": [
+          "Imports System.",
+          "Defines Main class.",
+          "Prints a message."
+        ]
+      },
+      {
+        "title": "Println Macro (Rust)",
+        "language": "Rust",
+        "code": "fn main() {\n    println!(\"Hello Game Boy with Rust!\");\n}",
+        "beginnerExplanation": "Rust print macro prints a string.",
+        "explanation": [
+          "Uses main function.",
+          "Prints a message with println!."
+        ]
+      },
+      {
+        "title": "PrintLine (Go)",
+        "language": "Go",
+        "code": "package main\nimport \"fmt\"\nfunc main() {\n    fmt.Println(\"Hello Game Boy from Go!\")\n}",
+        "beginnerExplanation": "Print a message with Go, used in scripting.",
+        "explanation": [
+          "Imports fmt.",
+          "Defines main.",
+          "Prints the message."
+        ]
+      },
+      {
+        "title": "Java Output Example",
+        "language": "Java",
+        "code": "public class GameBoy {\n    public static void main(String[] args) {\n        System.out.println(\"Hello Game Boy from Java!\");\n    }\n}",
+        "beginnerExplanation": "Uses Java to print a message to output.",
+        "explanation": [
+          "Defines class and main.",
+          "Prints the string."
+        ]
+      },
+      {
+        "title": "Basic Print (BASIC)",
+        "language": "BASIC",
+        "code": "10 PRINT \"HELLO GAME BOY!\"\n20 GOTO 10",
+        "beginnerExplanation": "BASIC code that prints the message forever.",
+        "explanation": [
+          "Prints the message.",
+          "Jumps back to line 10."
+        ]
+      },
+      {
+        "title": "Lua Print",
+        "language": "Lua",
+        "code": "print('Hello Game Boy in Lua!')",
+        "beginnerExplanation": "Print with Lua, used in scripting and emulators.",
+        "explanation": [
+          "Calls print to show message."
+        ]
+      },
+      {
+        "title": "Print Command (Ruby)",
+        "language": "Ruby",
+        "code": "puts 'Hello Game Boy with Ruby!'",
+        "beginnerExplanation": "Ruby script print example.",
+        "explanation": [
+          "Uses puts with a string."
+        ]
+      },
+      {
+        "title": "Swift Print",
+        "language": "Swift",
+        "code": "print(\"Hello Game Boy with Swift!\")",
+        "beginnerExplanation": "Shows the Swift way to print a message.",
+        "explanation": [
+          "Prints with the print function."
+        ]
+      },
+      {
+        "title": "Kotlin Print Statement",
+        "language": "Kotlin",
+        "code": "fun main() {\n    println(\"Hello Game Boy via Kotlin!\")\n}",
+        "beginnerExplanation": "Prints a line using Kotlin.",
+        "explanation": [
+          "Defines main.",
+          "Prints the line."
+        ]
+      },
+      {
+        "title": "Echo Output (PHP)",
+        "language": "PHP",
+        "code": "<?php\necho \"Hello Game Boy from PHP!\\n\";",
+        "beginnerExplanation": "Echoes a message with PHP script.",
+        "explanation": [
+          "Begins PHP.",
+          "Echoes string."
+        ]
+      },
+      {
+        "title": "Shell Print (Bash)",
+        "language": "Bash",
+        "code": "echo \"Hello Game Boy from Bash!\"",
+        "beginnerExplanation": "Prints a message in Bash, helpful for build scripts or automation.",
+        "explanation": [
+          "Runs echo to print the message."
         ]
       }
     ],
     "resources": {
-      "youtubeQuery": "Game Boy assembly programming beginner",
+      "youtubeQuery": "Game Boy homebrew programming tutorial",
       "websites": [
         {
           "title": "GBDev Wiki",
           "url": "https://gbdev.io/",
-          "description": "Everything you ever wanted to know about Game Boy programming."
+          "description": "Comprehensive guides and tools for Game Boy programming."
         }
       ]
     }
   },
   {
-    "id": "gba",
-    "name": "Game Boy Advance",
-    "shortName": "GBA",
-    "type": "handheld",
-    "manufacturer": "Nintendo",
-    "year": 2001,
-    "discontinued": 2010,
-    "cpu": "ARM7TDMI, 16.78 MHz",
-    "ram": "32 KB + 256 KB",
-    "storage": "Cartridge",
-    "os": "None (custom firmware)",
-    "description": "A pocket-size 32-bit powerhouse capable of SNES-style and advanced games.",
-    "funFact": "You could play old Game Boy games on it.",
-    "difficulty": "Intermediate",
-    "emoji": "🟪",
-    "color": "#9B59B6",
-    "codingLanguage": "C",
-    "whyLearn": "Classic for learning embedded C on real hardware.",
-    "codingExamples": [
-      {
-        "title": "Fill Screen With Blue (C, devkitARM)",
-        "language": "C",
-        "code": "#define REG_DISPCNT *(unsigned short*)0x4000000\n#define MODE3 0x0003\n#define BG2_ENABLE 0x0400\n#define VRAM ((unsigned short*)0x6000000)\n\nint main() {\n  REG_DISPCNT = MODE3 | BG2_ENABLE;\n  for(int i=0; i<240*160; i++) VRAM[i]=0x1F;\n  while(1);\n  return 0;\n}",
-        "beginnerExplanation": "This paints every pixel blue. It sets up the screen and fills it with the color's special number.",
-        "explanation": [
-          "Set display into a mode that allows direct pixel writing.",
-          "Loop through all (240x160) screen pixels.",
-          "Write blue color value (0x1F) in each pixel.",
-          "Infinite loop keeps screen painted."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "GBA homebrew programming",
-      "websites": [
-        {
-          "title": "Tonc GBA Guide",
-          "url": "https://www.coranac.com/tonc/text/first.htm",
-          "description": "Legendary GBA programming tutorial."
-        }
-      ]
-    }
-  },
-  {
-    "id": "nds",
-    "name": "Nintendo DS",
-    "shortName": "DS",
-    "type": "handheld",
-    "manufacturer": "Nintendo",
-    "year": 2004,
-    "discontinued": 2013,
-    "cpu": "ARM946E-S, 67 MHz; ARM7TDMI, 33 MHz",
-    "ram": "4 MB",
-    "storage": "Game Card",
-    "os": "None (custom firmware)",
-    "description": "Dual screens and touch controls made the DS a handheld revolution.",
-    "funFact": "The Nintendo DS is the best-selling handheld in history.",
-    "difficulty": "Intermediate",
-    "emoji": "🖊️",
-    "color": "#EAEAEA",
-    "codingLanguage": "C",
-    "whyLearn": "Explore dual-screen and touchscreen programming.",
-    "codingExamples": [
-      {
-        "title": "Print Text (C, libnds/devkitPro)",
-        "language": "C",
-        "code": "#include <nds.h>\n\nint main(void) {\n  consoleDemoInit();\n  iprintf(\"Hello, DS!\\n\");\n  while(1) swiWaitForVBlank();\n  return 0;\n}",
-        "beginnerExplanation": "Sets up the screen and prints out “Hello, DS!” as a friendly greeting.",
-        "explanation": [
-          "Initializes text output hardware.",
-          "Prints message.",
-          "Waits for vertical refresh in a loop."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "Nintendo DS homebrew coding",
-      "websites": [
-        {
-          "title": "libnds Tutorials",
-          "url": "https://devkitpro.org/wiki/Getting_Started_with_devkitPro",
-          "description": "Guides and docs for DS development in C."
-        }
-      ]
-    }
-  },
-  {
-    "id": "psp",
-    "name": "PlayStation Portable",
-    "shortName": "PSP",
-    "type": "handheld",
-    "manufacturer": "Sony",
-    "year": 2004,
-    "discontinued": 2014,
-    "cpu": "MIPS R4000, 1-333 MHz",
-    "ram": "32 MB (early), 64 MB (later)",
-    "storage": "UMD, Memory Stick Duo",
-    "os": "Sony custom OS",
-    "description": "Sony's portable powerhouse for 3D games, media, and homebrew.",
-    "funFact": "Thousands of homebrew games and emulators exist for PSP.",
-    "difficulty": "Intermediate",
-    "emoji": "🖐️",
-    "color": "#535353",
-    "codingLanguage": "C",
-    "whyLearn": "Good for learning modern game console coding.",
-    "codingExamples": [
-      {
-        "title": "Print Message (C, PSP SDK)",
-        "language": "C",
-        "code": "#include <pspkernel.h>\n#include <pspdebug.h>\n\nint main(void) {\n    pspDebugScreenInit();\n    pspDebugScreenPrintf(\"Hello, PSP!\\n\");\n    sceKernelSleepThread();\n    return 0;\n}",
-        "beginnerExplanation": "Sets up the screen, prints a welcome message, and keeps it there.",
-        "explanation": [
-          "Initializes the debug screen.",
-          "Prints 'Hello, PSP!'.",
-          "Sleeps thread so message stays visible."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "PSP homebrew tutorial",
-      "websites": [
-        {
-          "title": "PSP Programming Wiki",
-          "url": "https://psp-dev.org/doku.php",
-          "description": "Community SDK docs and homebrew programming."
-        }
-      ]
-    }
-  },
-  {
-    "id": "ciscoiosrouter",
+    "id": "ciscoios",
     "name": "Cisco IOS Router",
     "shortName": "Cisco IOS",
     "type": "network",
     "manufacturer": "Cisco",
     "year": 1993,
     "discontinued": null,
-    "cpu": "MIPS 200-800 MHz (model-dependent)",
-    "ram": "32+ MB (varies)",
+    "cpu": "MIPS (200-800 MHz, varies by model)",
+    "ram": "32+ MB",
     "storage": "Flash, NVRAM",
     "os": "Cisco IOS",
-    "description": "The world's most popular network routers, essential to the internet.",
-    "funFact": "You can still use 1980s commands today.",
+    "description": "Cisco IOS Routers power data centers and internet infrastructure worldwide. Their configuration is text-based, using a CLI for all interactions.",
+    "funFact": "The Cisco IOS CLI is used in nearly every big network, from offices to ISPs.",
     "difficulty": "Intermediate",
-    "emoji": "🌐",
-    "color": "#2962FF",
-    "codingLanguage": "Cisco IOS CLI",
-    "whyLearn": "Teaches essentials of real-world networking and automation.",
+    "color": "#2176ff",
     "codingExamples": [
       {
-        "title": "Set Hostname",
-        "language": "Cisco IOS CLI",
-        "code": "configure terminal\nhostname Router01\nend",
-        "beginnerExplanation": "This lets you set your router's name to 'Router01', so you won't get confused between different routers.",
+        "title": "Note on Assembly (Not available for CLI users)",
+        "language": "Assembly",
+        "code": "; Cisco IOS is not user-programmable in low-level assembly.",
+        "beginnerExplanation": "Typical users cannot write or upload assembly to Cisco routers. All work is done via CLI commands.",
         "explanation": [
-          "Go into configuration mode.",
-          "Change the router's hostname.",
-          "Finish configuration."
+          "Cisco IOS is managed through CLI, not low-level code."
+        ]
+      },
+      {
+        "title": "Print Connection Status (Python)",
+        "language": "Python",
+        "code": "print('Connected to Cisco IOS!')",
+        "beginnerExplanation": "Prints a message when an automated script connects to a router.",
+        "explanation": [
+          "Prints a string using Python's print function."
+        ]
+      },
+      {
+        "title": "Log Connection (JavaScript)",
+        "language": "JavaScript",
+        "code": "console.log('Cisco IOS script started');",
+        "beginnerExplanation": "Logs to the console in JavaScript, used for automation or configuration tools.",
+        "explanation": [
+          "Uses console.log to display a message."
+        ]
+      },
+      {
+        "title": "Log Output (TypeScript)",
+        "language": "TypeScript",
+        "code": "console.log('Connecting to Cisco IOS with TypeScript');",
+        "beginnerExplanation": "Same as JavaScript but typed, for network automation scripts.",
+        "explanation": [
+          "Prints the message with console.log."
+        ]
+      },
+      {
+        "title": "Print (C)",
+        "language": "C",
+        "code": "#include <stdio.h>\nint main() {\n    printf(\"Cisco IOS C tool starting...\\n\");\n    return 0;\n}",
+        "beginnerExplanation": "C program printing connection status. Used in CLI tools.",
+        "explanation": [
+          "Includes standard headers.",
+          "Main entry point.",
+          "Prints the message.",
+          "Exits."
+        ]
+      },
+      {
+        "title": "C++ Print Example",
+        "language": "C++",
+        "code": "#include <iostream>\nint main() {\n    std::cout << \"Cisco IOS C++ script\" << std::endl;\n    return 0;\n}",
+        "beginnerExplanation": "Uses C++ to log a message for Cisco CLI automation.",
+        "explanation": [
+          "Includes iostream.",
+          "Defines main.",
+          "Prints string."
+        ]
+      },
+      {
+        "title": "Log with C#",
+        "language": "C#",
+        "code": "using System;\nclass Ciscotool {\n    static void Main() {\n        Console.WriteLine(\"Cisco IOS connection...\");\n    }\n}",
+        "beginnerExplanation": "C# standard output method. Useful for Windows-based scripts.",
+        "explanation": [
+          "Sets up a class.",
+          "Prints status message."
+        ]
+      },
+      {
+        "title": "Rust Print Statement",
+        "language": "Rust",
+        "code": "fn main() {\n    println!(\"Cisco IOS using Rust\");\n}",
+        "beginnerExplanation": "Prints with Rust for network scripting.",
+        "explanation": [
+          "Defines main.",
+          "Print statement."
+        ]
+      },
+      {
+        "title": "Go Println Example",
+        "language": "Go",
+        "code": "package main\nimport \"fmt\"\nfunc main() {\n    fmt.Println(\"Cisco IOS Go script running\")\n}",
+        "beginnerExplanation": "Outputs a line of text using Go.",
+        "explanation": [
+          "Imports fmt.",
+          "Defines main.",
+          "Prints message."
+        ]
+      },
+      {
+        "title": "Java Print",
+        "language": "Java",
+        "code": "public class CiscoIOS {\n    public static void main(String[] args) {\n        System.out.println(\"Cisco IOS tool running\");\n    }\n}",
+        "beginnerExplanation": "Java send output to terminal. Good for config tools.",
+        "explanation": [
+          "Class, main, prints."
+        ]
+      },
+      {
+        "title": "BASIC Print",
+        "language": "BASIC",
+        "code": "10 PRINT \"CISCO IOS - CLI TOOL\"\n20 END",
+        "beginnerExplanation": "Prints a single status string using BASIC.",
+        "explanation": [
+          "Prints the string.",
+          "Ends program."
+        ]
+      },
+      {
+        "title": "Lua Print Command",
+        "language": "Lua",
+        "code": "print('Cisco IOS automation')",
+        "beginnerExplanation": "Outputs text in Lua, often used in automation.",
+        "explanation": [
+          "Prints the message."
+        ]
+      },
+      {
+        "title": "Ruby Status Output",
+        "language": "Ruby",
+        "code": "puts 'Cisco IOS - Ruby script.'",
+        "beginnerExplanation": "Printed message in Ruby for CLI tools.",
+        "explanation": [
+          "Uses puts."
+        ]
+      },
+      {
+        "title": "Swift Print Statement",
+        "language": "Swift",
+        "code": "print(\"Cisco IOS - Swift script!\")",
+        "beginnerExplanation": "Swift print for scripting status.",
+        "explanation": [
+          "Prints message."
+        ]
+      },
+      {
+        "title": "Kotlin Output",
+        "language": "Kotlin",
+        "code": "fun main() {\n    println(\"Cisco IOS connection via Kotlin!\")\n}",
+        "beginnerExplanation": "Outputs status line with Kotlin.",
+        "explanation": [
+          "Defines main.",
+          "Prints line."
+        ]
+      },
+      {
+        "title": "PHP Echo Output",
+        "language": "PHP",
+        "code": "<?php\necho \"Cisco IOS PHP script\\n\";",
+        "beginnerExplanation": "Prints status message in PHP.",
+        "explanation": [
+          "Begins PHP.",
+          "Echo output."
+        ]
+      },
+      {
+        "title": "Shell Echo Statement",
+        "language": "Bash",
+        "code": "echo \"Cisco IOS connection open\"",
+        "beginnerExplanation": "Shell script prints message, useful for network scripts.",
+        "explanation": [
+          "Runs echo with string argument."
         ]
       }
     ],
     "resources": {
-      "youtubeQuery": "Cisco IOS CLI intro",
+      "youtubeQuery": "Cisco IOS CLI tutorial",
       "websites": [
         {
           "title": "Cisco CLI Analyzer",
           "url": "https://cli.cloudapps.cisco.com/cli-analyzer/",
-          "description": "Interactive online tool for learning Cisco CLI commands."
+          "description": "Interactive tool for learning and automating Cisco CLI."
         }
       ]
     }
   },
   {
-    "id": "wrt54g",
-    "name": "Linksys WRT54G Router",
-    "shortName": "WRT54G",
-    "type": "network",
-    "manufacturer": "Linksys",
-    "year": 2002,
-    "discontinued": 2013,
-    "cpu": "Broadcom BCM4712, 125/200 MHz",
-    "ram": "16 MB",
-    "storage": "4 MB Flash",
-    "os": "VxWorks/Linux (with OpenWRT/DD-WRT)",
-    "description": "A legendary Wi-Fi router loved by home hackers for its mod-friendly hardware.",
-    "funFact": "You can turn it into a powerful firewall or VPN box with free firmware.",
-    "difficulty": "Intermediate",
-    "emoji": "📡",
-    "color": "#2285C6",
-    "codingLanguage": "Shell (Linux/Busybox)",
-    "whyLearn": "It's great for learning networking commands and real-world Linux.",
-    "codingExamples": [
-      {
-        "title": "Blink Power Light (DD-WRT shell)",
-        "language": "Shell",
-        "code": "# Makes the power LED blink on a WRT54G running DD-WRT\n echo blink > /proc/diag/led/power",
-        "beginnerExplanation": "This line tells the router's built-in lights to flash, proving you can talk to its hardware!",
-        "explanation": [
-          "echo blink: outputs the word blink.",
-          ">/proc/diag/led/power: sends it to the LED control, making the light blink."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "WRT54G openwrt setup",
-      "websites": [
-        {
-          "title": "DD-WRT Wiki",
-          "url": "https://wiki.dd-wrt.com/wiki/index.php/Linksys_WRT54G/GL/GS",
-          "description": "Full guides for modding and programming Linksys WRT54G routers."
-        }
-      ]
-    }
-  },
-  {
-    "id": "raspberrypi-router",
-    "name": "Raspberry Pi as Router",
-    "shortName": "Raspberry Pi Router",
-    "type": "network",
-    "manufacturer": "Raspberry Pi Foundation",
-    "year": 2012,
-    "discontinued": null,
-    "cpu": "Broadcom BCM2835-2711 (model dependent)",
-    "ram": "512 MB – 8 GB",
-    "storage": "MicroSD Card",
-    "os": "Raspberry Pi OS or Linux",
-    "description": "A tiny computer that can become a full-featured home, lab, or classroom router.",
-    "funFact": "A Pi can run as an enterprise-grade firewall thanks to software like OpenWRT.",
-    "difficulty": "Intermediate",
-    "emoji": "🛡️",
-    "color": "#C51A4A",
-    "codingLanguage": "Linux Shell",
-    "whyLearn": "A hands-on, DIY way to learn about real-world networking hardware and Linux tools.",
-    "codingExamples": [
-      {
-        "title": "Enable Routing (Linux shell)",
-        "language": "Shell",
-        "code": "# Turns on routing so your Pi can move data between networks\n echo 1 > /proc/sys/net/ipv4/ip_forward",
-        "beginnerExplanation": "This tells your Pi to start passing internet traffic between your devices, a key router job.",
-        "explanation": [
-          "echo 1: says 'turn it on'.",
-          ">/proc/sys/net/ipv4/ip_forward: sends the command to Linux's network settings."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "Raspberry Pi router tutorial",
-      "websites": [
-        {
-          "title": "Pi My Life Up: Pi Router",
-          "url": "https://pimylifeup.com/raspberry-pi-router/",
-          "description": "Step-by-step guide to building a router with Raspberry Pi."
-        }
-      ]
-    }
-  },
-  {
-    "id": "commodore64",
-    "name": "Commodore 64",
-    "shortName": "C64",
-    "type": "computer",
-    "manufacturer": "Commodore",
-    "year": 1982,
-    "discontinued": 1994,
-    "cpu": "MOS 6510, 1.0 MHz",
-    "ram": "64 KB",
-    "storage": "Cassette, Floppy Disk, Cartridge",
-    "os": "Commodore BASIC 2.0",
-    "description": "The most popular home computer ever, made for fun, games, and learning how to code at home.",
-    "funFact": "The C64's sound chip is still used for music today.",
-    "difficulty": "Beginner",
-    "emoji": "💾",
-    "color": "#43BCCE",
-    "codingLanguage": "BASIC",
-    "whyLearn": "You write code and immediately see results, making it perfect for complete beginners!",
-    "codingExamples": [
-      {
-        "title": "Say Hello (Commodore BASIC)",
-        "language": "BASIC",
-        "code": "10 REM This is a comment. Lines can have numbers!\n20 PRINT \"HELLO, WORLD!\"   : REM Print something to the screen\n30 END                     : REM Program stops here",
-        "beginnerExplanation": "Each step is written out like a recipe. Type this in and the computer talks back!",
-        "explanation": [
-          "Line 10: A comment—the computer ignores this.",
-          "Line 20: PRINT shows your message on screen.",
-          "Line 30: END tells the computer you’re done."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "Commodore 64 programming for beginners",
-      "websites": [
-        {
-          "title": "C64 Wiki",
-          "url": "https://www.c64-wiki.com/",
-          "description": "Huge resource for C64 hardware and programming help."
-        }
-      ]
-    }
-  },
-  {
-    "id": "apple2",
-    "name": "Apple II",
-    "shortName": "Apple II",
+    "id": "appleiie",
+    "name": "Apple IIe",
+    "shortName": "Apple IIe",
     "type": "computer",
     "manufacturer": "Apple",
-    "year": 1977,
+    "year": 1983,
     "discontinued": 1993,
-    "cpu": "MOS 6502, 1 MHz",
-    "ram": "4–64 KB (model-dependent)",
-    "storage": "Cassette, Floppy Disk",
-    "os": "Apple DOS, ProDOS, Integer BASIC",
-    "description": "The Apple II made home and school computing mainstream, letting anyone code their own games and programs.",
-    "funFact": "The original used cassette tapes to store programs.",
-    "difficulty": "Intermediate",
-    "emoji": "🍏",
-    "color": "#9ED765",
-    "codingLanguage": "BASIC",
-    "whyLearn": "One of the easiest and most fun platforms for classic coding.",
-    "codingExamples": [
-      {
-        "title": "Say Hello (Integer BASIC)",
-        "language": "BASIC",
-        "code": "10 REM This line is a comment\n20 PRINT \"HELLO APPLE II!\"\n30 END",
-        "beginnerExplanation": "Exactly like talking to your computer—every line is a single easy idea.",
-        "explanation": [
-          "10: Ignore this line, it’s a note.",
-          "20: Print words to the screen.",
-          "30: End the program."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "Apple II programming for beginners",
-      "websites": [
-        {
-          "title": "Apple2Online",
-          "url": "https://www.apple2online.com/",
-          "description": "Guides and docs for Apple II programming in BASIC."
-        }
-      ]
-    }
-  },
-  {
-    "id": "raspberrypi",
-    "name": "Raspberry Pi",
-    "shortName": "Raspberry Pi",
-    "type": "computer",
-    "manufacturer": "Raspberry Pi Foundation",
-    "year": 2012,
-    "discontinued": null,
-    "cpu": "Broadcom BCM2835-2711 (model dependent)",
-    "ram": "512 MB – 8 GB",
-    "storage": "MicroSD Card",
-    "os": "Raspberry Pi OS (Linux)",
-    "description": "A tiny, affordable computer that can do everything—from programming to making robots.",
-    "funFact": "You can build an arcade, a smart speaker, or a robot with a Raspberry Pi.",
+    "cpu": "MOS 6502, 1.023 MHz",
+    "ram": "64 KB (expandable)",
+    "storage": "5.25-inch floppy, cassette",
+    "os": "Apple DOS, ProDOS, others",
+    "description": "The Apple IIe was a widely used home and classroom computer known for approachability and expandability. It features a 6502 CPU and straightforward hardware.",
+    "funFact": "Several entire companies were started building add-on cards for the Apple II series.",
     "difficulty": "Beginner",
-    "emoji": "🍓",
-    "color": "#C51A4A",
-    "codingLanguage": "Python",
-    "whyLearn": "It’s cheap, safe to experiment with, and you can literally make anything you imagine.",
+    "color": "#4cd137",
     "codingExamples": [
       {
-        "title": "Say Hello (Python 3)",
-        "language": "Python",
-        "code": "# This is a comment - the computer ignores this line\nprint(\"Hello, world!\")  # This shows a message on your screen",
-        "beginnerExplanation": "Write exactly what you want the computer to say, and it does! Comments (with #) are just notes for humans.",
+        "title": "Endless Loop (6502 Assembly)",
+        "language": "Assembly",
+        "code": "loop: JMP loop",
+        "beginnerExplanation": "This code causes the Apple IIe to run in a never-ending loop. Many Apple IIe programs start this way.",
         "explanation": [
-          "# Comment for you, not the computer.",
-          "print(...) shows whatever you type in quotes.",
-          "# We can add comments after code, too."
+          "Creates a label 'loop'.",
+          "Jumps to the loop, repeating forever."
         ]
       },
       {
-        "title": "Blink an LED (Python, GPIO Zero)",
+        "title": "Print Output (Python)",
         "language": "Python",
-        "code": "# This will blink an LED plugged into GPIO pin 17\nfrom gpiozero import LED   # Let us control the LED\nfrom time import sleep     # For waiting\nled = LED(17)             # Use pin 17\nwhile True:               # Do this forever\n    led.on()                # Turn LED on\n    sleep(1)                # Wait 1 second\n    led.off()               # Turn LED off\n    sleep(1)                # Wait 1 second",
-        "beginnerExplanation": "Each step is simple: set up the light, turn it on and off with pauses. The computer repeats until you stop it.",
+        "code": "print('Hello from Apple IIe Python!')",
+        "beginnerExplanation": "Prints a message with Python for Apple IIe programming tools.",
         "explanation": [
-          "from gpiozero import LED: We need this to control lights.",
-          "from time import sleep: Lets us pause our program.",
-          "led = LED(17): We plug our light into GPIO pin 17.",
-          "while True: Our forever loop (keeps program running).",
-          "led.on(): Light turns on.",
-          "sleep(1): Wait for one second.",
-          "led.off(): Light turns off.",
-          "sleep(1): Wait again before the next blink."
+          "Uses the print statement to show output."
         ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "Raspberry Pi beginner programming",
-      "websites": [
-        {
-          "title": "Raspberry Pi Projects",
-          "url": "https://projects.raspberrypi.org/en/",
-          "description": "Official step-by-step code and hardware tutorials."
-        },
-        {
-          "title": "GPIO Zero Documentation",
-          "url": "https://gpiozero.readthedocs.io/",
-          "description": "The best simple intro to controlling Pi electronics with code."
-        }
-      ]
-    }
-  },
-  {
-    "id": "zxspectrum",
-    "name": "ZX Spectrum",
-    "shortName": "ZX Spectrum",
-    "type": "computer",
-    "manufacturer": "Sinclair",
-    "year": 1982,
-    "discontinued": 1992,
-    "cpu": "Zilog Z80A, 3.5 MHz",
-    "ram": "16-128 KB (model-dependent)",
-    "storage": "Cassette Tape",
-    "os": "Sinclair BASIC",
-    "description": "The Speccy was the UK’s affordable, colorful home programming starter, loved by a generation.",
-    "funFact": "Games loaded from cassette tapes with screeching sounds.",
-    "difficulty": "Intermediate",
-    "emoji": "🌈",
-    "color": "#FCE205",
-    "codingLanguage": "BASIC",
-    "whyLearn": "Its code is simple and every line makes something happen.",
-    "codingExamples": [
+      },
       {
-        "title": "Print Message (Sinclair BASIC)",
-        "language": "BASIC",
-        "code": "10 PRINT \"HELLO, ZX SPECTRUM!\"\n20 GO TO 10",
-        "beginnerExplanation": "This code prints 'HELLO, ZX SPECTRUM!' over and over like a screensaver.",
+        "title": "JavaScript Output",
+        "language": "JavaScript",
+        "code": "console.log('Apple IIe and JavaScript!');",
+        "beginnerExplanation": "Logs output using JavaScript.",
         "explanation": [
-          "10: Show message to screen.",
-          "20: Loop back to line 10, repeating forever."
+          "Calls console.log with the string."
         ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "ZX Spectrum programming tutorial",
-      "websites": [
-        {
-          "title": "World of Spectrum",
-          "url": "https://www.worldofspectrum.org/",
-          "description": "Portal for ZX Spectrum software and programming."
-        }
-      ]
-    }
-  },
-  {
-    "id": "mame",
-    "name": "MAME Arcade",
-    "shortName": "MAME",
-    "type": "arcade",
-    "manufacturer": "Multiple (emulation)",
-    "year": 1997,
-    "discontinued": null,
-    "cpu": "Multiple (emulation target)",
-    "ram": "Multiple (emulation target)",
-    "storage": "ROM chips (emulated)",
-    "os": "Emulated (varies)",
-    "description": "MAME is the world-standard emulator for preserving and running classic arcade machines.",
-    "funFact": "MAME supports over 10,000 different arcade games!",
-    "difficulty": "Advanced",
-    "emoji": "👾",
-    "color": "#A9D2FF",
-    "codingLanguage": "C/C++",
-    "whyLearn": "Learn how real arcade machines were programmed and preserved.",
-    "codingExamples": [
+      },
       {
-        "title": "Add Hello World to Driver (C)",
+        "title": "TypeScript Log",
+        "language": "TypeScript",
+        "code": "console.log('Apple IIe using TypeScript!');",
+        "beginnerExplanation": "Logs message in TypeScript.",
+        "explanation": [
+          "Console log prints the message."
+        ]
+      },
+      {
+        "title": "C Print",
         "language": "C",
-        "code": "machine().logerror(\"Hello, MAME!\\n\"); // Write message to emulator output",
-        "beginnerExplanation": "Lets you add a message to the emulator output, great for debugging your own arcade game driver.",
+        "code": "#include <stdio.h>\nint main() {\n    printf(\"Hello from Apple IIe in C!\\n\");\n    return 0;\n}",
+        "beginnerExplanation": "This prints a line using C, as used in Apple IIe dev tools.",
         "explanation": [
-          "machine().logerror: Function to print debug text.",
-          "\"Hello, MAME!\\n\": The text message."
+          "Includes stdio.",
+          "Defines main.",
+          "Prints string.",
+          "Exits."
+        ]
+      },
+      {
+        "title": "C++ Output",
+        "language": "C++",
+        "code": "#include <iostream>\nint main() {\n    std::cout << \"Hello Apple IIe from C++!\" << std::endl;\n    return 0;\n}",
+        "beginnerExplanation": "Print using C++ to standard out.",
+        "explanation": [
+          "Includes iostream.",
+          "Main entry.",
+          "Prints message."
+        ]
+      },
+      {
+        "title": "Print (C#)",
+        "language": "C#",
+        "code": "using System;\nclass Program {\n    static void Main() {\n        Console.WriteLine(\"Apple IIe in C#.\");\n    }\n}",
+        "beginnerExplanation": "C# write to console. Used for Apple IIe emulation and tools.",
+        "explanation": [
+          "Main entry.",
+          "Console outputs string."
+        ]
+      },
+      {
+        "title": "Rust Print",
+        "language": "Rust",
+        "code": "fn main() {\n    println!(\"Apple IIe, Rust edition!\");\n}",
+        "beginnerExplanation": "Rust println to output.",
+        "explanation": [
+          "Main function.",
+          "Prints the message."
+        ]
+      },
+      {
+        "title": "Print (Go)",
+        "language": "Go",
+        "code": "package main\nimport \"fmt\"\nfunc main() {\n    fmt.Println(\"Hello Apple IIe with Go!\")\n}",
+        "beginnerExplanation": "Go language prints to output.",
+        "explanation": [
+          "Package, import, main function.",
+          "Prints text."
+        ]
+      },
+      {
+        "title": "Java Output",
+        "language": "Java",
+        "code": "public class AppleIIe {\n    public static void main(String[] args) {\n        System.out.println(\"Apple IIe Java print\");\n    }\n}",
+        "beginnerExplanation": "Prints to output using Java.",
+        "explanation": [
+          "Defines main.",
+          "Prints string."
+        ]
+      },
+      {
+        "title": "Print in BASIC",
+        "language": "BASIC",
+        "code": "10 PRINT \"APPLE IIE FOREVER!\"\n20 END",
+        "beginnerExplanation": "BASIC program prints once and stops.",
+        "explanation": [
+          "Line 10 prints text.",
+          "Line 20 ends."
+        ]
+      },
+      {
+        "title": "Print in Lua",
+        "language": "Lua",
+        "code": "print('Apple IIe in Lua!')",
+        "beginnerExplanation": "Prints with Lua.",
+        "explanation": [
+          "Calls print."
+        ]
+      },
+      {
+        "title": "Ruby Print Statement",
+        "language": "Ruby",
+        "code": "puts 'Apple IIe and Ruby.'",
+        "beginnerExplanation": "Print output using Ruby.",
+        "explanation": [
+          "Uses puts to print the message."
+        ]
+      },
+      {
+        "title": "Swift Output",
+        "language": "Swift",
+        "code": "print(\"Hello from Apple IIe in Swift!\")",
+        "beginnerExplanation": "Displays a message using Swift's print command.",
+        "explanation": [
+          "Prints a line."
+        ]
+      },
+      {
+        "title": "Kotlin Print Function",
+        "language": "Kotlin",
+        "code": "fun main() {\n    println(\"Hello Apple IIe from Kotlin!\")\n}",
+        "beginnerExplanation": "Standard Kotlin print to output.",
+        "explanation": [
+          "Defines main.",
+          "Prints the string."
+        ]
+      },
+      {
+        "title": "Echo (PHP)",
+        "language": "PHP",
+        "code": "<?php\necho \"Apple IIe with PHP!\\n\";",
+        "beginnerExplanation": "Echoes to standard output in PHP.",
+        "explanation": [
+          "PHP opening, echo output."
+        ]
+      },
+      {
+        "title": "Bash Print",
+        "language": "Bash",
+        "code": "echo \"Apple IIe Bash output!\"",
+        "beginnerExplanation": "Prints a line in a Bash shell.",
+        "explanation": [
+          "Runs echo command with a string."
         ]
       }
     ],
     "resources": {
-      "youtubeQuery": "MAME driver development tutorial",
+      "youtubeQuery": "Apple IIe programming BASIC assembly tutorial",
       "websites": [
         {
-          "title": "MAME Dev Docs",
-          "url": "https://docs.mamedev.org/",
-          "description": "Official documentation for MAME programming and development."
+          "title": "Apple II Documentation Project",
+          "url": "https://apple2.org.za/gswv/a2zine/Docs/",
+          "description": "Extensive Apple IIe manuals and programming guides."
         }
       ]
     }
   },
   {
-    "id": "neogeo",
-    "name": "Neo Geo",
+    "id": "neo-geo",
+    "name": "Neo Geo MVS",
     "shortName": "Neo Geo",
     "type": "arcade",
     "manufacturer": "SNK",
     "year": 1990,
     "discontinued": 2004,
-    "cpu": "Motorola 68000, 12 MHz; Zilog Z80, 4 MHz (sound)",
-    "ram": "64 KB (main), 2 KB (sound)",
-    "storage": "ROM Cartridge",
-    "os": "None (baremetal arcade firmware)",
-    "description": "The Neo Geo ran powerful arcade and home games with rich sprites and epic fighting games.",
-    "funFact": "Neo Geo cartridges could be larger than some laptops at the time.",
+    "cpu": "Motorola 68000 (12 MHz) + Zilog Z80 (4 MHz)",
+    "ram": "64 KB (main) + 2 KB (sound)",
+    "storage": "Cartridge",
+    "os": "Custom BIOS",
+    "description": "The Neo Geo MVS was a revolutionary arcade system, famed for advanced graphics and its massive cartridge games library.",
+    "funFact": "Neo Geo MVS cartridges for consoles were nearly the size of video cassettes due to game size.",
     "difficulty": "Advanced",
-    "emoji": "🕹️",
-    "color": "#FFC300",
-    "codingLanguage": "68000 Assembly, C",
-    "whyLearn": "Teaches the real deal: how arcade machines handled graphics and sound.",
+    "color": "#eeaa00",
     "codingExamples": [
       {
-        "title": "Main Loop (M68000 Assembly)",
-        "language": "Assembly (68000)",
-        "code": "; Keep running forever\nmainloop:\n    bra mainloop",
-        "beginnerExplanation": "Creates an infinite loop (never ending) that every arcade game needs to keep checking for player input.",
+        "title": "Infinite Loop (68000 Assembly)",
+        "language": "Assembly",
+        "code": "Loop:\n  bra Loop",
+        "beginnerExplanation": "Keeps running the same instruction, useful for initial board tests.",
         "explanation": [
-          "mainloop: label for the start.",
-          "bra mainloop: Keep going back to mainloop forever."
+          "Defines a Loop label.",
+          "Branches to itself endlessly."
+        ]
+      },
+      {
+        "title": "Python Print Output",
+        "language": "Python",
+        "code": "print('Neo Geo dev output')",
+        "beginnerExplanation": "Prints output as part of tooling for Neo Geo arcade development.",
+        "explanation": [
+          "Uses print function for output."
+        ]
+      },
+      {
+        "title": "JavaScript Output Log",
+        "language": "JavaScript",
+        "code": "console.log('Neo Geo log message');",
+        "beginnerExplanation": "Prints logs for emulator or script devs.",
+        "explanation": [
+          "Uses console.log."
+        ]
+      },
+      {
+        "title": "TypeScript Console Print",
+        "language": "TypeScript",
+        "code": "console.log('TypeScript Neo Geo tool run!');",
+        "beginnerExplanation": "Logs output in a TypeScript Neo Geo program.",
+        "explanation": [
+          "Prints message using console.log."
+        ]
+      },
+      {
+        "title": "Print Output (C)",
+        "language": "C",
+        "code": "#include <stdio.h>\nint main() {\n    printf(\"Neo Geo C program!\\n\");\n    return 0;\n}",
+        "beginnerExplanation": "Prints to output in Neo Geo C tools.",
+        "explanation": [
+          "Includes stdio.",
+          "Main entry.",
+          "Prints message.",
+          "Returns zero."
+        ]
+      },
+      {
+        "title": "Output String (C++)",
+        "language": "C++",
+        "code": "#include <iostream>\nint main() {\n    std::cout << \"Neo Geo via C++!\" << std::endl;\n    return 0;\n}",
+        "beginnerExplanation": "C++ program prints a message to output.",
+        "explanation": [
+          "Stdout via iostream.",
+          "Main returns zero."
+        ]
+      },
+      {
+        "title": "Print Message (C#)",
+        "language": "C#",
+        "code": "using System;\nclass App {\n    static void Main() {\n        Console.WriteLine(\"Neo Geo message from C#\");\n    }\n}",
+        "beginnerExplanation": "Standard output via C# in Neo Geo scripting.",
+        "explanation": [
+          "Uses System namespace.",
+          "Writes out status."
+        ]
+      },
+      {
+        "title": "Rust Standard Output",
+        "language": "Rust",
+        "code": "fn main() {\n    println!(\"Neo Geo Rust print\");\n}",
+        "beginnerExplanation": "Rust program prints output for arcade scripting.",
+        "explanation": [
+          "Main runs println!."
+        ]
+      },
+      {
+        "title": "Go Println Tool",
+        "language": "Go",
+        "code": "package main\nimport \"fmt\"\nfunc main() {\n    fmt.Println(\"Neo Geo via Go!\")\n}",
+        "beginnerExplanation": "Prints a message using Go.",
+        "explanation": [
+          "Imports fmt, prints in main."
+        ]
+      },
+      {
+        "title": "Print in Java",
+        "language": "Java",
+        "code": "public class NeoGeo {\n    public static void main(String[] args) {\n        System.out.println(\"Neo Geo arcade Java output\");\n    }\n}",
+        "beginnerExplanation": "Uses Java's println to output text.",
+        "explanation": [
+          "Main function, prints to output."
+        ]
+      },
+      {
+        "title": "BASIC Print Routine",
+        "language": "BASIC",
+        "code": "10 PRINT \"NEO GEO DEMO!\"\n20 GOTO 10",
+        "beginnerExplanation": "Keeps printing the message. BASIC is familiar for arcade homebrew too.",
+        "explanation": [
+          "Line 10 prints.",
+          "Line 20 loops forever."
+        ]
+      },
+      {
+        "title": "Lua Print Function",
+        "language": "Lua",
+        "code": "print('Neo Geo Lua out')",
+        "beginnerExplanation": "Simple Lua print, often used in UI scripts.",
+        "explanation": [
+          "Runs print with string."
+        ]
+      },
+      {
+        "title": "Ruby Output Syntax",
+        "language": "Ruby",
+        "code": "puts 'Neo Geo Ruby output.'",
+        "beginnerExplanation": "Ruby prints to stdout.",
+        "explanation": [
+          "Uses puts function."
+        ]
+      },
+      {
+        "title": "Swift Print Statement",
+        "language": "Swift",
+        "code": "print(\"Neo Geo in Swift!\")",
+        "beginnerExplanation": "Swift print output.",
+        "explanation": [
+          "Prints line to terminal."
+        ]
+      },
+      {
+        "title": "Kotlin PrintLn",
+        "language": "Kotlin",
+        "code": "fun main() {\n    println(\"Neo Geo from Kotlin!\")\n}",
+        "beginnerExplanation": "Kotlin prints a message; useful in cross-dev tools.",
+        "explanation": [
+          "Defines main.",
+          "Prints a message."
+        ]
+      },
+      {
+        "title": "PHP Print Example",
+        "language": "PHP",
+        "code": "<?php\necho \"Neo Geo PHP output\\n\";",
+        "beginnerExplanation": "Echoes to output with PHP.",
+        "explanation": [
+          "Opens PHP, echoes message."
+        ]
+      },
+      {
+        "title": "Bash Echo Example",
+        "language": "Bash",
+        "code": "echo \"Neo Geo from Bash!\"",
+        "beginnerExplanation": "Prints to terminal with Bash.",
+        "explanation": [
+          "Executes echo command with message."
         ]
       }
     ],
     "resources": {
-      "youtubeQuery": "Neo Geo homebrew tutorial",
+      "youtubeQuery": "Neo Geo arcade programming tutorial",
       "websites": [
         {
-          "title": "Neo Geo Dev Wiki",
+          "title": "NeoGeo Dev Wiki",
           "url": "https://wiki.neogeodev.org/",
-          "description": "Comprehensive documentation for Neo Geo programming."
+          "description": "Documentation and resources for Neo Geo developers."
         }
       ]
     }
