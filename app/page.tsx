@@ -1,169 +1,199 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState, useMemo } from "react";
+import languages from "@/data/languages.json";
 import Link from "next/link";
-import consoles from "@/data/consoles.json";
 
-const FILTERS = [
+const TYPE_FILTERS = [
   { label: "All", value: "all" },
+  { label: "Web", value: "web" },
+  { label: "Systems", value: "systems" },
+  { label: "Scripting", value: "scripting" },
+  { label: "Mobile", value: "mobile" },
+  { label: "Data", value: "data" },
   { label: "Game", value: "game" },
-  { label: "Handheld", value: "handheld" },
-  { label: "Network", value: "network" },
-  { label: "Computer", value: "computer" },
-  { label: "Arcade", value: "arcade" },
 ];
 
-const DIFFICULTY_COLORS: Record<string, string> = {
-  Beginner: "bg-green-500 text-white",
-  Intermediate: "bg-yellow-400 text-white",
-  Advanced: "bg-red-500 text-white",
+type Language = {
+  id: string;
+  name: string;
+  type: string;
+  yearCreated: number;
+  creator: string;
+  difficulty: string;
+  usedFor: string;
 };
+
+const BEGINNER_LANGUAGES = [
+  { id: "python", name: "Python" },
+  { id: "javascript", name: "JavaScript" },
+  { id: "basic", name: "BASIC" },
+];
 
 export default function HomePage() {
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("all");
+  const [typeFilter, setTypeFilter] = useState("all");
 
-  // Prepare the data
-  const allConsoles: any[] = Array.isArray(consoles) ? consoles : [];
-  const beginnerConsoles = useMemo(
-    () =>
-      allConsoles.filter(
-        (c) =>
-          (c.difficulty === "Beginner" || c.difficulty === "beginner") &&
-          (!search || c.name.toLowerCase().includes(search.toLowerCase())) &&
-          (filter === "all" || (c.type && c.type.toLowerCase() === filter))
-      ),
-    [search, filter, allConsoles]
-  );
-
-  const filteredConsoles = useMemo(
-    () =>
-      allConsoles.filter(
-        (c) =>
-          (filter === "all" || (c.type && c.type.toLowerCase() === filter)) &&
-          (!search || c.name.toLowerCase().includes(search.toLowerCase()))
-      ),
-    [search, filter, allConsoles]
-  );
+  // Only include languages with correct info for display
+  const filteredLanguages = useMemo(() => {
+    return (languages as Language[])
+      .filter((lang) => {
+        const matchName =
+          lang.name.toLowerCase().includes(search.toLowerCase());
+        const matchType =
+          typeFilter === "all"
+            ? true
+            : lang.type.toLowerCase() === typeFilter;
+        return matchName && matchType;
+      });
+  }, [search, typeFilter]);
 
   return (
-    <div
-      className="font-sans bg-zinc-50 dark:bg-black min-h-screen"
-      style={{
-        fontFamily: "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
-      }}
-    >
-      <main className="bg-white dark:bg-black min-h-screen py-32 px-16">
-        <div className="max-w-3xl mx-auto">
-          <section className="mb-14">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-zinc-900 dark:text-white mb-2">
-              Welcome to Console Learning
-            </h1>
-            <p className="text-lg text-zinc-600 dark:text-zinc-400 font-medium mb-8">
-              Explore different consoles to learn coding, programming, and hardware concepts.
-            </p>
-            <div className="mb-8">
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search consoles by name..."
-                className="w-full rounded-full px-5 py-3 border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-black text-zinc-900 dark:text-white text-base outline-none transition focus:ring-2 focus:ring-green-500"
+    <div className="font-sans bg-zinc-50 dark:bg-black min-h-screen">
+      <main className="bg-white dark:bg-black max-w-3xl mx-auto py-32 px-16 text-zinc-600 dark:text-zinc-400">
+        {/* Beginner Section */}
+        <section className="mb-16">
+          <h1
+            className="font-bold text-3xl md:text-4xl text-zinc-900 dark:text-white mb-2"
+            style={{ fontFamily: "var(--font-geist-sans, Inter, sans-serif)" }}
+          >
+            Learn to Code, Starting Simple
+          </h1>
+          <p className="mb-4 text-lg text-zinc-600 dark:text-zinc-400">
+            New to programming? Try these beginner-friendly languages:
+          </p>
+          <div className="flex gap-4 mb-2">
+            {BEGINNER_LANGUAGES.map((lang) => (
+              <Link
+                key={lang.id}
+                href={`/language/${lang.id}`}
+                className="rounded-full bg-zinc-100 dark:bg-zinc-900 px-6 py-2 font-semibold text-base text-zinc-900 dark:text-white transition hover:bg-zinc-200 dark:hover:bg-zinc-700"
                 style={{
-                  fontFamily: "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
+                  fontFamily:
+                    "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
                 }}
-                aria-label="Search consoles"
-              />
-            </div>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {FILTERS.map((f) => (
+              >
+                {lang.name}
+              </Link>
+            ))}
+          </div>
+          <div className="text-sm text-zinc-500 dark:text-zinc-500">
+            <span>
+              Python, JavaScript, and BASIC are great starting points for absolute beginners.
+            </span>
+          </div>
+        </section>
+
+        {/* Search/filter */}
+        <section className="mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              type="text"
+              placeholder="Search languages…"
+              className="w-full sm:w-72 rounded-full bg-zinc-100 dark:bg-zinc-900 px-5 py-2 text-base outline-none focus:bg-zinc-200 dark:focus:bg-zinc-800 transition shadow border-none"
+              style={{
+                fontFamily:
+                  "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
+              }}
+              aria-label="Search for a programming language"
+            />
+            <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
+              {TYPE_FILTERS.map((filter) => (
                 <button
-                  key={f.value}
-                  onClick={() => setFilter(f.value)}
-                  className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
-                    filter === f.value
-                      ? "bg-green-600 text-white"
-                      : "bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-800"
+                  key={filter.value}
+                  onClick={() => setTypeFilter(filter.value)}
+                  className={`rounded-full px-4 py-1 font-medium text-sm transition ${
+                    typeFilter === filter.value
+                      ? "bg-zinc-200 dark:bg-zinc-900 text-zinc-900 dark:text-white"
+                      : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700"
                   }`}
                   style={{
-                    fontFamily: "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
+                    fontFamily:
+                      "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
                   }}
                   type="button"
                 >
-                  {f.label}
+                  {filter.label}
                 </button>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {beginnerConsoles.length > 0 && (
-            <section className="mb-12">
-              <h2 className="text-2xl font-bold text-zinc-900 dark:text-white mb-3">
-                Recommended for New Coders
-              </h2>
-              <div className="grid gap-5 md:grid-cols-2 sm:grid-cols-1 mb-6">
-                {beginnerConsoles.map((c) => (
-                  <Link
-                    key={c.id}
-                    href={`/console/${c.id}`}
-                    className="block border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 bg-zinc-50 dark:bg-zinc-900 hover:shadow-md transition"
-                    style={{
-                      fontFamily: "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
-                    }}
-                  >
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-xl font-bold text-zinc-900 dark:text-white">{c.name}</span>
-                      <span
-                        className={`ml-2 px-3 py-1 rounded-full text-xs font-bold ${DIFFICULTY_COLORS[c.difficulty] || "bg-zinc-400 text-white"}`}
-                      >
-                        {c.difficulty}
-                      </span>
+        {/* Languages grid */}
+        <section>
+          {filteredLanguages.length === 0 ? (
+            <div className="text-center py-12 text-zinc-400">
+              No languages found.
+            </div>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2">
+              {filteredLanguages.map((lang) => (
+                <Link
+                  key={lang.id}
+                  href={`/language/${lang.id}`}
+                  className="block rounded-2xl border border-zinc-100 dark:border-zinc-900 bg-zinc-50 dark:bg-zinc-950 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition p-6"
+                  style={{
+                    fontFamily:
+                      "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
+                  }}
+                >
+                  <div className="flex justify-between items-baseline mb-2">
+                    <h2 className="font-bold text-xl text-zinc-900 dark:text-white truncate">
+                      {lang.name}
+                    </h2>
+                    <span
+                      className={`rounded-full px-3 py-0.5 text-xs font-medium ${
+                        lang.difficulty === "Beginner"
+                          ? "bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300"
+                          : lang.difficulty === "Intermediate"
+                          ? "bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300"
+                          : "bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300"
+                      }`}
+                      style={{
+                        fontFamily:
+                          "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
+                      }}
+                    >
+                      {lang.difficulty}
+                    </span>
+                  </div>
+                  <div className="mb-1 text-sm text-zinc-600 dark:text-zinc-400">
+                    {lang.usedFor}
+                  </div>
+                  <div className="flex justify-between items-center mt-3">
+                    <div>
+                      <div className="text-xs text-zinc-400">
+                        Year
+                      </div>
+                      <div className="font-medium text-zinc-700 dark:text-zinc-200">
+                        {lang.yearCreated}
+                      </div>
                     </div>
-                    <div className="text-zinc-600 dark:text-zinc-400 text-sm">
-                      <span className="mr-4">Year: {c.year}</span>
-                      <span>Type: {c.type?.charAt(0).toUpperCase() + c.type?.slice(1)}</span>
+                    <div>
+                      <div className="text-xs text-zinc-400">
+                        Creator
+                      </div>
+                      <div className="font-medium text-zinc-700 dark:text-zinc-200 truncate max-w-[120px]">
+                        {lang.creator}
+                      </div>
                     </div>
-                  </Link>
-                ))}
-              </div>
-            </section>
+                    <div>
+                      <div className="text-xs text-zinc-400">
+                        Type
+                      </div>
+                      <div className="font-medium text-zinc-700 dark:text-zinc-200 capitalize">
+                        {lang.type}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           )}
-
-          <section>
-            <h2 className="text-2xl font-bold text-zinc-900 dark:text-white mb-3">All Consoles</h2>
-            {filteredConsoles.length === 0 ? (
-              <div className="py-12 text-center text-zinc-600 dark:text-zinc-400 text-base">
-                No consoles found matching your criteria.
-              </div>
-            ) : (
-              <div className="grid gap-6 md:grid-cols-2 sm:grid-cols-1">
-                {filteredConsoles.map((c) => (
-                  <Link
-                    key={c.id}
-                    href={`/console/${c.id}`}
-                    className="block border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 bg-zinc-50 dark:bg-zinc-900 hover:shadow-md transition"
-                    style={{
-                      fontFamily: "var(--font-geist-sans, Inter, ui-sans-serif, system-ui, sans-serif)",
-                    }}
-                  >
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-lg font-bold text-zinc-900 dark:text-white">{c.name}</span>
-                      <span
-                        className={`ml-2 px-3 py-1 rounded-full text-xs font-bold ${DIFFICULTY_COLORS[c.difficulty] || "bg-zinc-400 text-white"}`}
-                      >
-                        {c.difficulty}
-                      </span>
-                    </div>
-                    <div className="text-zinc-600 dark:text-zinc-400 text-sm">
-                      <span className="mr-4">Year: {c.year}</span>
-                      <span>Type: {c.type?.charAt(0).toUpperCase() + c.type?.slice(1)}</span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </section>
-        </div>
+        </section>
       </main>
     </div>
   );

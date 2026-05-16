@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
-import consoles from "@/data/consoles.json";
+import consoles from "@/data/languages.json";
 
 // Color mapping for difficulty badge
 const DIFFICULTY_COLORS: Record<string, string> = {
