@@ -1,48 +1,125 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import consoles from '@/data/consoles.json';
+import React, { useState, useMemo } from "react";
+import consoles from "@/data/consoles.json";
+import { useParams } from "next/navigation";
 
-// Lint: some next/navigation exports must be used as hooks, not as props
-import { useParams } from 'next/navigation';
-
-const TAB_OVERVIEW = 'Overview';
-const TAB_CODE = 'Code Examples';
-const TAB_RESOURCES = 'Resources';
-
+// --- Tab Names ---
+const TAB_OVERVIEW = "Overview";
+const TAB_CODE = "Code Examples";
+const TAB_RESOURCES = "Resources";
 const TABS = [TAB_OVERVIEW, TAB_CODE, TAB_RESOURCES];
 
-const DIFFICULTY_COLORS: Record<string, string> = {
-  Beginner: 'bg-green-100 text-green-700 border-green-300',
-  Intermediate: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-  Advanced: 'bg-red-100 text-red-700 border-red-300',
+// --- Difficulty Styling ---
+const DIFFICULTY_BADGES: Record<
+  string,
+  { bg: string; text: string; border: string }
+> = {
+  Beginner: {
+    bg: "bg-green-500",
+    text: "text-white",
+    border: "border-green-400",
+  },
+  Intermediate: {
+    bg: "bg-yellow-400",
+    text: "text-black",
+    border: "border-yellow-500",
+  },
+  Advanced: {
+    bg: "bg-red-500",
+    text: "text-white",
+    border: "border-red-400",
+  },
 };
 
-const DIFFICULTY_DARK_COLORS: Record<string, string> = {
-  Beginner: 'bg-green-900 text-green-200 border-green-800',
-  Intermediate: 'bg-yellow-700 text-yellow-50 border-yellow-700',
-  Advanced: 'bg-red-900 text-red-200 border-red-900',
-};
+function DifficultyBadge({ difficulty }: { difficulty: string }) {
+  const { bg, text, border } =
+    DIFFICULTY_BADGES[difficulty] ||
+    DIFFICULTY_BADGES["Intermediate"];
+  return (
+    <span
+      className={`inline-block px-3 py-1 rounded-full text-xs font-bold shadow border ${bg} ${text} ${border}`}
+      title={"Difficulty: " + difficulty}
+    >
+      {difficulty}
+    </span>
+  );
+}
 
-function getDifficultyColor(difficulty: string, dark: boolean) {
-  if (dark) {
-    return DIFFICULTY_DARK_COLORS[difficulty] || DIFFICULTY_DARK_COLORS['Intermediate'];
+// --- Copy Button ---
+function CopyButton({ value }: { value: string }) {
+  const [copied, setCopied] = useState(false);
+
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1200);
+    } catch {}
   }
-  return DIFFICULTY_COLORS[difficulty] || DIFFICULTY_COLORS['Intermediate'];
+
+  return (
+    <button
+      className="ml-2 px-2 py-0.5 rounded text-zinc-200 bg-zinc-800 hover:bg-zinc-700 text-xs border border-zinc-700 transition"
+      onClick={handleCopy}
+      title="Copy code"
+      type="button"
+    >
+      {copied ? "Copied!" : "Copy"}
+    </button>
+  );
 }
 
-function getConsoleById(id: string) {
-  return consoles.find((c: any) => c.id === id);
+// --- Simple Code Block ---
+function SimpleCodeBlock({ code }: { code: string }) {
+  return (
+    <pre className="bg-zinc-900 text-zinc-100 rounded-xl p-4 text-sm overflow-x-auto font-mono border border-zinc-800 mt-2 mb-2 whitespace-pre">
+      <code>{code}</code>
+    </pre>
+  );
 }
 
+// --- Explanation Toggle ---
+function ExplanationToggle({
+  explanation,
+  code,
+}: {
+  explanation: string[] | undefined;
+  code: string;
+}) {
+  const [show, setShow] = useState(false);
+  if (!explanation) return null;
+  return (
+    <div className="mt-2">
+      <button
+        className="text-green-400 hover:underline text-sm font-medium"
+        onClick={() => setShow((s) => !s)}
+        type="button"
+      >
+        {show ? "Hide line by line explanation" : "Show line by line explanation"}
+      </button>
+      {show && (
+        <ul className="bg-zinc-950 text-zinc-200 rounded-lg mt-2 p-3 text-sm list-disc list-inside border border-zinc-800">
+          {explanation.map((line, idx) => (
+            <li key={idx} className="mb-1 last:mb-0">{line}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+// --- Hardware Table ---
 function HardwareTable({ specs }: { specs: Record<string, string> }) {
   return (
     <table className="w-full mt-2 border-separate border-spacing-y-1 text-left">
       <tbody>
         {Object.entries(specs).map(([k, v]) => (
           <tr key={k}>
-            <th className="pr-4 text-zinc-900 dark:text-zinc-100 font-medium">{k}</th>
-            <td className="text-zinc-600 dark:text-zinc-400">{v}</td>
+            <th className="pr-4 text-zinc-900 dark:text-zinc-100 font-medium">
+              {k}
+            </th>
+            <td className="text-zinc-700 dark:text-zinc-400">{v}</td>
           </tr>
         ))}
       </tbody>
@@ -50,287 +127,260 @@ function HardwareTable({ specs }: { specs: Record<string, string> }) {
   );
 }
 
-// Simple syntax highlight for code (demo purposes)
-function SimpleCodeBlock({ code }: { code: string }) {
+// --- Best Language For Beginners Helper ---
+function BestLanguageTips({ consoleObj }: { consoleObj: any }) {
+  if (!consoleObj.language) return null;
   return (
-    <pre className="rounded-xl mb-2 bg-zinc-900 text-zinc-50 text-sm px-4 py-3 font-mono overflow-x-auto">
-      <code>{code}</code>
-    </pre>
+    <div className="my-4">
+      <div className="font-medium text-zinc-900 dark:text-zinc-100 mb-1">
+        Beginner Tip
+      </div>
+      <div className="text-zinc-700 dark:text-zinc-300 text-sm">
+        You will learn{" "}
+        <span className="font-semibold">{consoleObj.language}</span>{" "}
+        programming with this console!
+      </div>
+    </div>
   );
 }
 
-function CopyButton({ value }: { value: string }) {
-  const [copied, setCopied] = React.useState(false);
-  return (
-    <button
-      onClick={() => {
-        navigator.clipboard.writeText(value);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1500);
-      }}
-      className="ml-2 inline-flex items-center px-2.5 py-1 text-xs rounded-full bg-zinc-700 text-zinc-100 hover:bg-zinc-800 transition-colors"
-    >
-      {copied ? 'Copied!' : 'Copy'}
-    </button>
-  );
-}
-
-function ExplanationToggle({
-  explanation,
-  code,
+// --- Website Cards ---
+function ResourceCard({
+  title,
+  url,
+  desc,
 }: {
-  explanation: string[];
-  code: string;
+  title: string;
+  url: string;
+  desc?: string;
 }) {
-  const [show, setShow] = React.useState(false);
-  const lines = code.split('\n');
   return (
-    <div>
-      <button
-        onClick={() => setShow((v) => !v)}
-        className="mb-2 text-xs px-2.5 py-1 hover:bg-zinc-700 rounded-full transition-colors bg-zinc-800 text-zinc-100"
-      >
-        {show ? 'Hide Explanation' : 'Show Line-by-Line Explanation'}
-      </button>
-      {show && (
-        <div className="mt-1 bg-zinc-800/70 rounded-xl text-zinc-300 text-sm divide-y divide-zinc-700">
-          {lines.map((line, idx) => (
-            <div key={idx} className="flex items-start px-4 py-1.5 gap-3">
-              <div className="font-mono text-zinc-100 min-w-[36px]">{line}</div>
-              <div className="flex-1">{explanation[idx] ?? ''}</div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block bg-zinc-800 rounded-xl px-5 py-4 transition hover:bg-zinc-700 border border-zinc-700 text-zinc-100 font-medium mb-3"
+    >
+      <div className="font-semibold">{title}</div>
+      {desc && <div className="text-zinc-400 text-sm mt-1">{desc}</div>}
+      <div className="mt-2 text-green-400 text-xs">Visit Website</div>
+    </a>
   );
 }
 
+// --- Resources Tab ---
 function ResourcesTab({ consoleObj }: { consoleObj: any }) {
+  // guess best terms for search
+  const ytQuery = encodeURIComponent(
+    [consoleObj.name, consoleObj.language, "tutorial"].filter(Boolean).join(" ")
+  );
+  const ytUrl = `https://www.youtube.com/results?search_query=${ytQuery}`;
+
+  const websites: Array<{ title: string; url: string; desc?: string }> =
+    (consoleObj.resources && Array.isArray(consoleObj.resources)
+      ? consoleObj.resources
+      : []) as any;
+
   return (
-    <div className="flex flex-col gap-7 w-full">
-      <div className="mb-2">
-        <span className="block mb-3 py-2 px-3 rounded-xl bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-200 font-medium text-sm">
-          💡 Tip: Start with the YouTube videos before reading the docs!
-        </span>
-      </div>
-      <div>
-        <a
-          href={`https://www.youtube.com/results?search_query=${encodeURIComponent(
-            consoleObj.youtubeQuery || consoleObj.name
-          )}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl font-medium shadow transition-colors"
+    <div className="flex flex-col gap-5">
+      <a
+        href={ytUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex w-fit items-center gap-2 bg-green-700 hover:bg-green-600 text-white font-bold rounded-lg px-5 py-2 text-base transition mb-4"
+      >
+        <svg
+          height="1.25em"
+          viewBox="0 0 24 24"
+          fill="none"
+          className="inline -ml-1"
         >
-          <svg
-            width={22}
-            height={22}
-            className="mr-2"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-          >
-            <path d="M21.8 8.001s-.2-1.398-.801-2.018c-.748-.802-1.587-.807-1.972-.854C16.202 5 12 5 12 5h-.014s-4.202 0-7.027.129c-.386.047-1.224.052-1.972.854C2.386 6.603 2.2 8.001 2.2 8.001S2 9.61 2 11.222v1.556C2 14.39 2.2 16 2.2 16s.2 1.398.801 2.018c.748.802 1.73.776 2.173.861C8.007 19 12 19 12 19s4.202 0 7.027-.121c.386-.047 1.224-.052 1.972-.854C21.614 17.397 21.8 16 21.8 16s.2-1.611.2-3.222v-1.556C22 9.61 21.8 8.001 21.8 8.001zM9.754 15.017v-6.034L15.273 12l-5.519 3.017z" />
-          </svg>
-          Search on YouTube
-        </a>
-      </div>
-      <div className="flex flex-col gap-6">
-        {(consoleObj.websites ?? []).map((site: any) => (
-          <div
-            key={site.url}
-            className="rounded-xl bg-zinc-100 dark:bg-zinc-900 p-5 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col gap-3"
-          >
-            <div className="text-lg font-semibold text-zinc-800 dark:text-zinc-50">
-              {site.title}
-            </div>
-            <div className="text-zinc-600 dark:text-zinc-400">{site.description}</div>
-            <a
-              href={site.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-zinc-800 dark:text-zinc-100 underline font-medium hover:text-blue-600 transition"
-            >
-              Visit &rarr;
-            </a>
-          </div>
-        ))}
+          <circle cx="12" cy="12" r="12" fill="currentColor" />
+          <polygon
+            fill="#fff"
+            points="10,8 16,12 10,16"
+          />
+        </svg>
+        YouTube Tutorials
+      </a>
+      <div>
+        {websites && websites.length > 0 ? (
+          websites.map((r, idx) => (
+            <ResourceCard
+              key={idx}
+              title={r.title}
+              url={r.url}
+              desc={r.desc}
+            />
+          ))
+        ) : (
+          <div className="text-zinc-400 text-sm mt-4">No official resources available.</div>
+        )}
       </div>
     </div>
   );
 }
 
-function DifficultyBadge({ difficulty }: { difficulty: string }) {
-  // Use system color scheme (dark/light)
-  const [isDark, setIsDark] = React.useState(false);
-  React.useEffect(() => {
-    // SSR safe
-    if (typeof window !== 'undefined') {
-      setIsDark(window.matchMedia?.('(prefers-color-scheme: dark)').matches);
-    }
-  }, []);
-  const bg =
-    getDifficultyColor(
-      difficulty,
-      isDark
-    ) +
-    ' px-2.5 py-1 rounded-full text-xs border font-semibold inline-block ml-3 shadow-sm select-none';
-  let label: string = difficulty;
-  if (difficulty.toLowerCase() === 'beginner') label = 'Beginner';
-  else if (difficulty.toLowerCase() === 'intermediate') label = 'Intermediate';
-  else if (difficulty.toLowerCase() === 'advanced') label = 'Advanced';
-  return <span className={bg}>{label}</span>;
-}
-
-function Page() {
+// --- Main Page ---
+export default function ConsoleDetailPage() {
   const params = useParams();
-  const id = Array.isArray(params?.id) ? params.id[0] : params?.id;
-  const consoleObj = getConsoleById(id || '');
+  const id = typeof params?.id === "string"
+    ? params.id
+    : Array.isArray(params?.id) && params.id.length > 0
+    ? params.id[0]
+    : "";
 
-  // Fallback UI if not found: just a blank page – no error.
-  if (!consoleObj) {
-    return (
-      <div className="font-sans min-h-screen bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center" />
-    );
+  const consoleObj = useMemo(
+    () =>
+      (consoles as any[]).find(
+        (c) => String(c.id).toLowerCase() === String(id).toLowerCase()
+      ) ?? ({}),
+    [id]
+  );
+
+  const [tab, setTab] = useState(TAB_OVERVIEW);
+
+  // Theme — for badges (detect dark mode simply)
+  const isDark =
+    typeof window !== "undefined"
+      ? window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      : false;
+
+  if (!consoleObj || !consoleObj.id) {
+    // Instead of a 404, just show blank page.
+    return <main className="min-h-screen bg-zinc-900" />;
   }
 
-  const [tab, setTab] = useState<typeof TABS[number]>(TABS[0]);
-
-  const showBeginnerBanner =
-    (consoleObj.difficulty || '').toLowerCase() === 'beginner';
-
   return (
-    <div className="font-sans min-h-screen bg-zinc-50 dark:bg-zinc-900 py-10 flex flex-col items-center">
-      <div className="w-full max-w-2xl rounded-xl bg-white dark:bg-zinc-950 shadow p-8">
-
-        {/* Beginner banner */}
-        {showBeginnerBanner && (
-          <div className="mb-4 rounded-xl bg-green-100 dark:bg-green-900 border border-green-300 dark:border-green-800 text-green-800 dark:text-green-100 px-4 py-2 font-semibold text-center shadow">
-            <span role="img" aria-label="sparkles" className="mr-1">✨</span>
-            This is a great starting point for new coders!
+    <main className="min-h-screen bg-zinc-900 px-0 py-8 text-zinc-100 font-sans flex flex-col items-center">
+      {/* Banner for Beginner */}
+      {consoleObj.difficulty === "Beginner" && (
+        <div className="mb-6 w-full max-w-2xl">
+          <div className="flex items-center justify-between bg-green-600 rounded-xl px-6 py-5 shadow-lg">
+            <span className="text-lg font-bold text-white flex items-center gap-2">
+              🍀 Great starting point for beginners!
+            </span>
+            <DifficultyBadge difficulty={consoleObj.difficulty} />
           </div>
-        )}
-
-        {/* Header */}
-        <div className="flex gap-4 items-center mb-3">
-          <span className="text-4xl">{consoleObj.emoji}</span>
-          <span className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
-            {consoleObj.name}
-          </span>
-          <DifficultyBadge difficulty={consoleObj.difficulty || 'Intermediate'} />
         </div>
-        {/* Tab navigation */}
-        <div className="flex gap-4 mb-6 border-b border-zinc-200 dark:border-zinc-800">
-          {TABS.map((cur) => (
+      )}
+      {/* Title Row */}
+      <div className="w-full max-w-2xl mb-3 flex items-center gap-3">
+        <span className="text-4xl mr-2">{consoleObj.emoji}</span>
+        <h1 className="text-3xl md:text-4xl font-bold text-zinc-50 mr-4">{consoleObj.name}</h1>
+        {consoleObj.difficulty && (
+          <DifficultyBadge difficulty={consoleObj.difficulty} />
+        )}
+      </div>
+      {/* Sub info row */}
+      <div className="w-full max-w-2xl flex flex-wrap gap-4 items-center mb-5 text-zinc-400">
+        <span>
+          <span className="font-medium text-zinc-200">Type:</span> {consoleObj.type}
+        </span>
+        <span>
+          <span className="font-medium text-zinc-200">Year:</span> {consoleObj.year}
+        </span>
+        <span>
+          <span className="font-medium text-zinc-200">CPU:</span> {typeof consoleObj.cpu === "string" ? consoleObj.cpu : Object.values(consoleObj.cpu ?? {}).join(", ")}
+        </span>
+        <span>
+          <span className="font-medium text-zinc-200">RAM:</span> {consoleObj.ram}
+        </span>
+      </div>
+      {/* Tab Selector */}
+      <div className="w-full max-w-2xl mb-2">
+        <div className="flex space-x-3">
+          {TABS.map((t) => (
             <button
-              key={cur}
-              onClick={() => setTab(cur)}
-              className={`text-base px-3 py-2 transition font-medium border-b-2 ${
-                tab === cur
-                  ? 'border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100'
-                  : 'border-transparent text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200'
+              key={t}
+              className={`px-5 py-2 rounded-xl font-medium text-base transition flex-1 shadow ${
+                tab === t
+                  ? "bg-green-500 text-white"
+                  : "bg-zinc-800 text-zinc-200 hover:bg-zinc-700"
               }`}
+              onClick={() => setTab(t)}
+              type="button"
             >
-              {cur}
+              {t}
             </button>
           ))}
         </div>
-
-        {/* Tab Panels */}
-        <div className="mt-4">
-          {tab === TAB_OVERVIEW && (
-            <div>
-              <div className="mb-4">
-                <div className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
-                  {consoleObj.description}
-                </div>
-                {consoleObj.funFact && (
-                  <div className="italic text-zinc-600 dark:text-zinc-400 mb-2">
-                    Fun Fact: {consoleObj.funFact}
-                  </div>
-                )}
-
-                {/* Best For section */}
-                {consoleObj.type && (
-                  <div className="my-4">
-                    <div className="font-medium text-zinc-900 dark:text-zinc-100 mb-1">
-                      Best For
-                    </div>
-                    <div className="text-zinc-700 dark:text-zinc-300">
-                      If you're a beginner, you'll learn <span className="font-semibold">{consoleObj.type}</span> programming with this console.
-                    </div>
-                  </div>
-                )}
-
-                {consoleObj.cpu && (
-                  <div>
-                    <span className="block font-semibold mt-4 text-zinc-900 dark:text-zinc-50">
-                      Hardware Specs
-                    </span>
-                    {/* If cpu is a string, display as simple text. If it's an object, show hardware table. */}
-                    {typeof consoleObj.cpu === 'string' || !consoleObj.cpu ? (
-                      <div className="mt-2 text-zinc-700 dark:text-zinc-300">{consoleObj.cpu}</div>
-                    ) : (
-               
-                      <HardwareTable specs={consoleObj.cpu} />
-                    )}
-                  </div>
-                )}
-           
-              </div>
-            </div>
-          )}
-
-          {tab === TAB_CODE && (
-            <div className="flex flex-col gap-6">
-              {(consoleObj.codingExamples ?? []).map(
-                (ex: any, idx: number) => (
-                  <div key={idx} className="rounded-xl bg-zinc-950 border border-zinc-800 p-5">
-                    {/* Friendly intro message */}
-                    <div className="mb-2">
-                      <div className="flex items-center">
-                        <span className="font-semibold text-zinc-100">
-                          {ex.title || `Example ${idx + 1}`}
-                        </span>
-                        <CopyButton value={ex.code || ''} />
-                      </div>
-                      {ex.friendly ?? (
-                        <div className="mt-1 text-zinc-300 dark:text-zinc-300 text-sm">
-                          {ex.friendlyDescription ||
-                            'Here is a simple example that shows what this code does, explained in everyday language.'}
-                        </div>
-                      )}
-                      {/* Prefer ex.friendlyDescription if present; fallback to ex.friendly */}
-                      {ex.friendlyDescription ? (
-                        <div className="mt-1 text-zinc-300 dark:text-zinc-300 text-sm">
-                          {ex.friendlyDescription}
-                        </div>
-                      ) : ex.friendly && (
-                        <div className="mt-1 text-zinc-300 dark:text-zinc-300 text-sm">
-                          {ex.friendly}
-                        </div>
-                      )}
-                    </div>
-                    <SimpleCodeBlock code={ex.code} />
-                    {ex.explanation && ex.explanation.length > 0 && (
-                      <ExplanationToggle
-                        explanation={ex.explanation}
-                        code={ex.code || ''}
-                      />
-                    )}
-                  </div>
-                )
-              )}
-            </div>
-          )}
-
-          {tab === TAB_RESOURCES && (
-            <ResourcesTab consoleObj={consoleObj} />
-          )}
-        </div>
       </div>
-    </div>
+      {/* Panel Area */}
+      <div className="w-full max-w-2xl bg-zinc-800 rounded-xl p-7 min-h-[340px] mb-10 border border-zinc-700 mt-2">
+        {tab === TAB_OVERVIEW && (
+          <div>
+            <div className="mb-3 text-lg font-semibold text-zinc-50">
+              {consoleObj.description}
+            </div>
+            {consoleObj.funFact && (
+              <div className="italic text-zinc-400 mb-2">
+                Fun Fact: {consoleObj.funFact}
+              </div>
+            )}
+            {/* Beginner Tip */}
+            <BestLanguageTips consoleObj={consoleObj} />
+            {consoleObj.cpu && (
+              <div>
+                <span className="block font-semibold mt-4 text-zinc-50">
+                  Hardware Specs
+                </span>
+                {/* If cpu is a string, display as simple text. If it's an object, show hardware table. */}
+                {typeof consoleObj.cpu === "string" || !consoleObj.cpu ? (
+                  <div className="mt-2 text-zinc-300">{consoleObj.cpu}</div>
+                ) : (
+                  <HardwareTable specs={consoleObj.cpu} />
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {tab === TAB_CODE && (
+          <div className="flex flex-col gap-6">
+            {(consoleObj.codingExamples ?? []).length === 0 && (
+              <div className="text-zinc-400 text-base">
+                No beginner coding examples available.
+              </div>
+            )}
+            {(consoleObj.codingExamples ?? []).map((ex: any, idx: number) => (
+              <div
+                key={idx}
+                className="rounded-xl bg-zinc-950 border border-zinc-800 p-5"
+              >
+                <div className="mb-2">
+                  <div className="flex items-center">
+                    <span className="font-semibold text-zinc-100">
+                      {ex.title || `Example ${idx + 1}`}
+                    </span>
+                    <CopyButton value={ex.code || ""} />
+                  </div>
+                  <div className="mt-1 text-zinc-300 text-sm">
+                    {/* Prefer friendlyDescription, then friendly, then generic */}
+                    {ex.friendlyDescription
+                      ? ex.friendlyDescription
+                      : ex.friendly
+                      ? ex.friendly
+                      : "This code shows an example of what you can make as a beginner with this console."}
+                  </div>
+                </div>
+                <SimpleCodeBlock code={ex.code} />
+                {ex.explanation && ex.explanation.length > 0 && (
+                  <ExplanationToggle
+                    explanation={ex.explanation}
+                    code={ex.code || ""}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {tab === TAB_RESOURCES && (
+          <ResourcesTab consoleObj={consoleObj} />
+        )}
+      </div>
+    </main>
   );
 }
-
-export default Page;
