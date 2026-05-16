@@ -6,161 +6,59 @@
     "year": 1991,
     "creator": "Guido van Rossum",
     "difficulty": "Beginner",
-    "description": "Python is a versatile high-level scripting language with a simple, readable syntax. It is widely used for web development, data science, automation, and education. Python's robust standard library and community support make it a preferred language for learners and professionals.",
-    "usedFor": "Web applications (Django, Flask), data analysis (Pandas, NumPy), artificial intelligence, scripting, automation, and scientific research.",
-    "funFact": "Python was named after the British comedy group Monty Python, not after the snake.",
+    "description": "Python is a high-level, interpreted programming language known for its readability and concise syntax. It is used by professionals and beginners worldwide for web development, scientific computing, automation, and more.",
+    "usedFor": "Web development, data science, machine learning, scripting, automation, desktop applications.",
+    "funFact": "Python is named after the British comedy group 'Monty Python', not the snake.",
     "color": "#3572A5",
+    "terminalCommands": {
+      "windows": "python hello.py",
+      "mac": "python3 hello.py",
+      "linux": "python3 hello.py",
+      "install": "Download Python from https://python.org and add it to your PATH. Mac and Linux usually come with Python pre-installed, but you can upgrade via 'brew install python' (Mac) or 'sudo apt install python3' (Ubuntu).",
+      "runExample": "Hello, world!"
+    },
     "topics": [
       {
         "id": "variables",
         "title": "Variables",
         "difficulty": "Beginner",
-        "explanation": "Variables are containers for storing data values. In Python, you don't need to declare the type of a variable before using it; Python will infer it automatically.",
+        "explanation": "Variables store values in a program. In Python, you declare a variable by assigning it a value. There is no need to specify the type explicitly.",
         "keyConcepts": [
-          { "term": "Assignment", "definition": "Setting a variable to a value using the '=' operator." },
-          { "term": "Type Inference", "definition": "Python determines the type of variable at runtime." }
+          { "term": "Assignment", "definition": "Storing a value in a variable using =" },
+          { "term": "Type Inference", "definition": "Python determines type automatically based on value." }
         ],
-        "codeExample": "x = 10\ny = 'Hello'\nz = 3.14\nprint(x, y, z)",
+        "codeExample": "x = 10\ny = 'apple'\nprint(x, y)",
+        "expectedOutput": "10 apple",
+        "starterCode": "name = \nprint(name)",
+        "solution": "name = 'Sam'\nprint(name)",
         "commonMistakes": [
-          "Using undeclared variables.",
-          "Confusing '=' (assignment) with '==' (equality)."
+          "Using a variable before assignment.",
+          "Trying to declare variable types as in other languages."
         ],
-        "challenge": "Create a variable called 'name' and set it to your first name. Print it.",
-        "hint": "Use the assignment operator '=' and the print() function.",
-        "solution": "name = 'Alice'\nprint(name)",
-        "nextTopic": "lists"
+        "challenge": "Create a variable named 'age' set to 25 and print it.",
+        "hint": "Assign age to 25, then print(age)",
+        "terminalNote": "Save as hello.py and run with 'python hello.py'"
       },
       {
         "id": "lists",
         "title": "Lists",
         "difficulty": "Beginner",
-        "explanation": "Lists are ordered collections of items that can be changed (mutable). They're used to store sequences of data.",
+        "explanation": "Lists store ordered collections of items, which can be of different types. Lists are mutable and use square brackets.",
         "keyConcepts": [
-          { "term": "Mutable", "definition": "The content can be changed after creation." },
-          { "term": "Indexing", "definition": "Accessing elements by their position in the list." }
+          { "term": "Mutable", "definition": "Content can be changed after creation." },
+          { "term": "Index", "definition": "Position of an item, starting at 0." }
         ],
-        "codeExample": "fruits = ['apple', 'banana', 'cherry']\nprint(fruits[1])  # Output: banana",
+        "codeExample": "numbers = [1, 2, 3]\nprint(numbers[1])",
+        "expectedOutput": "2",
+        "starterCode": "colors = ['red', 'green', 'yellow']\n# print the last item",
+        "solution": "colors = ['red', 'green', 'yellow']\nprint(colors[-1])",
         "commonMistakes": [
-          "Indexing out of range.",
-          "Using incorrect syntax for lists."
+          "IndexError: list index out of range.",
+          "Using parentheses instead of brackets."
         ],
-        "challenge": "Create a list of three numbers and print the last one.",
-        "hint": "Use square brackets and remember index -1 gives the last element.",
-        "solution": "numbers = [7, 5, 3]\nprint(numbers[-1])",
-        "nextTopic": "dictionaries"
-      },
-      {
-        "id": "dictionaries",
-        "title": "Dictionaries",
-        "difficulty": "Beginner",
-        "explanation": "Dictionaries store key-value pairs. They're useful for associating a value with a unique key.",
-        "keyConcepts": [
-          { "term": "Key", "definition": "The unique identifier in a dictionary." },
-          { "term": "Value", "definition": "The data or object associated with a key." }
-        ],
-        "codeExample": "person = {'name': 'Bob', 'age': 25}\nprint(person['name'])",
-        "commonMistakes": [
-          "Accessing keys that do not exist.",
-          "Using mutable types (like lists) as dictionary keys."
-        ],
-        "challenge": "Create a dictionary for a car with keys 'make' and 'year', then print the year.",
-        "hint": "Use curly braces and strings for the keys.",
-        "solution": "car = {'make': 'Toyota', 'year': 2022}\nprint(car['year'])",
-        "nextTopic": "functions"
-      },
-      {
-        "id": "functions",
-        "title": "Functions",
-        "difficulty": "Beginner",
-        "explanation": "Functions are reusable blocks of code that perform a task. They help organize code and avoid repetition.",
-        "keyConcepts": [
-          { "term": "Defining", "definition": "Creating a function with the 'def' keyword." },
-          { "term": "Calling", "definition": "Executing the function." }
-        ],
-        "codeExample": "def greet(name):\n    print('Hello,', name)\ngreet('Alice')",
-        "commonMistakes": [
-          "Forgetting to indent the function body.",
-          "Forgetting to use parentheses when calling."
-        ],
-        "challenge": "Write a function that takes one number as input and prints it doubled.",
-        "hint": "Use def and print(num * 2) inside the function.",
-        "solution": "def double(num):\n    print(num * 2)\ndouble(5)",
-        "nextTopic": "classes"
-      },
-      {
-        "id": "classes",
-        "title": "Classes",
-        "difficulty": "Intermediate",
-        "explanation": "Classes let you build your own types of objects. They group together variables (attributes) and functions (methods) in a logical way.",
-        "keyConcepts": [
-          { "term": "Class", "definition": "A blueprint for objects." },
-          { "term": "Instance", "definition": "An individual object of a class." }
-        ],
-        "codeExample": "class Dog:\n    def __init__(self, name):\n        self.name = name\nbuddy = Dog('Buddy')\nprint(buddy.name)",
-        "commonMistakes": [
-          "Forgetting 'self' as the first parameter.",
-          "Not using __init__ for initialization."
-        ],
-        "challenge": "Create a class \"Book\" with a title attribute, and print the title.",
-        "hint": "Define __init__(self, title) and set self.title.",
-        "solution": "class Book:\n    def __init__(self, title):\n        self.title = title\nb = Book('Python 101')\nprint(b.title)",
-        "nextTopic": "file-handling"
-      },
-      {
-        "id": "file-handling",
-        "title": "File Handling",
-        "difficulty": "Intermediate",
-        "explanation": "Python can read and write files. This is helpful for saving and loading data from disk.",
-        "keyConcepts": [
-          { "term": "Open", "definition": "Use open() function to access files." },
-          { "term": "Read/Write", "definition": "Specify mode: 'r' to read, 'w' to write." }
-        ],
-        "codeExample": "with open('sample.txt', 'w') as f:\n    f.write('Hello World!')",
-        "commonMistakes": [
-          "Forgetting to close files (unless using with statement).",
-          "Incorrect file paths."
-        ],
-        "challenge": "Write 'Data' into a file named 'data.txt'.",
-        "hint": "Use with open('data.txt', 'w') as f: f.write('Data')",
-        "solution": "with open('data.txt', 'w') as f:\n    f.write('Data')",
-        "nextTopic": "list-comprehension"
-      },
-      {
-        "id": "list-comprehension",
-        "title": "List Comprehension",
-        "difficulty": "Intermediate",
-        "explanation": "List comprehensions provide a concise way to create lists. They are more readable and faster than loops for making new lists.",
-        "keyConcepts": [
-          { "term": "Comprehension", "definition": "A compact way to generate data structures." }
-        ],
-        "codeExample": "squares = [x*x for x in range(5)]\nprint(squares)",
-        "commonMistakes": [
-          "Misunderstanding the order of the for and if clauses.",
-          "Forgetting brackets [] around the expression."
-        ],
-        "challenge": "Use a list comprehension to create a list of numbers from 1 to 5, each multiplied by 3.",
-        "hint": "Syntax: [expression for variable in iterable]",
-        "solution": "result = [x * 3 for x in range(1, 6)]\nprint(result)",
-        "nextTopic": "decorators"
-      },
-      {
-        "id": "decorators",
-        "title": "Decorators",
-        "difficulty": "Advanced",
-        "explanation": "Decorators are special functions that can modify other functions. They're used to add functionality without changing the original code.",
-        "keyConcepts": [
-          { "term": "Decorator", "definition": "A function that modifies the behavior of another function." },
-          { "term": "@ Syntax", "definition": "Use '@' before the decorator function." }
-        ],
-        "codeExample": "def my_decorator(func):\n    def wrapper():\n        print('Before')\n        func()\n        print('After')\n    return wrapper\n@my_decorator\ndef say_hi():\n    print('Hi!')\nsay_hi()",
-        "commonMistakes": [
-          "Forgetting to return the wrapper function.",
-          "Not using @ syntax correctly."
-        ],
-        "challenge": "Write a decorator that prints 'Start' before the function and 'End' after.",
-        "hint": "Follow the wrapper pattern and add print statements before and after.",
-        "solution": "def deco(func):\n    def wrap():\n        print('Start')\n        func()\n        print('End')\n    return wrap\n@deco\ndef main():\n    print('Doing work')\nmain()",
-        "nextTopic": null
+        "challenge": "Print the first item in the list: words = ['hi', 'bye']",
+        "hint": "Use words[0]",
+        "terminalNote": "Save code in hello.py, run in terminal as above."
       }
     ],
     "resources": {
@@ -179,161 +77,59 @@
     "year": 1995,
     "creator": "Brendan Eich",
     "difficulty": "Beginner",
-    "description": "JavaScript is the language of the web, running in all modern browsers. It's used to create interactive websites and web applications. JavaScript now also powers backend servers and desktop apps.",
-    "usedFor": "Client-side web development, web applications, server-side scripting (Node.js), mobile app development, desktop apps.",
-    "funFact": "JavaScript was created in just 10 days at Netscape.",
+    "description": "JavaScript is the standard scripting language of the web, running in all major browsers and increasingly on servers via Node.js. It enables interactivity, dynamic content, and responsive UI design.",
+    "usedFor": "Web development (frontend and backend), mobile app development, desktop applications, automation.",
+    "funFact": "JavaScript was developed in just 10 days and originally called Mocha.",
     "color": "#F7DF1E",
+    "terminalCommands": {
+      "windows": "node hello.js",
+      "mac": "node hello.js",
+      "linux": "node hello.js",
+      "install": "Download Node.js from https://nodejs.org and install to run JavaScript outside browsers.",
+      "runExample": "Hello, world!"
+    },
     "topics": [
       {
         "id": "variables",
         "title": "Variables",
         "difficulty": "Beginner",
-        "explanation": "Variables hold data in JavaScript. 'let' and 'const' are modern ways to declare variables; 'var' is older.",
+        "explanation": "'let', 'const', and 'var' are used to declare variables. 'let' is block-scoped, 'const' creates a constant, and 'var' is function-scoped (legacy).",
         "keyConcepts": [
-          { "term": "let", "definition": "Declares a variable with block scope." },
-          { "term": "const", "definition": "Declares a constant variable; its value cannot be reassigned." }
+          { "term": "let", "definition": "Declares a block-scoped variable." },
+          { "term": "const", "definition": "Declares a block-scoped, immutable variable." }
         ],
-        "codeExample": "let age = 30;\nconst name = 'Ann';\nconsole.log(age, name);",
+        "codeExample": "let name = 'Lee';\nconsole.log(name);",
+        "expectedOutput": "Lee",
+        "starterCode": "// Declare a variable message with 'Hello' and log it",
+        "solution": "let message = 'Hello';\nconsole.log(message);",
         "commonMistakes": [
-          "Using 'var' instead of 'let'/'const'.",
-          "Trying to reassign a 'const' variable."
+          "Trying to reassign a const variable.",
+          "Forgetting to use 'let' or 'const'."
         ],
-        "challenge": "Declare a constant called 'color' and set it to 'blue'. Log it to the console.",
-        "hint": "Use const and console.log().",
-        "solution": "const color = 'blue';\nconsole.log(color);",
-        "nextTopic": "arrays"
+        "challenge": "Declare a variable 'count' set to 3 and log it.",
+        "hint": "Use let or const and console.log().",
+        "terminalNote": "Save code in hello.js, run with 'node hello.js'"
       },
       {
         "id": "arrays",
         "title": "Arrays",
         "difficulty": "Beginner",
-        "explanation": "Arrays are lists that store multiple values. They are indexed from 0, and you can use built-in methods to add, remove, or modify elements.",
+        "explanation": "Arrays are ordered lists of values. You can access elements by their index and use methods to add, remove, or process elements.",
         "keyConcepts": [
-          { "term": "Array", "definition": "An ordered collection of items." },
-          { "term": "Index", "definition": "The position of an element in an array." }
+          { "term": "Array", "definition": "A list that stores ordered data." },
+          { "term": "Index", "definition": "Zero-based position in the array." }
         ],
-        "codeExample": "const nums = [1, 2, 3];\nconsole.log(nums[0]); // 1",
+        "codeExample": "const arr = [10, 20, 30];\nconsole.log(arr[0]);",
+        "expectedOutput": "10",
+        "starterCode": "const fruits = ['apple', 'banana', 'pear'];\n// print pear",
+        "solution": "const fruits = ['apple', 'banana', 'pear'];\nconsole.log(fruits[2]);",
         "commonMistakes": [
-          "Off-by-one errors (indexing).",
-          "Modifying arrays declared as 'const' (allowed for content, not reassignment)."
+          "Indexing beyond the array length.",
+          "Using parentheses or curly braces."
         ],
-        "challenge": "Create an array of three cities and log the second one.",
-        "hint": "Remember JavaScript arrays start at index 0.",
-        "solution": "const cities = ['Paris', 'London', 'Tokyo'];\nconsole.log(cities[1]);",
-        "nextTopic": "objects"
-      },
-      {
-        "id": "objects",
-        "title": "Objects",
-        "difficulty": "Beginner",
-        "explanation": "Objects group key-value pairs. They are used to store structured data.",
-        "keyConcepts": [
-          { "term": "Property", "definition": "A variable contained in an object." },
-          { "term": "Method", "definition": "A function stored as a property." }
-        ],
-        "codeExample": "const person = {name: 'Ben', age: 40};\nconsole.log(person.name);",
-        "commonMistakes": [
-          "Accessing undefined properties.",
-          "Using incorrect syntax for object literals."
-        ],
-        "challenge": "Make an object for a laptop with brand and RAM properties, then log the RAM.",
-        "hint": "Use curly braces and colon syntax.",
-        "solution": "const laptop = {brand: 'Dell', RAM: 16};\nconsole.log(laptop.RAM);",
-        "nextTopic": "functions"
-      },
-      {
-        "id": "functions",
-        "title": "Functions",
-        "difficulty": "Beginner",
-        "explanation": "Functions organize code into reusable blocks. You declare functions and call them where needed.",
-        "keyConcepts": [
-          { "term": "Function Declaration", "definition": "Defines a named function." },
-          { "term": "Return Value", "definition": "The value a function gives back when it's done." }
-        ],
-        "codeExample": "function greet(name) {\n  return 'Hi, ' + name;\n}\nconsole.log(greet('Eve'));",
-        "commonMistakes": [
-          "Forgetting parenthesis when calling.",
-          "Not returning a value when needed."
-        ],
-        "challenge": "Write a function that adds two numbers and returns the sum.",
-        "hint": "Use function add(a, b) { ... }",
-        "solution": "function add(a, b) {\n  return a + b;\n}\nconsole.log(add(2, 3));",
-        "nextTopic": "loops"
-      },
-      {
-        "id": "loops",
-        "title": "Loops",
-        "difficulty": "Beginner",
-        "explanation": "Loops repeat code multiple times. JavaScript provides for, while, and forEach for looping.",
-        "keyConcepts": [
-          { "term": "For Loop", "definition": "Repeats a block a set number of times." },
-          { "term": "Iteration", "definition": "Each pass through the loop." }
-        ],
-        "codeExample": "for(let i = 0; i < 3; i++) {\n  console.log(i);\n}",
-        "commonMistakes": [
-          "Forgetting to update the loop variable.",
-          "Creating infinite loops by missing exit condition."
-        ],
-        "challenge": "Write a for loop that logs numbers from 1 to 5.",
-        "hint": "Start at 1 and continue while <= 5.",
-        "solution": "for(let i = 1; i <= 5; i++) {\n  console.log(i);\n}",
-        "nextTopic": "dom"
-      },
-      {
-        "id": "dom",
-        "title": "Document Object Model (DOM)",
-        "difficulty": "Intermediate",
-        "explanation": "The DOM lets JavaScript interact with and update HTML on a web page, enabling dynamic content.",
-        "keyConcepts": [
-          { "term": "document", "definition": "Represents the web page loaded in the browser." },
-          { "term": "getElementById", "definition": "Finds an HTML element with a specific id." }
-        ],
-        "codeExample": "document.getElementById('greet').textContent = 'Hello!';",
-        "commonMistakes": [
-          "Running DOM code before the page is loaded.",
-          "Typos in element IDs."
-        ],
-        "challenge": "Change the text of an element with ID 'welcome' to 'Hi there!' using JS.",
-        "hint": "Use document.getElementById and assignment.",
-        "solution": "document.getElementById('welcome').textContent = 'Hi there!';",
-        "nextTopic": "events"
-      },
-      {
-        "id": "events",
-        "title": "Events",
-        "difficulty": "Intermediate",
-        "explanation": "Events let you run code in response to user actions, like clicks or key presses.",
-        "keyConcepts": [
-          { "term": "addEventListener", "definition": "Attach a function to run when an event happens." }
-        ],
-        "codeExample": "document.getElementById('btn').addEventListener('click', function() {\n  alert('Button clicked!');\n});",
-        "commonMistakes": [
-          "Referencing incorrect or missing element IDs.",
-          "Not understanding event propagation."
-        ],
-        "challenge": "Add a click event to an element with id 'go' that logs 'Go clicked!'.",
-        "hint": "Use addEventListener('click', ...)",
-        "solution": "document.getElementById('go').addEventListener('click', function() {\n  console.log('Go clicked!');\n});",
-        "nextTopic": "promises"
-      },
-      {
-        "id": "promises",
-        "title": "Promises",
-        "difficulty": "Intermediate",
-        "explanation": "Promises handle asynchronous actions in JS, like loading data from a server. They can be pending, fulfilled, or rejected.",
-        "keyConcepts": [
-          { "term": "Promise", "definition": "An object representing a task that completes in the future." },
-          { "term": "then", "definition": "Method for handling successful results." }
-        ],
-        "codeExample": "new Promise((resolve, reject) => {\n  setTimeout(() => resolve('Done'), 1000);\n}).then(console.log);",
-        "commonMistakes": [
-          "Forgetting to handle errors with .catch().",
-          "Not returning the promise in functions."
-        ],
-        "challenge": "Create a promise that resolves with 'Success' and prints the result.",
-        "hint": "Use new Promise, resolve, and then().",
-        "solution": "new Promise((resolve) => {\n  resolve('Success');\n}).then(console.log);",
-        "nextTopic": null
+        "challenge": "Print the second element of ['a', 'b', 'c']",
+        "hint": "Index starts at 0, second item is index 1.",
+        "terminalNote": "Save as hello.js and run via node."
       }
     ],
     "resources": {
@@ -342,6 +138,153 @@
         "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
         "https://www.javascript.com/learn",
         "https://javascript.info/"
+      ]
+    }
+  },
+  {
+    "id": "typescript",
+    "name": "TypeScript",
+    "type": "web",
+    "year": 2012,
+    "creator": "Anders Hejlsberg",
+    "difficulty": "Intermediate",
+    "description": "TypeScript is a strongly-typed superset of JavaScript that adds static types and modern tools for large-scale software. It compiles to JavaScript and is adopted by major projects to improve reliability.",
+    "usedFor": "Large-scale web apps, libraries, frameworks (Angular, React, etc.), Node.js backends.",
+    "funFact": "TypeScript was first announced by Microsoft and shares roots with languages like C#.",
+    "color": "#3178C6",
+    "terminalCommands": {
+      "windows": "tsc hello.ts && node hello.js",
+      "mac": "tsc hello.ts && node hello.js",
+      "linux": "tsc hello.ts && node hello.js",
+      "install": "Install with 'npm install -g typescript'. Create hello.ts, compile using 'tsc hello.ts'.",
+      "runExample": "Hello, world!"
+    },
+    "topics": [
+      {
+        "id": "types",
+        "title": "Type Annotations",
+        "difficulty": "Beginner",
+        "explanation": "TypeScript allows you to specify types for variables, function parameters, and return values. This lets you catch mistakes before running your code.",
+        "keyConcepts": [
+          { "term": "Type Annotation", "definition": "Tells TypeScript what type a variable or parameter should be." }
+        ],
+        "codeExample": "let age: number = 23;\nconsole.log(age);",
+        "expectedOutput": "23",
+        "starterCode": "let color\n// assign color to a string, and log it",
+        "solution": "let color: string = 'blue';\nconsole.log(color);",
+        "commonMistakes": [
+          "Forgetting a type or using the wrong type.",
+          "Assigning a value of a different type causes compile error."
+        ],
+        "challenge": "Declare a variable animal of type string with value 'dog' and print it.",
+        "hint": "Use let animal: string = 'dog'",
+        "terminalNote": "Save code in hello.ts. Compile with 'tsc hello.ts'. Run 'node hello.js'."
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "TypeScript for beginners",
+      "websites": [
+        "https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html",
+        "https://www.typescriptlang.org/docs/"
+      ]
+    }
+  },
+  {
+    "id": "c",
+    "name": "C",
+    "type": "systems",
+    "year": 1972,
+    "creator": "Dennis Ritchie",
+    "difficulty": "Advanced",
+    "description": "C is a powerful, low-level programming language that forms the basis for operating systems, databases, and embedded systems. It provides control over memory and hardware.",
+    "usedFor": "Operating systems (Linux, Windows parts), embedded firmware, databases (MySQL), system utilities.",
+    "funFact": "The Unix kernel and most of its utilities were originally written in C.",
+    "color": "#555555",
+    "terminalCommands": {
+      "windows": "gcc hello.c -o hello && hello",
+      "mac": "gcc hello.c -o hello && ./hello",
+      "linux": "gcc hello.c -o hello && ./hello",
+      "install": "Install GCC. On Windows, use MinGW or WSL. On Mac, install Xcode Command Line Tools. On Ubuntu: sudo apt install build-essential.",
+      "runExample": "Hello, world!"
+    },
+    "topics": [
+      {
+        "id": "variables",
+        "title": "Variables",
+        "difficulty": "Beginner",
+        "explanation": "C requires you to declare a variable's type. Types determine the size of memory and what values a variable can store.",
+        "keyConcepts": [
+          { "term": "Declaration", "definition": "Specifying the type and name of a variable." },
+          { "term": "Initialization", "definition": "Giving your variable a starting value." }
+        ],
+        "codeExample": "#include <stdio.h>\nint main() {\n  int a = 5;\n  printf(\"%d\\n\", a);\n  return 0;\n}",
+        "expectedOutput": "5",
+        "starterCode": "int age;\nage = 45;\n// print age",
+        "solution": "#include <stdio.h>\nint main() {\n  int age;\n  age = 45;\n  printf(\"%d\\n\", age);\n  return 0;\n}",
+        "commonMistakes": [
+          "Forgetting semicolons.",
+          "Mismatching types on declaration and assignment."
+        ],
+        "challenge": "Declare an int variable x, set to 12, and print.",
+        "hint": "Use int x = 12; printf(\"%d\\n\", x);",
+        "terminalNote": "Compile with gcc and run as above."
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "C language tutorial for beginners",
+      "websites": [
+        "https://www.learn-c.org/",
+        "https://www.tutorialspoint.com/cprogramming/",
+        "https://en.cppreference.com/w/c"
+      ]
+    }
+  },
+  {
+    "id": "cpp",
+    "name": "C++",
+    "type": "systems",
+    "year": 1985,
+    "creator": "Bjarne Stroustrup",
+    "difficulty": "Advanced",
+    "description": "C++ extends C with object-oriented programming, templates, and powerful standard libraries. It's widely used for high-performance software, games, and system tools.",
+    "usedFor": "Game development, real-time systems, operating systems, graphics engines, large software.",
+    "funFact": "C++ originally stood for 'C with Classes'.",
+    "color": "#00599C",
+    "terminalCommands": {
+      "windows": "g++ hello.cpp -o hello && hello",
+      "mac": "g++ hello.cpp -o hello && ./hello",
+      "linux": "g++ hello.cpp -o hello && ./hello",
+      "install": "Install g++: Windows (MinGW), Mac (Xcode CLI tools), Ubuntu (sudo apt install g++).",
+      "runExample": "Hello, world!"
+    },
+    "topics": [
+      {
+        "id": "classes",
+        "title": "Classes",
+        "difficulty": "Intermediate",
+        "explanation": "Classes allow you to model real-world objects, grouping data and functions for reuse and organization.",
+        "keyConcepts": [
+          { "term": "Object", "definition": "Instance of a class." },
+          { "term": "Member Function", "definition": "A function defined inside a class." }
+        ],
+        "codeExample": "#include <iostream>\nclass Dog {\npublic:\n  std::string name;\n  void bark() { std::cout << \"Woof\" << std::endl; }\n};\nint main() {\n  Dog d;\n  d.name = \"Max\";\n  d.bark();\n  return 0;\n}",
+        "expectedOutput": "Woof",
+        "starterCode": "class Car {\npublic:\n  int year;\n};\n// create Car c, set year to 2020, print c.year",
+        "solution": "#include <iostream>\nclass Car {\npublic:\n  int year;\n};\nint main() {\n  Car c;\n  c.year = 2020;\n  std::cout << c.year << std::endl;\n  return 0;\n}",
+        "commonMistakes": [
+          "Forgetting public/private declarations.",
+          "Not using new for dynamic objects when needed."
+        ],
+        "challenge": "Make a class Book with string title, set title and print it.",
+        "hint": "Use std::string for text.",
+        "terminalNote": "Save as .cpp, compile and run as above."
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "C++ tutorial for beginners",
+      "websites": [
+        "https://learncpp.com/",
+        "https://www.cplusplus.com/doc/tutorial/"
       ]
     }
   }
