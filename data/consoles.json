@@ -11,19 +11,22 @@
     "ram": "2 KB",
     "storage": "Cartridge",
     "os": "None (custom firmware)",
-    "description": "The NES was Nintendo's iconic 8-bit home console and launched classic franchises like Mario and Zelda, popularizing console gaming worldwide.",
-    "funFact": "In Japan, the NES was called the Famicom, and its controller included a built-in microphone.",
+    "description": "The NES is the 8-bit home console that brought classic game franchises into living rooms worldwide.",
+    "funFact": "In Japan, the NES was called the Famicom and had a microphone in the controller.",
     "difficulty": "Intermediate",
     "emoji": "🕹️",
     "color": "#A3A3A3",
+    "codingLanguage": "6502 Assembly",
+    "whyLearn": "It's a classic platform to understand how games work under the hood.",
     "codingExamples": [
       {
         "title": "Change Background Color (6502 Assembly)",
         "language": "Assembly (6502)",
-        "code": "LDA #$01\nSTA $2001",
+        "code": "; Set background color to blue\nLDA #$01     ; Load value 1 into A\nSTA $2001    ; Store A at PPU Mask register",
+        "beginnerExplanation": "This code changes the NES's background color. It loads a number into the computer's 'A' box, then tells the screen to use that color.",
         "explanation": [
-          "LDA #$01 loads the value 1 into the accumulator register.",
-          "STA $2001 writes the value to the PPU mask register to change background rendering settings."
+          "LDA #$01 loads the number 1 into the accumulator.",
+          "STA $2001 puts that number into the hardware's screen setting register (PPU Mask)."
         ]
       }
     ],
@@ -55,34 +58,32 @@
     "ram": "128 KB",
     "storage": "Cartridge",
     "os": "None (custom firmware)",
-    "description": "Nintendo's 16-bit follow-up to the NES, with advanced graphics, Mode 7 effects, and legendary games like Super Mario World and Zelda: A Link to the Past.",
-    "funFact": "The SNES's sound chip was designed by Sony, paving the way for future collaborations.",
+    "description": "The SNES was Nintendo’s 16-bit powerhouse for colorful, rich games and legendary sound.",
+    "funFact": "The SNES sound chip was made by Sony!",
     "difficulty": "Intermediate",
     "emoji": "🎶",
     "color": "#A678D3",
+    "codingLanguage": "65c816 Assembly",
+    "whyLearn": "Great for exploring hardware graphics and sound.",
     "codingExamples": [
       {
-        "title": "Set Background Color (65c816 Assembly)",
+        "title": "Set Brightness (65c816 Assembly)",
         "language": "Assembly (65c816)",
-        "code": "LDA #$1F\nSTA $2100",
+        "code": "; Set display brightness\nLDA #$0F    ; 0 = off, $0F = full\nSTA $2100   ; Write to INIDISP register",
+        "beginnerExplanation": "This tells the Super Nintendo to make the screen bright. It loads a number into a register, and sends it to the screen controller.",
         "explanation": [
-          "LDA #$1F loads the accumulator with hexadecimal 1F, which sets the display brightness.",
-          "STA $2100 writes that value to the INIDISP register, updating the display color."
+          "LDA #$0F loads the number 15 (full brightness).",
+          "STA $2100 sends it to the INIDISP (screen control) register."
         ]
       }
     ],
     "resources": {
-      "youtubeQuery": "SNES assembly programming intro",
+      "youtubeQuery": "SNES assembly programming beginner",
       "websites": [
         {
-          "title": "SNES Dev Wiki",
+          "title": "Super Famicom/SNES Dev Wiki",
           "url": "https://wiki.superfamicom.org/",
-          "description": "Community SNES homebrew and development documentation."
-        },
-        {
-          "title": "Geiger's SNES Documentation",
-          "url": "https://snes.nesdev.org/",
-          "description": "Detailed SNES docs and tools for assembly programming."
+          "description": "Community SNES homebrew and development docs."
         }
       ]
     }
@@ -96,38 +97,36 @@
     "year": 1996,
     "discontinued": 2002,
     "cpu": "NEC VR4300 (64-bit MIPS), 93.75 MHz",
-    "ram": "4 MB (expandable to 8 MB)",
+    "ram": "4 MB (up to 8 MB w/ Expansion Pak)",
     "storage": "Cartridge",
     "os": "None (custom SDK)",
-    "description": "Nintendo's first 3D console, famous for iconic games like Super Mario 64 and Zelda: Ocarina of Time.",
-    "funFact": "The controller's three-pronged design was intended for different game control styles.",
+    "description": "Nintendo's entry into 3D introduced analog controls, Mario 64, and a new era of gaming.",
+    "funFact": "The N64 was the last major console to use cartridges.",
     "difficulty": "Advanced",
     "emoji": "🎮",
     "color": "#6265AA",
+    "codingLanguage": "C",
+    "whyLearn": "A great platform for diving into 3D graphics programming.",
     "codingExamples": [
       {
-        "title": "Print Hello (C, libultra SDK)",
+        "title": "Print to Debug Console (C, libultra SDK)",
         "language": "C",
         "code": "#include <ultra64.h>\n\nvoid mainproc(void) {\n    osSyncPrintf(\"Hello, N64 world!\\n\");\n}",
+        "beginnerExplanation": "This prints a message (“Hello, N64 world!”) using Nintendo’s N64 programmer tools. You see the output on the PC, not TV.",
         "explanation": [
-          "Includes the libultra SDK for N64 development.",
-          "Defines mainproc, the N64 program entry point.",
-          "osSyncPrintf prints a string to the debug console."
+          "#include – brings in the special code for N64 development.",
+          "mainproc is your main game function.",
+          "osSyncPrintf prints a line to the debug output window."
         ]
       }
     ],
     "resources": {
-      "youtubeQuery": "N64 homebrew tutorial",
+      "youtubeQuery": "N64 homebrew programming",
       "websites": [
         {
           "title": "N64 Dev Wiki",
           "url": "https://n64dev.org/",
           "description": "Documentation and tutorials for developing on the Nintendo 64."
-        },
-        {
-          "title": "libdragon SDK",
-          "url": "https://dragonminded.com/n64dev/libdragon/",
-          "description": "Open-source library for N64 homebrew."
         }
       ]
     }
@@ -144,20 +143,23 @@
     "ram": "2 MB",
     "storage": "CD-ROM",
     "os": "Sony custom OS",
-    "description": "Sony's first console brought 3D gaming to the masses, with hits like Final Fantasy VII and Metal Gear Solid.",
-    "funFact": "The PlayStation was nearly a Nintendo device before Sony went solo.",
+    "description": "Sony’s first console brought 3D gaming and iconic games like Final Fantasy VII and Metal Gear Solid.",
+    "funFact": "It was first planned as a Nintendo product, before becoming Sony's.",
     "difficulty": "Advanced",
     "emoji": "🌀",
     "color": "#9CC6EC",
+    "codingLanguage": "C",
+    "whyLearn": "Good to learn about early 3D and console hardware programming.",
     "codingExamples": [
       {
-        "title": "Draw Text (C, PSY-Q SDK)",
+        "title": "Print Text (C, PSY-Q SDK)",
         "language": "C",
-        "code": "#include <libgte.h>\n#include <libgpu.h>\n#include <libgs.h>\n\nFntConsoleInit(0, 0, 320, 16, 0, 512);\nFntPrint(\"Hello, PlayStation!\\n\");",
+        "code": "#include <libgte.h>\n#include <libgpu.h>\n#include <libgs.h>\n\nFntLoad(960, 256);\nFntOpen(0, 8, 320, 24, 0, 512);\nFntPrint(0, \"Hello, PlayStation!\\n\");",
+        "beginnerExplanation": "This prints the words 'Hello, PlayStation!' to the screen by using PS1’s text system from the SDK.",
         "explanation": [
-          "Includes the PSY-Q SDK headers for graphics and font.",
-          "Initializes the font console at position (0,0).",
-          "Prints 'Hello, PlayStation!' on the screen."
+          "Loads font graphics into memory.",
+          "Opens a text area at the top of the screen.",
+          "Prints 'Hello, PlayStation!' in that area."
         ]
       }
     ],
@@ -168,127 +170,6 @@
           "title": "PSXDev",
           "url": "https://psxdev.net/",
           "description": "Resources and tools for PlayStation 1 homebrew and development."
-        }
-      ]
-    }
-  },
-  {
-    "id": "ps2",
-    "name": "PlayStation 2",
-    "shortName": "PS2",
-    "type": "game",
-    "manufacturer": "Sony",
-    "year": 2000,
-    "discontinued": 2013,
-    "cpu": "Emotion Engine (MIPS-based), 294 MHz",
-    "ram": "32 MB",
-    "storage": "DVD-ROM",
-    "os": "Sony custom OS (Linux kit available)",
-    "description": "The best-selling console of all time, with a vast library and multimedia capabilities.",
-    "funFact": "The PS2 could run Linux with the official Linux kit, becoming a low-cost hobbyist computer.",
-    "difficulty": "Advanced",
-    "emoji": "💽",
-    "color": "#3A4057",
-    "codingExamples": [
-      {
-        "title": "Print Text (C, PS2SDK)",
-        "language": "C",
-        "code": "#include <debug.h>\n\nint main() {\n  init_scr();\n  scr_printf(\"Hello, PS2!\\n\");\n  return 0;\n}",
-        "explanation": [
-          "Includes header for PS2 debug output.",
-          "Initializes the screen.",
-          "scr_printf prints 'Hello, PS2!' on the display."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "PS2 homebrew coding",
-      "websites": [
-        {
-          "title": "PS2DEV.org",
-          "url": "https://www.ps2dev.org/",
-          "description": "Community for PlayStation 2 homebrew development."
-        }
-      ]
-    }
-  },
-  {
-    "id": "xbox",
-    "name": "Xbox",
-    "shortName": "Xbox",
-    "type": "game",
-    "manufacturer": "Microsoft",
-    "year": 2001,
-    "discontinued": 2009,
-    "cpu": "Intel Pentium III, 733 MHz",
-    "ram": "64 MB",
-    "storage": "DVD-ROM, HDD",
-    "os": "Xbox OS (custom Win2000 kernel)",
-    "description": "Microsoft's first game console, known for Halo and robust homebrew with modchips.",
-    "funFact": "The original Xbox used a modified PC motherboard and components.",
-    "difficulty": "Advanced",
-    "emoji": "🟩",
-    "color": "#107C10",
-    "codingExamples": [
-      {
-        "title": "Basic Hello (C, XDK/SDLx)",
-        "language": "C",
-        "code": "#include <hal/debug.h>\n\nvoid main() {\n  debugPrint(\"Hello, Xbox!\\n\");\n  while(1);\n}",
-        "explanation": [
-          "Includes Xbox debug header.",
-          "Prints a hello message to the debug output.",
-          "Loops forever to keep the system running."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "Original Xbox homebrew tutorial",
-      "websites": [
-        {
-          "title": "Xbox Dev Wiki",
-          "url": "https://xboxdevwiki.net/",
-          "description": "Extensive Xbox hardware and software internals."
-        }
-      ]
-    }
-  },
-  {
-    "id": "gamecube",
-    "name": "Nintendo GameCube",
-    "shortName": "GameCube",
-    "type": "game",
-    "manufacturer": "Nintendo",
-    "year": 2001,
-    "discontinued": 2007,
-    "cpu": "IBM PowerPC \"Gekko\", 485 MHz",
-    "ram": "24 MB main + 16 MB auxiliary",
-    "storage": "GameCube Optical Disc",
-    "os": "None (custom Nintendo OS)",
-    "description": "Nintendo's compact and powerful cube-shaped console, famous for Super Smash Bros. Melee.",
-    "funFact": "GameCube controller ports are still featured on modern Nintendo consoles for Smash Bros. fans.",
-    "difficulty": "Advanced",
-    "emoji": "🟪",
-    "color": "#6E47A8",
-    "codingExamples": [
-      {
-        "title": "Print to Screen (C, libogc/devkitPPC)",
-        "language": "C",
-        "code": "#include <ogc/console.h>\n#include <ogc/video.h>\n\nint main() {\n  VIDEO_Init();\n  console_init(NULL, 20, 20, 40, 30, 640, NULL, 0);\n  printf(\"Hello, GameCube!\\n\");\n  while(1);\n  return 0;\n}",
-        "explanation": [
-          "Initializes the GameCube video hardware.",
-          "Initializes a simple text console.",
-          "Prints a hello message.",
-          "Infinite loop keeps the console open."
-        ]
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "GameCube homebrew setup",
-      "websites": [
-        {
-          "title": "DevKitPro",
-          "url": "https://devkitpro.org/",
-          "description": "Toolchains and docs for GameCube and Wii homebrew."
         }
       ]
     }
@@ -305,20 +186,23 @@
     "ram": "64 KB",
     "storage": "Cartridge",
     "os": "None (custom firmware)",
-    "description": "Sega's 16-bit console, famed for fast action, Sonic the Hedgehog, and rivalry with Nintendo.",
-    "funFact": "Known as the Mega Drive outside North America.",
+    "description": "Sega’s 16-bit game system was the home of Sonic the Hedgehog and Rapid Arcade Action.",
+    "funFact": "Named 'Mega Drive' everywhere but North America.",
     "difficulty": "Advanced",
     "emoji": "🐍",
     "color": "#222222",
+    "codingLanguage": "C (SGDK), Assembly",
+    "whyLearn": "You learn low-level graphics and music programming for fun games.",
     "codingExamples": [
       {
         "title": "Print Message (C, SGDK)",
         "language": "C",
         "code": "#include <genesis.h>\n\nint main() {\n  VDP_drawText(\"Hello, Genesis!\", 10, 13);\n  while(1);\n  return 0;\n}",
+        "beginnerExplanation": "This puts 'Hello, Genesis!' on the screen at position 10,13 and keeps it showing.",
         "explanation": [
-          "Includes the Sega Genesis Development Kit library.",
-          "Draws text at screen coordinates (10, 13).",
-          "Infinite loop keeps the message displayed."
+          "Includes Genesis library.",
+          "Draws text at (10, 13).",
+          "Infinite loop keeps program from ending."
         ]
       }
     ],
@@ -326,9 +210,96 @@
       "youtubeQuery": "Sega Genesis homebrew tutorial",
       "websites": [
         {
-          "title": "SGDK Docs",
+          "title": "SGDK Documentation (Genesis C kit)",
           "url": "https://github.com/Stephane-D/SGDK",
           "description": "Official SGDK repository, tools and docs for Genesis development."
+        }
+      ]
+    }
+  },
+  {
+    "id": "xbox",
+    "name": "Xbox",
+    "shortName": "Xbox",
+    "type": "game",
+    "manufacturer": "Microsoft",
+    "year": 2001,
+    "discontinued": 2009,
+    "cpu": "Intel Pentium III, 733 MHz",
+    "ram": "64 MB",
+    "storage": "DVD-ROM, HDD",
+    "os": "Xbox OS (custom Win2000 kernel)",
+    "description": "Microsoft's first console combined PC components with console gaming and popularized online play.",
+    "funFact": "The original Xbox controller was nicknamed 'The Duke' for its large size.",
+    "difficulty": "Advanced",
+    "emoji": "🟩",
+    "color": "#107C10",
+    "codingLanguage": "C/C++",
+    "whyLearn": "Shows how consoles and PCs share common programming ideas.",
+    "codingExamples": [
+      {
+        "title": "Basic Hello (C, XDK/SDLx)",
+        "language": "C",
+        "code": "#include <hal/debug.h>\n\nvoid main() {\n  debugPrint(\"Hello, Xbox!\\n\");\n  while(1);\n}",
+        "beginnerExplanation": "This prints a message on the Xbox debug screen—like saying 'I’m alive!'",
+        "explanation": [
+          "Includes debug output.",
+          "Prints 'Hello, Xbox!'",
+          "Infinite loop keeps it running."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Original Xbox homebrew coding",
+      "websites": [
+        {
+          "title": "Xbox Dev Wiki",
+          "url": "https://xboxdevwiki.net/",
+          "description": "Extensive Xbox hardware and homebrew info."
+        }
+      ]
+    }
+  },
+  {
+    "id": "gamecube",
+    "name": "Nintendo GameCube",
+    "shortName": "GameCube",
+    "type": "game",
+    "manufacturer": "Nintendo",
+    "year": 2001,
+    "discontinued": 2007,
+    "cpu": "IBM PowerPC 'Gekko', 485 MHz",
+    "ram": "24 MB main + 16 MB auxiliary",
+    "storage": "GameCube Optical Disc",
+    "os": "None (custom Nintendo OS)",
+    "description": "Nintendo’s purple cube played host to Super Smash Bros. and Mario Sunshine.",
+    "funFact": "Its handle let you 'carry it to a friend’s house!'",
+    "difficulty": "Advanced",
+    "emoji": "🟪",
+    "color": "#6E47A8",
+    "codingLanguage": "C (libogc/devkitPPC)",
+    "whyLearn": "Good for learning about modern embedded systems and graphics.",
+    "codingExamples": [
+      {
+        "title": "Print to Screen (C, libogc/devkitPPC)",
+        "language": "C",
+        "code": "#include <ogc/console.h>\n#include <ogc/video.h>\n\nint main() {\n  VIDEO_Init();\n  console_init(NULL, 20, 20, 40, 30, 640, NULL, 0);\n  printf(\"Hello, GameCube!\\n\");\n  while(1);\n  return 0;\n}",
+        "beginnerExplanation": "This sets up the screen and writes 'Hello, GameCube!' for you to see.",
+        "explanation": [
+          "Initializes video hardware.",
+          "Sets up a console area for text.",
+          "Prints message.",
+          "Infinite loop to keep message showing."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "GameCube homebrew setup",
+      "websites": [
+        {
+          "title": "DevKitPro",
+          "url": "https://devkitpro.org/",
+          "description": "Toolchains and docs for GameCube and Wii homebrew."
         }
       ]
     }
@@ -345,29 +316,32 @@
     "ram": "8 KB",
     "storage": "Cartridge",
     "os": "None (custom firmware)",
-    "description": "Nintendo's portable 8-bit phenomenon, with Tetris introducing gaming to millions on the go.",
-    "funFact": "Astronauts took a Game Boy to space on a mission in 1993.",
+    "description": "The original handheld hit, made for playing on the go with Tetris and Pokémon.",
+    "funFact": "It could last up to 30 hours on 4 AA batteries!",
     "difficulty": "Intermediate",
     "emoji": "🟩",
     "color": "#92D050",
+    "codingLanguage": "Z80 Assembly",
+    "whyLearn": "Ideal for learning fundamentals of low-level programming.",
     "codingExamples": [
       {
         "title": "Infinite Loop (Z80 Assembly, RGBDS)",
         "language": "Assembly (Z80)",
-        "code": "start:\n    jp start",
+        "code": "; Keep program running forever\nstart:\n    jp start",
+        "beginnerExplanation": "This keeps the Game Boy busy forever so it doesn’t crash. All real games use something similar for their main loop.",
         "explanation": [
-          "Defines the start label.",
-          "Jumps back to the same label, creating a loop."
+          "start: is a label.",
+          "jp start jumps back to start—endless loop."
         ]
       }
     ],
     "resources": {
-      "youtubeQuery": "Game Boy homebrew programming",
+      "youtubeQuery": "Game Boy assembly programming beginner",
       "websites": [
         {
           "title": "GBDev Wiki",
           "url": "https://gbdev.io/",
-          "description": "The go-to resource for all aspects of Game Boy development."
+          "description": "Everything you ever wanted to know about Game Boy programming."
         }
       ]
     }
@@ -384,20 +358,24 @@
     "ram": "32 KB + 256 KB",
     "storage": "Cartridge",
     "os": "None (custom firmware)",
-    "description": "A 32-bit portable powerhouse, delivering SNES-like games on the go.",
-    "funFact": "The GBA can play all classic Game Boy and Color titles.",
+    "description": "A pocket-size 32-bit powerhouse capable of SNES-style and advanced games.",
+    "funFact": "You could play old Game Boy games on it.",
     "difficulty": "Intermediate",
     "emoji": "🟪",
     "color": "#9B59B6",
+    "codingLanguage": "C",
+    "whyLearn": "Classic for learning embedded C on real hardware.",
     "codingExamples": [
       {
-        "title": "Fill Screen With Color (C, devkitARM)",
+        "title": "Fill Screen With Blue (C, devkitARM)",
         "language": "C",
-        "code": "#define REG_DISPCNT *(volatile unsigned short*)0x4000000\n#define MODE3 0x0003\n#define BG2_ENABLE 0x0400\n#define SCREENBUFFER ((volatile unsigned short*)0x6000000)\n\nint main() {\n  REG_DISPCNT = MODE3 | BG2_ENABLE;\n  for(int i=0; i<240*160; i++) SCREENBUFFER[i] = 0x1F;\n  while(1);\n  return 0;\n}",
+        "code": "#define REG_DISPCNT *(unsigned short*)0x4000000\n#define MODE3 0x0003\n#define BG2_ENABLE 0x0400\n#define VRAM ((unsigned short*)0x6000000)\n\nint main() {\n  REG_DISPCNT = MODE3 | BG2_ENABLE;\n  for(int i=0; i<240*160; i++) VRAM[i]=0x1F;\n  while(1);\n  return 0;\n}",
+        "beginnerExplanation": "This paints every pixel blue. It sets up the screen and fills it with the color's special number.",
         "explanation": [
-          "Sets display mode 3 (bitmap).",
-          "Fills the screen with blue color (0x1F in 15-bit color).",
-          "Infinite loop keeps the image visible."
+          "Set display into a mode that allows direct pixel writing.",
+          "Loop through all (240x160) screen pixels.",
+          "Write blue color value (0x1F) in each pixel.",
+          "Infinite loop keeps screen painted."
         ]
       }
     ],
@@ -407,7 +385,7 @@
         {
           "title": "Tonc GBA Guide",
           "url": "https://www.coranac.com/tonc/text/first.htm",
-          "description": "Legendary in-depth GBA programming tutorial."
+          "description": "Legendary GBA programming tutorial."
         }
       ]
     }
@@ -424,25 +402,28 @@
     "ram": "4 MB",
     "storage": "Game Card",
     "os": "None (custom firmware)",
-    "description": "Dual screens and a touchscreen made the DS a huge innovation in portable gaming.",
-    "funFact": "The Nintendo DS Lite was the highest-selling model of the DS family.",
+    "description": "Dual screens and touch controls made the DS a handheld revolution.",
+    "funFact": "The Nintendo DS is the best-selling handheld in history.",
     "difficulty": "Intermediate",
     "emoji": "🖊️",
     "color": "#EAEAEA",
+    "codingLanguage": "C",
+    "whyLearn": "Explore dual-screen and touchscreen programming.",
     "codingExamples": [
       {
         "title": "Print Text (C, libnds/devkitPro)",
         "language": "C",
         "code": "#include <nds.h>\n\nint main(void) {\n  consoleDemoInit();\n  iprintf(\"Hello, DS!\\n\");\n  while(1) swiWaitForVBlank();\n  return 0;\n}",
+        "beginnerExplanation": "Sets up the screen and prints out “Hello, DS!” as a friendly greeting.",
         "explanation": [
-          "Initializes the default console on the DS screen.",
-          "Prints 'Hello, DS!' in the debug output.",
-          "Waits for vertical blank to save power."
+          "Initializes text output hardware.",
+          "Prints message.",
+          "Waits for vertical refresh in a loop."
         ]
       }
     ],
     "resources": {
-      "youtubeQuery": "Nintendo DS homebrew programming",
+      "youtubeQuery": "Nintendo DS homebrew coding",
       "websites": [
         {
           "title": "libnds Tutorials",
@@ -464,20 +445,23 @@
     "ram": "32 MB (early), 64 MB (later)",
     "storage": "UMD, Memory Stick Duo",
     "os": "Sony custom OS",
-    "description": "Sony's portable system with 3D graphics, media playback, and a huge homebrew community.",
-    "funFact": "The PSP can emulate many earlier consoles thanks to its powerful hardware.",
+    "description": "Sony's portable powerhouse for 3D games, media, and homebrew.",
+    "funFact": "Thousands of homebrew games and emulators exist for PSP.",
     "difficulty": "Intermediate",
     "emoji": "🖐️",
     "color": "#535353",
+    "codingLanguage": "C",
+    "whyLearn": "Good for learning modern game console coding.",
     "codingExamples": [
       {
         "title": "Print Message (C, PSP SDK)",
         "language": "C",
         "code": "#include <pspkernel.h>\n#include <pspdebug.h>\n\nint main(void) {\n    pspDebugScreenInit();\n    pspDebugScreenPrintf(\"Hello, PSP!\\n\");\n    sceKernelSleepThread();\n    return 0;\n}",
+        "beginnerExplanation": "Sets up the screen, prints a welcome message, and keeps it there.",
         "explanation": [
-          "Initializes the PSP debug screen.",
-          "Prints 'Hello, PSP!' to the screen.",
-          "Sleeps the main thread to keep message visible."
+          "Initializes the debug screen.",
+          "Prints 'Hello, PSP!'.",
+          "Sleeps thread so message stays visible."
         ]
       }
     ],
@@ -504,20 +488,23 @@
     "ram": "32+ MB (varies)",
     "storage": "Flash, NVRAM",
     "os": "Cisco IOS",
-    "description": "Cisco routers form the backbone of the internet, offering enterprise networking and secure data transport. They are managed via a command-line interface.",
-    "funFact": "The 'write memory' command is still supported from the 80s.",
+    "description": "The world's most popular network routers, essential to the internet.",
+    "funFact": "You can still use 1980s commands today.",
     "difficulty": "Intermediate",
     "emoji": "🌐",
     "color": "#2962FF",
+    "codingLanguage": "Cisco IOS CLI",
+    "whyLearn": "Teaches essentials of real-world networking and automation.",
     "codingExamples": [
       {
         "title": "Set Hostname",
         "language": "Cisco IOS CLI",
         "code": "configure terminal\nhostname Router01\nend",
+        "beginnerExplanation": "This lets you set your router's name to 'Router01', so you won't get confused between different routers.",
         "explanation": [
-          "Enters configuration mode.",
-          "Sets the hostname to Router01.",
-          "Exits configuration mode."
+          "Go into configuration mode.",
+          "Change the router's hostname.",
+          "Finish configuration."
         ]
       }
     ],
@@ -544,18 +531,22 @@
     "ram": "16 MB",
     "storage": "4 MB Flash",
     "os": "VxWorks/Linux (with OpenWRT/DD-WRT)",
-    "description": "Legendary home Wi-Fi router beloved for its hackable firmware and robustness.",
-    "funFact": "A huge community built custom firmware for WRT54G, unlocking pro networking features.",
+    "description": "A legendary Wi-Fi router loved by home hackers for its mod-friendly hardware.",
+    "funFact": "You can turn it into a powerful firewall or VPN box with free firmware.",
     "difficulty": "Intermediate",
     "emoji": "📡",
     "color": "#2285C6",
+    "codingLanguage": "Shell (Linux/Busybox)",
+    "whyLearn": "It's great for learning networking commands and real-world Linux.",
     "codingExamples": [
       {
         "title": "Blink Power Light (DD-WRT shell)",
-        "language": "Shell (sh)",
-        "code": "echo blink > /proc/diag/led/power",
+        "language": "Shell",
+        "code": "# Makes the power LED blink on a WRT54G running DD-WRT\n echo blink > /proc/diag/led/power",
+        "beginnerExplanation": "This line tells the router's built-in lights to flash, proving you can talk to its hardware!",
         "explanation": [
-          "Writes the word 'blink' to the router's power LED control to blink the power LED."
+          "echo blink: outputs the word blink.",
+          ">/proc/diag/led/power: sends it to the LED control, making the light blink."
         ]
       }
     ],
@@ -582,18 +573,22 @@
     "ram": "512 MB – 8 GB",
     "storage": "MicroSD Card",
     "os": "Raspberry Pi OS or Linux",
-    "description": "Use a Raspberry Pi as a configurable home router or firewall using Linux routing tools like dnsmasq and iptables.",
-    "funFact": "A Pi can run as an enterprise-grade firewall using software like OpenWRT or pfSense.",
+    "description": "A tiny computer that can become a full-featured home, lab, or classroom router.",
+    "funFact": "A Pi can run as an enterprise-grade firewall thanks to software like OpenWRT.",
     "difficulty": "Intermediate",
     "emoji": "🛡️",
     "color": "#C51A4A",
+    "codingLanguage": "Linux Shell",
+    "whyLearn": "A hands-on, DIY way to learn about real-world networking hardware and Linux tools.",
     "codingExamples": [
       {
-        "title": "Enable Packet Forwarding (Linux shell)",
-        "language": "Shell (sh)",
-        "code": "echo 1 > /proc/sys/net/ipv4/ip_forward",
+        "title": "Enable Routing (Linux shell)",
+        "language": "Shell",
+        "code": "# Turns on routing so your Pi can move data between networks\n echo 1 > /proc/sys/net/ipv4/ip_forward",
+        "beginnerExplanation": "This tells your Pi to start passing internet traffic between your devices, a key router job.",
         "explanation": [
-          "Enables IPv4 packet forwarding, an essential setting for using the Pi as a router."
+          "echo 1: says 'turn it on'.",
+          ">/proc/sys/net/ipv4/ip_forward: sends the command to Linux's network settings."
         ]
       }
     ],
@@ -616,23 +611,27 @@
     "manufacturer": "Commodore",
     "year": 1982,
     "discontinued": 1994,
-    "cpu": "MOS 6510, 1.0 MHz (PAL), 1.02 MHz (NTSC)",
+    "cpu": "MOS 6510, 1.0 MHz",
     "ram": "64 KB",
     "storage": "Cassette, Floppy Disk, Cartridge",
     "os": "Commodore BASIC 2.0",
-    "description": "The world's best-selling computer, famous for easy programming and a gigantic games library.",
-    "funFact": "The C64's SID sound chip is still prized by musicians and chip-tune artists.",
+    "description": "The most popular home computer ever, made for fun, games, and learning how to code at home.",
+    "funFact": "The C64's sound chip is still used for music today.",
     "difficulty": "Beginner",
     "emoji": "💾",
     "color": "#43BCCE",
+    "codingLanguage": "BASIC",
+    "whyLearn": "You write code and immediately see results, making it perfect for complete beginners!",
     "codingExamples": [
       {
         "title": "Say Hello (Commodore BASIC)",
         "language": "BASIC",
-        "code": "10 PRINT \"HELLO, WORLD!\"\n20 END",
+        "code": "10 REM This is a comment. Lines can have numbers!\n20 PRINT \"HELLO, WORLD!\"   : REM Print something to the screen\n30 END                     : REM Program stops here",
+        "beginnerExplanation": "Each step is written out like a recipe. Type this in and the computer talks back!",
         "explanation": [
-          "Line 10 prints the text 'HELLO, WORLD!' to the screen.",
-          "Line 20 ends the program."
+          "Line 10: A comment—the computer ignores this.",
+          "Line 20: PRINT shows your message on screen.",
+          "Line 30: END tells the computer you’re done."
         ]
       }
     ],
@@ -640,14 +639,9 @@
       "youtubeQuery": "Commodore 64 programming for beginners",
       "websites": [
         {
-          "title": "Commodore 64 Wiki",
+          "title": "C64 Wiki",
           "url": "https://www.c64-wiki.com/",
-          "description": "Extensive knowledge base for C64 hardware, BASIC and assembly programming."
-        },
-        {
-          "title": "Commodore Basic Tutorial",
-          "url": "https://retrocomputing.stackexchange.com/questions/8625/commodore-64-basic-how-to-get-started",
-          "description": "Beginner BASIC tutorial links and community Q&A."
+          "description": "Huge resource for C64 hardware and programming help."
         }
       ]
     }
@@ -664,29 +658,33 @@
     "ram": "4–64 KB (model-dependent)",
     "storage": "Cassette, Floppy Disk",
     "os": "Apple DOS, ProDOS, Integer BASIC",
-    "description": "One of the first mass-market personal computers, famous for schools and home programming.",
-    "funFact": "The original Apple II came with color graphics and sound, a rarity for the time.",
+    "description": "The Apple II made home and school computing mainstream, letting anyone code their own games and programs.",
+    "funFact": "The original used cassette tapes to store programs.",
     "difficulty": "Intermediate",
     "emoji": "🍏",
     "color": "#9ED765",
+    "codingLanguage": "BASIC",
+    "whyLearn": "One of the easiest and most fun platforms for classic coding.",
     "codingExamples": [
       {
         "title": "Say Hello (Integer BASIC)",
         "language": "BASIC",
-        "code": "10 PRINT \"HELLO APPLE II!\"\n20 END",
+        "code": "10 REM This line is a comment\n20 PRINT \"HELLO APPLE II!\"\n30 END",
+        "beginnerExplanation": "Exactly like talking to your computer—every line is a single easy idea.",
         "explanation": [
-          "Line 10 prints a message to the screen.",
-          "Line 20 ends the program cleanly."
+          "10: Ignore this line, it’s a note.",
+          "20: Print words to the screen.",
+          "30: End the program."
         ]
       }
     ],
     "resources": {
-      "youtubeQuery": "Apple II programming tutorial",
+      "youtubeQuery": "Apple II programming for beginners",
       "websites": [
         {
           "title": "Apple2Online",
           "url": "https://www.apple2online.com/",
-          "description": "Guides and docs for Apple II programming and BASIC."
+          "description": "Guides and docs for Apple II programming in BASIC."
         }
       ]
     }
@@ -703,29 +701,39 @@
     "ram": "512 MB – 8 GB",
     "storage": "MicroSD Card",
     "os": "Raspberry Pi OS (Linux)",
-    "description": "A tiny affordable computer that lets anyone learn programming and electronics.",
-    "funFact": "Over 40 million Raspberry Pis have been sold worldwide.",
+    "description": "A tiny, affordable computer that can do everything—from programming to making robots.",
+    "funFact": "You can build an arcade, a smart speaker, or a robot with a Raspberry Pi.",
     "difficulty": "Beginner",
     "emoji": "🍓",
     "color": "#C51A4A",
+    "codingLanguage": "Python",
+    "whyLearn": "It’s cheap, safe to experiment with, and you can literally make anything you imagine.",
     "codingExamples": [
       {
         "title": "Say Hello (Python 3)",
         "language": "Python",
-        "code": "print(\"Hello, world!\")",
+        "code": "# This is a comment - the computer ignores this line\nprint(\"Hello, world!\")  # This shows a message on your screen",
+        "beginnerExplanation": "Write exactly what you want the computer to say, and it does! Comments (with #) are just notes for humans.",
         "explanation": [
-          "This prints the words 'Hello, world!' on the screen.",
-          "Try editing the message and see what changes!"
+          "# Comment for you, not the computer.",
+          "print(...) shows whatever you type in quotes.",
+          "# We can add comments after code, too."
         ]
       },
       {
         "title": "Blink an LED (Python, GPIO Zero)",
         "language": "Python",
-        "code": "from gpiozero import LED\nfrom time import sleep\n\nled = LED(17)\n\nwhile True:\n    led.on()\n    sleep(1)\n    led.off()\n    sleep(1)",
+        "code": "# This will blink an LED plugged into GPIO pin 17\nfrom gpiozero import LED   # Let us control the LED\nfrom time import sleep     # For waiting\nled = LED(17)             # Use pin 17\nwhile True:               # Do this forever\n    led.on()                # Turn LED on\n    sleep(1)                # Wait 1 second\n    led.off()               # Turn LED off\n    sleep(1)                # Wait 1 second",
+        "beginnerExplanation": "Each step is simple: set up the light, turn it on and off with pauses. The computer repeats until you stop it.",
         "explanation": [
-          "Imports the library to control the Pi's pins.",
-          "Sets up an LED on pin 17.",
-          "Turns the LED on and off every second, making it blink."
+          "from gpiozero import LED: We need this to control lights.",
+          "from time import sleep: Lets us pause our program.",
+          "led = LED(17): We plug our light into GPIO pin 17.",
+          "while True: Our forever loop (keeps program running).",
+          "led.on(): Light turns on.",
+          "sleep(1): Wait for one second.",
+          "led.off(): Light turns off.",
+          "sleep(1): Wait again before the next blink."
         ]
       }
     ],
@@ -735,12 +743,12 @@
         {
           "title": "Raspberry Pi Projects",
           "url": "https://projects.raspberrypi.org/en/",
-          "description": "Official easy-to-follow coding and hardware tutorials."
+          "description": "Official step-by-step code and hardware tutorials."
         },
         {
           "title": "GPIO Zero Documentation",
           "url": "https://gpiozero.readthedocs.io/",
-          "description": "Docs for controlling electronics easily on the Raspberry Pi."
+          "description": "The best simple intro to controlling Pi electronics with code."
         }
       ]
     }
@@ -757,19 +765,22 @@
     "ram": "16-128 KB (model-dependent)",
     "storage": "Cassette Tape",
     "os": "Sinclair BASIC",
-    "description": "The ZX Spectrum launched the UK home programming boom with cheap computers and colorful games.",
-    "funFact": "Games loaded from cassette tapes, accompanied by screeching sounds.",
+    "description": "The Speccy was the UK’s affordable, colorful home programming starter, loved by a generation.",
+    "funFact": "Games loaded from cassette tapes with screeching sounds.",
     "difficulty": "Intermediate",
     "emoji": "🌈",
     "color": "#FCE205",
+    "codingLanguage": "BASIC",
+    "whyLearn": "Its code is simple and every line makes something happen.",
     "codingExamples": [
       {
         "title": "Print Message (Sinclair BASIC)",
         "language": "BASIC",
         "code": "10 PRINT \"HELLO, ZX SPECTRUM!\"\n20 GO TO 10",
+        "beginnerExplanation": "This code prints 'HELLO, ZX SPECTRUM!' over and over like a screensaver.",
         "explanation": [
-          "Prints a message to the screen.",
-          "GO TO 10 repeats forever, scrolling the message."
+          "10: Show message to screen.",
+          "20: Loop back to line 10, repeating forever."
         ]
       }
     ],
@@ -796,26 +807,30 @@
     "ram": "Multiple (emulation target)",
     "storage": "ROM chips (emulated)",
     "os": "Emulated (varies)",
-    "description": "MAME is the Multiple Arcade Machine Emulator, running classic arcade games for preservation and study.",
-    "funFact": "MAME stands for 'Multiple Arcade Machine Emulator' and supports thousands of machines.",
+    "description": "MAME is the world-standard emulator for preserving and running classic arcade machines.",
+    "funFact": "MAME supports over 10,000 different arcade games!",
     "difficulty": "Advanced",
     "emoji": "👾",
     "color": "#A9D2FF",
+    "codingLanguage": "C/C++",
+    "whyLearn": "Learn how real arcade machines were programmed and preserved.",
     "codingExamples": [
       {
-        "title": "Add Hello World to MAME Driver (C)",
+        "title": "Add Hello World to Driver (C)",
         "language": "C",
-        "code": "machine().logerror(\"Hello, MAME!\\n\");",
+        "code": "machine().logerror(\"Hello, MAME!\\n\"); // Write message to emulator output",
+        "beginnerExplanation": "Lets you add a message to the emulator output, great for debugging your own arcade game driver.",
         "explanation": [
-          "In a custom driver, logs 'Hello, MAME!' to emulator output."
+          "machine().logerror: Function to print debug text.",
+          "\"Hello, MAME!\\n\": The text message."
         ]
       }
     ],
     "resources": {
-      "youtubeQuery": "MAME driver programming guide",
+      "youtubeQuery": "MAME driver development tutorial",
       "websites": [
         {
-          "title": "MAME Dev Documentation",
+          "title": "MAME Dev Docs",
           "url": "https://docs.mamedev.org/",
           "description": "Official documentation for MAME programming and development."
         }
@@ -834,19 +849,22 @@
     "ram": "64 KB (main), 2 KB (sound)",
     "storage": "ROM Cartridge",
     "os": "None (baremetal arcade firmware)",
-    "description": "The Neo Geo powered both arcades and 'luxury' home consoles with advanced 2D graphics and fighting games.",
-    "funFact": "Neo Geo home cartridges were the size of a VHS tape!",
+    "description": "The Neo Geo ran powerful arcade and home games with rich sprites and epic fighting games.",
+    "funFact": "Neo Geo cartridges could be larger than some laptops at the time.",
     "difficulty": "Advanced",
     "emoji": "🕹️",
     "color": "#FFC300",
+    "codingLanguage": "68000 Assembly, C",
+    "whyLearn": "Teaches the real deal: how arcade machines handled graphics and sound.",
     "codingExamples": [
       {
-        "title": "Main Loop (M68000 Assembly, Neo Geo SDK)",
+        "title": "Main Loop (M68000 Assembly)",
         "language": "Assembly (68000)",
-        "code": "mainloop:\n    bra mainloop",
+        "code": "; Keep running forever\nmainloop:\n    bra mainloop",
+        "beginnerExplanation": "Creates an infinite loop (never ending) that every arcade game needs to keep checking for player input.",
         "explanation": [
-          "Defines a loop labeled mainloop.",
-          "BRA jumps back to itself, keeping the program alive."
+          "mainloop: label for the start.",
+          "bra mainloop: Keep going back to mainloop forever."
         ]
       }
     ],
@@ -854,7 +872,7 @@
       "youtubeQuery": "Neo Geo homebrew tutorial",
       "websites": [
         {
-          "title": "Neo Geo Dev WIKI",
+          "title": "Neo Geo Dev Wiki",
           "url": "https://wiki.neogeodev.org/",
           "description": "Comprehensive documentation for Neo Geo programming."
         }
