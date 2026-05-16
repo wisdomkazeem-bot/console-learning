@@ -1,0 +1,953 @@
+[
+  {
+    "id": "nes",
+    "name": "Nintendo Entertainment System",
+    "shortName": "NES",
+    "type": "game",
+    "manufacturer": "Nintendo",
+    "year": 1983,
+    "discontinued": 1995,
+    "cpu": "Ricoh 2A03 (6502 core), 1.79 MHz",
+    "ram": "2 KB",
+    "storage": "Cartridge",
+    "os": "None (custom firmware)",
+    "description": "The NES was Nintendo's breakthrough home console, launching classic franchises like Mario and Zelda. Its pixel graphics and chiptune sound defined a generation of gaming worldwide.",
+    "funFact": "The Famicom, the Japanese version, had a microphone in the controller.",
+    "difficulty": "Intermediate",
+    "emoji": "🕹️",
+    "color": "#A3A3A3",
+    "codingExamples": [
+      {
+        "title": "Change Background Color (6502 Assembly)",
+        "language": "Assembly (6502)",
+        "code": "LDA #$01\nSTA $2001",
+        "explanation": [
+          "LDA #$01 loads immediate value 1 into the accumulator.",
+          "STA $2001 stores the value in the PPU Mask register to change display settings (like background color)."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "NES assembly programming intro",
+      "websites": [
+        {
+          "title": "NESDev Wiki",
+          "url": "https://www.nesdev.org/wiki/NES_reference_guide",
+          "description": "Comprehensive technical documentation for NES development."
+        },
+        {
+          "title": "Making NES Games",
+          "url": "https://skilldrick.github.io/easy6502/",
+          "description": "Simple online 6502 assembler and tutorials."
+        }
+      ]
+    }
+  },
+  {
+    "id": "snes",
+    "name": "Super Nintendo Entertainment System",
+    "shortName": "SNES",
+    "type": "game",
+    "manufacturer": "Nintendo",
+    "year": 1990,
+    "discontinued": 1999,
+    "cpu": "Ricoh 5A22 (65C816-based), 3.58 MHz",
+    "ram": "128 KB",
+    "storage": "Cartridge",
+    "os": "None (custom firmware)",
+    "description": "The SNES delivered 16-bit graphics, Mode 7 effects and classic games like Super Mario World and Chrono Trigger. It helped shape the golden age of console gaming.",
+    "funFact": "Mode 7 graphics powered the 3D-effect backgrounds in games like Mario Kart.",
+    "difficulty": "Intermediate",
+    "emoji": "🎮",
+    "color": "#7F7FD5",
+    "codingExamples": [
+      {
+        "title": "Set CGRAM Color (65816 Assembly)",
+        "language": "Assembly (65816)",
+        "code": "LDA #$7FFF ; white\nSTA $2122 ; write to CGRAM",
+        "explanation": [
+          "LDA #$7FFF loads the color white in SNES format.",
+          "STA $2122 writes the color value to the CGRAM register to set background/text colors."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "SNES homebrew 65816 assembly",
+      "websites": [
+        {
+          "title": "SNES Development Wiki",
+          "url": "https://wiki.superfamicom.org/snes/show/HomePage",
+          "description": "Collaborative wiki about SNES programming and hardware."
+        }
+      ]
+    }
+  },
+  {
+    "id": "nintendo64",
+    "name": "Nintendo 64",
+    "shortName": "N64",
+    "type": "game",
+    "manufacturer": "Nintendo",
+    "year": 1996,
+    "discontinued": 2002,
+    "cpu": "NEC VR4300 (MIPS R4300i), 93.75 MHz",
+    "ram": "4 MB (expandable to 8 MB)",
+    "storage": "Cartridge",
+    "os": "None (custom firmware)",
+    "description": "The N64 brought 3D graphics and iconic titles like Super Mario 64 and The Legend of Zelda: Ocarina of Time. Its trident controller was a memorable part of its legacy.",
+    "funFact": "Nintendo 64 carts could hold up to 64MB of data, huge for the time.",
+    "difficulty": "Advanced",
+    "emoji": "🥒",
+    "color": "#6466C2",
+    "codingExamples": [
+      {
+        "title": "Print to Screen (C with Libdragon)",
+        "language": "C",
+        "code": "#include <stdio.h>\n#include <libdragon.h>\n\nint main(void) {\n    console_init();\n    printf(\"Hello, N64!\\n\");\n    while(1);\n    return 0;\n}",
+        "explanation": [
+          "Includes N64-specific libraries for development (e.g., Libdragon for homebrew).",
+          "Initializes the N64 console and prints a message to the screen."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Nintendo 64 homebrew development",
+      "websites": [
+        {
+          "title": "Libdragon - N64 Homebrew SDK",
+          "url": "https://github.com/DragonMinded/libdragon",
+          "description": "Popular open-source library for making homebrew N64 games."
+        }
+      ]
+    }
+  },
+  {
+    "id": "playstation1",
+    "name": "PlayStation 1",
+    "shortName": "PS1",
+    "type": "game",
+    "manufacturer": "Sony",
+    "year": 1994,
+    "discontinued": 2006,
+    "cpu": "32-bit MIPS R3000A, 33.9 MHz",
+    "ram": "2 MB",
+    "storage": "CD-ROM",
+    "os": "Sony OS (proprietary)",
+    "description": "The original PlayStation revolutionized gaming with 3D graphics and memorable franchises like Final Fantasy and Gran Turismo. Its vast library cemented its legacy as a 90s icon.",
+    "funFact": "The PlayStation 1 controller didn't have analog sticks until the DualShock revision.",
+    "difficulty": "Advanced",
+    "emoji": "🕹️",
+    "color": "#9A9997",
+    "codingExamples": [
+      {
+        "title": "Hello World (C)",
+        "language": "C",
+        "code": "#include <stdio.h>\n#include <psx.h>\n\nint main() {\n    printf(\"Hello, PS1 world!\\n\");\n    while(1);\n    return 0;\n}",
+        "explanation": [
+          "Includes the PSX hardware libraries.",
+          "Prints a message to the PlayStation debug console or screen."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "PS1 homebrew development",
+      "websites": [
+        {
+          "title": "PSXDEV.net",
+          "url": "https://www.psxdev.net/",
+          "description": "Community and guides for PlayStation 1 development and homebrew."
+        }
+      ]
+    }
+  },
+  {
+    "id": "playstation2",
+    "name": "PlayStation 2",
+    "shortName": "PS2",
+    "type": "game",
+    "manufacturer": "Sony",
+    "year": 2000,
+    "discontinued": 2013,
+    "cpu": "Emotion Engine, 294 MHz",
+    "ram": "32 MB",
+    "storage": "DVD-ROM",
+    "os": "Sony OS (proprietary)",
+    "description": "The PS2 is the best-selling console of all time, supporting an immense library of games. Its backwards compatibility and DVD support made it a household staple.",
+    "funFact": "PS2s were once networked together to form a supercomputer by researchers at the US Air Force.",
+    "difficulty": "Advanced",
+    "emoji": "🔵",
+    "color": "#3C82F4",
+    "codingExamples": [
+      {
+        "title": "Draw Rectangle (C, PS2SDK)",
+        "language": "C",
+        "code": "// Assume gsKit and PS2SDK are correctly included\n// Setup basics to draw a green background\n#include <gsKit.h>\n\ngsKit_init_screen();\ngsKit_clear_screen(0x0000FF00); // Green background",
+        "explanation": [
+          "gsKit is a PS2 homebrew graphics library.",
+          "Initializes screen and clears it with a solid color (green, using ARGB hex)."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "PS2 homebrew tutorial",
+      "websites": [
+        {
+          "title": "PS2Dev",
+          "url": "https://www.ps2dev.org/",
+          "description": "Home for PlayStation 2 development resources and forums."
+        }
+      ]
+    }
+  },
+  {
+    "id": "xboxoriginal",
+    "name": "Xbox (Original)",
+    "shortName": "Xbox Original",
+    "type": "game",
+    "manufacturer": "Microsoft",
+    "year": 2001,
+    "discontinued": 2009,
+    "cpu": "Intel Pentium III, 733 MHz",
+    "ram": "64 MB",
+    "storage": "8/10 GB HDD",
+    "os": "Xbox OS (custom Windows)",
+    "description": "Microsoft's first foray into consoles, the Xbox, boasted a built-in hard drive and iconic titles like Halo. Its robust hardware set it apart from competitors.",
+    "funFact": "Duke Nukem Forever was in development throughout the entire original Xbox lifespan.",
+    "difficulty": "Advanced",
+    "emoji": "💚",
+    "color": "#107C10",
+    "codingExamples": [
+      {
+        "title": "Hello World (C++)",
+        "language": "C++",
+        "code": "#include <xtl.h>\n\nvoid main() {\n    while(1) {\n        OutputDebugStringA(\"Hello, Xbox!\\n\");\n    }\n}",
+        "explanation": [
+          "Uses Xbox debug libraries.",
+          "Repeatedly prints a Hello message to the debug output."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Xbox original homebrew dev",
+      "websites": [
+        {
+          "title": "XboxDevWiki",
+          "url": "https://xboxdevwiki.net/",
+          "description": "Extensive documentation of the original Xbox hardware and OS."
+        }
+      ]
+    }
+  },
+  {
+    "id": "gamecube",
+    "name": "Nintendo GameCube",
+    "shortName": "GameCube",
+    "type": "game",
+    "manufacturer": "Nintendo",
+    "year": 2001,
+    "discontinued": 2007,
+    "cpu": "IBM PowerPC Gekko, 485 MHz",
+    "ram": "24 MB",
+    "storage": "MiniDVD",
+    "os": "None (custom firmware)",
+    "description": "The GameCube was Nintendo's entry into the 21st-century console wars, featuring compact discs, cube-shaped design, and favorites like Super Smash Bros. Melee.",
+    "funFact": "The GameCube could connect to Game Boy Advance games for bonus features in titles like Zelda: Four Swords.",
+    "difficulty": "Advanced",
+    "emoji": "🟪",
+    "color": "#6B47DC",
+    "codingExamples": [
+      {
+        "title": "Change Screen Color (C with libogc)",
+        "language": "C",
+        "code": "#include <gccore.h>\n#include <ogc/video.h>\n\nint main() {\n    void *frameBuffer = MEM_K0_TO_K1(SYS_GetArenaLo());\n    VIDEO_Init();\n    VIDEO_SetNextFramebuffer(frameBuffer);\n    VIDEO_SetBlack(FALSE);\n    VIDEO_Flush();\n    while(1);\n    return 0;\n}",
+        "explanation": [
+          "Uses libogc for GameCube homebrew.",
+          "Initializes video and framebuffer, switches display to active, and enters infinite loop."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "GameCube homebrew tutorial",
+      "websites": [
+        {
+          "title": "DevKitPro GameCube Dev",
+          "url": "https://devkitpro.org/wiki/GameCube",
+          "description": "Setup and starting guides for GameCube homebrew development."
+        }
+      ]
+    }
+  },
+  {
+    "id": "segagenesis",
+    "name": "Sega Genesis",
+    "shortName": "Genesis",
+    "type": "game",
+    "manufacturer": "Sega",
+    "year": 1988,
+    "discontinued": 1997,
+    "cpu": "Motorola 68000, 7.6 MHz",
+    "ram": "64 KB",
+    "storage": "Cartridge",
+    "os": "None (custom firmware)",
+    "description": "The Sega Genesis was famous for its blast processing and Sonic the Hedgehog series. It was the rival to Nintendo's SNES during the 16-bit era.",
+    "funFact": "Michael Jackson reportedly contributed music to Sonic 3.",
+    "difficulty": "Intermediate",
+    "emoji": "🌀",
+    "color": "#333333",
+    "codingExamples": [
+      {
+        "title": "Set Background Palette (68K Assembly)",
+        "language": "Assembly (68000)",
+        "code": "move.w #$0E00, $C00004 ; blue background",
+        "explanation": [
+          "Writes the color blue to the background palette register.",
+          "This simple line sets the background color for the entire screen."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Sega Genesis homebrew dev",
+      "websites": [
+        {
+          "title": "Genesis Development Wiki",
+          "url": "https://gendev.spritesmind.net/en/",
+          "description": "Collated hardware information and dev tools for Genesis programming."
+        }
+      ]
+    }
+  },
+  {
+    "id": "gameboy",
+    "name": "Game Boy",
+    "shortName": "Game Boy",
+    "type": "handheld",
+    "manufacturer": "Nintendo",
+    "year": 1989,
+    "discontinued": 2003,
+    "cpu": "Sharp LR35902, 4.19 MHz",
+    "ram": "8 KB",
+    "storage": "Cartridge",
+    "os": "None (custom firmware)",
+    "description": "Game Boy made gaming portable, with millions of users enjoying Tetris and Pokémon on the go. Its simple monochrome display helped games run for hours on AA batteries.",
+    "funFact": "Game Boy's greenish screen was chosen for low power consumption.",
+    "difficulty": "Intermediate",
+    "emoji": "🟩",
+    "color": "#B4DE6C",
+    "codingExamples": [
+      {
+        "title": "Infinite Loop (Z80 Assembly)",
+        "language": "Assembly (Z80)",
+        "code": "loop:\n    jp loop ; Jump forever",
+        "explanation": [
+          "Defines a label and jumps to it, creating an infinite loop. Useful as a 'do nothing' placeholder."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Game Boy assembly programming",
+      "websites": [
+        {
+          "title": "GBDev Wiki",
+          "url": "https://gbdev.io/",
+          "description": "Modern and friendly docs for Game Boy homebrew creation."
+        }
+      ]
+    }
+  },
+  {
+    "id": "gameboyadvance",
+    "name": "Game Boy Advance",
+    "shortName": "GBA",
+    "type": "handheld",
+    "manufacturer": "Nintendo",
+    "year": 2001,
+    "discontinued": 2010,
+    "cpu": "ARM7TDMI, 16.8 MHz",
+    "ram": "32 KB",
+    "storage": "Cartridge",
+    "os": "None (custom firmware)",
+    "description": "The Game Boy Advance brought 32-bit power to handhelds, enabling vivid color graphics and large worlds in your pocket. Popular franchises like Pokémon and Zelda thrived here.",
+    "funFact": "The GBA can play all original Game Boy and Game Boy Color games.",
+    "difficulty": "Intermediate",
+    "emoji": "🟪",
+    "color": "#7646B0",
+    "codingExamples": [
+      {
+        "title": "Set Mode 3 Pixel (C)",
+        "language": "C",
+        "code": "#define MODE3 0x0003\n#define BG2_ENABLE 0x0400\n#define REG_DISPCNT *(volatile unsigned short*)0x4000000\nunsigned short* videoBuffer = (unsigned short*)0x6000000;\n\nint main() {\n    REG_DISPCNT = MODE3 | BG2_ENABLE;\n    videoBuffer[120 + 160 * 80] = 0x7FFF; // Set white pixel at center\n    while (1);\n    return 0;\n}",
+        "explanation": [
+          "Sets GBA display mode to Mode 3 (bitmap, 240x160).",
+          "Directly draws a white pixel at screen center."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Game Boy Advance homebrew coding",
+      "websites": [
+        {
+          "title": "TONC GBA Programming Guide",
+          "url": "https://www.coranac.com/tonc/text/",
+          "description": "The classic reference text for GBA software development."
+        }
+      ]
+    }
+  },
+  {
+    "id": "nintendods",
+    "name": "Nintendo DS",
+    "shortName": "DS",
+    "type": "handheld",
+    "manufacturer": "Nintendo",
+    "year": 2004,
+    "discontinued": 2013,
+    "cpu": "ARM946E-S, 67 MHz; ARM7TDMI, 33 MHz",
+    "ram": "4 MB",
+    "storage": "Cartridge, SD (flashcart)",
+    "os": "None (custom firmware)",
+    "description": "The DS popularized dual screens and touchscreen gaming with blockbuster franchises and quirky innovations. Its Wi-Fi connectivity introduced global gaming on the go.",
+    "funFact": "The Nintendo DS Lite was originally codenamed 'Nitro.'",
+    "difficulty": "Intermediate",
+    "emoji": "🟦",
+    "color": "#689ADE",
+    "codingExamples": [
+      {
+        "title": "Print Message on Screen (C, libnds)",
+        "language": "C",
+        "code": "#include <nds.h>\nint main(void) {\n    consoleDemoInit();\n    iprintf(\"Hello, DS!\\n\");\n    while(1) swiWaitForVBlank();\n    return 0;\n}",
+        "explanation": [
+          "Initializes the text console and prints a quick message to the DS top screen."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Nintendo DS homebrew starting guide",
+      "websites": [
+        {
+          "title": "DevKitPro NDS Dev",
+          "url": "https://devkitpro.org/wiki/Getting_Started_with_NDS_Development",
+          "description": "Official docs for homebrew programming on the Nintendo DS."
+        }
+      ]
+    }
+  },
+  {
+    "id": "psp",
+    "name": "PlayStation Portable",
+    "shortName": "PSP",
+    "type": "handheld",
+    "manufacturer": "Sony",
+    "year": 2004,
+    "discontinued": 2014,
+    "cpu": "MIPS R4000, 333 MHz",
+    "ram": "32 MB",
+    "storage": "UMD",
+    "os": "PlayStation Portable System Software",
+    "description": "Sony's PSP brought powerful 3D graphics and media playback to portable gaming. It fostered an active scene of both official and homebrew games.",
+    "funFact": "Homebrew developers famously cracked the PSP's security, enabling custom apps and emulators.",
+    "difficulty": "Advanced",
+    "emoji": "⚪",
+    "color": "#AAAAAA",
+    "codingExamples": [
+      {
+        "title": "Print Message (C, PSP SDK)",
+        "language": "C",
+        "code": "#include <pspkernel.h>\n#include <pspdebug.h>\n\nint main(void) {\n    pspDebugScreenInit();\n    pspDebugScreenPrintf(\"Hello, PSP!\\n\");\n    sceKernelSleepThread();\n    return 0;\n}",
+        "explanation": [
+          "Initializes debugging screen and prints message.",
+          "Sleeps the main thread, keeping the output visible."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "PSP homebrew tutorial",
+      "websites": [
+        {
+          "title": "PSP Programming Wiki",
+          "url": "https://psp-dev.org/doku.php",
+          "description": "Community-maintained SDK docs and homebrew programming advice."
+        }
+      ]
+    }
+  },
+  {
+    "id": "gamegear",
+    "name": "Game Gear",
+    "shortName": "Game Gear",
+    "type": "handheld",
+    "manufacturer": "Sega",
+    "year": 1990,
+    "discontinued": 1997,
+    "cpu": "Zilog Z80, 3.58 MHz",
+    "ram": "8 KB",
+    "storage": "Cartridge",
+    "os": "None (custom firmware)",
+    "description": "Sega's color handheld, the Game Gear, offered fast-paced portable titles and competed directly against the Game Boy. Its bright display set it apart.",
+    "funFact": "Accessories included a TV tuner for watching broadcast television on the go.",
+    "difficulty": "Intermediate",
+    "emoji": "🔋",
+    "color": "#5BC0EB",
+    "codingExamples": [
+      {
+        "title": "Main Loop (Z80 Assembly)",
+        "language": "Assembly (Z80)",
+        "code": "start:\n    jp start",
+        "explanation": [
+          "A main loop is a common way to keep programs running on Game Gear.",
+          "This code loops forever."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Game Gear homebrew coding",
+      "websites": [
+        {
+          "title": "SMS Power!",
+          "url": "https://www.smspower.org/Development/GameGear",
+          "description": "Guides for Sega Game Gear (and Master System) homebrew software."
+        }
+      ]
+    }
+  },
+  {
+    "id": "ciscoiosrouter",
+    "name": "Cisco IOS Router",
+    "shortName": "Cisco IOS",
+    "type": "network",
+    "manufacturer": "Cisco",
+    "year": 1993,
+    "discontinued": null,
+    "cpu": "MIPS 200-800 MHz (varies by model)",
+    "ram": "32+ MB (varies)",
+    "storage": "Flash, NVRAM",
+    "os": "Cisco IOS",
+    "description": "Cisco IOS routers form the backbone of the internet, enabling enterprise networking and secure data transport. They use a command-line interface for configuration.",
+    "funFact": "The 'write memory' command is still supported, despite being a legacy command.",
+    "difficulty": "Intermediate",
+    "emoji": "🌐",
+    "color": "#2962FF",
+    "codingExamples": [
+      {
+        "title": "Set Hostname",
+        "language": "Cisco IOS CLI",
+        "code": "configure terminal\nhostname Router01\nend",
+        "explanation": [
+          "Enters global configuration mode.",
+          "Sets the hostname to Router01.",
+          "Exits configuration mode."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Cisco IOS CLI intro",
+      "websites": [
+        {
+          "title": "Cisco CLI Analyzer",
+          "url": "https://cli.cloudapps.cisco.com/cli-analyzer/",
+          "description": "Interactive online tool for learning Cisco CLI commands."
+        }
+      ]
+    }
+  },
+  {
+    "id": "linksyswrt54g",
+    "name": "Linksys WRT54G",
+    "shortName": "WRT54G",
+    "type": "network",
+    "manufacturer": "Linksys",
+    "year": 2002,
+    "discontinued": 2008,
+    "cpu": "Broadcom BCM5352, 200 MHz",
+    "ram": "16 MB",
+    "storage": "4 MB Flash",
+    "os": "Linux-based Linksys firmware (or OpenWRT/DD-WRT)",
+    "description": "The WRT54G was a popular SOHO router, famous for its hackable Linux-based firmware. It enabled advanced customizations for home networking.",
+    "funFact": "The openness of the original firmware inspired projects like DD-WRT and OpenWRT.",
+    "difficulty": "Intermediate",
+    "emoji": "📶",
+    "color": "#36BCE7",
+    "codingExamples": [
+      {
+        "title": "Check Router Uptime (Telnet Shell)",
+        "language": "Shell",
+        "code": "uptime",
+        "explanation": [
+          "Outputs how long the router has been running since last boot."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Linksys WRT54G custom firmware install",
+      "websites": [
+        {
+          "title": "DD-WRT Homepage",
+          "url": "https://dd-wrt.com/",
+          "description": "Popular alternate firmware supported on many Linksys routers."
+        }
+      ]
+    }
+  },
+  {
+    "id": "ddwrt",
+    "name": "DD-WRT Router",
+    "shortName": "DD-WRT",
+    "type": "network",
+    "manufacturer": "Community (based on Linksys models)",
+    "year": 2005,
+    "discontinued": null,
+    "cpu": "Varies",
+    "ram": "Varies",
+    "storage": "Flash",
+    "os": "Linux (OpenWRT/DD-WRT)",
+    "description": "DD-WRT is open firmware for routers, providing advanced features like QoS, VLANs, and VPN. It is a favorite among tinkerers and prosumers.",
+    "funFact": "DD-WRT can run on over 100 router models, not just Linksys.",
+    "difficulty": "Intermediate",
+    "emoji": "🛠️",
+    "color": "#AB47BC",
+    "codingExamples": [
+      {
+        "title": "Enable SSH Access",
+        "language": "Shell (WebUI or CLI)",
+        "code": "nvram set sshd_enable=1\nnvram commit\nreboot",
+        "explanation": [
+          "Enables SSH on the router for secure command-line access.",
+          "Commits the setting and reboots."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "DD-WRT configuration advanced",
+      "websites": [
+        {
+          "title": "DD-WRT Wiki",
+          "url": "https://wiki.dd-wrt.com/",
+          "description": "Tech guides and documentation for DD-WRT routers."
+        }
+      ]
+    }
+  },
+  {
+    "id": "rpirouter",
+    "name": "Raspberry Pi as Router",
+    "shortName": "Raspberry Pi Router",
+    "type": "network",
+    "manufacturer": "Raspberry Pi Foundation",
+    "year": 2012,
+    "discontinued": null,
+    "cpu": "ARM Cortex-A (varies)",
+    "ram": "512 MB or more",
+    "storage": "microSD",
+    "os": "Raspberry Pi OS, OpenWRT, etc.",
+    "description": "A Raspberry Pi can be configured as a network router or access point, teaching networking skills hands-on and enabling custom firewall, VPN, and monitoring tools.",
+    "funFact": "The Pi can serve as the complete home network hub, firewall, and even traffic visualizer.",
+    "difficulty": "Beginner",
+    "emoji": "🍓",
+    "color": "#D7263D",
+    "codingExamples": [
+      {
+        "title": "Print Local IP Address",
+        "language": "Python",
+        "code": "import socket\nhostname = socket.gethostname()\nlocal_ip = socket.gethostbyname(hostname)\nprint(f\"Local IP: {local_ip}\")",
+        "explanation": [
+          "Imports the socket library.",
+          "Gets the system's hostname and uses it to look up the local IP address.",
+          "Prints the result. This can be run on the Pi to confirm network status."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Raspberry Pi router tutorial",
+      "websites": [
+        {
+          "title": "Pi My Life Up - Router Guide",
+          "url": "https://pimylifeup.com/raspberry-pi-wifi-router/",
+          "description": "Step-by-step tutorial: turning your Pi into a Wi-Fi router/access point."
+        }
+      ]
+    }
+  },
+  {
+    "id": "commodore64",
+    "name": "Commodore 64",
+    "shortName": "C64",
+    "type": "computer",
+    "manufacturer": "Commodore",
+    "year": 1982,
+    "discontinued": 1994,
+    "cpu": "MOS Technology 6510, 1.02 MHz",
+    "ram": "64 KB",
+    "storage": "Tape, Disk, Cartridge",
+    "os": "Commodore BASIC 2.0",
+    "description": "The C64 was the world's most popular home computer in the 1980s. It introduced millions to programming, games, and music creation, earning a huge community even today.",
+    "funFact": "Its SID sound chip inspired an entire genre of electronic music known as 'chiptune.'",
+    "difficulty": "Beginner",
+    "emoji": "💾",
+    "color": "#55c5ff",
+    "codingExamples": [
+      {
+        "title": "Hello World (BASIC)",
+        "language": "BASIC",
+        "code": "10 PRINT \"HELLO, WORLD!\"\n20 GOTO 10",
+        "explanation": [
+          "Line 10 prints 'HELLO, WORLD!' to the screen.",
+          "Line 20 causes the program to repeat, creating an infinite scroll."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Commodore 64 BASIC programming",
+      "websites": [
+        {
+          "title": "C64 Wiki BASIC Programming",
+          "url": "https://www.c64-wiki.com/wiki/BASIC_programming",
+          "description": "Tutorials and programming examples for Commodore 64 BASIC."
+        }
+      ]
+    }
+  },
+  {
+    "id": "appleii",
+    "name": "Apple II",
+    "shortName": "Apple II",
+    "type": "computer",
+    "manufacturer": "Apple",
+    "year": 1977,
+    "discontinued": 1993,
+    "cpu": "MOS Technology 6502, 1 MHz",
+    "ram": "4 KB to 64 KB",
+    "storage": "Cassette, Floppy, Disk II",
+    "os": "Apple DOS, ProDOS, BASIC",
+    "description": "The Apple II was a pioneering personal computer, famed for ease of use and expandability. It helped spark the school computing revolution in the US.",
+    "funFact": "The first version of VisiCalc, the spreadsheet app, debuted on the Apple II.",
+    "difficulty": "Intermediate",
+    "emoji": "🍏",
+    "color": "#99E265",
+    "codingExamples": [
+      {
+        "title": "Input and Output (BASIC)",
+        "language": "BASIC",
+        "code": "10 INPUT \"WHAT IS YOUR NAME? \",N$\n20 PRINT \"HELLO, \";N$",
+        "explanation": [
+          "Line 10 prompts the user to input a name and stores it.",
+          "Line 20 prints a friendly greeting using the name entered."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Apple II BASIC programming",
+      "websites": [
+        {
+          "title": "Apple2.org BASIC",
+          "url": "https://www.apple2.org/BASIC/",
+          "description": "BASIC reference, tutorials, and emulator links for Apple II users."
+        }
+      ]
+    }
+  },
+  {
+    "id": "raspberrypi",
+    "name": "Raspberry Pi",
+    "shortName": "Raspberry Pi",
+    "type": "computer",
+    "manufacturer": "Raspberry Pi Foundation",
+    "year": 2012,
+    "discontinued": null,
+    "cpu": "ARM Cortex-A (varies by model)",
+    "ram": "512 MB – 8 GB",
+    "storage": "microSD",
+    "os": "Raspberry Pi OS (Linux)",
+    "description": "The Raspberry Pi is a small, cheap, and popular microcomputer that makes coding and electronics accessible to everyone. With a lively community and endless tutorials, it's perfect for beginners.",
+    "funFact": "Over 40 million Raspberry Pis have been sold globally.",
+    "difficulty": "Beginner",
+    "emoji": "🍓",
+    "color": "#D7263D",
+    "codingExamples": [
+      {
+        "title": "Blink an LED (Python, GPIO Zero)",
+        "language": "Python",
+        "code": "from gpiozero import LED\nfrom time import sleep\nled = LED(17)\nwhile True:\n    led.on()\n    sleep(1)\n    led.off()\n    sleep(1)",
+        "explanation": [
+          "Imports the gpiozero library for simple GPIO pin control.",
+          "Sets up GPIO pin 17 for output to an LED.",
+          "Turns the LED on for 1 second, off for 1 second, and repeats.",
+          "This is a common beginner hardware project with Raspberry Pi."
+        ]
+      },
+      {
+        "title": "Simple Hello World (Python)",
+        "language": "Python",
+        "code": "print(\"Hello, Raspberry Pi!\")",
+        "explanation": [
+          "This one-liner prints a friendly hello message to the screen.",
+          "It's the classic starting point for all coding beginners on the Pi."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Raspberry Pi Python beginner tutorial",
+      "websites": [
+        {
+          "title": "Official Raspberry Pi Learning",
+          "url": "https://projects.raspberrypi.org/en/",
+          "description": "Beginner-friendly projects, code samples, and explanations from the official Raspberry Pi Foundation."
+        }
+      ]
+    }
+  },
+  {
+    "id": "zxspectrum",
+    "name": "ZX Spectrum",
+    "shortName": "ZX Spectrum",
+    "type": "computer",
+    "manufacturer": "Sinclair Research",
+    "year": 1982,
+    "discontinued": 1992,
+    "cpu": "Zilog Z80A, 3.5 MHz",
+    "ram": "16 KB, 48 KB",
+    "storage": "Cassette tape",
+    "os": "Sinclair BASIC",
+    "description": "The ZX Spectrum was a defining British home microcomputer whose rubber keys and colorful graphics became iconic. It was the birthplace of many classic 8-bit games and coders.",
+    "funFact": "The original ZX Spectrum beep sound was used in British TV for years after.",
+    "difficulty": "Intermediate",
+    "emoji": "🖥️",
+    "color": "#471A62",
+    "codingExamples": [
+      {
+        "title": "Draw Diagonal Line (BASIC)",
+        "language": "BASIC",
+        "code": "10 FOR I=0 TO 20\n20 PLOT I,I\n30 NEXT I",
+        "explanation": [
+          "Line 10 starts a for loop from 0 to 20.",
+          "Line 20 draws a pixel at position (I,I) creating a diagonal line.",
+          "Line 30 increments to the next step."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "ZX Spectrum BASIC programming",
+      "websites": [
+        {
+          "title": "ZX Spectrum Programming",
+          "url": "https://www.worldofspectrum.org/ZXBasicManual/Ch3.html",
+          "description": "Official Sinclair BASIC manual for ZX Spectrum."
+        }
+      ]
+    }
+  },
+  {
+    "id": "mamecabinet",
+    "name": "MAME Arcade Cabinet",
+    "shortName": "MAME Cabinet",
+    "type": "arcade",
+    "manufacturer": "Varies (MAME)",
+    "year": 1997,
+    "discontinued": null,
+    "cpu": "Varies",
+    "ram": "Varies",
+    "storage": "HDD, Flash",
+    "os": "MAME",
+    "description": "MAME (Multiple Arcade Machine Emulator) cabinets let you run, play, and even develop games for hundreds of classic arcade systems, all in one retro-style shell.",
+    "funFact": "MAME is open-source, preserving arcade games through emulation.",
+    "difficulty": "Intermediate",
+    "emoji": "🕹️",
+    "color": "#444444",
+    "codingExamples": [
+      {
+        "title": "List Available Games",
+        "language": "Shell",
+        "code": "mame -listfull",
+        "explanation": [
+          "Executes the mame binary with the -listfull argument.",
+          "Outputs a full list of available arcade games detected by your ROM set."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "MAME setup and game launch",
+      "websites": [
+        {
+          "title": "Official MAME Dev",
+          "url": "https://www.mamedev.org/",
+          "description": "Home of official MAME downloads, docs, and news."
+        }
+      ]
+    }
+  },
+  {
+    "id": "neogeo",
+    "name": "Neo Geo MVS",
+    "shortName": "Neo Geo",
+    "type": "arcade",
+    "manufacturer": "SNK",
+    "year": 1990,
+    "discontinued": 2004,
+    "cpu": "Motorola 68000, 12 MHz; Zilog Z80, 4 MHz",
+    "ram": "64 KB",
+    "storage": "Cartridge",
+    "os": "None (custom firmware)",
+    "description": "The Neo Geo brought arcade-quality graphics to cabinets and homes alike. Known for fighting games like King of Fighters and Metal Slug.",
+    "funFact": "Neo Geo cartridges could cost as much as $300 at launch.",
+    "difficulty": "Advanced",
+    "emoji": "💰",
+    "color": "#FFD600",
+    "codingExamples": [
+      {
+        "title": "Set Palette Color (68K Assembly)",
+        "language": "Assembly (68000)",
+        "code": "move.l #$FF0000, $400000 ; set red palette color",
+        "explanation": [
+          "Moves a hex color value (red) into a palette memory address.",
+          "Changes a palette color for sprites/backgrounds."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Neo Geo homebrew programming",
+      "websites": [
+        {
+          "title": "NeoDev Wiki",
+          "url": "https://wiki.neogeodev.org/index.php?title=Programming",
+          "description": "Development resources and guides for Neo Geo programming."
+        }
+      ]
+    }
+  },
+  {
+    "id": "pacmanhw",
+    "name": "Pac-Man Hardware",
+    "shortName": "Pac-Man HW",
+    "type": "arcade",
+    "manufacturer": "Namco",
+    "year": 1980,
+    "discontinued": 1987,
+    "cpu": "Zilog Z80, 3.072 MHz",
+    "ram": "2 KB",
+    "storage": "ROM",
+    "os": "None (custom firmware)",
+    "description": "Pac-Man ran on custom arcade hardware, famed for its simple graphics and addictive gameplay. Modders use the platform to create their own mazes and versions.",
+    "funFact": "Pac-Man's original title, 'Puck Man,' was changed for the US release.",
+    "difficulty": "Advanced",
+    "emoji": "🟡",
+    "color": "#FFE607",
+    "codingExamples": [
+      {
+        "title": "Infinite Loop (Z80 Assembly)",
+        "language": "Assembly (Z80)",
+        "code": "start:\n    jp start",
+        "explanation": [
+          "A simple infinite loop, typical for halting the CPU after main game loop ends."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Pac-Man arcade hardware explained",
+      "websites": [
+        {
+          "title": "Pac-Man Dossier",
+          "url": "https://pacman.holenet.info/",
+          "description": "A deep technical analysis of Pac-Man's algorithms, hardware and game logic."
+        }
+      ]
+    }
+  }
+]
