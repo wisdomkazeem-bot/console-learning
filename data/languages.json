@@ -2,290 +2,2855 @@
   {
     "id": "python",
     "name": "Python",
-    "type": "scripting",
+    "type": "Interpreted",
     "year": 1991,
     "creator": "Guido van Rossum",
     "difficulty": "Beginner",
-    "description": "Python is a high-level, interpreted programming language known for its readability and concise syntax. It is used by professionals and beginners worldwide for web development, scientific computing, automation, and more.",
-    "usedFor": "Web development, data science, machine learning, scripting, automation, desktop applications.",
-    "funFact": "Python is named after the British comedy group 'Monty Python', not the snake.",
+    "description": "Python is a versatile, user-friendly language known for clear syntax and a huge ecosystem of libraries.",
+    "usedFor": "Web development, automation, data analysis, scripting, machine learning, APIs.",
+    "funFact": "Python is named after the British comedy group Monty Python.",
     "color": "#3572A5",
     "terminalCommands": {
-      "windows": "python hello.py",
-      "mac": "python3 hello.py",
-      "linux": "python3 hello.py",
-      "install": "Download Python from https://python.org and add it to your PATH. Mac and Linux usually come with Python pre-installed, but you can upgrade via 'brew install python' (Mac) or 'sudo apt install python3' (Ubuntu).",
-      "runExample": "Hello, world!"
+      "windows": "python lesson.py",
+      "mac": "python3 lesson.py",
+      "linux": "python3 lesson.py",
+      "install": "Download from https://www.python.org/downloads/"
     },
     "topics": [
       {
         "id": "variables",
-        "title": "Variables",
+        "title": "Variables and Data Types",
         "difficulty": "Beginner",
-        "explanation": "Variables store values in a program. In Python, you declare a variable by assigning it a value. There is no need to specify the type explicitly.",
-        "keyConcepts": [
-          { "term": "Assignment", "definition": "Storing a value in a variable using =" },
-          { "term": "Type Inference", "definition": "Python determines type automatically based on value." }
+        "explanation": "Variables store data values in Python. Types (int, float, str, etc.) are assigned dynamically, so you don't specify them explicitly.",
+        "keyTerms": [
+          { "term": "Variable", "definition": "A named container for storing data." },
+          { "term": "Type", "definition": "Kind of value, e.g. int, float, str, bool." }
         ],
-        "codeExample": "x = 10\ny = 'apple'\nprint(x, y)",
-        "expectedOutput": "10 apple",
-        "starterCode": "name = \nprint(name)",
-        "solution": "name = 'Sam'\nprint(name)",
+        "codeExample": [
+          "age = 22",
+          "name = \"Alice\"",
+          "height = 1.72",
+          "print(name, age, height)"
+        ],
+        "expectedOutput": "Alice 22 1.72",
+        "starterCode": "city = \nzip_code = \nprint(city, zip_code)",
+        "solution": [
+          "city = \"London\"",
+          "zip_code = 12345",
+          "print(city, zip_code)"
+        ],
         "commonMistakes": [
-          "Using a variable before assignment.",
-          "Trying to declare variable types as in other languages."
+          "Misspelling variable names.",
+          "Using variables before assigning a value."
         ],
-        "challenge": "Create a variable named 'age' set to 25 and print it.",
-        "hint": "Assign age to 25, then print(age)",
-        "terminalNote": "Save as hello.py and run with 'python hello.py'"
+        "challenge": "Assign your favorite color and number to two variables and print them.",
+        "challengeHint": "Assign a string and an int to two new variables.",
+        "challengeSolution": [
+          "favorite_color = \"blue\"",
+          "favorite_number = 7",
+          "print(favorite_color, favorite_number)"
+        ],
+        "terminalNote": "Run with python lesson.py or python3 lesson.py"
       },
       {
         "id": "lists",
         "title": "Lists",
         "difficulty": "Beginner",
-        "explanation": "Lists store ordered collections of items, which can be of different types. Lists are mutable and use square brackets.",
-        "keyConcepts": [
-          { "term": "Mutable", "definition": "Content can be changed after creation." },
-          { "term": "Index", "definition": "Position of an item, starting at 0." }
+        "explanation": "A list is an ordered collection of elements in Python. Lists can hold elements of different types, and can be changed after creation.",
+        "keyTerms": [
+          { "term": "List", "definition": "Mutable sequence of elements." }
         ],
-        "codeExample": "numbers = [1, 2, 3]\nprint(numbers[1])",
-        "expectedOutput": "2",
-        "starterCode": "colors = ['red', 'green', 'yellow']\n# print the last item",
-        "solution": "colors = ['red', 'green', 'yellow']\nprint(colors[-1])",
+        "codeExample": [
+          "fruits = [\"apple\", \"banana\", \"mango\"]",
+          "print(fruits[1])"
+        ],
+        "expectedOutput": "banana",
+        "starterCode": "nums = [3, 6, 9]\n# Print the last number",
+        "solution": [
+          "nums = [3, 6, 9]",
+          "print(nums[-1])"
+        ],
         "commonMistakes": [
-          "IndexError: list index out of range.",
-          "Using parentheses instead of brackets."
+          "Forgetting lists are indexed from 0.",
+          "Using parentheses or braces instead of brackets."
         ],
-        "challenge": "Print the first item in the list: words = ['hi', 'bye']",
-        "hint": "Use words[0]",
-        "terminalNote": "Save code in hello.py, run in terminal as above."
+        "challenge": "Add a new item 'grape' to the fruits list, then print the full list.",
+        "challengeHint": "Use .append() to add items.",
+        "challengeSolution": [
+          "fruits = [\"apple\", \"banana\", \"mango\"]",
+          "fruits.append(\"grape\")",
+          "print(fruits)"
+        ],
+        "terminalNote": "Print statements let you inspect list values."
+      },
+      {
+        "id": "loops",
+        "title": "Loops",
+        "difficulty": "Beginner",
+        "explanation": "Loops help you repeat code. The 'for' loop iterates over items in a sequence, while 'while' repeats while a condition is true.",
+        "keyTerms": [
+          { "term": "for loop", "definition": "Repeatedly executes code for each item in a collection." },
+          { "term": "while loop", "definition": "Repeats code while a condition remains True." }
+        ],
+        "codeExample": [
+          "for i in range(4):",
+          "    print(i)"
+        ],
+        "expectedOutput": "0\n1\n2\n3",
+        "starterCode": "numbers = [2, 4, 6]\n# Loop through and print each number",
+        "solution": [
+          "numbers = [2, 4, 6]",
+          "for n in numbers:",
+          "    print(n)"
+        ],
+        "commonMistakes": [
+          "Using tabs and spaces inconsistently in indentation.",
+          "Forgetting the colon after 'for' or 'while'."
+        ],
+        "challenge": "Print only odd numbers from 1 to 10 using a loop.",
+        "challengeHint": "Use range and step or check n % 2 == 1.",
+        "challengeSolution": [
+          "for n in range(1, 11, 2):",
+          "    print(n)"
+        ],
+        "terminalNote": "Use python to run and view output lines."
+      },
+      {
+        "id": "functions",
+        "title": "Functions",
+        "difficulty": "Beginner",
+        "explanation": "Functions let you reuse code by encapsulating a block of commands as a callable routine. Use 'def' to create one.",
+        "keyTerms": [
+          { "term": "Function", "definition": "Reusable named block of code." },
+          { "term": "def", "definition": "Python keyword to define a function." }
+        ],
+        "codeExample": [
+          "def add(a, b):",
+          "    return a + b",
+          "print(add(3, 6))"
+        ],
+        "expectedOutput": "9",
+        "starterCode": "def greet(name):\n    # Print Hello and the name",
+        "solution": [
+          "def greet(name):",
+          "    print(\"Hello\", name)"
+        ],
+        "commonMistakes": [
+          "Forgetting the return statement.",
+          "Calling the function without parentheses."
+        ],
+        "challenge": "Write a function that returns double the input.",
+        "challengeHint": "Just return n * 2.",
+        "challengeSolution": [
+          "def double(n):",
+          "    return n * 2"
+        ],
+        "terminalNote": "Define, then call; nothing executes until called."
+      },
+      {
+        "id": "dictionaries",
+        "title": "Dictionaries",
+        "difficulty": "Intermediate",
+        "explanation": "A dictionary stores key-value pairs. Keys can be strings, numbers or tuples; values can be anything. Dictionaries are mutable.",
+        "keyTerms": [
+          { "term": "Dictionary", "definition": "Unordered collection of key-value pairs." }
+        ],
+        "codeExample": [
+          "person = {\"name\": \"Sam\", \"age\": 36}",
+          "print(person[\"age\"])"
+        ],
+        "expectedOutput": "36",
+        "starterCode": "scores = {\"A\": 85}\n# Add a key 'B' with 70",
+        "solution": [
+          "scores = {\"A\": 85}",
+          "scores[\"B\"] = 70"
+        ],
+        "commonMistakes": [
+          "Using parentheses instead of brackets.",
+          "Misspelling existing keys when accessing."
+        ],
+        "challenge": "Print all dictionary keys.",
+        "challengeHint": "Use .keys() and print().",
+        "challengeSolution": [
+          "scores = {\"A\": 85, \"B\": 70}",
+          "print(scores.keys())"
+        ],
+        "terminalNote": "Output will look like dict_keys([...])."
+      },
+      {
+        "id": "classes",
+        "title": "Classes",
+        "difficulty": "Intermediate",
+        "explanation": "Classes define the structure for objects and can include attributes and methods. Use 'class' and always include self as the first argument to methods.",
+        "keyTerms": [
+          { "term": "Class", "definition": "A custom type for objects." },
+          { "term": "Method", "definition": "A function defined inside a class." }
+        ],
+        "codeExample": [
+          "class Animal:",
+          "    def __init__(self, name):",
+          "        self.name = name",
+          "a = Animal('Dog')",
+          "print(a.name)"
+        ],
+        "expectedOutput": "Dog",
+        "starterCode": "class Car:\n    def __init__(self, model):\n        self.model = model",
+        "solution": [
+          "class Car:",
+          "    def __init__(self, model):",
+          "        self.model = model"
+        ],
+        "commonMistakes": [
+          "Forgetting self in method arguments.",
+          "Not initializing attributes."
+        ],
+        "challenge": "Add a honk method that returns \"Honk!\" and print it.",
+        "challengeHint": "Return a string from an instance method.",
+        "challengeSolution": [
+          "class Car:",
+          "    def __init__(self, model):",
+          "        self.model = model",
+          "    def honk(self):",
+          "        return \"Honk!\"",
+          "mycar = Car(\"Sedan\")",
+          "print(mycar.honk())"
+        ],
+        "terminalNote": "Call methods with instance.method()."
+      },
+      {
+        "id": "fileio",
+        "title": "File Input/Output",
+        "difficulty": "Intermediate",
+        "explanation": "Use open(), read(), write() and 'with' statements for reading and writing files safely.",
+        "keyTerms": [
+          { "term": "open()", "definition": "Opens a file for reading/writing." },
+          { "term": "with", "definition": "Context manager for safer file handling." }
+        ],
+        "codeExample": [
+          "with open(\"test.txt\", \"w\") as f:",
+          "    f.write(\"Python rocks\")",
+          "with open(\"test.txt\") as f:",
+          "    print(f.read())"
+        ],
+        "expectedOutput": "Python rocks",
+        "starterCode": "with open(\"task.txt\", \"w\") as f:\n    # write something\n",
+        "solution": [
+          "with open(\"task.txt\", \"w\") as f:",
+          "    f.write(\"abc123\")"
+        ],
+        "commonMistakes": [
+          "Forgetting to close files (use 'with').",
+          "Opening with wrong mode ('r' for reading does not create the file)."
+        ],
+        "challenge": "Append a line to a file, then read all lines and print.",
+        "challengeHint": "Open with 'a' then open with 'r'.",
+        "challengeSolution": [
+          "with open(\"task.txt\", \"a\") as f:",
+          "    f.write(\"more\\n\")",
+          "with open(\"task.txt\") as f:",
+          "    print(f.read())"
+        ],
+        "terminalNote": "File output persists after script ends."
+      },
+      {
+        "id": "modules",
+        "title": "Modules",
+        "difficulty": "Intermediate",
+        "explanation": "Python modules let you organize your code. Use 'import' to bring in modules from the standard library or third-party packages.",
+        "keyTerms": [
+          { "term": "module", "definition": "A file containing Python code (functions, variables, classes)." }
+        ],
+        "codeExample": [
+          "import random",
+          "print(random.randint(1, 3))"
+        ],
+        "expectedOutput": "1 or 2 or 3",
+        "starterCode": "# Import math and print square root of 49",
+        "solution": [
+          "import math",
+          "print(math.sqrt(49))"
+        ],
+        "commonMistakes": [
+          "Misspelling module or function name.",
+          "Trying to use a module without first importing it."
+        ],
+        "challenge": "Use the sys module to print the version of Python.",
+        "challengeHint": "Check sys.version.",
+        "challengeSolution": [
+          "import sys",
+          "print(sys.version)"
+        ],
+        "terminalNote": "Install third-party modules via pip."
+      },
+      {
+        "id": "exceptions",
+        "title": "Exception Handling",
+        "difficulty": "Intermediate",
+        "explanation": "Python handles errors with try/except blocks. This keeps your program from stopping unexpectedly.",
+        "keyTerms": [
+          { "term": "Exception", "definition": "Error that can be caught at runtime." },
+          { "term": "try/except", "definition": "Block to handle exceptions." }
+        ],
+        "codeExample": [
+          "try:",
+          "    age = int(\"abc\")",
+          "except ValueError:",
+          "    print(\"Invalid integer!\")"
+        ],
+        "expectedOutput": "Invalid integer!",
+        "starterCode": "try:\n    x = 1 / 0\nexcept:",
+        "solution": [
+          "try:",
+          "    x = 1 / 0",
+          "except:",
+          "    print(\"Division by zero!\")"
+        ],
+        "commonMistakes": [
+          "Missing colon after try/except statements.",
+          "Handling wrong exception type."
+        ],
+        "challenge": "Handle division by zero with ZeroDivisionError.",
+        "challengeHint": "except ZeroDivisionError:",
+        "challengeSolution": [
+          "try:",
+          "    print(4 / 0)",
+          "except ZeroDivisionError:",
+          "    print(\"Zero division!\")"
+        ],
+        "terminalNote": "Errors will print only when exceptions occur."
+      },
+      {
+        "id": "apis",
+        "title": "APIs and HTTP Requests",
+        "difficulty": "Intermediate",
+        "explanation": "Python can fetch data from the internet using modules like 'requests'. API stands for Application Programming Interface.",
+        "keyTerms": [
+          { "term": "API", "definition": "A software interface for data/services." },
+          { "term": "requests", "definition": "Popular HTTP library for Python." }
+        ],
+        "codeExample": [
+          "import requests",
+          "response = requests.get('https://api.github.com')",
+          "print(response.status_code)"
+        ],
+        "expectedOutput": "200",
+        "starterCode": "# Use requests to get https://api.github.com and print JSON keys",
+        "solution": [
+          "import requests",
+          "response = requests.get('https://api.github.com')",
+          "print(response.json().keys())"
+        ],
+        "commonMistakes": [
+          "Forgetting to pip install requests.",
+          "Using the wrong URL."
+        ],
+        "challenge": "Print the value of the 'current_user_url' key from the response JSON.",
+        "challengeHint": "Access with response.json()['current_user_url']",
+        "challengeSolution": [
+          "import requests",
+          "response = requests.get('https://api.github.com')",
+          "print(response.json()['current_user_url'])"
+        ],
+        "terminalNote": "Install requests before running: pip install requests"
       }
-    ],
-    "resources": {
-      "youtubeQuery": "Python programming for beginners",
-      "websites": [
-        "https://docs.python.org/3/tutorial/",
-        "https://realpython.com/",
-        "https://www.learnpython.org/"
-      ]
-    }
+    ]
   },
   {
     "id": "javascript",
     "name": "JavaScript",
-    "type": "web",
+    "type": "Interpreted",
     "year": 1995,
     "creator": "Brendan Eich",
     "difficulty": "Beginner",
-    "description": "JavaScript is the standard scripting language of the web, running in all major browsers and increasingly on servers via Node.js. It enables interactivity, dynamic content, and responsive UI design.",
-    "usedFor": "Web development (frontend and backend), mobile app development, desktop applications, automation.",
-    "funFact": "JavaScript was developed in just 10 days and originally called Mocha.",
-    "color": "#F7DF1E",
+    "description": "JavaScript is the most widely used language for interactive and dynamic web content, both in browsers and on servers (Node.js).",
+    "usedFor": "Web apps, scripting, automation, servers, games.",
+    "funFact": "Despite the name, JavaScript is not related to Java.",
+    "color": "#f0db4f",
     "terminalCommands": {
-      "windows": "node hello.js",
-      "mac": "node hello.js",
-      "linux": "node hello.js",
-      "install": "Download Node.js from https://nodejs.org and install to run JavaScript outside browsers.",
-      "runExample": "Hello, world!"
+      "windows": "node lesson.js",
+      "mac": "node lesson.js",
+      "linux": "node lesson.js",
+      "install": "Install Node.js from https://nodejs.org/"
     },
     "topics": [
       {
         "id": "variables",
         "title": "Variables",
         "difficulty": "Beginner",
-        "explanation": "'let', 'const', and 'var' are used to declare variables. 'let' is block-scoped, 'const' creates a constant, and 'var' is function-scoped (legacy).",
-        "keyConcepts": [
-          { "term": "let", "definition": "Declares a block-scoped variable." },
-          { "term": "const", "definition": "Declares a block-scoped, immutable variable." }
+        "explanation": "Variables store values in JavaScript. Use let and const for modern, safer code. They are dynamically typed.",
+        "keyTerms": [
+          { "term": "let", "definition": "Block-scoped variable declaration." },
+          { "term": "const", "definition": "Block-scoped constant value." }
         ],
-        "codeExample": "let name = 'Lee';\nconsole.log(name);",
-        "expectedOutput": "Lee",
-        "starterCode": "// Declare a variable message with 'Hello' and log it",
-        "solution": "let message = 'Hello';\nconsole.log(message);",
+        "codeExample": [
+          "let mood = \"happy\";",
+          "const year = 2023;",
+          "console.log(mood, year);"
+        ],
+        "expectedOutput": "happy 2023",
+        "starterCode": "let price = ;\nconst item = ;\nconsole.log(item, price);",
+        "solution": [
+          "let price = 10;",
+          "const item = \"Book\";",
+          "console.log(item, price);"
+        ],
         "commonMistakes": [
-          "Trying to reassign a const variable.",
-          "Forgetting to use 'let' or 'const'."
+          "Accidentally redeclaring const.",
+          "Using var instead of let/const."
         ],
-        "challenge": "Declare a variable 'count' set to 3 and log it.",
-        "hint": "Use let or const and console.log().",
-        "terminalNote": "Save code in hello.js, run with 'node hello.js'"
+        "challenge": "Create a variable for your age and one for your favorite language, print both.",
+        "challengeHint": "Use let and const as needed.",
+        "challengeSolution": [
+          "let myAge = 18;",
+          "const favoriteLang = \"JavaScript\";",
+          "console.log(myAge, favoriteLang);"
+        ],
+        "terminalNote": "Print output with node lesson.js"
       },
       {
         "id": "arrays",
         "title": "Arrays",
         "difficulty": "Beginner",
-        "explanation": "Arrays are ordered lists of values. You can access elements by their index and use methods to add, remove, or process elements.",
-        "keyConcepts": [
-          { "term": "Array", "definition": "A list that stores ordered data." },
-          { "term": "Index", "definition": "Zero-based position in the array." }
+        "explanation": "An array is a list of items. JavaScript arrays can change size and hold values of any type.",
+        "keyTerms": [
+          { "term": "Array", "definition": "An ordered, indexable collection of items." }
         ],
-        "codeExample": "const arr = [10, 20, 30];\nconsole.log(arr[0]);",
-        "expectedOutput": "10",
-        "starterCode": "const fruits = ['apple', 'banana', 'pear'];\n// print pear",
-        "solution": "const fruits = ['apple', 'banana', 'pear'];\nconsole.log(fruits[2]);",
+        "codeExample": [
+          "let nums = [3, 5, 7];",
+          "console.log(nums[2]);"
+        ],
+        "expectedOutput": "7",
+        "starterCode": "const letters = [\"a\", \"b\", \"c\"];\n// Print the second element",
+        "solution": [
+          "const letters = [\"a\", \"b\", \"c\"];",
+          "console.log(letters[1]);"
+        ],
         "commonMistakes": [
-          "Indexing beyond the array length.",
-          "Using parentheses or curly braces."
+          "Using 1 as the first index (should be 0)."
         ],
-        "challenge": "Print the second element of ['a', 'b', 'c']",
-        "hint": "Index starts at 0, second item is index 1.",
-        "terminalNote": "Save as hello.js and run via node."
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "JavaScript tutorial for beginners",
-      "websites": [
-        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
-        "https://www.javascript.com/learn",
-        "https://javascript.info/"
-      ]
-    }
-  },
-  {
-    "id": "typescript",
-    "name": "TypeScript",
-    "type": "web",
-    "year": 2012,
-    "creator": "Anders Hejlsberg",
-    "difficulty": "Intermediate",
-    "description": "TypeScript is a strongly-typed superset of JavaScript that adds static types and modern tools for large-scale software. It compiles to JavaScript and is adopted by major projects to improve reliability.",
-    "usedFor": "Large-scale web apps, libraries, frameworks (Angular, React, etc.), Node.js backends.",
-    "funFact": "TypeScript was first announced by Microsoft and shares roots with languages like C#.",
-    "color": "#3178C6",
-    "terminalCommands": {
-      "windows": "tsc hello.ts && node hello.js",
-      "mac": "tsc hello.ts && node hello.js",
-      "linux": "tsc hello.ts && node hello.js",
-      "install": "Install with 'npm install -g typescript'. Create hello.ts, compile using 'tsc hello.ts'.",
-      "runExample": "Hello, world!"
-    },
-    "topics": [
+        "challenge": "Add 'd' to the end and print full array.",
+        "challengeHint": "Use push('d').",
+        "challengeSolution": [
+          "letters.push(\"d\");",
+          "console.log(letters);"
+        ],
+        "terminalNote": "Arrays in JS can grow in size."
+      },
       {
-        "id": "types",
-        "title": "Type Annotations",
+        "id": "functions",
+        "title": "Functions",
         "difficulty": "Beginner",
-        "explanation": "TypeScript allows you to specify types for variables, function parameters, and return values. This lets you catch mistakes before running your code.",
-        "keyConcepts": [
-          { "term": "Type Annotation", "definition": "Tells TypeScript what type a variable or parameter should be." }
+        "explanation": "Functions help organize repeating logic. Use function declarations or arrow functions for concise syntax.",
+        "keyTerms": [
+          { "term": "Function", "definition": "Reusable, named code block." },
+          { "term": "Arrow function", "definition": "A compact function using => syntax." }
         ],
-        "codeExample": "let age: number = 23;\nconsole.log(age);",
-        "expectedOutput": "23",
-        "starterCode": "let color\n// assign color to a string, and log it",
-        "solution": "let color: string = 'blue';\nconsole.log(color);",
+        "codeExample": [
+          "function greet(name) {",
+          "  return 'Hi ' + name;",
+          "}",
+          "console.log(greet('Joe'));"
+        ],
+        "expectedOutput": "Hi Joe",
+        "starterCode": "const double = n => ;\nconsole.log(double(10));",
+        "solution": [
+          "const double = n => n * 2;",
+          "console.log(double(10));"
+        ],
         "commonMistakes": [
-          "Forgetting a type or using the wrong type.",
-          "Assigning a value of a different type causes compile error."
+          "Not using return for non-void arrow functions.",
+          "Omitting () parentheses."
         ],
-        "challenge": "Declare a variable animal of type string with value 'dog' and print it.",
-        "hint": "Use let animal: string = 'dog'",
-        "terminalNote": "Save code in hello.ts. Compile with 'tsc hello.ts'. Run 'node hello.js'."
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "TypeScript for beginners",
-      "websites": [
-        "https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html",
-        "https://www.typescriptlang.org/docs/"
-      ]
-    }
-  },
-  {
-    "id": "c",
-    "name": "C",
-    "type": "systems",
-    "year": 1972,
-    "creator": "Dennis Ritchie",
-    "difficulty": "Advanced",
-    "description": "C is a powerful, low-level programming language that forms the basis for operating systems, databases, and embedded systems. It provides control over memory and hardware.",
-    "usedFor": "Operating systems (Linux, Windows parts), embedded firmware, databases (MySQL), system utilities.",
-    "funFact": "The Unix kernel and most of its utilities were originally written in C.",
-    "color": "#555555",
-    "terminalCommands": {
-      "windows": "gcc hello.c -o hello && hello",
-      "mac": "gcc hello.c -o hello && ./hello",
-      "linux": "gcc hello.c -o hello && ./hello",
-      "install": "Install GCC. On Windows, use MinGW or WSL. On Mac, install Xcode Command Line Tools. On Ubuntu: sudo apt install build-essential.",
-      "runExample": "Hello, world!"
-    },
-    "topics": [
+        "challenge": "Write a function triple(n) that returns n*3.",
+        "challengeHint": "Just use return n*3.",
+        "challengeSolution": [
+          "function triple(n) { return n * 3; }"
+        ],
+        "terminalNote": "Define, then call your function to see output."
+      },
       {
-        "id": "variables",
-        "title": "Variables",
+        "id": "dom",
+        "title": "DOM Manipulation",
         "difficulty": "Beginner",
-        "explanation": "C requires you to declare a variable's type. Types determine the size of memory and what values a variable can store.",
-        "keyConcepts": [
-          { "term": "Declaration", "definition": "Specifying the type and name of a variable." },
-          { "term": "Initialization", "definition": "Giving your variable a starting value." }
+        "explanation": "The Document Object Model (DOM) is an object representation of your HTML. Use querySelector or getElementById to select elements.",
+        "keyTerms": [
+          { "term": "DOM", "definition": "API representing the structure of the webpage." }
         ],
-        "codeExample": "#include <stdio.h>\nint main() {\n  int a = 5;\n  printf(\"%d\\n\", a);\n  return 0;\n}",
-        "expectedOutput": "5",
-        "starterCode": "int age;\nage = 45;\n// print age",
-        "solution": "#include <stdio.h>\nint main() {\n  int age;\n  age = 45;\n  printf(\"%d\\n\", age);\n  return 0;\n}",
+        "codeExample": [
+          "// In browser JS",
+          "let main = document.getElementById('main');",
+          "console.log(main.id);"
+        ],
+        "expectedOutput": "main",
+        "starterCode": "// Select and print the tag name of <body>",
+        "solution": [
+          "let body = document.querySelector(\"body\");",
+          "console.log(body.tagName);"
+        ],
         "commonMistakes": [
-          "Forgetting semicolons.",
-          "Mismatching types on declaration and assignment."
+          "Trying to run DOM code in Node.js.",
+          "Selecting elements that don't exist."
         ],
-        "challenge": "Declare an int variable x, set to 12, and print.",
-        "hint": "Use int x = 12; printf(\"%d\\n\", x);",
-        "terminalNote": "Compile with gcc and run as above."
-      }
-    ],
-    "resources": {
-      "youtubeQuery": "C language tutorial for beginners",
-      "websites": [
-        "https://www.learn-c.org/",
-        "https://www.tutorialspoint.com/cprogramming/",
-        "https://en.cppreference.com/w/c"
-      ]
-    }
-  },
-  {
-    "id": "cpp",
-    "name": "C++",
-    "type": "systems",
-    "year": 1985,
-    "creator": "Bjarne Stroustrup",
-    "difficulty": "Advanced",
-    "description": "C++ extends C with object-oriented programming, templates, and powerful standard libraries. It's widely used for high-performance software, games, and system tools.",
-    "usedFor": "Game development, real-time systems, operating systems, graphics engines, large software.",
-    "funFact": "C++ originally stood for 'C with Classes'.",
-    "color": "#00599C",
-    "terminalCommands": {
-      "windows": "g++ hello.cpp -o hello && hello",
-      "mac": "g++ hello.cpp -o hello && ./hello",
-      "linux": "g++ hello.cpp -o hello && ./hello",
-      "install": "Install g++: Windows (MinGW), Mac (Xcode CLI tools), Ubuntu (sudo apt install g++).",
-      "runExample": "Hello, world!"
-    },
-    "topics": [
+        "challenge": "Print the text content of the first <h1>.",
+        "challengeHint": "Use .textContent",
+        "challengeSolution": [
+          "let h1 = document.querySelector('h1');",
+          "console.log(h1.textContent);"
+        ],
+        "terminalNote": "DOM code requires a browser context."
+      },
+      {
+        "id": "events",
+        "title": "Events",
+        "difficulty": "Intermediate",
+        "explanation": "Events are how JS responds to user actions. Use addEventListener to run code when, for example, a button is clicked.",
+        "keyTerms": [
+          { "term": "Event", "definition": "User-triggered or system-triggered action." }
+        ],
+        "codeExample": [
+          "document.body.addEventListener('click', function() {",
+          "  console.log('Body clicked!');",
+          "});"
+        ],
+        "expectedOutput": "Body clicked!",
+        "starterCode": "// Log a message when user clicks anywhere on body",
+        "solution": [
+          "document.body.addEventListener('click', function() {",
+          "  console.log('clicked!');",
+          "});"
+        ],
+        "commonMistakes": [
+          "Forgetting to pass a function to the listener."
+        ],
+        "challenge": "Alert 'Thanks!' when a <button> is clicked.",
+        "challengeHint": "Add event to button.",
+        "challengeSolution": [
+          "document.querySelector('button').addEventListener('click', function(){",
+          "  alert('Thanks!');",
+          "});"
+        ],
+        "terminalNote": "DOM events only work in browsers."
+      },
+      {
+        "id": "promises",
+        "title": "Promises",
+        "difficulty": "Intermediate",
+        "explanation": "A Promise is an object representing the result of an asynchronous operation. Use .then() and .catch() to respond.",
+        "keyTerms": [
+          { "term": "Promise", "definition": "Represents future completion or rejection of an async operation." }
+        ],
+        "codeExample": [
+          "let p = new Promise(res => setTimeout(()=>res(3), 100));",
+          "p.then(x => console.log(x));"
+        ],
+        "expectedOutput": "3",
+        "starterCode": "// Make a Promise resolving to your name",
+        "solution": [
+          "const myPromise = Promise.resolve('Mary');",
+          "myPromise.then(console.log);"
+        ],
+        "commonMistakes": [
+          "Expecting immediate results from Promises.",
+          "Not handling failures with .catch()."
+        ],
+        "challenge": "Create a Promise that rejects and log the error.",
+        "challengeHint": "Use Promise.reject().catch().",
+        "challengeSolution": [
+          "Promise.reject('fail').catch(e => console.log(e));"
+        ],
+        "terminalNote": "Promise code runs after the call stack clears."
+      },
+      {
+        "id": "asyncawait",
+        "title": "Async / Await",
+        "difficulty": "Intermediate",
+        "explanation": "async/await lets you write async code that looks synchronous. await only works inside functions marked async.",
+        "keyTerms": [
+          { "term": "async", "definition": "Declares a function that returns a promise." },
+          { "term": "await", "definition": "Pauses until a Promise settles." }
+        ],
+        "codeExample": [
+          "async function foo() {",
+          "  let val = await Promise.resolve(99);",
+          "  return val;",
+          "}",
+          "foo().then(console.log);"
+        ],
+        "expectedOutput": "99",
+        "starterCode": "async function run() {\n  // await a promise of 5\n}\nrun();",
+        "solution": [
+          "async function run() {",
+          "  let x = await Promise.resolve(5);",
+          "  console.log(x);",
+          "}",
+          "run();"
+        ],
+        "commonMistakes": [
+          "Using await outside of async function.",
+          "Omitting to call the async function."
+        ],
+        "challenge": "Await a Promise that resolves after 200ms and print a message.",
+        "challengeHint": "Wrap setTimeout in Promise.",
+        "challengeSolution": [
+          "async function later() {",
+          "  await new Promise(res => setTimeout(res, 200));",
+          "  console.log('waited!');",
+          "}",
+          "later();"
+        ],
+        "terminalNote": "Output will appear after a delay."
+      },
       {
         "id": "classes",
         "title": "Classes",
         "difficulty": "Intermediate",
-        "explanation": "Classes allow you to model real-world objects, grouping data and functions for reuse and organization.",
-        "keyConcepts": [
-          { "term": "Object", "definition": "Instance of a class." },
-          { "term": "Member Function", "definition": "A function defined inside a class." }
+        "explanation": "Classes are templates for creating objects with data (properties) and methods. Introduced in ES6.",
+        "keyTerms": [
+          { "term": "class", "definition": "A syntax for defining object structure and behavior." }
         ],
-        "codeExample": "#include <iostream>\nclass Dog {\npublic:\n  std::string name;\n  void bark() { std::cout << \"Woof\" << std::endl; }\n};\nint main() {\n  Dog d;\n  d.name = \"Max\";\n  d.bark();\n  return 0;\n}",
-        "expectedOutput": "Woof",
-        "starterCode": "class Car {\npublic:\n  int year;\n};\n// create Car c, set year to 2020, print c.year",
-        "solution": "#include <iostream>\nclass Car {\npublic:\n  int year;\n};\nint main() {\n  Car c;\n  c.year = 2020;\n  std::cout << c.year << std::endl;\n  return 0;\n}",
+        "codeExample": [
+          "class Cat {",
+          "  constructor(name) { this.name = name; }",
+          "  meow() { return 'Meow!'; }",
+          "}",
+          "const c = new Cat('Fluffy');",
+          "console.log(c.meow());"
+        ],
+        "expectedOutput": "Meow!",
+        "starterCode": "class Book {\n  constructor(title) { this.title = title; }\n}\n",
+        "solution": [
+          "class Book {",
+          "  constructor(title) { this.title = title; }",
+          "}"
+        ],
         "commonMistakes": [
-          "Forgetting public/private declarations.",
-          "Not using new for dynamic objects when needed."
+          "Forgetting 'this.' for property assignments.",
+          "Misspelling 'constructor'."
         ],
-        "challenge": "Make a class Book with string title, set title and print it.",
-        "hint": "Use std::string for text.",
-        "terminalNote": "Save as .cpp, compile and run as above."
+        "challenge": "Add a method author() that returns 'Unknown'.",
+        "challengeHint": "Declare author() in the class.",
+        "challengeSolution": [
+          "class Book {",
+          "  constructor(title) { this.title = title; }",
+          "  author() { return 'Unknown'; }",
+          "}"
+        ],
+        "terminalNote": "Construct with new and call methods."
+      },
+      {
+        "id": "modules",
+        "title": "Modules",
+        "difficulty": "Intermediate",
+        "explanation": "Split code into modules for clarity. Use export and import statements (supported natively in modern browsers and via Node's ESM).",
+        "keyTerms": [
+          { "term": "module", "definition": "A separate file or chunk of reusable code." }
+        ],
+        "codeExample": [
+          "// utils.js",
+          "export function add(x, y) { return x + y; }",
+          "// main.js",
+          "import { add } from './utils.js';",
+          "console.log(add(2, 3));"
+        ],
+        "expectedOutput": "5",
+        "starterCode": "// In math.js export a subtract function\n// In main.js import and use subtract",
+        "solution": [
+          "// math.js",
+          "export function subtract(a, b) { return a - b; }",
+          "// main.js",
+          "import { subtract } from './math.js';",
+          "console.log(subtract(10, 4));"
+        ],
+        "commonMistakes": [
+          "Not using the .js extension in imports for ESM.",
+          "Trying ESM in Node without .mjs extension or configuration."
+        ],
+        "challenge": "Export a constant and import it for printing.",
+        "challengeHint": "Use export const and import { ... }.",
+        "challengeSolution": [
+          "// data.js",
+          "export const PI = 3.14;",
+          "// main.js",
+          "import { PI } from './data.js';",
+          "console.log(PI);"
+        ],
+        "terminalNote": "Node: consider using --experimental-modules for ESM."
+      },
+      {
+        "id": "fetchapi",
+        "title": "Fetch API",
+        "difficulty": "Intermediate",
+        "explanation": "Fetch API lets you request resources over HTTP in browser JS. It returns a Promise.",
+        "keyTerms": [
+          { "term": "fetch", "definition": "Function to make HTTP requests." }
+        ],
+        "codeExample": [
+          "fetch('https://api.github.com')",
+          "  .then(res => res.status)",
+          "  .then(console.log)"
+        ],
+        "expectedOutput": "200",
+        "starterCode": "// Fetch https://api.github.com and print the JSON",
+        "solution": [
+          "fetch('https://api.github.com')",
+          "  .then(res => res.json())",
+          "  .then(data => console.log(data));"
+        ],
+        "commonMistakes": [
+          "Forgetting .then() after fetch() or misusing async/await."
+        ],
+        "challenge": "Print the value of the 'current_user_url' property from GitHub API root.",
+        "challengeHint": "data.current_user_url",
+        "challengeSolution": [
+          "fetch('https://api.github.com')",
+          "  .then(res => res.json())",
+          "  .then(data => console.log(data.current_user_url));"
+        ],
+        "terminalNote": "Works in browsers and node-fetch."
       }
-    ],
-    "resources": {
-      "youtubeQuery": "C++ tutorial for beginners",
-      "websites": [
-        "https://learncpp.com/",
-        "https://www.cplusplus.com/doc/tutorial/"
-      ]
-    }
+    ]
+  },
+  {
+    "id": "typescript",
+    "name": "TypeScript",
+    "type": "Compiled to JS",
+    "year": 2012,
+    "creator": "Anders Hejlsberg",
+    "difficulty": "Intermediate",
+    "description": "TypeScript adds static typing and advanced tooling to JavaScript, helping to avoid bugs and improve maintainability.",
+    "usedFor": "Large scale web apps, Node.js, serverless development.",
+    "funFact": "TypeScript is used to build the VSCode editor.",
+    "color": "#3178c6",
+    "terminalCommands": {
+      "windows": "tsc lesson.ts && node lesson.js",
+      "mac": "tsc lesson.ts && node lesson.js",
+      "linux": "tsc lesson.ts && node lesson.js",
+      "install": "npm install -g typescript"
+    },
+    "topics": [
+      {
+        "id": "variables",
+        "title": "Typed Variables",
+        "difficulty": "Beginner",
+        "explanation": "Declare a variable's type with a type annotation. The compiler checks value compatibility.",
+        "keyTerms": [
+          { "term": "Type annotation", "definition": "Declares a variable's required type." }
+        ],
+        "codeExample": [
+          "let name: string = \"Eve\";",
+          "let score: number = 100;"
+        ],
+        "expectedOutput": "",
+        "starterCode": "let age: number = ;\nconsole.log(age);",
+        "solution": [
+          "let age: number = 19;",
+          "console.log(age);"
+        ],
+        "commonMistakes": [
+          "Assigning the wrong data type.",
+          "Forgetting the colon between variable and type."
+        ],
+        "challenge": "Declare a variable isReady of type boolean with value true.",
+        "challengeHint": "let isReady: boolean = true;",
+        "challengeSolution": [
+          "let isReady: boolean = true;"
+        ],
+        "terminalNote": "TypeScript will error on invalid assignments."
+      },
+      {
+        "id": "types",
+        "title": "Types and Interfaces",
+        "difficulty": "Beginner",
+        "explanation": "Interfaces define an object's shape at compile time. Types can also alias unions, primitives, and more.",
+        "keyTerms": [
+          { "term": "interface", "definition": "A named set of properties" }
+        ],
+        "codeExample": [
+          "interface User { name: string; }",
+          "const u: User = { name: \"Lia\" };"
+        ],
+        "expectedOutput": "",
+        "starterCode": "type Id = string;\nconst uid: Id = ;",
+        "solution": [
+          "type Id = string;",
+          "const uid: Id = \"xyz\";"
+        ],
+        "commonMistakes": [
+          "Leaving out required properties."
+        ],
+        "challenge": "Create an interface Account with number and owner (string)",
+        "challengeHint": "Use colon and semicolon for interface.",
+        "challengeSolution": [
+          "interface Account { number: number; owner: string; }"
+        ],
+        "terminalNote": "Interfaces checked only during compilation."
+      },
+      {
+        "id": "arrays",
+        "title": "Typed Arrays",
+        "difficulty": "Beginner",
+        "explanation": "Specify a type for array elements. TypeScript ensures only correct types are stored.",
+        "keyTerms": [
+          { "term": "T[]", "definition": "Array of type T, e.g., string[], number[]." }
+        ],
+        "codeExample": [
+          "let books: string[] = [\"War\", \"Peace\"];"
+        ],
+        "expectedOutput": "",
+        "starterCode": "let nums: number[] = ;\nnums = [1, 2, 3];",
+        "solution": [
+          "let nums: number[] = [1, 2, 3];"
+        ],
+        "commonMistakes": [
+          "Mixing types in a typed array."
+        ],
+        "challenge": "Create a boolean array of [true, false].",
+        "challengeHint": "let b: boolean[] = [true, false]",
+        "challengeSolution": [
+          "let b: boolean[] = [true, false];"
+        ],
+        "terminalNote": "Check array element type in editor/tooling."
+      },
+      {
+        "id": "functions",
+        "title": "Functions with Types",
+        "difficulty": "Beginner",
+        "explanation": "All function arguments and return types can be typed in TypeScript. Omitting them leads to inference.",
+        "keyTerms": [
+          { "term": "type annotation", "definition": "Describe function parameter / return type." }
+        ],
+        "codeExample": [
+          "function square(x: number): number {",
+          "  return x * x;",
+          "}",
+          "console.log(square(9));"
+        ],
+        "expectedOutput": "81",
+        "starterCode": "function greet(name: string): string { return ; }",
+        "solution": [
+          "function greet(name: string): string { return \"Hi \" + name; }"
+        ],
+        "commonMistakes": [
+          "Not specifying return type when it's not obvious."
+        ],
+        "challenge": "Write a function that takes a string[] and returns the first element.",
+        "challengeHint": "string[] parameter, return string",
+        "challengeSolution": [
+          "function first(xs: string[]): string { return xs[0]; }"
+        ],
+        "terminalNote": "Compiler warns for type mismatches."
+      },
+      {
+        "id": "objects",
+        "title": "Object Types",
+        "difficulty": "Beginner",
+        "explanation": "You can specify object types inline or with interfaces. All properties must be present and types must match.",
+        "keyTerms": [
+          { "term": "object literal", "definition": "Syntax for direct object creation." }
+        ],
+        "codeExample": [
+          "let person: {name: string, age: number} = { name: \"Tina\", age: 33 };"
+        ],
+        "expectedOutput": "",
+        "starterCode": "let car: {make: string; year: number} = ;",
+        "solution": [
+          "let car: {make: string; year: number} = {make: \"Ford\", year: 2020};"
+        ],
+        "commonMistakes": [
+          "Property missing, or wrong type for property."
+        ],
+        "challenge": "Make an object with 'title' (string) and 'pages' (number).",
+        "challengeHint": "Use correct types.",
+        "challengeSolution": [
+          "let book: {title: string; pages: number} = {title: \"Book\", pages: 100};"
+        ],
+        "terminalNote": "Object types are structural; order unimportant."
+      },
+      {
+        "id": "classes",
+        "title": "Classes and Access Modifiers",
+        "difficulty": "Intermediate",
+        "explanation": "TypeScript classes can declare public/private/protected methods and properties, helping encapsulation.",
+        "keyTerms": [
+          { "term": "public/private", "definition": "Controls visibility." }
+        ],
+        "codeExample": [
+          "class Person {",
+          "  private secret: string;",
+          "  constructor(public name: string, secret: string) { this.secret = secret; }",
+          "  getSecret() { return this.secret; }",
+          "}",
+          "const p = new Person('Joe', 'xx');",
+          "console.log(p.name);"
+        ],
+        "expectedOutput": "Joe",
+        "starterCode": "class Point {\n  x: number;\n  y: number;\n}",
+        "solution": [
+          "class Point {",
+          "  x: number;",
+          "  y: number;",
+          "  constructor(x: number, y: number) { this.x = x; this.y = y; }",
+          "}"
+        ],
+        "commonMistakes": [
+          "Trying to access private properties outside the class."
+        ],
+        "challenge": "Define a class with a protected method sayHello.",
+        "challengeHint": "Use protected in method definition.",
+        "challengeSolution": [
+          "class Greeter { protected sayHello() { console.log(\"hi\"); } }"
+        ],
+        "terminalNote": "Classes compile to JS constructor functions."
+      },
+      {
+        "id": "generics",
+        "title": "Generics",
+        "difficulty": "Intermediate",
+        "explanation": "Generics enable flexible, type-safe code that can operate on many types, via angle bracket syntax.",
+        "keyTerms": [
+          { "term": "<T>", "definition": "A type parameter for generic structures." }
+        ],
+        "codeExample": [
+          "function id<T>(x: T): T { return x; }",
+          "console.log(id(7));"
+        ],
+        "expectedOutput": "7",
+        "starterCode": "function last<T>(arr: T[]): T {\n  // ...\n}",
+        "solution": [
+          "function last<T>(arr:T[]):T{ return arr[arr.length-1]; }"
+        ],
+        "commonMistakes": [
+          "Forgetting to call function with an array.",
+          "Using generic name inconsistently."
+        ],
+        "challenge": "Make a generic Pair<T> interface (first, second).",
+        "challengeHint": "Use interface Pair<T>.",
+        "challengeSolution": [
+          "interface Pair<T> { first: T; second: T; }"
+        ],
+        "terminalNote": "Generics greatly aid reusability."
+      },
+      {
+        "id": "enums",
+        "title": "Enums",
+        "difficulty": "Intermediate",
+        "explanation": "Enums provide named constants, either numeric or string. Useful for fixed value sets.",
+        "keyTerms": [
+          { "term": "enum", "definition": "Declares named constant values." }
+        ],
+        "codeExample": [
+          "enum Color { Red, Blue, Green }",
+          "let c: Color = Color.Green;",
+          "console.log(c);"
+        ],
+        "expectedOutput": "2",
+        "starterCode": "enum Direction { Up, Down }\nlet d = Direction.Up;",
+        "solution": [
+          "enum Direction { Up, Down }",
+          "let d = Direction.Up;"
+        ],
+        "commonMistakes": [
+          "Assuming enum names are strings (they are numbers by default)."
+        ],
+        "challenge": "Print string name of a Color enum value.",
+        "challengeHint": "Use Color[enumValue] for reverse lookup.",
+        "challengeSolution": [
+          "console.log(Color[Color.Green]);"
+        ],
+        "terminalNote": "Enums appear as objects in JS output."
+      },
+      {
+        "id": "typeassertions",
+        "title": "Type Assertions",
+        "difficulty": "Intermediate",
+        "explanation": "Type assertions override TypeScript's type inference. Only affects compile time, not JS runtime.",
+        "keyTerms": [
+          { "term": "as", "definition": "New type treat variable as (value as Type)" }
+        ],
+        "codeExample": [
+          "let x: any = 'hi';",
+          "console.log((x as string).length);"
+        ],
+        "expectedOutput": "2",
+        "starterCode": "let n: any = 123;\n// Cast to number and log toFixed(2)",
+        "solution": [
+          "let n: any = 123;",
+          "console.log((n as number).toFixed(2));"
+        ],
+        "commonMistakes": [
+          "Thinking this changes runtime behavior, it does not."
+        ],
+        "challenge": "Assert unknown to string and log length",
+        "challengeHint": "Use as string.",
+        "challengeSolution": [
+          "let v: unknown = \"xyz\";",
+          "console.log((v as string).length);"
+        ],
+        "terminalNote": "Assertions help TypeScript, not JavaScript."
+      }
+    ]
+  },
+  {
+    "id": "c",
+    "name": "C",
+    "type": "Compiled",
+    "year": 1972,
+    "creator": "Dennis Ritchie",
+    "difficulty": "Intermediate",
+    "description": "C is a foundational high-performance language giving close control over memory and the system.",
+    "usedFor": "Operating systems, embedded devices, performance-critical software.",
+    "funFact": "The original UNIX operating system was written in C.",
+    "color": "#555555",
+    "terminalCommands": {
+      "windows": "gcc lesson.c -o lesson.exe && lesson.exe",
+      "mac": "gcc lesson.c -o lesson && ./lesson",
+      "linux": "gcc lesson.c -o lesson && ./lesson",
+      "install": "Install GCC from https://gcc.gnu.org/"
+    },
+    "topics": [
+      {
+        "id": "variables",
+        "title": "Variables and Types",
+        "difficulty": "Beginner",
+        "explanation": "Variables in C must declare their type at definition time. Common types include int, float, double, char.",
+        "keyTerms": [
+          { "term": "int", "definition": "Integer value." },
+          { "term": "char", "definition": "Single character." }
+        ],
+        "codeExample": [
+          "int x = 7;",
+          "char c = 'Q';",
+          "printf(\"%d %c\\n\", x, c);"
+        ],
+        "expectedOutput": "7 Q",
+        "starterCode": "float pi = ;\nprintf(\"%f\\n\", pi);",
+        "solution": [
+          "float pi = 3.14;",
+          "printf(\"%f\\n\", pi);"
+        ],
+        "commonMistakes": [
+          "Using variables before assigning.",
+          "Wrong format specifiers in printf."
+        ],
+        "challenge": "Declare a double called e and print it.",
+        "challengeHint": "double e = 2.718;",
+        "challengeSolution": [
+          "double e = 2.718;",
+          "printf(\"%f\\n\", e);"
+        ],
+        "terminalNote": "Compile first, then run the output file."
+      },
+      {
+        "id": "arrays",
+        "title": "Arrays",
+        "difficulty": "Beginner",
+        "explanation": "Arrays let you store multiple values of the same type in a contiguous block of memory.",
+        "keyTerms": [
+          { "term": "array", "definition": "Group of elements indexed from 0." }
+        ],
+        "codeExample": [
+          "int arr[3] = {1, 2, 3};",
+          "printf(\"%d\\n\", arr[2]);"
+        ],
+        "expectedOutput": "3",
+        "starterCode": "int nums[2] = {2, 5};\n// Print sum of both.",
+        "solution": [
+          "int nums[2] = {2, 5};",
+          "printf(\"%d\\n\", nums[0] + nums[1]);"
+        ],
+        "commonMistakes": [
+          "Confusing length with highest index."
+        ],
+        "challenge": "Print the first char in char arr[5] = \"hello\";",
+        "challengeHint": "Arrays of char are strings.",
+        "challengeSolution": [
+          "char arr[5] = \"hello\";",
+          "printf(\"%c\\n\", arr[0]);"
+        ],
+        "terminalNote": "Length must be known at compile time."
+      },
+      {
+        "id": "pointers",
+        "title": "Pointers",
+        "difficulty": "Intermediate",
+        "explanation": "Pointers store memory addresses. Use * to declare, & to get address, * again to dereference.",
+        "keyTerms": [
+          { "term": "pointer", "definition": "Variable storing address of another variable." }
+        ],
+        "codeExample": [
+          "int num = 5;",
+          "int *p = &num;",
+          "printf(\"%d\\n\", *p);"
+        ],
+        "expectedOutput": "5",
+        "starterCode": "int x = 10;\n// Print address of x",
+        "solution": [
+          "int x = 10;",
+          "printf(\"%p\\n\", (void *)&x);"
+        ],
+        "commonMistakes": [
+          "Forgetting address-of operator &.",
+          "Dereferencing before initialization."
+        ],
+        "challenge": "Change a value via pointer and print the original variable.",
+        "challengeHint": "*p = newVal;",
+        "challengeSolution": [
+          "int a = 6;",
+          "int *p = &a;",
+          "*p = 20;",
+          "printf(\"%d\\n\", a);"
+        ],
+        "terminalNote": "Pointers are essential for C data structures and arrays."
+      },
+      {
+        "id": "functions",
+        "title": "Functions",
+        "difficulty": "Beginner",
+        "explanation": "Declare return type, name, and arguments. Code modularity and reusability depend on functions in C.",
+        "keyTerms": [
+          { "term": "function", "definition": "Reusable, named block of code." }
+        ],
+        "codeExample": [
+          "int sum(int a, int b) { return a + b; }",
+          "int main() { printf(\"%d\\n\", sum(2,3)); return 0; }"
+        ],
+        "expectedOutput": "5",
+        "starterCode": "int triple(int x) { return ; }",
+        "solution": [
+          "int triple(int x) { return 3 * x; }"
+        ],
+        "commonMistakes": [
+          "Wrong return type or missing return value."
+        ],
+        "challenge": "Implement a function that checks if an int is positive.",
+        "challengeHint": "Return 1 for positive, 0 for non-positive.",
+        "challengeSolution": [
+          "int is_positive(int n){ return n > 0; }"
+        ],
+        "terminalNote": "Declare prototype above main if defining below it."
+      },
+      {
+        "id": "structs",
+        "title": "Structs",
+        "difficulty": "Intermediate",
+        "explanation": "Structs let you package related data as a single type, with named fields.",
+        "keyTerms": [
+          { "term": "struct", "definition": "Group of fields by name/type." }
+        ],
+        "codeExample": [
+          "struct Point { int x; int y; };",
+          "struct Point p = {3, 6};",
+          "printf(\"%d %d\\n\", p.x, p.y);"
+        ],
+        "expectedOutput": "3 6",
+        "starterCode": "struct Student { char name[10]; int age; };",
+        "solution": [
+          "struct Student { char name[10]; int age; };"
+        ],
+        "commonMistakes": [
+          "Forgetting ; after struct ending brace."
+        ],
+        "challenge": "Declare, initialize, and print a struct with name and year fields.",
+        "challengeHint": "Struct type, then assign fields.",
+        "challengeSolution": [
+          "struct Book { char name[10]; int year; };",
+          "struct Book b = {\"Moby\", 1851};",
+          "printf(\"%s %d\\n\", b.name, b.year);"
+        ],
+        "terminalNote": "Field access via dot notation."
+      },
+      {
+        "id": "ifelse",
+        "title": "If-Else Statements",
+        "difficulty": "Beginner",
+        "explanation": "Conditional execution uses if-else statements. Block uses braces, condition is in parentheses.",
+        "keyTerms": [
+          { "term": "if", "definition": "Performs block if condition is true." }
+        ],
+        "codeExample": [
+          "int x = 3;",
+          "if (x > 0) { printf(\"positive\\n\"); }",
+          "else { printf(\"zero or negative\\n\"); }"
+        ],
+        "expectedOutput": "positive",
+        "starterCode": "int n = 0;\n// Print zero or nonzero",
+        "solution": [
+          "int n = 0;",
+          "if (n == 0) printf(\"zero\\n\");",
+          "else printf(\"nonzero\\n\");"
+        ],
+        "commonMistakes": [
+          "Omitting braces with multi-line statements."
+        ],
+        "challenge": "Test if a number is odd or even.",
+        "challengeHint": "Use n % 2.",
+        "challengeSolution": [
+          "int n = 3;",
+          "if (n % 2) printf(\"odd\\n\");",
+          "else printf(\"even\\n\");"
+        ],
+        "terminalNote": "C convention: 0 false, nonzero true."
+      },
+      {
+        "id": "loops",
+        "title": "Loops",
+        "difficulty": "Beginner",
+        "explanation": "for and while loops repeat execution. For is often used to repeat a fixed number of times.",
+        "keyTerms": [
+          { "term": "for", "definition": "Loop with start, stop, increment." }
+        ],
+        "codeExample": [
+          "for (int i=0; i<5; i++) { printf(\"%d\\n\", i); }"
+        ],
+        "expectedOutput": "0\n1\n2\n3\n4",
+        "starterCode": "for (int i=0;i<3;i++) { // ... }",
+        "solution": [
+          "for (int i=0; i<3; i++) { printf(\"%d\\n\", i); }"
+        ],
+        "commonMistakes": [
+          "Infinite loops from missing increment.",
+          "Misplacing semicolons."
+        ],
+        "challenge": "Sum numbers 1-5 by loop and print.",
+        "challengeHint": "Add to sum in loop.",
+        "challengeSolution": [
+          "int sum = 0;",
+          "for (int i=1; i<=5; i++) sum += i;",
+          "printf(\"%d\\n\", sum);"
+        ],
+        "terminalNote": "Use \\n in printf for separate lines."
+      },
+      {
+        "id": "stdio",
+        "title": "Standard I/O",
+        "difficulty": "Beginner",
+        "explanation": "Use printf to print, scanf to read. Always match format specifiers with data types.",
+        "keyTerms": [
+          { "term": "printf", "definition": "Outputs formatted string to terminal." },
+          { "term": "scanf", "definition": "Reads formatted input from user." }
+        ],
+        "codeExample": [
+          "#include <stdio.h>",
+          "int main() {",
+          "  char name[20];",
+          "  scanf(\"%s\", name);",
+          "  printf(\"Name: %s\\n\", name);",
+          "  return 0;",
+          "}"
+        ],
+        "expectedOutput": "",
+        "starterCode": "// Print Hello, world!",
+        "solution": [
+          "printf(\"Hello, world!\\n\");"
+        ],
+        "commonMistakes": [
+          "Forgetting to use & for int/float in scanf.",
+          "Incorrect format strings."
+        ],
+        "challenge": "Read an integer and print double its value.",
+        "challengeHint": "scanf(\"%d\", &n); printf(\"%d\", n*2);",
+        "challengeSolution": [
+          "int n;",
+          "scanf(\"%d\", &n);",
+          "printf(\"%d\\n\", n * 2);"
+        ],
+        "terminalNote": "Check standard streams for I/O reliability."
+      },
+      {
+        "id": "memory",
+        "title": "Memory Management",
+        "difficulty": "Advanced",
+        "explanation": "Use malloc and free to allocate and release heap memory. Always free what you malloc!",
+        "keyTerms": [
+          { "term": "malloc", "definition": "Allocates memory on the heap." },
+          { "term": "free", "definition": "Releases previously allocated memory." }
+        ],
+        "codeExample": [
+          "int *arr = malloc(3 * sizeof(int));",
+          "arr[0] = 10; arr[1] = 20; arr[2] = 30;",
+          "free(arr);"
+        ],
+        "expectedOutput": "",
+        "starterCode": "// Allocate space for 2 ints, assign values, free the memory.",
+        "solution": [
+          "int *p = malloc(2 * sizeof(int));",
+          "p[0] = 1; p[1] = 2;",
+          "free(p);"
+        ],
+        "commonMistakes": [
+          "Leaking memory by forgetting free.",
+          "Freeing the wrong pointer."
+        ],
+        "challenge": "Allocate a char array for a 10-char string, assign and print it, then free.",
+        "challengeHint": "malloc(strlen+1), copy string, free.",
+        "challengeSolution": [
+          "char *str = malloc(11);",
+          "strcpy(str, \"C language\");",
+          "printf(\"%s\\n\", str);",
+          "free(str);"
+        ],
+        "terminalNote": "Heap memory persists after function exit until freed."
+      }
+    ]
+  },
+  {
+    "id": "cpp",
+    "name": "C++",
+    "type": "Compiled",
+    "year": 1985,
+    "creator": "Bjarne Stroustrup",
+    "difficulty": "Intermediate",
+    "description": "C++ extends C with classes, templates, and more for modern systems, gaming, and performance-intensive applications.",
+    "usedFor": "Games, desktop applications, performance software, system libraries.",
+    "funFact": "C++ was first called 'C with Classes.'",
+    "color": "#00599C",
+    "terminalCommands": {
+      "windows": "g++ lesson.cpp -o lesson.exe && lesson.exe",
+      "mac": "g++ lesson.cpp -o lesson && ./lesson",
+      "linux": "g++ lesson.cpp -o lesson && ./lesson",
+      "install": "Install g++ from https://gcc.gnu.org/"
+    },
+    "topics": [
+      {
+        "id": "variables",
+        "title": "Variables and Types",
+        "difficulty": "Beginner",
+        "explanation": "In C++, you must declare the type of each variable. Use int, double, char, std::string, etc.",
+        "keyTerms": [
+          { "term": "int", "definition": "Integer type." },
+          { "term": "std::string", "definition": "String class in C++ standard library." }
+        ],
+        "codeExample": [
+          "#include <iostream>",
+          "int main() {",
+          "  int age = 30;",
+          "  std::cout << age << std::endl;",
+          "}"
+        ],
+        "expectedOutput": "30",
+        "starterCode": "double pi = ;\nstd::cout << pi;",
+        "solution": [
+          "double pi = 3.14;",
+          "std::cout << pi;"
+        ],
+        "commonMistakes": [
+          "Forgetting to include <iostream>.",
+          "Leaving out std:: for cout/cin."
+        ],
+        "challenge": "Declare std::string s = \"C++\" and print.",
+        "challengeHint": "Include <string>, use std::string.",
+        "challengeSolution": [
+          "#include <string>",
+          "std::string s = \"C++\";",
+          "std::cout << s << std::endl;"
+        ],
+        "terminalNote": "Compile and run the resulting program."
+      },
+      {
+        "id": "arrays",
+        "title": "Arrays",
+        "difficulty": "Beginner",
+        "explanation": "Arrays are fixed-size containers for items of a single type.",
+        "keyTerms": [
+          { "term": "array", "definition": "Fixed-size, indexable set of items." }
+        ],
+        "codeExample": [
+          "int a[3] = {1,2,3};",
+          "std::cout << a[2];"
+        ],
+        "expectedOutput": "3",
+        "starterCode": "char letters[4] = {'a','b','c','d'};\n// Print last letter",
+        "solution": [
+          "char letters[4] = {'a','b','c','d'};",
+          "std::cout << letters[3];"
+        ],
+        "commonMistakes": [
+          "Accessing out-of-bounds indices."
+        ],
+        "challenge": "Sum all elements of int arr[3] = {2, 2, 2}; and print.",
+        "challengeHint": "for loop & accumulator.",
+        "challengeSolution": [
+          "int arr[3] = {2,2,2}; int sum=0;",
+          "for(int i=0;i<3;i++) sum+=arr[i];",
+          "std::cout<<sum;"
+        ],
+        "terminalNote": "Zero-based index."
+      },
+      {
+        "id": "pointers",
+        "title": "Pointers",
+        "difficulty": "Intermediate",
+        "explanation": "Pointers store addresses, not values. Useful for dynamic memory, arrays, and more.",
+        "keyTerms": [
+          { "term": "pointer", "definition": "Variable holding a memory address." }
+        ],
+        "codeExample": [
+          "int n = 5;",
+          "int* p = &n;",
+          "std::cout << *p;"
+        ],
+        "expectedOutput": "5",
+        "starterCode": "int x=7; int* px=&x; // Print address of x",
+        "solution": [
+          "int x=7; int* px=&x; std::cout<<px;"
+        ],
+        "commonMistakes": [
+          "Dereferencing uninitialized pointers.",
+          "Mixing up & and *."
+        ],
+        "challenge": "Change a value via pointer.",
+        "challengeHint": "*ptr=val;",
+        "challengeSolution": [
+          "int a=10; int *pa=&a; *pa = 20; std::cout<<a;"
+        ],
+        "terminalNote": "Always initialize pointers before use."
+      },
+      {
+        "id": "functions",
+        "title": "Functions",
+        "difficulty": "Beginner",
+        "explanation": "Specify argument and return types for all functions. Use pass-by-reference for modifications.",
+        "keyTerms": [
+          { "term": "pass by value", "definition": "Gets copy of an argument." }
+        ],
+        "codeExample": [
+          "int add(int a, int b) { return a+b; }",
+          "std::cout << add(7, 5);"
+        ],
+        "expectedOutput": "12",
+        "starterCode": "int max(int a, int b) { /* ... */ }",
+        "solution": [
+          "int max(int a, int b) { return a > b ? a : b; }"
+        ],
+        "commonMistakes": [
+          "Forgetting return value for non-void function."
+        ],
+        "challenge": "Write a function to multiply two doubles.",
+        "challengeHint": "double mul(double,double)",
+        "challengeSolution": [
+          "double mul(double x, double y){ return x*y; }"
+        ],
+        "terminalNote": "Functions declared above main or as prototypes."
+      },
+      {
+        "id": "classes",
+        "title": "Classes",
+        "difficulty": "Intermediate",
+        "explanation": "C++ classes group data and methods, supporting encapsulation and OOP.",
+        "keyTerms": [
+          { "term": "class", "definition": "A custom object type in C++." }
+        ],
+        "codeExample": [
+          "class Point { public: int x; int y; };",
+          "Point p; p.x = 1; p.y = 2;"
+        ],
+        "expectedOutput": "",
+        "starterCode": "class Animal {\n  public:\n    std::string species;\n};",
+        "solution": [
+          "class Animal { public: std::string species; };"
+        ],
+        "commonMistakes": [
+          "Leaving members private by default."
+        ],
+        "challenge": "Add a constructor to Animal for species.",
+        "challengeHint": "Animal(string s){species=s;}",
+        "challengeSolution": [
+          "class Animal { public: std::string species; Animal(std::string s){species=s;} };"
+        ],
+        "terminalNote": "Use public for outside access."
+      },
+      {
+        "id": "inheritance",
+        "title": "Inheritance",
+        "difficulty": "Intermediate",
+        "explanation": "Inheritance allows classes to build on previous ones. Use ': public Base' to inherit.",
+        "keyTerms": [
+          { "term": "inheritance", "definition": "Acquisition of features from base class." }
+        ],
+        "codeExample": [
+          "class Dog : public Animal {};",
+          "Dog d;"
+        ],
+        "expectedOutput": "",
+        "starterCode": "class Base {}; // Derive class Sub",
+        "solution": [
+          "class Sub : public Base {};"
+        ],
+        "commonMistakes": [
+          "Omitting access specifier (public)."
+        ],
+        "challenge": "Override base method in derived class.",
+        "challengeHint": "Declare method with same signature.",
+        "challengeSolution": [
+          "class Base { public: virtual void f(){} };",
+          "class D : public Base { public: void f(){} };"
+        ],
+        "terminalNote": "Use 'virtual' for correct overriding."
+      },
+      {
+        "id": "templates",
+        "title": "Templates",
+        "difficulty": "Advanced",
+        "explanation": "Templates create code for multiple types. Syntax: template<typename T>.",
+        "keyTerms": [
+          { "term": "template", "definition": "Generic code for all types." }
+        ],
+        "codeExample": [
+          "template <typename T> T identity(T x) { return x; }",
+          "std::cout << identity(3);"
+        ],
+        "expectedOutput": "3",
+        "starterCode": "template <typename T> T add(T a, T b) { return ; }",
+        "solution": [
+          "template <typename T> T add(T a, T b) { return a + b; }"
+        ],
+        "commonMistakes": [
+          "Forgetting template<> header."
+        ],
+        "challenge": "Write a template for min function.",
+        "challengeHint": "a<b?a:b",
+        "challengeSolution": [
+          "template<typename T>T min(T a,T b){return a<b?a:b;}"
+        ],
+        "terminalNote": "Templates are instantiated at compile time."
+      },
+      {
+        "id": "stl",
+        "title": "Standard Template Library (STL)",
+        "difficulty": "Advanced",
+        "explanation": "STL offers ready-made vectors (dynamic arrays), sets, and maps. Use algorithms like sort, find, etc.",
+        "keyTerms": [
+          { "term": "vector", "definition": "Dynamic array class." }
+        ],
+        "codeExample": [
+          "#include <vector>",
+          "std::vector<int> v = {4, 5, 6};",
+          "std::cout << v.at(0);"
+        ],
+        "expectedOutput": "4",
+        "starterCode": "#include <vector>\nstd::vector<std::string> vs;\n// Add and print element",
+        "solution": [
+          "vs.push_back(\"Hi\");",
+          "std::cout << vs[0];"
+        ],
+        "commonMistakes": [
+          "Forgetting to #include <vector>."
+        ],
+        "challenge": "Create std::map<string, int> and insert pair.",
+        "challengeHint": "#include <map>",
+        "challengeSolution": [
+          "#include <map>",
+          "std::map<std::string,int> m;",
+          "m[\"x\"] = 1;"
+        ],
+        "terminalNote": "Always include STL headers you use."
+      },
+      {
+        "id": "memory",
+        "title": "Memory Management",
+        "difficulty": "Advanced",
+        "explanation": "Use new/delete for dynamic memory. Modern C++ prefers smart pointers (unique_ptr etc.) to avoid leaks.",
+        "keyTerms": [
+          { "term": "unique_ptr", "definition": "C++11 smart pointer with unique ownership semantics." }
+        ],
+        "codeExample": [
+          "#include <memory>",
+          "auto p = std::make_unique<int>(8);",
+          "std::cout << *p;"
+        ],
+        "expectedOutput": "8",
+        "starterCode": "int* p = new int;\n// Assign and print value, then delete.",
+        "solution": [
+          "int* p = new int;",
+          "*p = 42;",
+          "std::cout << *p;",
+          "delete p;"
+        ],
+        "commonMistakes": [
+          "Not calling delete on heap memory.",
+          "Double deletion."
+        ],
+        "challenge": "Create a unique_ptr to array of 2 ints, assign values.",
+        "challengeHint": "std::make_unique<int[]>(2);",
+        "challengeSolution": [
+          "#include <memory>",
+          "auto arr = std::make_unique<int[]>(2);",
+          "arr[0] = 1; arr[1] = 2;"
+        ],
+        "terminalNote": "unique_ptr deletes memory when out of scope."
+      },
+      {
+        "id": "exceptions",
+        "title": "Exceptions",
+        "difficulty": "Advanced",
+        "explanation": "Handle errors with try/catch and use throw to signal an error. Catch by value, reference, or type.",
+        "keyTerms": [
+          { "term": "try", "definition": "Start of exception block." },
+          { "term": "catch", "definition": "Catch an exception." }
+        ],
+        "codeExample": [
+          "try { throw 42; } catch(int e){ std::cout << e; }"
+        ],
+        "expectedOutput": "42",
+        "starterCode": "try { throw \"fail\"; } catch(...) { }",
+        "solution": [
+          "try { throw \"fail\"; } catch(...) { }"
+        ],
+        "commonMistakes": [
+          "Catching wrong type of exception."
+        ],
+        "challenge": "Throw and catch a std::string.",
+        "challengeHint": "throw std::string; catch by reference.",
+        "challengeSolution": [
+          "try { throw std::string(\"Oops\"); } catch(const std::string& e){ std::cout << e; }"
+        ],
+        "terminalNote": "std exceptions use std::exception base class."
+      }
+    ]
+  },
+  {
+    "id": "csharp",
+    "name": "C#",
+    "type": "Compiled",
+    "year": 2000,
+    "creator": "Anders Hejlsberg",
+    "difficulty": "Intermediate",
+    "description": "C# is a modern object-oriented language for Windows, .NET, and Unity games.",
+    "usedFor": "Desktop applications, web services, Unity game development.",
+    "funFact": "C# was once code-named 'Cool.'",
+    "color": "#68217A",
+    "terminalCommands": {
+      "windows": "dotnet run",
+      "mac": "dotnet run",
+      "linux": "dotnet run",
+      "install": "Install .NET SDK from https://dotnet.microsoft.com/"
+    },
+    "topics": [
+      {
+        "id": "variables",
+        "title": "Variables and Types",
+        "difficulty": "Beginner",
+        "explanation": "C# variables require type declaration. Popular types: int, double, string, bool.",
+        "keyTerms": [
+          { "term": "int", "definition": "Integer type." },
+          { "term": "string", "definition": "Unicode character data." }
+        ],
+        "codeExample": [
+          "int age = 45;",
+          "string name = \"Sam\";",
+          "Console.WriteLine(name + age);"
+        ],
+        "expectedOutput": "Sam45",
+        "starterCode": "double d = ;\nConsole.WriteLine(d);",
+        "solution": [
+          "double d = 2.5;",
+          "Console.WriteLine(d);"
+        ],
+        "commonMistakes": [
+          "Assigning bool to an int variable.",
+          "Forgetting the semicolon."
+        ],
+        "challenge": "Declare bool flag = true and print.",
+        "challengeHint": "bool flag = true; Console.WriteLine(flag);",
+        "challengeSolution": [
+          "bool flag = true;",
+          "Console.WriteLine(flag);"
+        ],
+        "terminalNote": "C# statements end with semicolon."
+      },
+      {
+        "id": "classes",
+        "title": "Classes",
+        "difficulty": "Beginner",
+        "explanation": "Define reusable object types and their members using classes. Constructors initialize fields.",
+        "keyTerms": [
+          { "term": "class", "definition": "Blueprint for objects." }
+        ],
+        "codeExample": [
+          "class Dog {",
+          "  public string Name;",
+          "  public Dog(string n) { Name = n; }",
+          "}",
+          "Dog d = new Dog(\"Max\");",
+          "Console.WriteLine(d.Name);"
+        ],
+        "expectedOutput": "Max",
+        "starterCode": "class Book {\n  public string Title;\n}",
+        "solution": [
+          "class Book { public string Title; }"
+        ],
+        "commonMistakes": [
+          "Forgetting public/private in members."
+        ],
+        "challenge": "Add a constructor for Book and set title from parameter.",
+        "challengeHint": "public Book(string t) { Title = t; }",
+        "challengeSolution": [
+          "class Book { public string Title; public Book(string t) { Title = t; } }"
+        ],
+        "terminalNote": "Instantiate objects with new."
+      },
+      {
+        "id": "methods",
+        "title": "Methods",
+        "difficulty": "Beginner",
+        "explanation": "Methods are functions inside classes/structs. They can return values and take parameters.",
+        "keyTerms": [
+          { "term": "method", "definition": "A class or struct function." }
+        ],
+        "codeExample": [
+          "class Adder {",
+          "  public int Add(int x, int y) { return x + y; }",
+          "}",
+          "var a = new Adder();",
+          "Console.WriteLine(a.Add(2,3));"
+        ],
+        "expectedOutput": "5",
+        "starterCode": "class Greeter {\n  public void Hello() { /* ... */ }\n}",
+        "solution": [
+          "class Greeter { public void Hello() { Console.WriteLine(\"Hello\"); } }"
+        ],
+        "commonMistakes": [
+          "Leaving out return type.",
+          "Not instantiating the class."
+        ],
+        "challenge": "Write a method Length(string s) returning s.Length.",
+        "challengeHint": "return s.Length;",
+        "challengeSolution": [
+          "public int Length(string s) { return s.Length; }"
+        ],
+        "terminalNote": "Methods belong to classes or structs."
+      },
+      {
+        "id": "properties",
+        "title": "Properties",
+        "difficulty": "Intermediate",
+        "explanation": "Properties are accessors for fields in a class. They encapsulate get/set functionality.",
+        "keyTerms": [
+          { "term": "property", "definition": "Getter/setter for data fields." }
+        ],
+        "codeExample": [
+          "class Student {",
+          "  public int Grade { get; set; }",
+          "}"
+        ],
+        "expectedOutput": "",
+        "starterCode": "class Clock {\n  public int Sec { get; set; }\n}",
+        "solution": [
+          "class Clock { public int Sec { get; set; } }"
+        ],
+        "commonMistakes": [
+          "Missing get/set blocks."
+        ],
+        "challenge": "Make a read-only property for Name.",
+        "challengeHint": "get only, no set.",
+        "challengeSolution": [
+          "public string Name { get; }"
+        ],
+        "terminalNote": "Properties go inside class body."
+      },
+      {
+        "id": "inheritance",
+        "title": "Inheritance",
+        "difficulty": "Intermediate",
+        "explanation": "A class can inherit fields and methods from another by using : BaseName.",
+        "keyTerms": [
+          { "term": "inheritance", "definition": "Acquiring members from a parent class." }
+        ],
+        "codeExample": [
+          "class Animal { public void Speak() { Console.WriteLine(\"Hi\"); } }",
+          "class Dog : Animal { }",
+          "Dog d = new Dog(); d.Speak();"
+        ],
+        "expectedOutput": "Hi",
+        "starterCode": "class Base { } // Create class Sub : Base",
+        "solution": [
+          "class Sub : Base { }"
+        ],
+        "commonMistakes": [
+          "Misspelling base class name."
+        ],
+        "challenge": "Override a method in derived class.",
+        "challengeHint": "Use override keyword.",
+        "challengeSolution": [
+          "class B { public virtual void Say(){} }",
+          "class C:B { public override void Say(){ Console.WriteLine(\"S\"); } }"
+        ],
+        "terminalNote": "Derived class can extend/override parents."
+      },
+      {
+        "id": "interfaces",
+        "title": "Interfaces",
+        "difficulty": "Intermediate",
+        "explanation": "An interface defines a contract. A class must implement all its methods.",
+        "keyTerms": [
+          { "term": "interface", "definition": "Only method/property signatures." }
+        ],
+        "codeExample": [
+          "interface IThing { void Act(); }",
+          "class Tool : IThing { public void Act(){ } }"
+        ],
+        "expectedOutput": "",
+        "starterCode": "interface I { void A(); }\nclass X : I { }",
+        "solution": [
+          "class X : I { public void A(){} }"
+        ],
+        "commonMistakes": [
+          "Leaving interface methods unimplemented."
+        ],
+        "challenge": "Make interface with two methods, implement both.",
+        "challengeHint": "interface IR { void B(); void C(); }",
+        "challengeSolution": [
+          "interface IR { void B(); void C(); }",
+          "class T : IR { public void B(){} public void C(){} }"
+        ],
+        "terminalNote": "Multiple interfaces allowed per class."
+      },
+      {
+        "id": "collections",
+        "title": "Collections",
+        "difficulty": "Intermediate",
+        "explanation": "The .NET collection types let you store lists, sets, and maps. List<T> is a dynamic array.",
+        "keyTerms": [
+          { "term": "List<T>", "definition": "Resizable, indexed sequence." }
+        ],
+        "codeExample": [
+          "using System.Collections.Generic;",
+          "List<int> nums = new List<int>{ 2, 4, 6 };",
+          "Console.WriteLine(nums.Count);"
+        ],
+        "expectedOutput": "3",
+        "starterCode": "List<string> colors = new List<string>();\n// Add a color and print it.",
+        "solution": [
+          "colors.Add(\"blue\");",
+          "Console.WriteLine(colors[0]);"
+        ],
+        "commonMistakes": [
+          "Forgetting to add using System.Collections.Generic;"
+        ],
+        "challenge": "Add 3 ints to a List and print their sum.",
+        "challengeHint": "nums.Add(1); nums.Sum();",
+        "challengeSolution": [
+          "List<int> l = new List<int>();",
+          "l.Add(1); l.Add(2); l.Add(4);",
+          "Console.WriteLine(l.Sum());"
+        ],
+        "terminalNote": "System.Linq needed for some operations."
+      },
+      {
+        "id": "exception",
+        "title": "Exception Handling",
+        "difficulty": "Intermediate",
+        "explanation": "try/catch handles runtime errors safely. Specific exceptions can be caught.",
+        "keyTerms": [
+          { "term": "Exception", "definition": "C# error object." }
+        ],
+        "codeExample": [
+          "try { int n = int.Parse(\"hello\"); }",
+          "catch (FormatException) { Console.WriteLine(\"Fail\"); }"
+        ],
+        "expectedOutput": "Fail",
+        "starterCode": "try { /* bad code */ } catch { Console.WriteLine(\"error\"); }",
+        "solution": [
+          "try { int x = 1 / 0; } catch { Console.WriteLine(\"error\"); }"
+        ],
+        "commonMistakes": [
+          "Ignoring exception type."
+        ],
+        "challenge": "Catch and print DivideByZeroException.",
+        "challengeHint": "catch (DivideByZeroException)",
+        "challengeSolution": [
+          "try { int a = 1 / 0; } catch(DivideByZeroException) { Console.WriteLine(\"/0\"); }"
+        ],
+        "terminalNote": "Detail errors for safer code."
+      },
+      {
+        "id": "linq",
+        "title": "LINQ",
+        "difficulty": "Advanced",
+        "explanation": "LINQ gives SQL-like queries inside C#. Use for filtering, mapping, and aggregate calculations.",
+        "keyTerms": [
+          { "term": "LINQ", "definition": "Language Integrated Query." }
+        ],
+        "codeExample": [
+          "using System.Linq;",
+          "int[] nums = {1,2,3,4};",
+          "var odds = nums.Where(x => x % 2 == 1);",
+          "Console.WriteLine(odds.Count());"
+        ],
+        "expectedOutput": "2",
+        "starterCode": "int[] vals = {4,5,6};\n// Print sum using LINQ",
+        "solution": [
+          "using System.Linq;",
+          "Console.WriteLine(vals.Sum());"
+        ],
+        "commonMistakes": [
+          "Forgetting to add using System.Linq;"
+        ],
+        "challenge": "Print number of elements > 3.",
+        "challengeHint": "Where(x=>x>3).Count()",
+        "challengeSolution": [
+          "int[] v = {3,4,5};",
+          "Console.WriteLine(v.Where(x=>x>3).Count());"
+        ],
+        "terminalNote": "LINQ makes data queries easy and safe."
+      }
+    ]
+  },
+  {
+    "id": "rust",
+    "name": "Rust",
+    "type": "Compiled",
+    "year": 2010,
+    "creator": "Graydon Hoare",
+    "difficulty": "Advanced",
+    "description": "Rust is a modern systems language focused on safety, zero-cost abstractions, and fearless concurrency.",
+    "usedFor": "System programming, CLI tools, web, embedded systems.",
+    "funFact": "Rust's mascot is a friendly crab named Ferris.",
+    "color": "#dea584",
+    "terminalCommands": {
+      "windows": "rustc lesson.rs && lesson.exe",
+      "mac": "rustc lesson.rs && ./lesson",
+      "linux": "rustc lesson.rs && ./lesson",
+      "install": "Install from https://rustup.rs/"
+    },
+    "topics": [
+      {
+        "id": "variables",
+        "title": "Variables and Mutability",
+        "difficulty": "Beginner",
+        "explanation": "Rust variables are immutable by default. Use let for assignment, add 'mut' to make them mutable.",
+        "keyTerms": [
+          { "term": "let", "definition": "Declares a variable." },
+          { "term": "mut", "definition": "Allows the variable to be changed." }
+        ],
+        "codeExample": [
+          "let mut a = 2;",
+          "a = 5;",
+          "println!(\"{}\", a);"
+        ],
+        "expectedOutput": "5",
+        "starterCode": "let x = 10;\n// Make x mutable and change it to 20.",
+        "solution": [
+          "let mut x = 10;",
+          "x = 20;"
+        ],
+        "commonMistakes": [
+          "Trying to change an immutable variable.",
+          "Leaving off 'mut' where needed."
+        ],
+        "challenge": "Declare two variables, print their sum.",
+        "challengeHint": "let a = ...; let b = ...; println!(...)",
+        "challengeSolution": [
+          "let a = 1; let b = 2; println!(\"{}\", a+b);"
+        ],
+        "terminalNote": "Every statement needs a semicolon."
+      },
+      {
+        "id": "ownership",
+        "title": "Ownership",
+        "difficulty": "Beginner",
+        "explanation": "In Rust, each value has one owner responsible for dropping it; moves transfer ownership.",
+        "keyTerms": [
+          { "term": "ownership", "definition": "The variable responsible for cleaning up the value." }
+        ],
+        "codeExample": [
+          "let s = String::from(\"hi\");",
+          "let t = s; // s is now invalid"
+        ],
+        "expectedOutput": "",
+        "starterCode": "let s = String::from(\"a\");\nlet t = s;",
+        "solution": [
+          "let s = String::from(\"a\");",
+          "let t = s;"
+        ],
+        "commonMistakes": [
+          "Using a variable after it's been moved.",
+          "Not cloning if you need both."
+        ],
+        "challenge": "Clone the String instead of moving.",
+        "challengeHint": "Use .clone().",
+        "challengeSolution": [
+          "let s = String::from(\"copy\");",
+          "let t = s.clone();"
+        ],
+        "terminalNote": "Clone is explicit for heap-allocated data."
+      },
+      {
+        "id": "borrowing",
+        "title": "Borrowing and References",
+        "difficulty": "Intermediate",
+        "explanation": "References let you access values without taking ownership. Immutable: &T, mutable: &mut T.",
+        "keyTerms": [
+          { "term": "borrowing", "definition": "Access without ownership transfer." }
+        ],
+        "codeExample": [
+          "let name = String::from(\"Rust\");",
+          "print_ref(&name);",
+          "fn print_ref(s: &String) { println!(\"{}\", s); }"
+        ],
+        "expectedOutput": "Rust",
+        "starterCode": "let mut n = 0;\nadd_one(&mut n);",
+        "solution": [
+          "let mut n = 0;",
+          "add_one(&mut n);",
+          "fn add_one(v: &mut i32) { *v += 1; }"
+        ],
+        "commonMistakes": [
+          "Trying to mutate through & reference.",
+          "Having two mutable borrows at once."
+        ],
+        "challenge": "Write a function that takes an immutable ref and prints the value.",
+        "challengeHint": "&T as parameter.",
+        "challengeSolution": [
+          "fn show(x: &i32){ println!(\"{}\", x); }",
+          "let n = 42;",
+          "show(&n);"
+        ],
+        "terminalNote": "Rust guarantees ref safety at compile time."
+      },
+      {
+        "id": "structs",
+        "title": "Structs",
+        "difficulty": "Intermediate",
+        "explanation": "Structs group related data under a single type. Use dot notation to access fields.",
+        "keyTerms": [
+          { "term": "struct", "definition": "A structure bundling multiple fields." }
+        ],
+        "codeExample": [
+          "struct Point { x: i32, y: i32 }",
+          "let p = Point { x: 3, y: 8 };"
+        ],
+        "expectedOutput": "",
+        "starterCode": "struct Book { title: String, pages: i32 }",
+        "solution": [
+          "struct Book { title: String, pages: i32 }"
+        ],
+        "commonMistakes": [
+          "Not providing values for all fields."
+        ],
+        "challenge": "Add show() method to Book to print both fields.",
+        "challengeHint": "Impl block for Book.",
+        "challengeSolution": [
+          "impl Book { fn show(&self){ println!(\"{} {}\", self.title, self.pages); } }"
+        ],
+        "terminalNote": "Methods/impl after struct definition."
+      },
+      {
+        "id": "enums",
+        "title": "Enums",
+        "difficulty": "Intermediate",
+        "explanation": "Enums define types with a set of named variants, often used for state or pattern matching.",
+        "keyTerms": [
+          { "term": "enum", "definition": "Multiple discrete named variants." }
+        ],
+        "codeExample": [
+          "enum Coin { Penny, Nickel }",
+          "let c = Coin::Nickel;"
+        ],
+        "expectedOutput": "",
+        "starterCode": "enum Light { On, Off }",
+        "solution": [
+          "enum Light { On, Off }"
+        ],
+        "commonMistakes": [
+          "Forgetting :: to access variants."
+        ],
+        "challenge": "Print a string depending on enum value.",
+        "challengeHint": "match on value.",
+        "challengeSolution": [
+          "let l = Light::On;",
+          "match l { Light::On => println!(\"On\"), Light::Off => println!(\"Off\") }"
+        ],
+        "terminalNote": "Pattern match all enum variants."
+      },
+      {
+        "id": "patternmatch",
+        "title": "Pattern Matching",
+        "difficulty": "Intermediate",
+        "explanation": "match lets you run code based on value patterns, including destructuring and guards.",
+        "keyTerms": [
+          { "term": "match", "definition": "Branch based on value and pattern." }
+        ],
+        "codeExample": [
+          "let n = 7;",
+          "match n { 1 => println!(\"1\"), 7 => println!(\"7\"), _ => println!(\"other\") }"
+        ],
+        "expectedOutput": "7",
+        "starterCode": "let b = true;\nmatch b { /* ... */ }",
+        "solution": [
+          "let b = true;",
+          "match b { true => println!(\"T\"), false => println!(\"F\") }"
+        ],
+        "commonMistakes": [
+          "Leaving out the wildcard _ case."
+        ],
+        "challenge": "Pattern match on Option<i32>.",
+        "challengeHint": "Some(n) or None.",
+        "challengeSolution": [
+          "let x = Some(4);",
+          "match x { Some(n) => println!(\"{}\", n), None => println!(\"empty\") }"
+        ],
+        "terminalNote": "match enforces exhaustive cases."
+      },
+      {
+        "id": "traits",
+        "title": "Traits",
+        "difficulty": "Advanced",
+        "explanation": "Traits let you define shared methods. Types implement a trait to promise the methods exist.",
+        "keyTerms": [
+          { "term": "trait", "definition": "Collection of required method signatures." }
+        ],
+        "codeExample": [
+          "trait Speak { fn speak(&self); }",
+          "struct Robot;",
+          "impl Speak for Robot { fn speak(&self){ println!(\"Beep\"); } }"
+        ],
+        "expectedOutput": "",
+        "starterCode": "trait MyTrait { fn act(&self); }",
+        "solution": [
+          "trait MyTrait { fn act(&self); }"
+        ],
+        "commonMistakes": [
+          "Not implementing all methods for the trait."
+        ],
+        "challenge": "Provide default impl for trait method.",
+        "challengeHint": "Define method body in trait.",
+        "challengeSolution": [
+          "trait S { fn go(&self) { println!(\"hi\") } }"
+        ],
+        "terminalNote": "Traits enable polymorphism."
+      },
+      {
+        "id": "generics",
+        "title": "Generics",
+        "difficulty": "Advanced",
+        "explanation": "Generics allow code to be written for any type. The <T> syntax defines a type parameter.",
+        "keyTerms": [
+          { "term": "T", "definition": "A stand-in for a type chosen at use." }
+        ],
+        "codeExample": [
+          "fn id<T>(x:T) -> T { x }",
+          "println!(\"{}\", id(5));"
+        ],
+        "expectedOutput": "5",
+        "starterCode": "fn first<T>(arr: &[T]) -> &T { // ... }",
+        "solution": [
+          "fn first<T>(arr: &[T]) -> &T { &arr[0] }"
+        ],
+        "commonMistakes": [
+          "Writing code that is not generic-safe."
+        ],
+        "challenge": "Make a generic struct Pair<T> { first, second }",
+        "challengeHint": "struct Pair<T>{...}",
+        "challengeSolution": [
+          "struct Pair<T> { first: T, second: T }"
+        ],
+        "terminalNote": "Type chosen when code is used."
+      },
+      {
+        "id": "errorhandling",
+        "title": "Error Handling",
+        "difficulty": "Advanced",
+        "explanation": "Rust uses Result types, not exceptions. The ? operator propagates errors up the call stack if not handled.",
+        "keyTerms": [
+          { "term": "Result", "definition": "Enum for Ok(T) or Err(E) outcome." }
+        ],
+        "codeExample": [
+          "fn div(a: i32, b:i32) -> Result<i32,&'static str>{",
+          "  if b==0 { Err(\"Zero\") } else { Ok(a/b) } }"
+        ],
+        "expectedOutput": "",
+        "starterCode": "fn parse(s:&str) -> Result<i32, String> {}",
+        "solution": [
+          "fn parse(s:&str) -> Result<i32,String> {",
+          "  s.parse::<i32>().map_err(|_| \"fail\".to_string())",
+          "}"
+        ],
+        "commonMistakes": [
+          "Trying to use try/catch."
+        ],
+        "challenge": "Return Ok for even, Err for odd integer input.",
+        "challengeHint": "Check n%2==0",
+        "challengeSolution": [
+          "fn even(n:i32)->Result<i32,&'static str>{",
+          "  if n%2==0 { Ok(n) } else { Err(\"odd\") } }"
+        ],
+        "terminalNote": "Use ? to propagate Result errors."
+      },
+      {
+        "id": "concurrency",
+        "title": "Concurrency",
+        "difficulty": "Advanced",
+        "explanation": "Rust makes safe concurrency possible via threads, channels, and strict ownership rules. spawn runs new threads.",
+        "keyTerms": [
+          { "term": "spawn", "definition": "Launch new thread." }
+        ],
+        "codeExample": [
+          "use std::thread;",
+          "thread::spawn(|| println!(\"Hello\"));"
+        ],
+        "expectedOutput": "Hello",
+        "starterCode": "use std::thread;\nthread::spawn(|| println!(\"!\"));",
+        "solution": [
+          "use std::thread;",
+          "thread::spawn(|| println!(\"!\"));"
+        ],
+        "commonMistakes": [
+          "Forgetting to join or handle thread output."
+        ],
+        "challenge": "Spawn two threads, print 'a' and 'b' from each.",
+        "challengeHint": "spawn twice.",
+        "challengeSolution": [
+          "use std::thread;",
+          "let t1=thread::spawn(|| println!(\"a\"));",
+          "let t2=thread::spawn(|| println!(\"b\"));",
+          "t1.join().unwrap(); t2.join().unwrap();"
+        ],
+        "terminalNote": "Threads may execute in any order."
+      }
+    ]
+  },
+  {
+    "id": "go",
+    "name": "Go",
+    "type": "Compiled",
+    "year": 2009,
+    "creator": "Robert Griesemer, Rob Pike, Ken Thompson",
+    "difficulty": "Intermediate",
+    "description": "Go is a simple, statically typed language with lightweight concurrency and great tool support.",
+    "usedFor": "Cloud servers, web services, CLI tools, microservices.",
+    "funFact": "Go compiles extremely fast and has a built-in code formatter.",
+    "color": "#00ADD8",
+    "terminalCommands": {
+      "windows": "go run lesson.go",
+      "mac": "go run lesson.go",
+      "linux": "go run lesson.go",
+      "install": "Download and install from https://go.dev/dl/"
+    },
+    "topics": [
+      {
+        "id": "variables",
+        "title": "Variables and Types",
+        "difficulty": "Beginner",
+        "explanation": "Use var for explicit type, := for inferred. Go has strict types.",
+        "keyTerms": [
+          { "term": "var", "definition": "Declares a variable, explicit type." },
+          { "term": ":=", "definition": "Short declare and infer." }
+        ],
+        "codeExample": [
+          "var x int = 5",
+          "y := \"hello\"",
+          "fmt.Println(x, y)"
+        ],
+        "expectedOutput": "5 hello",
+        "starterCode": "score := 12\n// Print double the score",
+        "solution": [
+          "score := 12",
+          "fmt.Println(score * 2)"
+        ],
+        "commonMistakes": [
+          "Using := outside functions.",
+          "Wrong type assignment."
+        ],
+        "challenge": "Create int age=20 and print.",
+        "challengeHint": "var age int = 20",
+        "challengeSolution": [
+          "var age int = 20",
+          "fmt.Println(age)"
+        ],
+        "terminalNote": "All variables must be used or the compiler will error."
+      },
+      {
+        "id": "functions",
+        "title": "Functions",
+        "difficulty": "Beginner",
+        "explanation": "Define functions with func. Return types go after param list.",
+        "keyTerms": [
+          { "term": "func", "definition": "Defines a function." }
+        ],
+        "codeExample": [
+          "func sum(a int, b int) int { return a + b }",
+          "fmt.Println(sum(2,3))"
+        ],
+        "expectedOutput": "5",
+        "starterCode": "func hi(name string) string { return \"\" }\nfmt.Println(hi(\"Sam\"))",
+        "solution": [
+          "func hi(name string) string { return \"Hi \" + name }",
+          "fmt.Println(hi(\"Sam\"))"
+        ],
+        "commonMistakes": [
+          "Omitting parens.",
+          "Wrong position for return type."
+        ],
+        "challenge": "Write a function for double(n int) int.",
+        "challengeHint": "Return n*2.",
+        "challengeSolution": [
+          "func double(n int) int { return n*2 }"
+        ],
+        "terminalNote": "Functions are called as in C."
+      },
+      {
+        "id": "arrays",
+        "title": "Arrays and Slices",
+        "difficulty": "Beginner",
+        "explanation": "Arrays have fixed size, slices are dynamic. Prefer slices for most work.",
+        "keyTerms": [
+          { "term": "array", "definition": "[len]T — fixed size." },
+          { "term": "slice", "definition": "[]T — dynamic view of array." }
+        ],
+        "codeExample": [
+          "nums := []int{1,2,3,4}",
+          "fmt.Println(nums[2])"
+        ],
+        "expectedOutput": "3",
+        "starterCode": "letters := []string{\"a\", \"b\"}\n// Print first",
+        "solution": [
+          "letters := []string{\"a\", \"b\"}",
+          "fmt.Println(letters[0])"
+        ],
+        "commonMistakes": [
+          "Index out of range.",
+          "Confusing array vs slice."
+        ],
+        "challenge": "Append 'c' and print all.",
+        "challengeHint": "letters = append(...).",
+        "challengeSolution": [
+          "letters = append(letters, \"c\")",
+          "fmt.Println(letters)"
+        ],
+        "terminalNote": "Slices return new slice from append."
+      },
+      {
+        "id": "structs",
+        "title": "Structs",
+        "difficulty": "Beginner",
+        "explanation": "Structs group fields. Go structs do not support methods inside the type itself, but methods can have struct receivers.",
+        "keyTerms": [
+          { "term": "struct", "definition": "Named field grouping." }
+        ],
+        "codeExample": [
+          "type Cat struct { Name string }",
+          "c := Cat{\"Tom\"}",
+          "fmt.Println(c.Name)"
+        ],
+        "expectedOutput": "Tom",
+        "starterCode": "type User struct { ID int }\n// Print ID for User{5}",
+        "solution": [
+          "u := User{ID:5}",
+          "fmt.Println(u.ID)"
+        ],
+        "commonMistakes": [
+          "Omitting field name during initialization.",
+          "Forgetting uppercase field for export."
+        ],
+        "challenge": "Add Age field to User and print user.Age.",
+        "challengeHint": "User{ID:..., Age:...}",
+        "challengeSolution": [
+          "type User struct{ ID int; Age int }",
+          "u := User{ID:1, Age:22}",
+          "fmt.Println(u.Age)"
+        ],
+        "terminalNote": "New types always have capitalized field names for export."
+      },
+      {
+        "id": "interfaces",
+        "title": "Interfaces",
+        "difficulty": "Intermediate",
+        "explanation": "Interfaces define a set of methods. Any type implementing them is considered that interface.",
+        "keyTerms": [
+          { "term": "interface", "definition": "Specifies method signatures." }
+        ],
+        "codeExample": [
+          "type Speaker interface{ Speak() }",
+          "type Dog struct{}",
+          "func (Dog) Speak() { fmt.Println(\"Woof\") }"
+        ],
+        "expectedOutput": "",
+        "starterCode": "type Item interface{ Print() }\n// Implement Print() for struct.",
+        "solution": [
+          "type Item interface{ Print() }",
+          "type Pen struct{}",
+          "func (Pen) Print(){ fmt.Println(\"Pen\") }"
+        ],
+        "commonMistakes": [
+          "Method receiver not on concrete type.",
+          "Not implementing all interface methods."
+        ],
+        "challenge": "Make an interface with two methods and implement.",
+        "challengeHint": "type X interface {A();B()}",
+        "challengeSolution": [
+          "type X interface{ A(); B(); }",
+          "type Y struct{}",
+          "func (Y) A(){} func (Y) B(){}"
+        ],
+        "terminalNote": "No implements keyword — implicit implementation."
+      },
+      {
+        "id": "goroutines",
+        "title": "Goroutines",
+        "difficulty": "Intermediate",
+        "explanation": "Goroutines are lightweight concurrent functions, created by the 'go' keyword.",
+        "keyTerms": [
+          { "term": "goroutine", "definition": "Concurrent execution thread." }
+        ],
+        "codeExample": [
+          "go fmt.Println(\"A\")",
+          "time.Sleep(time.Millisecond * 10)"
+        ],
+        "expectedOutput": "A",
+        "starterCode": "// Launch goroutine to print 'done'",
+        "solution": [
+          "go fmt.Println(\"done\")",
+          "time.Sleep(time.Millisecond * 10)"
+        ],
+        "commonMistakes": [
+          "Exiting program before goroutine runs. Use time.Sleep to see output."
+        ],
+        "challenge": "Launch two goroutines to print 1 and 2.",
+        "challengeHint": "go func(){fmt.Println(...)}() twice.",
+        "challengeSolution": [
+          "go fmt.Println(1)",
+          "go fmt.Println(2)",
+          "time.Sleep(time.Millisecond*10)"
+        ],
+        "terminalNote": "No ordering guarantee — concurrent!"
+      },
+      {
+        "id": "channels",
+        "title": "Channels",
+        "difficulty": "Intermediate",
+        "explanation": "Channels are conduits for communicating between goroutines. Use make(chan T) to create.",
+        "keyTerms": [
+          { "term": "channel", "definition": "Thread-safe data pipe." }
+        ],
+        "codeExample": [
+          "ch := make(chan int)",
+          "go func() { ch <- 7 }()",
+          "fmt.Println(<-ch)"
+        ],
+        "expectedOutput": "7",
+        "starterCode": "ch := make(chan string)\n// Send 'hi' and print received value",
+        "solution": [
+          "ch := make(chan string)",
+          "go func(){ ch <- \"hi\" }()",
+          "fmt.Println(<-ch)"
+        ],
+        "commonMistakes": [
+          "Not synchronizing both send and receive."
+        ],
+        "challenge": "Send two values, receive both.",
+        "challengeHint": "Send twice, receive twice.",
+        "challengeSolution": [
+          "ch := make(chan int)",
+          "go func(){ ch <- 5; ch <- 6 }()",
+          "fmt.Println(<-ch)",
+          "fmt.Println(<-ch)"
+        ],
+        "terminalNote": "Channels block until both sides are ready."
+      },
+      {
+        "id": "errorhandling",
+        "title": "Error Handling",
+        "difficulty": "Intermediate",
+        "explanation": "Go does not have exceptions; error is returned as a separate value in the return signature.",
+        "keyTerms": [
+          { "term": "error", "definition": "Built-in interface for error reporting." }
+        ],
+        "codeExample": [
+          "i, err := strconv.Atoi(\"a\");",
+          "if err != nil { fmt.Println(\"fail\") }"
+        ],
+        "expectedOutput": "fail",
+        "starterCode": "f, err := os.Open(\"foo.txt\");\n// Check if err != nil",
+        "solution": [
+          "if err != nil { fmt.Println(\"fail\") }"
+        ],
+        "commonMistakes": [
+          "Ignoring returned error value.",
+          "Trying try/catch (not in Go)."
+        ],
+        "challenge": "Return an error from a function when n < 0.",
+        "challengeHint": "errors.New(\"bad\")",
+        "challengeSolution": [
+          "func foo(n int) error { if n<0 { return errors.New(\"bad\") }; return nil }"
+        ],
+        "terminalNote": "Always check error return values!"
+      },
+      {
+        "id": "packages",
+        "title": "Packages",
+        "difficulty": "Intermediate",
+        "explanation": "Go code is organized into packages. Import packages using import statement.",
+        "keyTerms": [
+          { "term": "package", "definition": "Collection of Go source files." }
+        ],
+        "codeExample": [
+          "import \"fmt\"",
+          "fmt.Println(\"Go!\")"
+        ],
+        "expectedOutput": "Go!",
+        "starterCode": "import \"math\"\n// Print Pi",
+        "solution": [
+          "fmt.Println(math.Pi)"
+        ],
+        "commonMistakes": [
+          "Not capitalizing package name in import."
+        ],
+        "challenge": "Import time package and print current time.",
+        "challengeHint": "fmt.Println(time.Now())",
+        "challengeSolution": [
+          "import \"time\"",
+          "fmt.Println(time.Now())"
+        ],
+        "terminalNote": "Standard library is extensive in Go."
+      },
+      {
+        "id": "http",
+        "title": "HTTP Server",
+        "difficulty": "Advanced",
+        "explanation": "Go's net/http makes web servers easy to write. Use HandleFunc and ListenAndServe.",
+        "keyTerms": [
+          { "term": "http.HandleFunc", "definition": "Register path to handler." }
+        ],
+        "codeExample": [
+          "http.HandleFunc(\"/\", func(w http.ResponseWriter, r *http.Request) {",
+          "  fmt.Fprint(w, \"Hello\")",
+          "})",
+          "http.ListenAndServe(\":8080\", nil)"
+        ],
+        "expectedOutput": "",
+        "starterCode": "// Serve /foo path to print 'bar'",
+        "solution": [
+          "http.HandleFunc(\"/foo\", func(w http.ResponseWriter, r *http.Request){",
+          "  fmt.Fprint(w, \"bar\") })",
+          "http.ListenAndServe(\":8080\",nil)"
+        ],
+        "commonMistakes": [
+          "Missing ListenAndServe.",
+          "Handler function signature incorrect."
+        ],
+        "challenge": "Serve '/hi' and respond with 'hello'.",
+        "challengeHint": "Register second HandleFunc.",
+        "challengeSolution": [
+          "http.HandleFunc(\"/hi\", func(w http.ResponseWriter, r *http.Request){ fmt.Fprint(w, \"hello\") })"
+        ],
+        "terminalNote": "Test from browser: http://localhost:8080/hi"
+      }
+    ]
+  },
+  {
+    "id": "java",
+    "name": "Java",
+    "type": "Compiled",
+    "year": 1995,
+    "creator": "James Gosling",
+    "difficulty": "Intermediate",
+    "description": "Java is an object-oriented, platform-independent language used for stable, maintainable large-scale applications.",
+    "usedFor": "Android, enterprise systems, backend, desktop.",
+    "funFact": "The Java mascot 'Duke' originally waved a flag.",
+    "color": "#b07219",
+    "terminalCommands": {
+      "windows": "javac Lesson.java && java Lesson",
+      "mac": "javac Lesson.java && java Lesson",
+      "linux": "javac Lesson.java && java Lesson",
+      "install": "Install from https://adoptium.net/"
+    },
+    "topics": [
+      {
+        "id": "variables",
+        "title": "Variables and Data Types",
+        "difficulty": "Beginner",
+        "explanation": "Each Java variable must have a type (int, double, boolean, String, etc.). Type errors are caught at compile time.",
+        "keyTerms": [
+          { "term": "int", "definition": "Integer type." },
+          { "term": "String", "definition": "Reference type for text." }
+        ],
+        "codeExample": [
+          "int a = 2;",
+          "String n = \"John\";",
+          "System.out.println(n + \" \" + a);"
+        ],
+        "expectedOutput": "John 2",
+        "starterCode": "double pi = ;\nSystem.out.println(pi);",
+        "solution": [
+          "double pi = 3.14;",
+          "System.out.println(pi);"
+        ],
+        "commonMistakes": [
+          "Leaving variable uninitialized.",
+          "Type mismatch."
+        ],
+        "challenge": "Declare boolean ready = true and print.",
+        "challengeHint": "System.out.println(ready);",
+        "challengeSolution": [
+          "boolean ready = true;",
+          "System.out.println(ready);"
+        ],
+        "terminalNote": "Variable types are explicit in Java."
+      },
+      {
+        "id": "arrays",
+        "title": "Arrays",
+        "difficulty": "Beginner",
+        "explanation": "Arrays are fixed-size collections of a type. Indexing starts at 0.",
+        "keyTerms": [
+          { "term": "array", "definition": "Fixed length, type-homogenous sequence." }
+        ],
+        "codeExample": [
+          "int[] arr = {4,5,6};",
+          "System.out.println(arr[1]);"
+        ],
+        "expectedOutput": "5",
+        "starterCode": "String[] sa = {\"apple\", \"banana\"};\n// Print array length.",
+        "solution": [
+          "System.out.println(sa.length);"
+        ],
+        "commonMistakes": [
+          "Array index out of bounds.",
+          "Forgetting new for allocation."
+        ],
+        "challenge": "Assign new value to second element and print array.",
+        "challengeHint": "sa[1] = ...",
+        "challengeSolution": [
+          "sa[1] = \"pear\";",
+          "System.out.println(sa[0] + \",\" + sa[1]);"
+        ],
+        "terminalNote": "Array types can't grow after creation."
+      },
+      {
+        "id": "methods",
+        "title": "Methods",
+        "difficulty": "Beginner",
+        "explanation": "Methods are functions attached to classes. Use static if they don't need a class instance.",
+        "keyTerms": [
+          { "term": "method", "definition": "A named code block in a class." }
+        ],
+        "codeExample": [
+          "static int add(int x, int y){ return x+y; }",
+          "System.out.println(add(3, 7));"
+        ],
+        "expectedOutput": "10",
+        "starterCode": "static int cube(int n){ /* ... */ }",
+        "solution": [
+          "static int cube(int n){ return n*n*n; }"
+        ],
+        "commonMistakes": [
+          "Using method before definition in the file."
+        ],
+        "challenge": "Write method greet returning \"Hello\" + param.",
+        "challengeHint": "return \"Hello \" + name;",
+        "challengeSolution": [
+          "static String greet(String name){ return \"Hello \" + name; }"
+        ],
+        "terminalNote": "Static methods are called via Class.method()."
+      },
+      {
+        "id": "classes",
+        "title": "Classes",
+        "difficulty": "Beginner",
+        "explanation": "A class defines the properties and behaviors of objects. Fields and methods go inside.",
+        "keyTerms": [
+          { "term": "class", "definition": "A named blueprint for objects." }
+        ],
+        "codeExample": [
+          "class Cat { String name; }",
+          "Cat c = new Cat();",
+          "c.name = \"Mimi\";"
+        ],
+        "expectedOutput": "",
+        "starterCode": "class Car { int year; String model; }",
+        "solution": [
+          "class Car { int year; String model; }"
+        ],
+        "commonMistakes": [
+          "Forgetting curly braces around class contents."
+        ],
+        "challenge": "Add a constructor to set year and model.",
+        "challengeHint": "Car(int y, String m) { ... }",
+        "challengeSolution": [
+          "class Car {",
+          "  int year; String model;",
+          "  Car(int y, String m){ year = y; model = m; }",
+          "}"
+        ],
+        "terminalNote": "Filename must match public class name."
+      },
+      {
+        "id": "inheritance",
+        "title": "Inheritance",
+        "difficulty": "Intermediate",
+        "explanation": "One class can extend another, inheriting all fields and methods. Use 'extends' keyword.",
+        "keyTerms": [
+          { "term": "inheritance", "definition": "Extending a class for code reuse." }
+        ],
+        "codeExample": [
+          "class Animal {}",
+          "class Dog extends Animal {}"
+        ],
+        "expectedOutput": "",
+        "starterCode": "class Parent { } // Declare Child that inherits",
+        "solution": [
+          "class Child extends Parent { }"
+        ],
+        "commonMistakes": [
+          "Misspelling extends.",
+          "Calling parent constructor incorrectly."
+        ],
+        "challenge": "Override a parent method in Child.",
+        "challengeHint": "Use @Override annotation.",
+        "challengeSolution": [
+          "class A { void say(){ System.out.println(\"a\"); } }",
+          "class B extends A { @Override void say(){ System.out.println(\"b\"); } }"
+        ],
+        "terminalNote": "@Override tells compiler you're intending to override."
+      },
+      {
+        "id": "interfaces",
+        "title": "Interfaces",
+        "difficulty": "Intermediate",
+        "explanation": "Interfaces define required methods for a class to provide. No bodies in interface.",
+        "keyTerms": [
+          { "term": "interface", "definition": "Contract of required method signatures." }
+        ],
+        "codeExample": [
+          "interface IShow { void show(); }",
+          "class Demo implements IShow { public void show(){} }"
+        ],
+        "expectedOutput": "",
+        "starterCode": "interface Fruit { void eat(); }\nclass Apple implements Fruit { }",
+        "solution": [
+          "class Apple implements Fruit { public void eat(){} }"
+        ],
+        "commonMistakes": [
+          "Using class instead of interface.",
+          "Omitting required methods."
+        ],
+        "challenge": "Declare interface X with two methods, and implement.",
+        "challengeHint": "implement all methods.",
+        "challengeSolution": [
+          "interface X { void a(); void b(); }",
+          "class Y implements X { public void a(){} public void b(){} }"
+        ],
+        "terminalNote": "A class can implement multiple interfaces."
+      },
+      {
+        "id": "generics",
+        "title": "Generics",
+        "difficulty": "Intermediate",
+        "explanation": "Generics provide type safety and reduce code duplication. Use angle brackets for parameterized types.",
+        "keyTerms": [
+          { "term": "<T>", "definition": "Denotes a type parameter." }
+        ],
+        "codeExample": [
+          "class Box<T> { T value; }",
+          "Box<Integer> b = new Box<>();"
+        ],
+        "expectedOutput": "",
+        "starterCode": "class Pair<T> { T first; T second; }",
+        "solution": [
+          "class Pair<T> { T first; T second; }"
+        ],
+        "commonMistakes": [
+          "Forgetting the <T> in class or method definition."
+        ],
+        "challenge": "Write method <T> head(T[] arr) returns arr[0]",
+        "challengeHint": "static <T> T...",
+        "challengeSolution": [
+          "static <T> T head(T[] arr){ return arr[0]; }"
+        ],
+        "terminalNote": "Use generics for flexible data structures."
+      },
+      {
+        "id": "collections",
+        "title": "Collections",
+        "difficulty": "Intermediate",
+        "explanation": "Java Collections Framework offers ArrayList, HashMap, etc., that grow dynamically and offer advanced operations.",
+        "keyTerms": [
+          { "term": "ArrayList", "definition": "Resizable list." }
+        ],
+        "codeExample": [
+          "import java.util.ArrayList;",
+          "ArrayList<String> l = new ArrayList<>();",
+          "l.add(\"Hi\");",
+          "System.out.println(l.size());"
+        ],
+        "expectedOutput": "1",
+        "starterCode": "HashMap<String,Integer> m = new HashMap<>();\n// Add a pair and print value.",
+        "solution": [
+          "m.put(\"A\", 33);",
+          "System.out.println(m.get(\"A\"));"
+        ],
+        "commonMistakes": [
+          "Forgetting import java.util.*",
+          "Working with wrong types."
+        ],
+        "challenge": "Add three elements to list and print sum.",
+        "challengeHint": "add ints, then loop or use List sum.",
+        "challengeSolution": [
+          "ArrayList<Integer> l = new ArrayList<>();",
+          "l.add(2); l.add(3); l.add(7);",
+          "int sum = 0; for(int i:l) sum+=i;",
+          "System.out.println(sum);"
+        ],
+        "terminalNote": "ArrayList grows automatically."
+      },
+      {
+        "id": "exceptions",
+        "title": "Exception Handling",
+        "difficulty": "Intermediate",
+        "explanation": "Java uses try/catch/finally constructs for safe error handling at runtime.",
+        "keyTerms": [
+          { "term": "try", "definition": "Runs code that may cause error." },
+          { "term": "catch", "definition": "Handles exceptions thrown in try." }
+        ],
+        "codeExample": [
+          "try { int a = 1/0; } catch(Exception e) { System.out.println(\"fail\"); }"
+        ],
+        "expectedOutput": "fail",
+        "starterCode": "try { /* ... */ } catch(Exception e) { /* ... */ }",
+        "solution": [
+          "try { int[] a = new int[2]; a[3]=10; } catch(Exception e){ System.out.println(\"oops\"); }"
+        ],
+        "commonMistakes": [
+          "Forgetting catch block.",
+          "Using wrong exception type."
+        ],
+        "challenge": "Catch NumberFormatException and print 'bad'.",
+        "challengeHint": "catch(NumberFormatException e)",
+        "challengeSolution": [
+          "try { Integer.parseInt(\"abc\"); } catch(NumberFormatException e){ System.out.println(\"bad\"); }"
+        ],
+        "terminalNote": "Exception hierarchy can be deep!"
+      },
+      {
+        "id": "threads",
+        "title": "Threads",
+        "difficulty": "Advanced",
+        "explanation": "Java threads allow concurrent execution. Extend Thread or implement Runnable, and start().",
+        "keyTerms": [
+          { "term": "Thread", "definition": "Class for concurrent execution." }
+        ],
+        "codeExample": [
+          "class MyThread extends Thread { public void run(){ System.out.println(\"hello\"); } }",
+          "new MyThread().start();"
+        ],
+        "expectedOutput": "hello",
+        "starterCode": "class T extends Thread { public void run(){ } }",
+        "solution": [
+          "class T extends Thread { public void run(){ System.out.println(\"T\"); } }"
+        ],
+        "commonMistakes": [
+          "Forgetting to call start() instead of run().",
+          "Accessing shared data without synchronization."
+        ],
+        "challenge": "Create two threads (Runnable) that each print a message.",
+        "challengeHint": "new Thread(() -> {...}).start();",
+        "challengeSolution": [
+          "new Thread(() -> { System.out.println(\"One\"); }).start();",
+          "new Thread(() -> { System.out.println(\"Two\"); }).start();"
+        ],
+        "terminalNote": "Thread output order is not guaranteed."
+      }
+    ]
   }
 ]

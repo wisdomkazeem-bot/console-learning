@@ -1,14 +1,12 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import languages from "@/data/languages.json";
 
-// --- Fixes for lint errors ---
-// Type corrections for languages.json structure
+// --- Types ---
 type Language = {
   id: string;
   name: string;
-  // Correct usage for terminal commands in the provided languages.json structure
   terminalCommands: {
     windows: string;
     mac: string;
@@ -17,7 +15,6 @@ type Language = {
     runExample: string;
   };
   topics: Topic[];
-  // Other fields omitted for brevity (not used directly in UI)
 };
 
 type Topic = {
@@ -33,7 +30,7 @@ type Topic = {
   };
   assignment: {
     prompt: string;
-    expected: string; // expected output as string
+    expected: string;
     exampleCall?: string;
     testInput?: any;
     lang?: string;
@@ -49,23 +46,26 @@ type Topic = {
   };
 };
 
-// Utility/styles
+// Utility
 function classNames(...classes: (string | boolean | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-// Updated safe language getter for new structure
 function getLanguageById(id: string): Language | undefined {
   return (languages as any[]).find(
-    (lang) => lang.id === id || lang.id?.toLowerCase?.() === id.toLowerCase()
+    (lang) =>
+      lang.id === id ||
+      (typeof lang.id === "string" && lang.id.toLowerCase() === id.toLowerCase())
   ) as Language | undefined;
 }
 
+// --------- Component starts ---------
 export default function LanguageLessonPage({ params }: { params: { id: string } }) {
   const language = getLanguageById(params.id);
+
   const [selectedLessonIdx, setSelectedLessonIdx] = useState(0);
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
-  const [step, setStep] = useState(1); // Step 1-5
+  const [step, setStep] = useState(1);
   const [assignmentInput, setAssignmentInput] = useState("");
   const [assignmentStatus, setAssignmentStatus] = useState<"idle" | "success" | "error">("idle");
   const [assignmentHint, setAssignmentHint] = useState(false);
@@ -75,100 +75,90 @@ export default function LanguageLessonPage({ params }: { params: { id: string } 
   const [challengeHintOpen, setChallengeHintOpen] = useState(false);
   const [challengeSolutionOpen, setChallengeSolutionOpen] = useState(false);
 
-  // If no language, show not found
+  // Not found case (requirement #4)
   if (!language) {
     return (
       <div className="max-w-3xl mx-auto px-4 pt-32 font-sans text-zinc-700">
         <h2 className="text-2xl font-semibold mb-4">Language not found</h2>
-        <a href="/language" className="underline text-blue-700 dark:text-blue-400">
-          Back to language home
+        <a href="/" className="underline text-blue-700 dark:text-blue-400">
+          Back to homepage
         </a>
       </div>
     );
   }
 
+  // Lessons from language.topics (#1)
   const lessons = language.topics;
   const lesson = lessons[selectedLessonIdx];
 
-  // Progress data
+  // Progress info
   const progress = {
     number: selectedLessonIdx + 1,
     total: lessons.length,
     title: lesson.title,
-    completed: completedLessons.length
+    completed: completedLessons.length,
   };
-  // Progress as a percentage (0-100)
   const percent = lessons.length
     ? Math.round((completedLessons.length / lessons.length) * 100)
     : 0;
-
   const progressBarColor = percent < 100 ? "bg-blue-600" : "bg-green-600";
 
-  // Locked/unlocked/complete state helpers
+  // Helpers
   const isLessonUnlocked = (idx: number) => {
     if (idx === 0) return true;
     return completedLessons.includes(idx - 1);
   };
   const canGoNextLesson = completedLessons.includes(selectedLessonIdx);
 
-  // ---- Terminal commands extraction according to new data shape ----
-  // languages.json: { terminalCommands: { windows, mac, linux, install, runExample } }
-  // 'install' and 'runExample' keys have per-OS values joined via newlines; extract per-OS
-  const parseTerminalInstall = (commands: string, os: "windows" | "mac" | "linux") => {
-    // commands is the install string; if multiline, may have OS labels
-    // If a structure with all OS keys: prefer direct.
-    // For boot.dev style, we expect per-OS already set.
-    if (!commands) return "";
-    // Accepts both: direct command for each OS OR
-    // a single string for all (rare)
-    return commands;
-  };
-  const parseRunCommand = (commands: string, os: "windows" | "mac" | "linux") => {
-    if (!commands) return "";
-    return commands;
-  };
-
+  // Terminal commands (#1, #3)
   const terminalCommands = language.terminalCommands
     ? {
         windows: {
-          install: parseTerminalInstall(language.terminalCommands.windows || language.terminalCommands.install || "", "windows"),
+          install:
+            language.terminalCommands.windows ||
+            language.terminalCommands.install ||
+            "",
           run:
-            language.terminalCommands.runExample && language.terminalCommands.runExample.includes("windows")
-              ? language.terminalCommands.runExample
-              : parseRunCommand(language.terminalCommands.windows || language.terminalCommands.runExample || "", "windows"),
+            language.terminalCommands.runExample ||
+            language.terminalCommands.windows ||
+            "",
         },
         mac: {
-          install: parseTerminalInstall(language.terminalCommands.mac || language.terminalCommands.install || "", "mac"),
+          install:
+            language.terminalCommands.mac ||
+            language.terminalCommands.install ||
+            "",
           run:
-            language.terminalCommands.runExample && language.terminalCommands.runExample.includes("mac")
-              ? language.terminalCommands.runExample
-              : parseRunCommand(language.terminalCommands.mac || language.terminalCommands.runExample || "", "mac"),
+            language.terminalCommands.runExample ||
+            language.terminalCommands.mac ||
+            "",
         },
         linux: {
-          install: parseTerminalInstall(language.terminalCommands.linux || language.terminalCommands.install || "", "linux"),
+          install:
+            language.terminalCommands.linux ||
+            language.terminalCommands.install ||
+            "",
           run:
-            language.terminalCommands.runExample && language.terminalCommands.runExample.includes("linux")
-              ? language.terminalCommands.runExample
-              : parseRunCommand(language.terminalCommands.linux || language.terminalCommands.runExample || "", "linux"),
+            language.terminalCommands.runExample ||
+            language.terminalCommands.linux ||
+            "",
         },
       }
     : {
         windows: { install: "", run: "" },
         mac: { install: "", run: "" },
-        linux: { install: "", run: "" }
+        linux: { install: "", run: "" },
       };
 
-  // For terminal panel, get expectedOutput from lesson.terminal if present, else use lesson.assignment.expected
   const terminalExpectedOutput =
     lesson.terminal?.expectedOutput ||
     (lesson.assignment?.expected && lesson.assignment.expected !== ""
       ? [lesson.assignment.expected]
       : []);
 
-  // Helper for code line numbers/code block
+  // Helper to render dark code block with lines & copy
   const renderCodeBlock = (lines: string[], lang: string = "text") => (
     <div className="relative bg-[#18181b] rounded-lg p-4 mt-2 text-sm font-mono text-zinc-100 overflow-x-auto">
-      {/* Copy button */}
       <button
         className="absolute top-3 right-4 rounded-full bg-zinc-700 text-white px-3 py-1 text-xs transition hover:bg-zinc-600 font-sans"
         onClick={() => {
@@ -191,16 +181,13 @@ export default function LanguageLessonPage({ params }: { params: { id: string } 
     </div>
   );
 
-  // General runner for assignment
+  // Assignment runner for all languages (#2)
   function runAssignment() {
-    // Defensive for TS
     if (!language) return;
-
     const lang = (lesson.assignment.lang || language.id).toLowerCase();
     let out: string | undefined = undefined;
     let pass = false;
     try {
-      // Slightly improved cross-language heuristics, NOT real interpreters!
       if (lang === "python") {
         const fnNameMatch = lesson.assignment.exampleCall
           ? lesson.assignment.exampleCall.match(/^([A-Za-z_][A-Za-z0-9_]*)\(/)
@@ -212,7 +199,6 @@ export default function LanguageLessonPage({ params }: { params: { id: string } 
           assignmentInput.includes("return")
         ) {
           if (fnName === "add") {
-            // Return test for add(7,8)
             if (
               assignmentInput.match(/\breturn\s+(a\s*\+\s*b|b\s*\+\s*a)[\s$]/) ||
               assignmentInput.replace(/\s/g, "").includes("returna+b")
@@ -237,24 +223,28 @@ export default function LanguageLessonPage({ params }: { params: { id: string } 
           assignmentInput.includes("public static") &&
           assignmentInput.includes("return") &&
           assignmentInput.includes(String(lesson.assignment.expected))
-        ) pass = true;
+        )
+          pass = true;
       } else if (lang === "go") {
         if (
           assignmentInput.includes("func main()") &&
           assignmentInput.includes(`fmt.Println(${lesson.assignment.expected})`)
-        ) pass = true;
+        )
+          pass = true;
       } else if (lang === "c" || lang === "cpp" || lang === "c++") {
         if (
           assignmentInput.includes("printf") &&
           assignmentInput.includes(String(lesson.assignment.expected))
-        ) pass = true;
+        )
+          pass = true;
       } else if (lang === "ruby") {
         if (
           assignmentInput.includes("puts") &&
           assignmentInput.includes(String(lesson.assignment.expected))
-        ) pass = true;
+        )
+          pass = true;
       } else {
-        // Fallback
+        // Fallback: just check output string
         if (assignmentInput.includes(String(lesson.assignment.expected)))
           pass = true;
       }
@@ -305,7 +295,7 @@ export default function LanguageLessonPage({ params }: { params: { id: string } 
     }
   }
 
-  // ========== Layout ==========
+  // Layout
   return (
     <div className="font-sans bg-zinc-50 dark:bg-black min-h-screen">
       {/* Progress Bar at very top */}
@@ -319,7 +309,7 @@ export default function LanguageLessonPage({ params }: { params: { id: string } 
               )}
               style={{
                 width: `${percent}%`,
-                minWidth: percent > 0 ? "2rem" : "0"
+                minWidth: percent > 0 ? "2rem" : "0",
               }}
             />
           </div>
@@ -331,8 +321,8 @@ export default function LanguageLessonPage({ params }: { params: { id: string } 
       {/* Top bar */}
       <div className="bg-white dark:bg-black shadow-sm">
         <div className="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
-          {/* Left: Language + lesson */}
           <div>
+            {/* Use language.name (#2) */}
             <span className="text-lg font-medium">{language.name}</span>
             <span className="mx-2 text-zinc-300 select-none">|</span>
             <span className="text-base font-normal">{progress.title}</span>
@@ -417,7 +407,6 @@ export default function LanguageLessonPage({ params }: { params: { id: string } 
         </nav>
         {/* Main Panel (content) */}
         <div className="flex-1 min-w-0 bg-white dark:bg-black p-6 rounded-xl shadow-lg border border-zinc-100 dark:border-zinc-900 font-sans text-zinc-600 dark:text-zinc-400">
-          {/* Step progress header */}
           <div className="mb-8 flex gap-3 items-center">
             {["Read", "Watch", "Assignment", "Terminal", "Challenge"].map((label, i) => (
               <span key={label}
@@ -430,7 +419,7 @@ export default function LanguageLessonPage({ params }: { params: { id: string } 
               </span>
             ))}
           </div>
-          {/* Steps panels */}
+          {/* Steps */}
           {step === 1 && (
             <section>
               <h2 className="text-xl font-semibold mb-4">Step 1: Read</h2>
@@ -725,10 +714,10 @@ export default function LanguageLessonPage({ params }: { params: { id: string } 
   );
 }
 
-// Terminal panel: tabbed install/run/expected for current language
+// Terminal tabbed panel (used in step 4; takes language.terminalCommands, #3)
 function TabTerminalPanel({
   commands,
-  expectedOutput = []
+  expectedOutput = [],
 }: {
   commands: {
     windows: { install: string; run: string };
