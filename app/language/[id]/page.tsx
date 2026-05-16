@@ -11,8 +11,8 @@ type Language = {
     windows: string;
     mac: string;
     linux: string;
-    install: string;
-    runExample: string;
+    install?: string;
+    runExample?: string;
   };
   topics: Topic[];
 };
@@ -59,7 +59,6 @@ function getLanguageById(id: string): Language | undefined {
   ) as Language | undefined;
 }
 
-// --------- Component starts ---------
 export default function LanguageLessonPage({ params }: { params: { id: string } }) {
   const language = getLanguageById(params.id);
 
@@ -110,45 +109,21 @@ export default function LanguageLessonPage({ params }: { params: { id: string } 
   };
   const canGoNextLesson = completedLessons.includes(selectedLessonIdx);
 
-  // Terminal commands (#1, #3)
-  const terminalCommands = language.terminalCommands
-    ? {
-        windows: {
-          install:
-            language.terminalCommands.windows ||
-            language.terminalCommands.install ||
-            "",
-          run:
-            language.terminalCommands.runExample ||
-            language.terminalCommands.windows ||
-            "",
-        },
-        mac: {
-          install:
-            language.terminalCommands.mac ||
-            language.terminalCommands.install ||
-            "",
-          run:
-            language.terminalCommands.runExample ||
-            language.terminalCommands.mac ||
-            "",
-        },
-        linux: {
-          install:
-            language.terminalCommands.linux ||
-            language.terminalCommands.install ||
-            "",
-          run:
-            language.terminalCommands.runExample ||
-            language.terminalCommands.linux ||
-            "",
-        },
-      }
-    : {
-        windows: { install: "", run: "" },
-        mac: { install: "", run: "" },
-        linux: { install: "", run: "" },
-      };
+  // Terminal commands (#1, #3): use language.terminalCommands for each OS
+  const terminalCommands = {
+    windows: {
+      install: language.terminalCommands?.install ?? language.terminalCommands?.windows ?? "",
+      run: language.terminalCommands?.windows ?? "",
+    },
+    mac: {
+      install: language.terminalCommands?.install ?? language.terminalCommands?.mac ?? "",
+      run: language.terminalCommands?.mac ?? "",
+    },
+    linux: {
+      install: language.terminalCommands?.install ?? language.terminalCommands?.linux ?? "",
+      run: language.terminalCommands?.linux ?? "",
+    },
+  };
 
   const terminalExpectedOutput =
     lesson.terminal?.expectedOutput ||
@@ -295,7 +270,6 @@ export default function LanguageLessonPage({ params }: { params: { id: string } 
     }
   }
 
-  // Layout
   return (
     <div className="font-sans bg-zinc-50 dark:bg-black min-h-screen">
       {/* Progress Bar at very top */}
@@ -714,7 +688,7 @@ export default function LanguageLessonPage({ params }: { params: { id: string } 
   );
 }
 
-// Terminal tabbed panel (used in step 4; takes language.terminalCommands, #3)
+// Terminal tabbed panel (used in step 4; uses language.terminalCommands per #3)
 function TabTerminalPanel({
   commands,
   expectedOutput = [],
