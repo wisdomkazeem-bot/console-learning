@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import languages from "../../../data/languages.json";
+import languages from "@/data/languages.json";
 
 interface Term {
   term: string;
