@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-import { useParams, useRouter } from "next/navigation";
-import consoles from "@/data/languages.json";
+import React, { useState, useMemo, use } from "react";
+import { useRouter } from "next/navigation";
+import languages from "@/data/languages.json";
 
 // Color mapping for difficulty badge
 const DIFFICULTY_COLORS: Record<string, string> = {
@@ -11,20 +11,26 @@ const DIFFICULTY_COLORS: Record<string, string> = {
   Advanced: "bg-red-600 text-white",
 };
 
-function getConsoleById(id: string) {
-  return (consoles as any[]).find((c) => c.id === id);
-}
-
 function uniq(arr: any[]) {
   return Array.from(new Set(arr));
 }
 
-export default function ConsolePage() {
-  const params = useParams();
-  const router = useRouter();
-  const { id } = params as { id: string };
+type Language = {
+  id: string;
+  [key: string]: any;
+};
 
-  const consoleData = getConsoleById(id);
+export default function ConsolePage(props: { params: Promise<{ id: string }> }) {
+  const params = use(props.params);
+  const router = useRouter();
+  const { id } = params;
+
+  // Find the language using lowercase exact match
+  const language = (languages as Language[]).find(
+    (l) => l.id.toLowerCase() === id.toLowerCase()
+  );
+
+  const consoleData = language;
 
   const [tab, setTab] = useState<"overview" | "examples" | "resources">("overview");
   const [selectedLang, setSelectedLang] = useState<string | null>(null);
