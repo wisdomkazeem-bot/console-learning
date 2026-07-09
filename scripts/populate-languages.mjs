@@ -1,0 +1,9250 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const root = path.join(__dirname, '..');
+const outPath = path.join(root, 'data', 'languages.json');
+const existingPath = outPath;
+
+const LANGS = [
+  [
+    "python",
+    "Python",
+    "Interpreted",
+    1991,
+    "Guido van Rossum",
+    "Beginner",
+    "#3776AB",
+    "Python is a readable, versatile language used across web, data, automation, and scripting.",
+    "Web development, data science, scripting, automation, machine learning.",
+    "Python is named after Monty Python, not the snake.",
+    {
+      "windows": "python file.py",
+      "mac": "python3 file.py",
+      "linux": "python3 file.py",
+      "install": "Install from python.org or use your package manager; pip installs packages."
+    }
+  ],
+  [
+    "javascript",
+    "JavaScript",
+    "Interpreted",
+    1995,
+    "Brendan Eich",
+    "Beginner",
+    "#F7DF1E",
+    "JavaScript powers interactive web pages and server-side apps with a flexible, event-driven model.",
+    "Front-end web, Node.js servers, mobile apps, tooling.",
+    "JavaScript was created in about 10 days at Netscape.",
+    {
+      "windows": "node file.js",
+      "mac": "node file.js",
+      "linux": "node file.js",
+      "install": "Install Node.js from nodejs.org."
+    }
+  ],
+  [
+    "typescript",
+    "TypeScript",
+    "Transpiled",
+    2012,
+    "Anders Hejlsberg",
+    "Intermediate",
+    "#3178c6",
+    "TypeScript adds static types to JavaScript and compiles to plain JS for safer large codebases.",
+    "Large web apps, Angular/React codebases, Node services.",
+    "TypeScript is a strict superset of JavaScript.",
+    {
+      "windows": "tsc file.ts && node file.js",
+      "mac": "tsc file.ts && node file.js",
+      "linux": "tsc file.ts && node file.js",
+      "install": "npm install -g typescript"
+    }
+  ],
+  [
+    "c",
+    "C",
+    "Compiled",
+    1972,
+    "Dennis Ritchie",
+    "Intermediate",
+    "#A8B9CC",
+    "C is a low-level systems language that influenced most modern languages.",
+    "Operating systems, embedded systems, performance-critical libraries.",
+    "Unix was rewritten in C.",
+    {
+      "windows": "gcc file.c -o file.exe && file.exe",
+      "mac": "gcc file.c -o file && ./file",
+      "linux": "gcc file.c -o file && ./file",
+      "install": "Install GCC (MinGW on Windows) or Clang via your package manager."
+    }
+  ],
+  [
+    "cpp",
+    "C++",
+    "Compiled",
+    1985,
+    "Bjarne Stroustrup",
+    "Advanced",
+    "#00599C",
+    "C++ extends C with object-oriented and generic programming features.",
+    "Game engines, high-performance software, systems tooling.",
+    "C++ started as C with Classes.",
+    {
+      "windows": "g++ file.cpp -o file.exe && file.exe",
+      "mac": "g++ file.cpp -o file && ./file",
+      "linux": "g++ file.cpp -o file && ./file",
+      "install": "Install g++ with GCC or LLVM toolchains."
+    }
+  ],
+  [
+    "csharp",
+    "C#",
+    "Compiled",
+    2000,
+    "Microsoft",
+    "Intermediate",
+    "#239120",
+    "C# is a modern, type-safe language on the .NET platform.",
+    "Desktop apps, games (Unity), cloud services, enterprise software.",
+    "C# was originally codenamed Cool.",
+    {
+      "windows": "dotnet run",
+      "mac": "dotnet run",
+      "linux": "dotnet run",
+      "install": "Install the .NET SDK from dotnet.microsoft.com."
+    }
+  ],
+  [
+    "rust",
+    "Rust",
+    "Compiled",
+    2010,
+    "Mozilla",
+    "Advanced",
+    "#dea584",
+    "Rust focuses on memory safety and concurrency without a garbage collector.",
+    "Systems programming, WebAssembly, CLI tools, infrastructure.",
+    "Rust's mascot is Ferris the crab.",
+    {
+      "windows": "cargo run",
+      "mac": "cargo run",
+      "linux": "cargo run",
+      "install": "Install Rust via rustup.rs."
+    }
+  ],
+  [
+    "go",
+    "Go",
+    "Compiled",
+    2009,
+    "Google",
+    "Intermediate",
+    "#00ADD8",
+    "Go is a simple, fast language with built-in concurrency support.",
+    "Cloud backends, DevOps tooling, network services.",
+    "Go's gopher mascot is famous at conferences.",
+    {
+      "windows": "go run file.go",
+      "mac": "go run file.go",
+      "linux": "go run file.go",
+      "install": "Install Go from go.dev."
+    }
+  ],
+  [
+    "java",
+    "Java",
+    "Compiled",
+    1995,
+    "Sun Microsystems",
+    "Intermediate",
+    "#b07219",
+    "Java runs on the JVM with write-once, run-anywhere bytecode.",
+    "Enterprise backends, Android, big data.",
+    "Java's name came from coffee.",
+    {
+      "windows": "javac Main.java && java Main",
+      "mac": "javac Main.java && java Main",
+      "linux": "javac Main.java && java Main",
+      "install": "Install a JDK (Temurin, Oracle, or OpenJDK)."
+    }
+  ],
+  [
+    "assembly",
+    "Assembly",
+    "Compiled",
+    1949,
+    "Various",
+    "Advanced",
+    "#6E4C13",
+    "Assembly language maps closely to CPU instructions for maximum control.",
+    "Bootloaders, drivers, reverse engineering, tight embedded loops.",
+    "Each CPU family has its own assembly dialect.",
+    {
+      "windows": "nasm -f win64 file.asm && link file.obj /subsystem:console /entry:main file.exe",
+      "mac": "nasm -f macho64 file.asm && ld -lSystem -o file file.o",
+      "linux": "nasm -f elf64 file.asm && ld file.o -o file && ./file",
+      "install": "Install NASM and a linker; exact steps vary by OS."
+    }
+  ],
+  [
+    "basic",
+    "BASIC",
+    "Interpreted",
+    1964,
+    "Kemeny & Kurtz",
+    "Beginner",
+    "#FF6600",
+    "BASIC was designed for beginners and interactive computing.",
+    "Education, hobby projects, retro computing.",
+    "BASIC debuted on the Dartmouth time-sharing system.",
+    {
+      "windows": "run file.bas",
+      "mac": "run file.bas",
+      "linux": "run file.bas",
+      "install": "Use QB64 or FreeBASIC; run with the interpreter's command (often the filename)."
+    }
+  ],
+  [
+    "lua",
+    "Lua",
+    "Interpreted",
+    1993,
+    "PUC-Rio",
+    "Intermediate",
+    "#000080",
+    "Lua is a lightweight embeddable scripting language.",
+    "Game scripting, Redis, nginx, embedded configs.",
+    "Lua means moon in Portuguese.",
+    {
+      "windows": "lua file.lua",
+      "mac": "lua file.lua",
+      "linux": "lua file.lua",
+      "install": "Install Lua from lua.org or your package manager."
+    }
+  ],
+  [
+    "ruby",
+    "Ruby",
+    "Interpreted",
+    1995,
+    "Yukihiro Matsumoto",
+    "Beginner",
+    "#CC342D",
+    "Ruby emphasizes developer happiness with expressive syntax.",
+    "Web (Rails), scripting, automation, prototypes.",
+    "Ruby's creator wanted a language more enjoyable than Python.",
+    {
+      "windows": "ruby file.rb",
+      "mac": "ruby file.rb",
+      "linux": "ruby file.rb",
+      "install": "Install Ruby from ruby-lang.org or rbenv."
+    }
+  ],
+  [
+    "swift",
+    "Swift",
+    "Compiled",
+    2014,
+    "Apple",
+    "Intermediate",
+    "#F05138",
+    "Swift is Apple's safe, fast language for Apple platforms and beyond.",
+    "iOS/macOS apps, server-side Swift, systems tooling.",
+    "Swift was open-sourced in 2015.",
+    {
+      "windows": "swift file.swift",
+      "mac": "swift file.swift",
+      "linux": "swift file.swift",
+      "install": "Install Swift from swift.org."
+    }
+  ],
+  [
+    "kotlin",
+    "Kotlin",
+    "Compiled",
+    2011,
+    "JetBrains",
+    "Intermediate",
+    "#A97BFF",
+    "Kotlin is a concise JVM language officially supported for Android.",
+    "Android, backend services, multiplatform apps.",
+    "Kotlin is named after Kotlin Island near Saint Petersburg.",
+    {
+      "windows": "kotlinc file.kt -include-runtime -d out.jar && java -jar out.jar",
+      "mac": "kotlinc file.kt -include-runtime -d out.jar && java -jar out.jar",
+      "linux": "kotlinc file.kt -include-runtime -d out.jar && java -jar out.jar",
+      "install": "Install Kotlin compiler or use Gradle."
+    }
+  ],
+  [
+    "php",
+    "PHP",
+    "Interpreted",
+    1995,
+    "Rasmus Lerdorf",
+    "Beginner",
+    "#777BB4",
+    "PHP is a server-side language widely used for dynamic websites.",
+    "Web backends, WordPress, APIs, content sites.",
+    "PHP once stood for Personal Home Page.",
+    {
+      "windows": "php file.php",
+      "mac": "php file.php",
+      "linux": "php file.php",
+      "install": "Install PHP from php.net or XAMPP."
+    }
+  ],
+  [
+    "bash",
+    "Bash",
+    "Script",
+    1989,
+    "Brian Fox",
+    "Beginner",
+    "#4EAA25",
+    "Bash is the default shell on many Linux and macOS systems.",
+    "Automation, DevOps scripts, system administration.",
+    "Bash is the GNU Bourne Again Shell.",
+    {
+      "windows": "bash file.sh",
+      "mac": "bash file.sh",
+      "linux": "bash file.sh",
+      "install": "Preinstalled on macOS/Linux; use Git Bash or WSL on Windows."
+    }
+  ],
+  [
+    "r",
+    "R",
+    "Interpreted",
+    1993,
+    "Ross & Ihaka",
+    "Intermediate",
+    "#276DC3",
+    "R is built for statistics, visualization, and data analysis.",
+    "Research, bioinformatics, reporting, data science.",
+    "R is part of the GNU project.",
+    {
+      "windows": "Rscript file.R",
+      "mac": "Rscript file.R",
+      "linux": "Rscript file.R",
+      "install": "Install R from cran.r-project.org."
+    }
+  ],
+  [
+    "dart",
+    "Dart",
+    "Compiled",
+    2011,
+    "Google",
+    "Intermediate",
+    "#00B4AB",
+    "Dart powers Flutter apps and compiles to native or JavaScript.",
+    "Flutter mobile/web/desktop, server-side Dart.",
+    "Dart 2 added strong typing by default.",
+    {
+      "windows": "dart run file.dart",
+      "mac": "dart run file.dart",
+      "linux": "dart run file.dart",
+      "install": "Install Dart SDK from dart.dev."
+    }
+  ],
+  [
+    "scala",
+    "Scala",
+    "Compiled",
+    2004,
+    "Martin Odersky",
+    "Advanced",
+    "#DC322F",
+    "Scala combines functional and object-oriented programming on the JVM.",
+    "Big data (Spark), backend services, expressive APIs.",
+    "Scala runs on the JVM and interops with Java.",
+    {
+      "windows": "scala file.scala",
+      "mac": "scala file.scala",
+      "linux": "scala file.scala",
+      "install": "Install Scala from scala-lang.org or use sbt."
+    }
+  ]
+];
+
+const ADVANCED_TITLES = {
+  "python": "Decorators & Comprehensions",
+  "javascript": "Async & Promises",
+  "typescript": "Generics & Type Utilities",
+  "c": "Pointers & Memory",
+  "cpp": "Templates & STL",
+  "csharp": "LINQ & Async",
+  "rust": "Ownership & Borrowing",
+  "go": "Goroutines & Concurrency",
+  "java": "Streams & Generics",
+  "assembly": "Registers & Syscalls",
+  "basic": "User Input & Subroutines",
+  "lua": "Metatables",
+  "ruby": "Blocks & Procs",
+  "swift": "Optionals & Protocols",
+  "kotlin": "Coroutines",
+  "php": "Traits & Namespaces",
+  "bash": "Pipelines & Text Tools",
+  "r": "Data Frames",
+  "dart": "Futures & async/await",
+  "scala": "Pattern Matching"
+};
+
+const TOPIC_DATA = {
+  "python": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in Python.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "count=3",
+        "name='Ada'",
+        "print(count,name)"
+      ],
+      "expectedOutput": "3 Ada",
+      "starterCode": [
+        "score="
+      ],
+      "solution": [
+        "score=10",
+        "print(score)"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "Set price=19.99 and print.",
+      "challengeHint": "print(price)",
+      "challengeSolution": [
+        "price=19.99",
+        "print(price)"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in Python.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "nums=[10,20,30]",
+        "print(nums[1])",
+        "nums.append(40)",
+        "print(len(nums))"
+      ],
+      "expectedOutput": "20\n4",
+      "starterCode": [
+        "items=[1,2]"
+      ],
+      "solution": [
+        "items=[1,2,3]",
+        "print(items[-1])"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "Print last of three colors.",
+      "challengeHint": "index -1",
+      "challengeSolution": [
+        "c=['r','g','b']",
+        "print(c[-1])"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in Python.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "t=0",
+        "for n in [1,2,3]: t+=n",
+        "print(t)"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [
+        "for i in range(3): pass"
+      ],
+      "solution": [
+        "for i in range(1,4): print(i)"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "Print 1..5",
+      "challengeHint": "range(1,6)",
+      "challengeSolution": [
+        "for i in range(1,6): print(i)"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in Python.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "def add(a,b): return a+b",
+        "print(add(2,3))"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [
+        "def double(x): pass"
+      ],
+      "solution": [
+        "def double(x): return x*2",
+        "print(double(4))"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "greet(name)->Hello,name",
+      "challengeHint": "f-string",
+      "challengeSolution": [
+        "def greet(n): return f'Hello, {n}'",
+        "print(greet('Sam'))"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in Python.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "s=85",
+        "print('A' if s>=90 else 'B' if s>=80 else 'C')"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [
+        "n=4"
+      ],
+      "solution": [
+        "n=4",
+        "print('even' if n%2==0 else 'odd')"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "even/odd",
+      "challengeHint": "mod 2",
+      "challengeSolution": [
+        "n=6",
+        "print('even' if n%2==0 else 'odd')"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in Python.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "class Dog:",
+        "  def __init__(self,n): self.name=n",
+        "  def speak(self): return self.name+' woof'",
+        "print(Dog('Rex').speak())"
+      ],
+      "expectedOutput": "Rex woof",
+      "starterCode": [
+        "class Cat: pass"
+      ],
+      "solution": [
+        "class Cat:\n  def __init__(self,n): self.name=n",
+        "print(Cat('Mia').name)"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "Person with name",
+      "challengeHint": "__init__",
+      "challengeSolution": [
+        "class Person:\n  def __init__(self,n): self.name=n",
+        "print(Person('Lee').name)"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in Python.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "try: print(int('42'))\nexcept ValueError: print('bad')\nelse: print('ok')"
+      ],
+      "expectedOutput": "42\nok",
+      "starterCode": [
+        "try: pass\nexcept Exception: pass"
+      ],
+      "solution": [
+        "try: 1/0\nexcept ZeroDivisionError: print('err')"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "Catch KeyError",
+      "challengeHint": "except KeyError",
+      "challengeSolution": [
+        "d={}",
+        "try: print(d['x'])\nexcept KeyError: print('missing')"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in Python.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "open('n.txt','w').write('hello')",
+        "print(open('n.txt').read())"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [
+        "open('o.txt','w')"
+      ],
+      "solution": [
+        "open('o.txt','w').write('hi')"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "write/read hi",
+      "challengeHint": "open w then r",
+      "challengeSolution": [
+        "open('t.txt','w').write('hi')",
+        "print(open('t.txt').read())"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in Python.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "import math",
+        "print(math.sqrt(9))",
+        "from datetime import date",
+        "print(date.today().year>2000)"
+      ],
+      "expectedOutput": "3.0\nTrue",
+      "starterCode": [
+        "import math"
+      ],
+      "solution": [
+        "import math",
+        "print(math.pi)"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "json.dumps",
+      "challengeHint": "import json",
+      "challengeSolution": [
+        "import json",
+        "print(json.dumps({'a':1}))"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Decorators & Comprehensions",
+      "difficulty": "Advanced",
+      "explanation": "An advanced Python feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "print([n*n for n in [1,2,3,4] if n%2==0])",
+        "print((lambda: 'HI')())"
+      ],
+      "expectedOutput": "[4, 16]\nHI",
+      "starterCode": [
+        "vals=[1,2,3]"
+      ],
+      "solution": [
+        "print([v*2 for v in [1,2,3]])"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "filter len>3",
+      "challengeHint": "comprehension",
+      "challengeSolution": [
+        "w=['a','tool','go']",
+        "print([x for x in w if len(x)>3])"
+      ]
+    }
+  ],
+  "javascript": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in JavaScript.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "let count=3;",
+        "const name='Ada';",
+        "console.log(count,name);"
+      ],
+      "expectedOutput": "3 Ada",
+      "starterCode": [
+        "let score;"
+      ],
+      "solution": [
+        "let score=10;",
+        "console.log(score);"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "total=42",
+      "challengeHint": "let total",
+      "challengeSolution": [
+        "let total=42;",
+        "console.log(total);"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in JavaScript.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "const a=[10,20,30];",
+        "console.log(a[1]);",
+        "a.push(40);",
+        "console.log(a.length);"
+      ],
+      "expectedOutput": "20\n4",
+      "starterCode": [
+        "const items=[1,2];"
+      ],
+      "solution": [
+        "const items=[1,2,3];",
+        "console.log(items.at(-1));"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "last color",
+      "challengeHint": "length-1",
+      "challengeSolution": [
+        "const c=['r','g'];",
+        "console.log(c[c.length-1]);"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in JavaScript.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "let t=0;",
+        "for (const n of [1,2,3]) t+=n;",
+        "console.log(t);"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [
+        "for(let i=0;i<3;i++){}"
+      ],
+      "solution": [
+        "for(let i=1;i<=3;i++) console.log(i);"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "1..5",
+      "challengeHint": "for loop",
+      "challengeSolution": [
+        "for(let i=1;i<=5;i++) console.log(i);"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in JavaScript.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "function add(a,b){return a+b;}",
+        "console.log(add(2,3));"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [
+        "function d(x){}"
+      ],
+      "solution": [
+        "function d(x){return x*2;}",
+        "console.log(d(4));"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "greet",
+      "challengeHint": "template literal",
+      "challengeSolution": [
+        "const greet=n=>`Hello, ${n}`;",
+        "console.log(greet('Sam'));"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in JavaScript.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "const s=85;",
+        "console.log(s>=90?'A':s>=80?'B':'C');"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [
+        "const n=4;"
+      ],
+      "solution": [
+        "const n=4;",
+        "console.log(n%2===0?'even':'odd');"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "even",
+      "challengeHint": "===",
+      "challengeSolution": [
+        "const n=6;",
+        "console.log(n%2===0?'even':'odd');"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in JavaScript.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "class Dog{constructor(n){this.name=n;} speak(){return this.name+' woof';}}",
+        "console.log(new Dog('Rex').speak());"
+      ],
+      "expectedOutput": "Rex woof",
+      "starterCode": [
+        "class Cat{}"
+      ],
+      "solution": [
+        "class Cat{constructor(n){this.name=n;}}",
+        "console.log(new Cat('Mia').name);"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "Person",
+      "challengeHint": "constructor",
+      "challengeSolution": [
+        "class Person{constructor(n){this.name=n;}}",
+        "console.log(new Person('Lee').name);"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in JavaScript.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "try{console.log(Number('42'));}catch(e){console.log('bad');}finally{console.log('done');}"
+      ],
+      "expectedOutput": "42\ndone",
+      "starterCode": [
+        "try{}catch(e){}"
+      ],
+      "solution": [
+        "try{throw new Error('x');}catch(e){console.log('caught');}"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "NaN check",
+      "challengeHint": "throw",
+      "challengeSolution": [
+        "try{const x=Number('x'); if(Number.isNaN(x)) throw new Error('nan');}catch{console.log('nan');}"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in JavaScript.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "const fs=require('fs');",
+        "fs.writeFileSync('n.txt','hello');",
+        "console.log(fs.readFileSync('n.txt','utf8'));"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [
+        "const fs=require('fs');"
+      ],
+      "solution": [
+        "const fs=require('fs');",
+        "fs.writeFileSync('o.txt','hi');"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "hi.txt",
+      "challengeHint": "readFileSync",
+      "challengeSolution": [
+        "const fs=require('fs');",
+        "fs.writeFileSync('hi.txt','ok');",
+        "console.log(fs.readFileSync('hi.txt','utf8'));"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in JavaScript.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "import path from 'node:path';",
+        "console.log(path.join('a','b'));",
+        "import {readFileSync} from 'node:fs';",
+        "console.log(typeof readFileSync);"
+      ],
+      "expectedOutput": "a/b\nfunction",
+      "starterCode": [
+        "import path from 'node:path';"
+      ],
+      "solution": [
+        "import path from 'node:path';",
+        "console.log(path.basename('/a/b.txt'));"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "join a/b",
+      "challengeHint": "path.join",
+      "challengeSolution": [
+        "import path from 'node:path';",
+        "console.log(path.join('a','b'));"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Async & Promises",
+      "difficulty": "Advanced",
+      "explanation": "An advanced JavaScript feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "(async()=>{await new Promise(r=>setTimeout(r,5)); console.log('done');})();"
+      ],
+      "expectedOutput": "done",
+      "starterCode": [
+        "Promise.resolve(1).then(console.log);"
+      ],
+      "solution": [
+        "Promise.resolve(5).then(v=>console.log(v));"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "await 7",
+      "challengeHint": "async/await",
+      "challengeSolution": [
+        "(async()=>{console.log(await Promise.resolve(7));})();"
+      ]
+    }
+  ],
+  "typescript": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in TypeScript.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "let count:number=3;",
+        "const name:string='Ada';",
+        "console.log(count,name);"
+      ],
+      "expectedOutput": "3 Ada",
+      "starterCode": [
+        "let score:number="
+      ],
+      "solution": [
+        "let score:number=10;",
+        "console.log(score);"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "message Hi",
+      "challengeHint": "string type",
+      "challengeSolution": [
+        "const message:string='Hi';",
+        "console.log(message);"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in TypeScript.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "const nums:number[]=[10,20,30];",
+        "console.log(nums[1]);",
+        "nums.push(40);",
+        "console.log(nums.length);"
+      ],
+      "expectedOutput": "20\n4",
+      "starterCode": [
+        "const items:string[]=['a'];"
+      ],
+      "solution": [
+        "const items=['a','b'];",
+        "console.log(items[1]);"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "tuple",
+      "challengeHint": "[string,number]",
+      "challengeSolution": [
+        "const t:[string,number]=['x',9];",
+        "console.log(t[1]);"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in TypeScript.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "let t=0;",
+        "for(const n of [1,2,3] as number[]) t+=n;",
+        "console.log(t);"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [
+        "for(let i=0;i<3;i++){}"
+      ],
+      "solution": [
+        "for(let i=1;i<=3;i++) console.log(i);"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "1..5",
+      "challengeHint": "for",
+      "challengeSolution": [
+        "for(let i=1;i<=5;i++) console.log(i);"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in TypeScript.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "function add(a:number,b:number):number{return a+b;}",
+        "console.log(add(2,3));"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [
+        "function d(x:number):number{}"
+      ],
+      "solution": [
+        "const d=(x:number)=>x*2;",
+        "console.log(d(4));"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "square",
+      "challengeHint": "arrow fn",
+      "challengeSolution": [
+        "const sq=(n:number)=>n*n;",
+        "console.log(sq(4));"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in TypeScript.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "const s=85;",
+        "console.log(s>=90?'A':s>=80?'B':'C');"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [
+        "const n=4;"
+      ],
+      "solution": [
+        "const n=4;",
+        "console.log(n%2===0?'even':'odd');"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "union type",
+      "challengeHint": "string|number",
+      "challengeSolution": [
+        "const n:string|number=5;",
+        "console.log(typeof n);"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in TypeScript.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "class Dog{constructor(public name:string){} speak(){return this.name+' woof';}}",
+        "console.log(new Dog('Rex').speak());"
+      ],
+      "expectedOutput": "Rex woof",
+      "starterCode": [
+        "class Cat{}"
+      ],
+      "solution": [
+        "type User={name:string};",
+        "const u:User={name:'Lee'};",
+        "console.log(u.name);"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "User type",
+      "challengeHint": "type alias",
+      "challengeSolution": [
+        "type User={name:string};",
+        "console.log(({name:'Lee'} as User).name);"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in TypeScript.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "try{console.log(JSON.parse('{\"a\":1}').a);}catch{console.log('bad');}"
+      ],
+      "expectedOutput": "1",
+      "starterCode": [
+        "try{}catch(e){}"
+      ],
+      "solution": [
+        "try{JSON.parse('{');}catch{console.log('bad json');}"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "bad json",
+      "challengeHint": "try/catch",
+      "challengeSolution": [
+        "try{JSON.parse('{');}catch{console.log('bad');}"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in TypeScript.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "import{writeFileSync,readFileSync}from'node:fs';",
+        "writeFileSync('n.txt','hello');",
+        "console.log(readFileSync('n.txt','utf8'));"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [
+        "import{writeFileSync}from'node:fs';"
+      ],
+      "solution": [
+        "import{writeFileSync}from'node:fs';",
+        "writeFileSync('o.txt','hi');"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "utf8 file",
+      "challengeHint": "node:fs",
+      "challengeSolution": [
+        "import{writeFileSync,readFileSync}from'node:fs';",
+        "writeFileSync('t.txt','ok');",
+        "console.log(readFileSync('t.txt','utf8'));"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in TypeScript.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "import path from 'node:path';",
+        "console.log(path.basename('/tmp/a.txt'));",
+        "export const VERSION=1;",
+        "console.log(VERSION);"
+      ],
+      "expectedOutput": "a.txt\n1",
+      "starterCode": [
+        "import path from 'node:path';"
+      ],
+      "solution": [
+        "import path from 'node:path';",
+        "console.log(path.dirname('/a/b'));"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "export ID",
+      "challengeHint": "export const",
+      "challengeSolution": [
+        "export const ID=42;",
+        "console.log(ID);"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Generics & Type Utilities",
+      "difficulty": "Advanced",
+      "explanation": "An advanced TypeScript feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "function id<T>(x:T):T{return x;}",
+        "console.log(id<number>(7));",
+        "type Point={x:number;y:number};",
+        "const p:Point={x:1,y:2};",
+        "console.log(p.x);"
+      ],
+      "expectedOutput": "7\n1",
+      "starterCode": [
+        "type Name=string;"
+      ],
+      "solution": [
+        "type Name=string;",
+        "const n:Name='Ada';",
+        "console.log(n);"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "pair generic",
+      "challengeHint": "function pair<T>",
+      "challengeSolution": [
+        "function pair<T>(a:T,b:T):[T,T]{return[a,b];}",
+        "console.log(pair(1,2)[1]);"
+      ]
+    }
+  ],
+  "cpp": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in C++.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  int age=30;",
+        "  double pi=3.14;",
+        "  cout<<age<<\" \"<<pi<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "expectedOutput": "30 3.14",
+      "starterCode": [],
+      "solution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  int age=30;",
+        "  double pi=3.14;",
+        "  cout<<age<<\" \"<<pi<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "C++ variables challenge",
+      "challengeHint": "Use STL/examples.",
+      "challengeSolution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  int age=30;",
+        "  double pi=3.14;",
+        "  cout<<age<<\" \"<<pi<<endl;",
+        "  return 0;",
+        "}"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in C++.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  vector<int> v={1,2,3};",
+        "  cout<<v[1]<<endl;",
+        "  v.push_back(4);",
+        "  cout<<v.size()<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "expectedOutput": "2\n4",
+      "starterCode": [],
+      "solution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  vector<int> v={1,2,3};",
+        "  cout<<v[1]<<endl;",
+        "  v.push_back(4);",
+        "  cout<<v.size()<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "C++ arrays-collections challenge",
+      "challengeHint": "Use STL/examples.",
+      "challengeSolution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  vector<int> v={1,2,3};",
+        "  cout<<v[1]<<endl;",
+        "  v.push_back(4);",
+        "  cout<<v.size()<<endl;",
+        "  return 0;",
+        "}"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in C++.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  int t=0;",
+        "  for(int n: {1,2,3}) t+=n;",
+        "  cout<<t<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [],
+      "solution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  int t=0;",
+        "  for(int n: {1,2,3}) t+=n;",
+        "  cout<<t<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "C++ loops challenge",
+      "challengeHint": "Use STL/examples.",
+      "challengeSolution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  int t=0;",
+        "  for(int n: {1,2,3}) t+=n;",
+        "  cout<<t<<endl;",
+        "  return 0;",
+        "}"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in C++.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  auto add=[](int a,int b){return a+b;};",
+        "  cout<<add(2,3)<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [],
+      "solution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  auto add=[](int a,int b){return a+b;};",
+        "  cout<<add(2,3)<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "C++ functions challenge",
+      "challengeHint": "Use STL/examples.",
+      "challengeSolution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  auto add=[](int a,int b){return a+b;};",
+        "  cout<<add(2,3)<<endl;",
+        "  return 0;",
+        "}"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in C++.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  int s=85;",
+        "  cout<<(s>=90?\"A\":s>=80?\"B\":\"C\")<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [],
+      "solution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  int s=85;",
+        "  cout<<(s>=90?\"A\":s>=80?\"B\":\"C\")<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "C++ conditionals challenge",
+      "challengeHint": "Use STL/examples.",
+      "challengeSolution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  int s=85;",
+        "  cout<<(s>=90?\"A\":s>=80?\"B\":\"C\")<<endl;",
+        "  return 0;",
+        "}"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in C++.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  struct Point{int x,y;};",
+        "  Point p{2,3};",
+        "  cout<<p.x<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "expectedOutput": "2",
+      "starterCode": [],
+      "solution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  struct Point{int x,y;};",
+        "  Point p{2,3};",
+        "  cout<<p.x<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "C++ classes-objects challenge",
+      "challengeHint": "Use STL/examples.",
+      "challengeSolution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  struct Point{int x,y;};",
+        "  Point p{2,3};",
+        "  cout<<p.x<<endl;",
+        "  return 0;",
+        "}"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in C++.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  try{throw runtime_error(\"fail\");}catch(const exception&e){cout<<e.what()<<endl;}",
+        "  return 0;",
+        "}"
+      ],
+      "expectedOutput": "fail",
+      "starterCode": [],
+      "solution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  try{throw runtime_error(\"fail\");}catch(const exception&e){cout<<e.what()<<endl;}",
+        "  return 0;",
+        "}"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "C++ error-handling challenge",
+      "challengeHint": "Use STL/examples.",
+      "challengeSolution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  try{throw runtime_error(\"fail\");}catch(const exception&e){cout<<e.what()<<endl;}",
+        "  return 0;",
+        "}"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in C++.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "#include <fstream>",
+        "int main() {",
+        "  ofstream o(\"n.txt\"); o<<\"hello\"; o.close();",
+        "  ifstream i(\"n.txt\"); string s; getline(i,s); cout<<s<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [],
+      "solution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "#include <fstream>",
+        "int main() {",
+        "  ofstream o(\"n.txt\"); o<<\"hello\"; o.close();",
+        "  ifstream i(\"n.txt\"); string s; getline(i,s); cout<<s<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "C++ file-io challenge",
+      "challengeHint": "Use STL/examples.",
+      "challengeSolution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "#include <fstream>",
+        "int main() {",
+        "  ofstream o(\"n.txt\"); o<<\"hello\"; o.close();",
+        "  ifstream i(\"n.txt\"); string s; getline(i,s); cout<<s<<endl;",
+        "  return 0;",
+        "}"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in C++.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  #include <cmath>",
+        "  cout<<sqrt(9)<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "expectedOutput": "3",
+      "starterCode": [],
+      "solution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  #include <cmath>",
+        "  cout<<sqrt(9)<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "C++ modules-packages challenge",
+      "challengeHint": "Use STL/examples.",
+      "challengeSolution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  #include <cmath>",
+        "  cout<<sqrt(9)<<endl;",
+        "  return 0;",
+        "}"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Templates & STL",
+      "difficulty": "Advanced",
+      "explanation": "An advanced C++ feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  vector<int> v={1,2,3};",
+        "  sort(v.begin(),v.end(),greater<int>());",
+        "  cout<<v[0]<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "expectedOutput": "3",
+      "starterCode": [],
+      "solution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  vector<int> v={1,2,3};",
+        "  sort(v.begin(),v.end(),greater<int>());",
+        "  cout<<v[0]<<endl;",
+        "  return 0;",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "C++ advanced challenge",
+      "challengeHint": "Use STL/examples.",
+      "challengeSolution": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <algorithm>",
+        "using namespace std;",
+        "int main() {",
+        "  vector<int> v={1,2,3};",
+        "  sort(v.begin(),v.end(),greater<int>());",
+        "  cout<<v[0]<<endl;",
+        "  return 0;",
+        "}"
+      ]
+    }
+  ],
+  "csharp": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in C#.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    int age=30;",
+        "    string name=\"Ada\";",
+        "    Console.WriteLine(age +  + name);",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "30 Ada",
+      "starterCode": [],
+      "solution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    int age=30;",
+        "    string name=\"Ada\";",
+        "    Console.WriteLine(age +  + name);",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "C# variables",
+      "challengeHint": "LINQ/examples",
+      "challengeSolution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    int age=30;",
+        "    string name=\"Ada\";",
+        "    Console.WriteLine(age +  + name);",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in C#.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    var nums=new[]{10,20,30};",
+        "    Console.WriteLine(nums[1]);",
+        "    Console.WriteLine(nums.Length);",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "20\n3",
+      "starterCode": [],
+      "solution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    var nums=new[]{10,20,30};",
+        "    Console.WriteLine(nums[1]);",
+        "    Console.WriteLine(nums.Length);",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "C# arrays-collections",
+      "challengeHint": "LINQ/examples",
+      "challengeSolution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    var nums=new[]{10,20,30};",
+        "    Console.WriteLine(nums[1]);",
+        "    Console.WriteLine(nums.Length);",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in C#.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    int t=0;",
+        "    foreach(var n in new[]{1,2,3}) t+=n;",
+        "    Console.WriteLine(t);",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [],
+      "solution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    int t=0;",
+        "    foreach(var n in new[]{1,2,3}) t+=n;",
+        "    Console.WriteLine(t);",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "C# loops",
+      "challengeHint": "LINQ/examples",
+      "challengeSolution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    int t=0;",
+        "    foreach(var n in new[]{1,2,3}) t+=n;",
+        "    Console.WriteLine(t);",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in C#.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    int Add(int a,int b)=>a+b;",
+        "    Console.WriteLine(Add(2,3));",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [],
+      "solution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    int Add(int a,int b)=>a+b;",
+        "    Console.WriteLine(Add(2,3));",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "C# functions",
+      "challengeHint": "LINQ/examples",
+      "challengeSolution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    int Add(int a,int b)=>a+b;",
+        "    Console.WriteLine(Add(2,3));",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in C#.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    int s=85;",
+        "    Console.WriteLine(s>=90?\"A\":s>=80?\"B\":\"C\");",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [],
+      "solution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    int s=85;",
+        "    Console.WriteLine(s>=90?\"A\":s>=80?\"B\":\"C\");",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "C# conditionals",
+      "challengeHint": "LINQ/examples",
+      "challengeSolution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    int s=85;",
+        "    Console.WriteLine(s>=90?\"A\":s>=80?\"B\":\"C\");",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in C#.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    record Point(int X,int Y);",
+        "    var p=new Point(2,3);",
+        "    Console.WriteLine(p.X);",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "2",
+      "starterCode": [],
+      "solution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    record Point(int X,int Y);",
+        "    var p=new Point(2,3);",
+        "    Console.WriteLine(p.X);",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "C# classes-objects",
+      "challengeHint": "LINQ/examples",
+      "challengeSolution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    record Point(int X,int Y);",
+        "    var p=new Point(2,3);",
+        "    Console.WriteLine(p.X);",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in C#.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    try{throw new Exception(\"fail\");}catch(Exception e){Console.WriteLine(e.Message);}",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "fail",
+      "starterCode": [],
+      "solution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    try{throw new Exception(\"fail\");}catch(Exception e){Console.WriteLine(e.Message);}",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "C# error-handling",
+      "challengeHint": "LINQ/examples",
+      "challengeSolution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    try{throw new Exception(\"fail\");}catch(Exception e){Console.WriteLine(e.Message);}",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in C#.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "using System;",
+        "using System.IO;",
+        "class Program {",
+        "  static void Main() {",
+        "    File.WriteAllText(\"n.txt\",\"hello\");",
+        "    Console.WriteLine(File.ReadAllText(\"n.txt\"));",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [],
+      "solution": [
+        "using System;",
+        "using System.IO;",
+        "class Program {",
+        "  static void Main() {",
+        "    File.WriteAllText(\"n.txt\",\"hello\");",
+        "    Console.WriteLine(File.ReadAllText(\"n.txt\"));",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "C# file-io",
+      "challengeHint": "LINQ/examples",
+      "challengeSolution": [
+        "using System;",
+        "using System.IO;",
+        "class Program {",
+        "  static void Main() {",
+        "    File.WriteAllText(\"n.txt\",\"hello\");",
+        "    Console.WriteLine(File.ReadAllText(\"n.txt\"));",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in C#.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    using System.Linq;",
+        "    Console.WriteLine(new[]{1,2,3}.Sum());",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [],
+      "solution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    using System.Linq;",
+        "    Console.WriteLine(new[]{1,2,3}.Sum());",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "C# modules-packages",
+      "challengeHint": "LINQ/examples",
+      "challengeSolution": [
+        "using System;",
+        "class Program {",
+        "  static void Main() {",
+        "    using System.Linq;",
+        "    Console.WriteLine(new[]{1,2,3}.Sum());",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "LINQ & Async",
+      "difficulty": "Advanced",
+      "explanation": "An advanced C# feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "using System;",
+        "using System.Linq;",
+        "class Program {",
+        "  static void Main() {",
+        "    var nums=Enumerable.Range(1,5).Where(n=>n%2==0);",
+        "    Console.WriteLine(string.Join(\",\", nums));",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "2,4",
+      "starterCode": [],
+      "solution": [
+        "using System;",
+        "using System.Linq;",
+        "class Program {",
+        "  static void Main() {",
+        "    var nums=Enumerable.Range(1,5).Where(n=>n%2==0);",
+        "    Console.WriteLine(string.Join(\",\", nums));",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "C# advanced",
+      "challengeHint": "LINQ/examples",
+      "challengeSolution": [
+        "using System;",
+        "using System.Linq;",
+        "class Program {",
+        "  static void Main() {",
+        "    var nums=Enumerable.Range(1,5).Where(n=>n%2==0);",
+        "    Console.WriteLine(string.Join(\",\", nums));",
+        "  }",
+        "}"
+      ]
+    }
+  ],
+  "rust": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in Rust.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "fn main() {",
+        "    let count=3;",
+        "    let name=\"Ada\";",
+        "    println!(\"{} {}\", count, name);",
+        "}"
+      ],
+      "expectedOutput": "3 Ada",
+      "starterCode": [],
+      "solution": [
+        "fn main() {",
+        "    let count=3;",
+        "    let name=\"Ada\";",
+        "    println!(\"{} {}\", count, name);",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "Rust variables",
+      "challengeHint": "ownership/borrow",
+      "challengeSolution": [
+        "fn main() {",
+        "    let count=3;",
+        "    let name=\"Ada\";",
+        "    println!(\"{} {}\", count, name);",
+        "}"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in Rust.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "fn main() {",
+        "    let mut v=vec![10,20,30];",
+        "    println!(\"{}\", v[1]);",
+        "    v.push(40);",
+        "    println!(\"{}\", v.len());",
+        "}"
+      ],
+      "expectedOutput": "20\n4",
+      "starterCode": [],
+      "solution": [
+        "fn main() {",
+        "    let mut v=vec![10,20,30];",
+        "    println!(\"{}\", v[1]);",
+        "    v.push(40);",
+        "    println!(\"{}\", v.len());",
+        "}"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "Rust arrays-collections",
+      "challengeHint": "ownership/borrow",
+      "challengeSolution": [
+        "fn main() {",
+        "    let mut v=vec![10,20,30];",
+        "    println!(\"{}\", v[1]);",
+        "    v.push(40);",
+        "    println!(\"{}\", v.len());",
+        "}"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in Rust.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "fn main() {",
+        "    let mut t=0;",
+        "    for n in [1,2,3]{t+=n;}",
+        "    println!(\"{}\", t);",
+        "}"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [],
+      "solution": [
+        "fn main() {",
+        "    let mut t=0;",
+        "    for n in [1,2,3]{t+=n;}",
+        "    println!(\"{}\", t);",
+        "}"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "Rust loops",
+      "challengeHint": "ownership/borrow",
+      "challengeSolution": [
+        "fn main() {",
+        "    let mut t=0;",
+        "    for n in [1,2,3]{t+=n;}",
+        "    println!(\"{}\", t);",
+        "}"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in Rust.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "fn main() {",
+        "    fn add(a:i32,b:i32)->i32{a+b}",
+        "    println!(\"{}\", add(2,3));",
+        "}"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [],
+      "solution": [
+        "fn main() {",
+        "    fn add(a:i32,b:i32)->i32{a+b}",
+        "    println!(\"{}\", add(2,3));",
+        "}"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "Rust functions",
+      "challengeHint": "ownership/borrow",
+      "challengeSolution": [
+        "fn main() {",
+        "    fn add(a:i32,b:i32)->i32{a+b}",
+        "    println!(\"{}\", add(2,3));",
+        "}"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in Rust.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "fn main() {",
+        "    let s=85;",
+        "    println!(\"{}\", if s>=90{\"A\"} else if s>=80{\"B\"} else {\"C\"});",
+        "}"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [],
+      "solution": [
+        "fn main() {",
+        "    let s=85;",
+        "    println!(\"{}\", if s>=90{\"A\"} else if s>=80{\"B\"} else {\"C\"});",
+        "}"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "Rust conditionals",
+      "challengeHint": "ownership/borrow",
+      "challengeSolution": [
+        "fn main() {",
+        "    let s=85;",
+        "    println!(\"{}\", if s>=90{\"A\"} else if s>=80{\"B\"} else {\"C\"});",
+        "}"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in Rust.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "fn main() {",
+        "    struct Point{x:i32,y:i32}",
+        "    let p=Point{x:2,y:3};",
+        "    println!(\"{}\", p.x);",
+        "}"
+      ],
+      "expectedOutput": "2",
+      "starterCode": [],
+      "solution": [
+        "fn main() {",
+        "    struct Point{x:i32,y:i32}",
+        "    let p=Point{x:2,y:3};",
+        "    println!(\"{}\", p.x);",
+        "}"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "Rust classes-objects",
+      "challengeHint": "ownership/borrow",
+      "challengeSolution": [
+        "fn main() {",
+        "    struct Point{x:i32,y:i32}",
+        "    let p=Point{x:2,y:3};",
+        "    println!(\"{}\", p.x);",
+        "}"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in Rust.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "fn main() {",
+        "    match \"42\".parse::<i32>(){Ok(v)=>println!(\"{}\", v),Err(_)=>println!(\"bad\");}",
+        "}"
+      ],
+      "expectedOutput": "42",
+      "starterCode": [],
+      "solution": [
+        "fn main() {",
+        "    match \"42\".parse::<i32>(){Ok(v)=>println!(\"{}\", v),Err(_)=>println!(\"bad\");}",
+        "}"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "Rust error-handling",
+      "challengeHint": "ownership/borrow",
+      "challengeSolution": [
+        "fn main() {",
+        "    match \"42\".parse::<i32>(){Ok(v)=>println!(\"{}\", v),Err(_)=>println!(\"bad\");}",
+        "}"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in Rust.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "use std::fs;",
+        "fn main() {",
+        "    use std::fs;",
+        "    fs::write(\"n.txt\",\"hello\").unwrap();",
+        "    println!(\"{}\", fs::read_to_string(\"n.txt\").unwrap());",
+        "}"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [],
+      "solution": [
+        "use std::fs;",
+        "fn main() {",
+        "    use std::fs;",
+        "    fs::write(\"n.txt\",\"hello\").unwrap();",
+        "    println!(\"{}\", fs::read_to_string(\"n.txt\").unwrap());",
+        "}"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "Rust file-io",
+      "challengeHint": "ownership/borrow",
+      "challengeSolution": [
+        "use std::fs;",
+        "fn main() {",
+        "    use std::fs;",
+        "    fs::write(\"n.txt\",\"hello\").unwrap();",
+        "    println!(\"{}\", fs::read_to_string(\"n.txt\").unwrap());",
+        "}"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in Rust.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "fn main() {",
+        "    use std::f64::consts::PI;",
+        "    println!(\"{:.2}\", PI);",
+        "}"
+      ],
+      "expectedOutput": "3.14",
+      "starterCode": [],
+      "solution": [
+        "fn main() {",
+        "    use std::f64::consts::PI;",
+        "    println!(\"{:.2}\", PI);",
+        "}"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "Rust modules-packages",
+      "challengeHint": "ownership/borrow",
+      "challengeSolution": [
+        "fn main() {",
+        "    use std::f64::consts::PI;",
+        "    println!(\"{:.2}\", PI);",
+        "}"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Ownership & Borrowing",
+      "difficulty": "Advanced",
+      "explanation": "An advanced Rust feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "fn main() {",
+        "    let s=String::from(\"hi\");",
+        "    let r=&s;",
+        "    println!(\"{} {}\", s, r);",
+        "}"
+      ],
+      "expectedOutput": "hi hi",
+      "starterCode": [],
+      "solution": [
+        "fn main() {",
+        "    let s=String::from(\"hi\");",
+        "    let r=&s;",
+        "    println!(\"{} {}\", s, r);",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "Rust advanced",
+      "challengeHint": "ownership/borrow",
+      "challengeSolution": [
+        "fn main() {",
+        "    let s=String::from(\"hi\");",
+        "    let r=&s;",
+        "    println!(\"{} {}\", s, r);",
+        "}"
+      ]
+    }
+  ],
+  "go": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in Go.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  count:=3",
+        "  name:=\"Ada\"",
+        "  fmt.Println(count,name)",
+        "}"
+      ],
+      "expectedOutput": "3 Ada",
+      "starterCode": [],
+      "solution": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  count:=3",
+        "  name:=\"Ada\"",
+        "  fmt.Println(count,name)",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "Go variables",
+      "challengeHint": "goroutine/channel",
+      "challengeSolution": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  count:=3",
+        "  name:=\"Ada\"",
+        "  fmt.Println(count,name)",
+        "}"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in Go.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  nums:=[]int{10,20,30}",
+        "  fmt.Println(nums[1])",
+        "  nums=append(nums,40)",
+        "  fmt.Println(len(nums))",
+        "}"
+      ],
+      "expectedOutput": "20\n4",
+      "starterCode": [],
+      "solution": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  nums:=[]int{10,20,30}",
+        "  fmt.Println(nums[1])",
+        "  nums=append(nums,40)",
+        "  fmt.Println(len(nums))",
+        "}"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "Go arrays-collections",
+      "challengeHint": "goroutine/channel",
+      "challengeSolution": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  nums:=[]int{10,20,30}",
+        "  fmt.Println(nums[1])",
+        "  nums=append(nums,40)",
+        "  fmt.Println(len(nums))",
+        "}"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in Go.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  t:=0",
+        "  for _,n:=range []int{1,2,3}{t+=n}",
+        "  fmt.Println(t)",
+        "}"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [],
+      "solution": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  t:=0",
+        "  for _,n:=range []int{1,2,3}{t+=n}",
+        "  fmt.Println(t)",
+        "}"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "Go loops",
+      "challengeHint": "goroutine/channel",
+      "challengeSolution": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  t:=0",
+        "  for _,n:=range []int{1,2,3}{t+=n}",
+        "  fmt.Println(t)",
+        "}"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in Go.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  add:=func(a,b int)int{return a+b}",
+        "  fmt.Println(add(2,3))",
+        "}"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [],
+      "solution": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  add:=func(a,b int)int{return a+b}",
+        "  fmt.Println(add(2,3))",
+        "}"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "Go functions",
+      "challengeHint": "goroutine/channel",
+      "challengeSolution": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  add:=func(a,b int)int{return a+b}",
+        "  fmt.Println(add(2,3))",
+        "}"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in Go.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  s:=85",
+        "  if s>=90{fmt.Println(\"A\")}else if s>=80{fmt.Println(\"B\")}else{fmt.Println(\"C\")}",
+        "}"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [],
+      "solution": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  s:=85",
+        "  if s>=90{fmt.Println(\"A\")}else if s>=80{fmt.Println(\"B\")}else{fmt.Println(\"C\")}",
+        "}"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "Go conditionals",
+      "challengeHint": "goroutine/channel",
+      "challengeSolution": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  s:=85",
+        "  if s>=90{fmt.Println(\"A\")}else if s>=80{fmt.Println(\"B\")}else{fmt.Println(\"C\")}",
+        "}"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in Go.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  type Point struct{X,Y int}",
+        "  p:=Point{2,3}",
+        "  fmt.Println(p.X)",
+        "}"
+      ],
+      "expectedOutput": "2",
+      "starterCode": [],
+      "solution": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  type Point struct{X,Y int}",
+        "  p:=Point{2,3}",
+        "  fmt.Println(p.X)",
+        "}"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "Go classes-objects",
+      "challengeHint": "goroutine/channel",
+      "challengeSolution": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  type Point struct{X,Y int}",
+        "  p:=Point{2,3}",
+        "  fmt.Println(p.X)",
+        "}"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in Go.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "package main",
+        "import \"fmt\"",
+        "import \"strconv\"",
+        "func main() {",
+        "  _,err:=strconv.Atoi(\"42\")",
+        "  if err!=nil{fmt.Println(\"bad\")}else{fmt.Println(\"ok\")}",
+        "}"
+      ],
+      "expectedOutput": "ok",
+      "starterCode": [],
+      "solution": [
+        "package main",
+        "import \"fmt\"",
+        "import \"strconv\"",
+        "func main() {",
+        "  _,err:=strconv.Atoi(\"42\")",
+        "  if err!=nil{fmt.Println(\"bad\")}else{fmt.Println(\"ok\")}",
+        "}"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "Go error-handling",
+      "challengeHint": "goroutine/channel",
+      "challengeSolution": [
+        "package main",
+        "import \"fmt\"",
+        "import \"strconv\"",
+        "func main() {",
+        "  _,err:=strconv.Atoi(\"42\")",
+        "  if err!=nil{fmt.Println(\"bad\")}else{fmt.Println(\"ok\")}",
+        "}"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in Go.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "package main",
+        "import \"fmt\"",
+        "import \"os\"",
+        "func main() {",
+        "  os.WriteFile(\"n.txt\",[]byte(\"hello\"),0644)",
+        "  b,_:=os.ReadFile(\"n.txt\")",
+        "  fmt.Println(string(b))",
+        "}"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [],
+      "solution": [
+        "package main",
+        "import \"fmt\"",
+        "import \"os\"",
+        "func main() {",
+        "  os.WriteFile(\"n.txt\",[]byte(\"hello\"),0644)",
+        "  b,_:=os.ReadFile(\"n.txt\")",
+        "  fmt.Println(string(b))",
+        "}"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "Go file-io",
+      "challengeHint": "goroutine/channel",
+      "challengeSolution": [
+        "package main",
+        "import \"fmt\"",
+        "import \"os\"",
+        "func main() {",
+        "  os.WriteFile(\"n.txt\",[]byte(\"hello\"),0644)",
+        "  b,_:=os.ReadFile(\"n.txt\")",
+        "  fmt.Println(string(b))",
+        "}"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in Go.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "package main",
+        "import \"fmt\"",
+        "import \"strings\"",
+        "func main() {",
+        "  import \"strings\"",
+        "  fmt.Println(strings.ToUpper(\"go\"))",
+        "}"
+      ],
+      "expectedOutput": "GO",
+      "starterCode": [],
+      "solution": [
+        "package main",
+        "import \"fmt\"",
+        "import \"strings\"",
+        "func main() {",
+        "  import \"strings\"",
+        "  fmt.Println(strings.ToUpper(\"go\"))",
+        "}"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "Go modules-packages",
+      "challengeHint": "goroutine/channel",
+      "challengeSolution": [
+        "package main",
+        "import \"fmt\"",
+        "import \"strings\"",
+        "func main() {",
+        "  import \"strings\"",
+        "  fmt.Println(strings.ToUpper(\"go\"))",
+        "}"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Goroutines & Concurrency",
+      "difficulty": "Advanced",
+      "explanation": "An advanced Go feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  ch:=make(chan int,1)",
+        "  ch<-7",
+        "  fmt.Println(<-ch)",
+        "}"
+      ],
+      "expectedOutput": "7",
+      "starterCode": [],
+      "solution": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  ch:=make(chan int,1)",
+        "  ch<-7",
+        "  fmt.Println(<-ch)",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "Go advanced",
+      "challengeHint": "goroutine/channel",
+      "challengeSolution": [
+        "package main",
+        "import \"fmt\"",
+        "func main() {",
+        "  ch:=make(chan int,1)",
+        "  ch<-7",
+        "  fmt.Println(<-ch)",
+        "}"
+      ]
+    }
+  ],
+  "java": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in Java.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    int count=3;",
+        "    String name=\"Ada\";",
+        "    System.out.println(count+\" \"+name);",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "3 Ada",
+      "starterCode": [],
+      "solution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    int count=3;",
+        "    String name=\"Ada\";",
+        "    System.out.println(count+\" \"+name);",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "Java variables",
+      "challengeHint": "streams/generics",
+      "challengeSolution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    int count=3;",
+        "    String name=\"Ada\";",
+        "    System.out.println(count+\" \"+name);",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in Java.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    int[] nums={10,20,30};",
+        "    System.out.println(nums[1]);",
+        "    System.out.println(nums.length);",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "20\n3",
+      "starterCode": [],
+      "solution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    int[] nums={10,20,30};",
+        "    System.out.println(nums[1]);",
+        "    System.out.println(nums.length);",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "Java arrays-collections",
+      "challengeHint": "streams/generics",
+      "challengeSolution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    int[] nums={10,20,30};",
+        "    System.out.println(nums[1]);",
+        "    System.out.println(nums.length);",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in Java.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    int t=0;",
+        "    for(int n: new int[]{1,2,3}) t+=n;",
+        "    System.out.println(t);",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [],
+      "solution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    int t=0;",
+        "    for(int n: new int[]{1,2,3}) t+=n;",
+        "    System.out.println(t);",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "Java loops",
+      "challengeHint": "streams/generics",
+      "challengeSolution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    int t=0;",
+        "    for(int n: new int[]{1,2,3}) t+=n;",
+        "    System.out.println(t);",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in Java.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    System.out.println(java.util.stream.IntStream.of(2,3).sum());",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [],
+      "solution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    System.out.println(java.util.stream.IntStream.of(2,3).sum());",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "Java functions",
+      "challengeHint": "streams/generics",
+      "challengeSolution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    System.out.println(java.util.stream.IntStream.of(2,3).sum());",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in Java.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    int s=85;",
+        "    System.out.println(s>=90?\"A\":s>=80?\"B\":\"C\");",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [],
+      "solution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    int s=85;",
+        "    System.out.println(s>=90?\"A\":s>=80?\"B\":\"C\");",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "Java conditionals",
+      "challengeHint": "streams/generics",
+      "challengeSolution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    int s=85;",
+        "    System.out.println(s>=90?\"A\":s>=80?\"B\":\"C\");",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in Java.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    record Point(int x,int y){}",
+        "    System.out.println(new Point(2,3).x());",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "2",
+      "starterCode": [],
+      "solution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    record Point(int x,int y){}",
+        "    System.out.println(new Point(2,3).x());",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "Java classes-objects",
+      "challengeHint": "streams/generics",
+      "challengeSolution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    record Point(int x,int y){}",
+        "    System.out.println(new Point(2,3).x());",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in Java.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    try{int x=Integer.parseInt(\"42\"); System.out.println(x);}catch(NumberFormatException e){System.out.println(\"bad\");}",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "42",
+      "starterCode": [],
+      "solution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    try{int x=Integer.parseInt(\"42\"); System.out.println(x);}catch(NumberFormatException e){System.out.println(\"bad\");}",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "Java error-handling",
+      "challengeHint": "streams/generics",
+      "challengeSolution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    try{int x=Integer.parseInt(\"42\"); System.out.println(x);}catch(NumberFormatException e){System.out.println(\"bad\");}",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in Java.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    java.nio.file.Files.writeString(java.nio.file.Path.of(\"n.txt\"),\"hello\");",
+        "    System.out.println(java.nio.file.Files.readString(java.nio.file.Path.of(\"n.txt\")));",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [],
+      "solution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    java.nio.file.Files.writeString(java.nio.file.Path.of(\"n.txt\"),\"hello\");",
+        "    System.out.println(java.nio.file.Files.readString(java.nio.file.Path.of(\"n.txt\")));",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "Java file-io",
+      "challengeHint": "streams/generics",
+      "challengeSolution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    java.nio.file.Files.writeString(java.nio.file.Path.of(\"n.txt\"),\"hello\");",
+        "    System.out.println(java.nio.file.Files.readString(java.nio.file.Path.of(\"n.txt\")));",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in Java.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    System.out.println(Math.sqrt(9));",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "3.0",
+      "starterCode": [],
+      "solution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    System.out.println(Math.sqrt(9));",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "Java modules-packages",
+      "challengeHint": "streams/generics",
+      "challengeSolution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    System.out.println(Math.sqrt(9));",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Streams & Generics",
+      "difficulty": "Advanced",
+      "explanation": "An advanced Java feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    System.out.println(java.util.stream.IntStream.rangeClosed(1,5).filter(n->n%2==0).sum());",
+        "  }",
+        "}"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [],
+      "solution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    System.out.println(java.util.stream.IntStream.rangeClosed(1,5).filter(n->n%2==0).sum());",
+        "  }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "Java advanced",
+      "challengeHint": "streams/generics",
+      "challengeSolution": [
+        "public class Main {",
+        "  public static void main(String[] args) {",
+        "    System.out.println(java.util.stream.IntStream.rangeClosed(1,5).filter(n->n%2==0).sum());",
+        "  }",
+        "}"
+      ]
+    }
+  ],
+  "assembly": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in Assembly.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "mov eax,4",
+        "mov ebx,1",
+        "mov ecx,msg",
+        "mov edx,len",
+        "int 0x80",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "expectedOutput": "OK",
+      "starterCode": [],
+      "solution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "mov eax,4",
+        "mov ebx,1",
+        "mov ecx,msg",
+        "mov edx,len",
+        "int 0x80",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "Write syscall exit",
+      "challengeHint": "eax=1",
+      "challengeSolution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "mov eax,1",
+        "xor ebx,ebx",
+        "int 0x80",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in Assembly.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "; array db 1,2,3",
+        "mov al,[msg]",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "expectedOutput": "",
+      "starterCode": [],
+      "solution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "mov al,[msg]",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "Define byte array",
+      "challengeHint": "db directive",
+      "challengeSolution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "; values db 1,2,3",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in Assembly.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "mov ecx,3",
+        "loop_start:",
+        "dec ecx",
+        "jnz loop_start",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "expectedOutput": "",
+      "starterCode": [],
+      "solution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "mov ecx,3",
+        "loop_start:",
+        "dec ecx",
+        "jnz loop_start",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "Loop 5 times",
+      "challengeHint": "ecx counter",
+      "challengeSolution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "mov ecx,5",
+        "l:",
+        "dec ecx",
+        "jnz l",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in Assembly.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "call fn",
+        "jmp end",
+        "fn: ret",
+        "end:",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "expectedOutput": "",
+      "starterCode": [],
+      "solution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "call fn",
+        "jmp end",
+        "fn: ret",
+        "end:",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "Define label",
+      "challengeHint": "label:",
+      "challengeSolution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "myfn:",
+        "ret",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in Assembly.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "cmp eax,0",
+        "je zero",
+        "jmp done",
+        "zero:",
+        "done:",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "expectedOutput": "",
+      "starterCode": [],
+      "solution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "cmp eax,0",
+        "je zero",
+        "zero:",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "Compare and jump",
+      "challengeHint": "cmp/je",
+      "challengeSolution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "cmp eax,1",
+        "je eq",
+        "eq:",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in Assembly.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "; structs via memory layout",
+        "mov eax,2",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "expectedOutput": "",
+      "starterCode": [],
+      "solution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "mov eax,2",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "Struct offsets",
+      "challengeHint": "manual layout",
+      "challengeSolution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "; struct size 8",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in Assembly.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "test eax,eax",
+        "jz error",
+        "jmp ok",
+        "error:",
+        "ok:",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "expectedOutput": "",
+      "starterCode": [],
+      "solution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "test eax,eax",
+        "jz error",
+        "error:",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "Check return code",
+      "challengeHint": "test/jz",
+      "challengeSolution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "cmp eax,-1",
+        "je fail",
+        "fail:",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in Assembly.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "; file IO via syscalls",
+        "mov eax,1",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "expectedOutput": "",
+      "starterCode": [],
+      "solution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "mov eax,1",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "Open syscall",
+      "challengeHint": "OS specific",
+      "challengeSolution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "; open path here",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in Assembly.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "%include 'io64.inc'",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "expectedOutput": "",
+      "starterCode": [],
+      "solution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "; include macros",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "Include file",
+      "challengeHint": "%include",
+      "challengeSolution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "%include 'macros.asm'",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Registers & Syscalls",
+      "difficulty": "Advanced",
+      "explanation": "An advanced Assembly feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "mov rax,60",
+        "xor rdi,rdi",
+        "syscall",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "expectedOutput": "",
+      "starterCode": [],
+      "solution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "mov rax,60",
+        "xor rdi,rdi",
+        "syscall",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "Exit syscall x86_64",
+      "challengeHint": "rax=60",
+      "challengeSolution": [
+        "section .data",
+        "msg db 'OK',10",
+        "len equ $ - msg",
+        "section .text",
+        "global _start",
+        "_start:",
+        "mov rax,60",
+        "xor rdi,rdi",
+        "syscall",
+        "mov eax,1",
+        "mov ebx,0",
+        "int 0x80"
+      ]
+    }
+  ],
+  "basic": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in BASIC.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "LET count = 3",
+        "LET name$ = \"Ada\"",
+        "PRINT count; name$"
+      ],
+      "expectedOutput": "3 Ada",
+      "starterCode": [
+        "LET score = "
+      ],
+      "solution": [
+        "LET score = 10",
+        "PRINT score"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "price variable",
+      "challengeHint": "LET",
+      "challengeSolution": [
+        "LET price = 19.99",
+        "PRINT price"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in BASIC.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "DIM nums(2)",
+        "nums(0)=10: nums(1)=20: nums(2)=30",
+        "PRINT nums(1)"
+      ],
+      "expectedOutput": "20",
+      "starterCode": [
+        "DIM a(1)"
+      ],
+      "solution": [
+        "DIM a(2)",
+        "PRINT a(0)"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "DIM array",
+      "challengeHint": "DIM",
+      "challengeSolution": [
+        "DIM c(2)",
+        "PRINT c(0)"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in BASIC.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "FOR i = 1 TO 3",
+        "PRINT i",
+        "NEXT i"
+      ],
+      "expectedOutput": "1\n2\n3",
+      "starterCode": [
+        "FOR i=1 TO 2",
+        "NEXT i"
+      ],
+      "solution": [
+        "FOR i=1 TO 3",
+        "PRINT i",
+        "NEXT i"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "1 TO 5",
+      "challengeHint": "FOR/NEXT",
+      "challengeSolution": [
+        "FOR i=1 TO 5",
+        "PRINT i",
+        "NEXT i"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in BASIC.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "DEF FN add(a,b) = a + b",
+        "PRINT FN add(2,3)"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [
+        "DEF FN d(x)=x*2"
+      ],
+      "solution": [
+        "DEF FN d(x)=x*2",
+        "PRINT FN d(4)"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "square fn",
+      "challengeHint": "DEF FN",
+      "challengeSolution": [
+        "DEF FN sq(n)=n*n",
+        "PRINT FN sq(4)"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in BASIC.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "s=85",
+        "IF s>=90 THEN PRINT \"A\" ELSE IF s>=80 THEN PRINT \"B\" ELSE PRINT \"C\""
+      ],
+      "expectedOutput": "B",
+      "starterCode": [
+        "IF 1 THEN PRINT 1"
+      ],
+      "solution": [
+        "n=4",
+        "IF n MOD 2=0 THEN PRINT \"even\" ELSE PRINT \"odd\""
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "IF/ELSE",
+      "challengeHint": "IF THEN",
+      "challengeSolution": [
+        "n=6",
+        "IF n MOD 2=0 THEN PRINT \"even\" ELSE PRINT \"odd\""
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in BASIC.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "TYPE Point",
+        "  x AS INTEGER",
+        "  y AS INTEGER",
+        "END TYPE",
+        "DIM p AS Point",
+        "p.x=2: PRINT p.x"
+      ],
+      "expectedOutput": "2",
+      "starterCode": [
+        "TYPE T",
+        "END TYPE"
+      ],
+      "solution": [
+        "TYPE T",
+        "  v AS INTEGER",
+        "END TYPE"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "TYPE record",
+      "challengeHint": "TYPE/END TYPE",
+      "challengeSolution": [
+        "TYPE Item",
+        "  id AS INTEGER",
+        "END TYPE"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in BASIC.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "ON ERROR GOTO eh",
+        "PRINT 1/0",
+        "eh: PRINT \"err\"",
+        "RESUME NEXT"
+      ],
+      "expectedOutput": "err",
+      "starterCode": [
+        "ON ERROR GOTO h",
+        "h:"
+      ],
+      "solution": [
+        "ON ERROR GOTO h",
+        "h: PRINT \"caught\""
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "ON ERROR",
+      "challengeHint": "GOTO handler",
+      "challengeSolution": [
+        "ON ERROR GOTO h",
+        "PRINT 1/0",
+        "h: PRINT \"bad\""
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in BASIC.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "OPEN \"n.txt\" FOR OUTPUT AS #1",
+        "PRINT #1, \"hello\"",
+        "CLOSE #1",
+        "OPEN \"n.txt\" FOR INPUT AS #1",
+        "LINE INPUT #1, s$",
+        "PRINT s$",
+        "CLOSE #1"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [
+        "OPEN \"o.txt\" FOR OUTPUT AS #1"
+      ],
+      "solution": [
+        "OPEN \"o.txt\" FOR OUTPUT AS #1",
+        "PRINT #1,\"hi\"",
+        "CLOSE #1"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "write/read",
+      "challengeHint": "OPEN FOR OUTPUT",
+      "challengeSolution": [
+        "OPEN \"t.txt\" FOR OUTPUT AS #1",
+        "PRINT #1,\"ok\"",
+        "CLOSE #1"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in BASIC.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "REM modules via separate .bas files",
+        "PRINT \"main\""
+      ],
+      "expectedOutput": "main",
+      "starterCode": [
+        "REM include"
+      ],
+      "solution": [
+        "PRINT \"ok\""
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "SUB in module",
+      "challengeHint": "$INCLUDE",
+      "challengeSolution": [
+        "PRINT \"mod\""
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "User Input & Subroutines",
+      "difficulty": "Advanced",
+      "explanation": "An advanced BASIC feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "INPUT \"Name? \"; n$",
+        "PRINT \"Hi \"; n$"
+      ],
+      "expectedOutput": "Hi Ada",
+      "starterCode": [
+        "REM INPUT"
+      ],
+      "solution": [
+        "INPUT \"x?\"; x",
+        "PRINT x"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "INPUT prompt",
+      "challengeHint": "INPUT",
+      "challengeSolution": [
+        "INPUT \"Age?\"; age",
+        "PRINT age"
+      ]
+    }
+  ],
+  "lua": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in Lua.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "count=3",
+        "name='Ada'",
+        "print(count,name)"
+      ],
+      "expectedOutput": "3\tAda",
+      "starterCode": [
+        "score="
+      ],
+      "solution": [
+        "score=10",
+        "print(score)"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "price",
+      "challengeHint": "print",
+      "challengeSolution": [
+        "price=19.99",
+        "print(price)"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in Lua.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "nums={10,20,30}",
+        "print(nums[2])",
+        "table.insert(nums,40)",
+        "print(#nums)"
+      ],
+      "expectedOutput": "20\n4",
+      "starterCode": [
+        "t={1,2}"
+      ],
+      "solution": [
+        "t={1,2,3}",
+        "print(t[#t])"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "last color",
+      "challengeHint": "#t",
+      "challengeSolution": [
+        "c={'r','g','b'}",
+        "print(c[#c])"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in Lua.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "t=0",
+        "for _,n in ipairs({1,2,3}) do t=t+n end",
+        "print(t)"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [
+        "for i=1,3 do end"
+      ],
+      "solution": [
+        "for i=1,3 do print(i) end"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "1..5",
+      "challengeHint": "for i=1,5",
+      "challengeSolution": [
+        "for i=1,5 do print(i) end"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in Lua.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "function add(a,b) return a+b end",
+        "print(add(2,3))"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [
+        "function d(x) end"
+      ],
+      "solution": [
+        "function d(x) return x*2 end",
+        "print(d(4))"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "greet",
+      "challengeHint": "return",
+      "challengeSolution": [
+        "function greet(n) return 'Hello, '..n end",
+        "print(greet('Sam'))"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in Lua.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "s=85",
+        "if s>=90 then print('A') elseif s>=80 then print('B') else print('C') end"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [
+        "n=4"
+      ],
+      "solution": [
+        "n=4",
+        "print(n%2==0 and 'even' or 'odd')"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "even",
+      "challengeHint": "mod",
+      "challengeSolution": [
+        "n=6",
+        "print(n%2==0 and 'even' or 'odd')"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in Lua.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "Dog={}",
+        "function Dog:new(n) self.name=n return self end",
+        "function Dog:speak() return self.name..' woof' end",
+        "print(Dog:new('Rex'):speak())"
+      ],
+      "expectedOutput": "Rex woof",
+      "starterCode": [
+        "Cat={}"
+      ],
+      "solution": [
+        "Cat={name='Mia'}",
+        "print(Cat.name)"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "table object",
+      "challengeHint": "tables",
+      "challengeSolution": [
+        "P={name='Lee'}",
+        "print(P.name)"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in Lua.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "local ok,res=pcall(function() return tonumber('42') end)",
+        "print(ok,res)"
+      ],
+      "expectedOutput": "true\t42",
+      "starterCode": [
+        "pcall(function() end)"
+      ],
+      "solution": [
+        "local ok=pcall(function() error('x') end)",
+        "print(ok)"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "pcall",
+      "challengeHint": "pcall(fn)",
+      "challengeSolution": [
+        "local ok=pcall(function() error('bad') end)",
+        "print(ok)"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in Lua.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "f=io.open('n.txt','w')",
+        "f:write('hello')",
+        "f:close()",
+        "f=io.open('n.txt','r')",
+        "print(f:read('*a'))",
+        "f:close()"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [
+        "io.open('o.txt','w')"
+      ],
+      "solution": [
+        "io.open('o.txt','w'):write('hi')"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "write/read",
+      "challengeHint": "io.open",
+      "challengeSolution": [
+        "local f=io.open('t.txt','w'); f:write('ok'); f:close(); print(io.open('t.txt'):read('*a'))"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in Lua.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "math=require('math')",
+        "print(math.sqrt(9))"
+      ],
+      "expectedOutput": "3",
+      "starterCode": [
+        "require('math')"
+      ],
+      "solution": [
+        "print(require('math').pi)"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "require module",
+      "challengeHint": "require",
+      "challengeSolution": [
+        "local m=require('math'); print(m.floor(3.9))"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Metatables",
+      "difficulty": "Advanced",
+      "explanation": "An advanced Lua feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "t={}",
+        "setmetatable(t,{__add=function(a,b) return a.v+b.v end})",
+        "a={v=1} b={v=2} setmetatable(a,getmetatable(t)) setmetatable(b,getmetatable(t))",
+        "print((a+b).v)"
+      ],
+      "expectedOutput": "3",
+      "starterCode": [
+        "setmetatable({},{})"
+      ],
+      "solution": [
+        "local mt={__tostring=function() return 'X' end}; local x=setmetatable({},mt); print(tostring(x))"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "metatable __add",
+      "challengeHint": "__add",
+      "challengeSolution": [
+        "local mt={__add=function(x,y) return {v=x.v+y.v} end}; local a=setmetatable({v=1},mt); local b=setmetatable({v=2},mt); print((a+b).v)"
+      ]
+    }
+  ],
+  "ruby": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in Ruby.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "count=3",
+        "name='Ada'",
+        "puts \"#{count} #{name}\""
+      ],
+      "expectedOutput": "3 Ada",
+      "starterCode": [
+        "score="
+      ],
+      "solution": [
+        "score=10",
+        "puts score"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "price",
+      "challengeHint": "puts",
+      "challengeSolution": [
+        "price=19.99",
+        "puts price"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in Ruby.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "nums=[10,20,30]",
+        "puts nums[1]",
+        "nums<<40",
+        "puts nums.length"
+      ],
+      "expectedOutput": "20\n4",
+      "starterCode": [
+        "items=[1,2]"
+      ],
+      "solution": [
+        "items=[1,2,3]",
+        "puts items.last"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "last color",
+      "challengeHint": "last",
+      "challengeSolution": [
+        "c=%w[r g b]",
+        "puts c.last"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in Ruby.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "t=0",
+        "[1,2,3].each{|n| t+=n}",
+        "puts t"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [
+        "3.times{}"
+      ],
+      "solution": [
+        "(1..3).each{|i| puts i}"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "1..5",
+      "challengeHint": "each",
+      "challengeSolution": [
+        "(1..5).each{|i| puts i}"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in Ruby.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "def add(a,b) a+b end",
+        "puts add(2,3)"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [
+        "def d(x) end"
+      ],
+      "solution": [
+        "def d(x) x*2 end",
+        "puts d(4)"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "greet",
+      "challengeHint": "def",
+      "challengeSolution": [
+        "def greet(n) \"Hello, #{n}\" end",
+        "puts greet('Sam')"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in Ruby.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "s=85",
+        "puts s>=90 ? 'A' : s>=80 ? 'B' : 'C'"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [
+        "n=4"
+      ],
+      "solution": [
+        "n=4",
+        "puts n.even? ? 'even' : 'odd'"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "even",
+      "challengeHint": "even?",
+      "challengeSolution": [
+        "n=6",
+        "puts n.even? ? 'even' : 'odd'"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in Ruby.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "class Dog",
+        "  def initialize(n) @name=n end",
+        "  def speak @name+' woof' end",
+        "end",
+        "puts Dog.new('Rex').speak"
+      ],
+      "expectedOutput": "Rex woof",
+      "starterCode": [
+        "class Cat; end"
+      ],
+      "solution": [
+        "class Cat; def initialize(n) @name=n end; end",
+        "puts Cat.new('Mia').instance_variable_get(:@name)"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "Person",
+      "challengeHint": "initialize",
+      "challengeSolution": [
+        "class Person; def initialize(n) @name=n end; attr_reader :name; end",
+        "puts Person.new('Lee').name"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in Ruby.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "begin",
+        "  puts Integer('42')",
+        "rescue ArgumentError",
+        "  puts 'bad'",
+        "end"
+      ],
+      "expectedOutput": "42",
+      "starterCode": [
+        "begin; rescue; end"
+      ],
+      "solution": [
+        "begin; raise 'x'; rescue; puts 'caught'; end"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "rescue",
+      "challengeHint": "begin/rescue",
+      "challengeSolution": [
+        "begin; Integer('x'); rescue; puts 'bad'; end"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in Ruby.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "File.write('n.txt','hello')",
+        "puts File.read('n.txt')"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [
+        "File.write('o.txt','')"
+      ],
+      "solution": [
+        "File.write('o.txt','hi')"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "read/write",
+      "challengeHint": "File.write",
+      "challengeSolution": [
+        "File.write('t.txt','ok')",
+        "puts File.read('t.txt')"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in Ruby.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "require 'json'",
+        "puts JSON.generate({a:1})"
+      ],
+      "expectedOutput": "{\"a\":1}",
+      "starterCode": [
+        "require 'json'"
+      ],
+      "solution": [
+        "require 'date'",
+        "puts Date.today.year>2000"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "JSON generate",
+      "challengeHint": "JSON.generate",
+      "challengeSolution": [
+        "require 'json'",
+        "puts JSON.generate({x:2})"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Blocks & Procs",
+      "difficulty": "Advanced",
+      "explanation": "An advanced Ruby feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "square=proc{|n| n*n}",
+        "puts square.call(4)",
+        "[1,2].map(&square).each{|v| print v,' '}"
+      ],
+      "expectedOutput": "16\n1 4 ",
+      "starterCode": [
+        "p=proc{}"
+      ],
+      "solution": [
+        "b=proc{|x| x+1}; puts b.call(2)"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "block map",
+      "challengeHint": "proc/block",
+      "challengeSolution": [
+        "nums=[1,2,3]; puts nums.map{|n| n*2}.inspect"
+      ]
+    }
+  ],
+  "swift": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in Swift.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "let count=3",
+        "var name=\"Ada\"",
+        "print(count,name)"
+      ],
+      "expectedOutput": "3 Ada",
+      "starterCode": [
+        "var score="
+      ],
+      "solution": [
+        "var score=10",
+        "print(score)"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "price",
+      "challengeHint": "var/let",
+      "challengeSolution": [
+        "let price=19.99",
+        "print(price)"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in Swift.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "var nums=[10,20,30]",
+        "print(nums[1])",
+        "nums.append(40)",
+        "print(nums.count)"
+      ],
+      "expectedOutput": "20\n4",
+      "starterCode": [
+        "var items=[1,2]"
+      ],
+      "solution": [
+        "var items=[1,2,3]",
+        "print(items.last!)"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "last element",
+      "challengeHint": "last",
+      "challengeSolution": [
+        "let c=[\"r\",\"g\",\"b\"]",
+        "print(c.last!)"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in Swift.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "var t=0",
+        "for n in [1,2,3]{t+=n}",
+        "print(t)"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [
+        "for _ in 0..<3{}"
+      ],
+      "solution": [
+        "for i in 1...3{print(i)}"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "1..5",
+      "challengeHint": "for in",
+      "challengeSolution": [
+        "for i in 1...5{print(i)}"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in Swift.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "func add(_ a:Int,_ b:Int)->Int{a+b}",
+        "print(add(2,3))"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [
+        "func d(_ x:Int)->Int{}"
+      ],
+      "solution": [
+        "func d(_ x:Int)->Int{x*2}",
+        "print(d(4))"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "greet",
+      "challengeHint": "func",
+      "challengeSolution": [
+        "func greet(_ n:String)->String{\"Hello, \\(n)\"}",
+        "print(greet(\"Sam\"))"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in Swift.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "let s=85",
+        "print(s>=90 ? \"A\" : s>=80 ? \"B\" : \"C\")"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [
+        "let n=4"
+      ],
+      "solution": [
+        "let n=4",
+        "print(n%2==0 ? \"even\":\"odd\")"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "even",
+      "challengeHint": "ternary",
+      "challengeSolution": [
+        "let n=6",
+        "print(n%2==0 ? \"even\":\"odd\")"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in Swift.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "struct Point{let x,y:Int}",
+        "let p=Point(x:2,y:3)",
+        "print(p.x)"
+      ],
+      "expectedOutput": "2",
+      "starterCode": [
+        "struct Cat{}"
+      ],
+      "solution": [
+        "class Cat{let name:String; init(_ n:String){name=n}}",
+        "print(Cat(\"Mia\").name)"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "struct Point",
+      "challengeHint": "struct",
+      "challengeSolution": [
+        "struct Person{let name:String}; print(Person(name:\"Lee\").name)"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in Swift.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "enum E:Error{case bad}",
+        "func f() throws{throw E.bad}",
+        "do{try f()}catch{print(\"caught\")}"
+      ],
+      "expectedOutput": "caught",
+      "starterCode": [
+        "do{}catch{}"
+      ],
+      "solution": [
+        "do{try f()}catch{print(\"caught\")}"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "throws",
+      "challengeHint": "try/catch",
+      "challengeSolution": [
+        "func g() throws -> Int {return 42}; print(try g())"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in Swift.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "try \"hello\".write(toFile:\"n.txt\",atomically:true,encoding:.utf8)",
+        "print(try String(contentsOfFile:\"n.txt\"))"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [
+        "try \"hi\".write(toFile:\"o.txt\",atomically:true,encoding:.utf8)"
+      ],
+      "solution": [
+        "try \"hi\".write(toFile:\"o.txt\",atomically:true,encoding:.utf8)"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "write/read",
+      "challengeHint": "write(toFile:)",
+      "challengeSolution": [
+        "try \"ok\".write(toFile:\"t.txt\",atomically:true,encoding:.utf8)",
+        "print(try String(contentsOfFile:\"t.txt\"))"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in Swift.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "import Foundation",
+        "print(sqrt(9.0))"
+      ],
+      "expectedOutput": "3.0",
+      "starterCode": [
+        "import Foundation"
+      ],
+      "solution": [
+        "import Foundation",
+        "print(Date().timeIntervalSince1970>0)"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "import Foundation",
+      "challengeHint": "import",
+      "challengeSolution": [
+        "import Foundation",
+        "print(NSString(string:\"hi\").length)"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Optionals & Protocols",
+      "difficulty": "Advanced",
+      "explanation": "An advanced Swift feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "var x:Int?=7",
+        "if let v=x{print(v)}",
+        "protocol P{func show()}",
+        "struct S:P{func show(){print(\"ok\")}}",
+        "S().show()"
+      ],
+      "expectedOutput": "7\nok",
+      "starterCode": [
+        "var o:Int?=nil"
+      ],
+      "solution": [
+        "let o:Int?=nil; print(o ?? 0)"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "optional binding",
+      "challengeHint": "if let",
+      "challengeSolution": [
+        "let s:String?=\"hi\"; if let v=s {print(v)}"
+      ]
+    }
+  ],
+  "kotlin": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in Kotlin.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "fun main() {",
+        "    val count=3",
+        "    var name=\"Ada\"",
+        "    println(\"$count $name\")",
+        "}"
+      ],
+      "expectedOutput": "3 Ada",
+      "starterCode": [
+        "var score="
+      ],
+      "solution": [
+        "fun main() {",
+        "    var score=10",
+        "    println(score)",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "price",
+      "challengeHint": "val/var",
+      "challengeSolution": [
+        "fun main() {",
+        "    val price=19.99",
+        "    println(price)",
+        "}"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in Kotlin.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "fun main() {",
+        "    val nums=mutableListOf(10,20,30)",
+        "    println(nums[1])",
+        "    nums.add(40)",
+        "    println(nums.size)",
+        "}"
+      ],
+      "expectedOutput": "20\n4",
+      "starterCode": [
+        "val items=mutableListOf(1,2)"
+      ],
+      "solution": [
+        "fun main() {",
+        "    val items=listOf(1,2,3)",
+        "    println(items.last())",
+        "}"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "last color",
+      "challengeHint": "last()",
+      "challengeSolution": [
+        "fun main() {",
+        "    println(listOf(\"r\",\"g\",\"b\").last())",
+        "}"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in Kotlin.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "fun main() {",
+        "    var t=0",
+        "    for(n in listOf(1,2,3)) t+=n",
+        "    println(t)",
+        "}"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [
+        "for(i in 1..3){}"
+      ],
+      "solution": [
+        "fun main() {",
+        "    for(i in 1..3) println(i)",
+        "}"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "1..5",
+      "challengeHint": "for in range",
+      "challengeSolution": [
+        "fun main() {",
+        "    for(i in 1..5) println(i)",
+        "}"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in Kotlin.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "fun main() {",
+        "    fun add(a:Int,b:Int)=a+b",
+        "    println(add(2,3))",
+        "}"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [
+        "fun d(x:Int):Int{}"
+      ],
+      "solution": [
+        "fun main() {",
+        "    fun d(x:Int)=x*2",
+        "    println(d(4))",
+        "}"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "greet",
+      "challengeHint": "fun",
+      "challengeSolution": [
+        "fun main() {",
+        "    fun greet(n:String)=\"Hello, $n\"",
+        "    println(greet(\"Sam\"))",
+        "}"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in Kotlin.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "fun main() {",
+        "    val s=85",
+        "    println(when{ s>=90->\"A\"; s>=80->\"B\"; else->\"C\"})",
+        "}"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [
+        "val n=4"
+      ],
+      "solution": [
+        "fun main() {",
+        "    val n=4",
+        "    println(if(n%2==0) \"even\" else \"odd\")",
+        "}"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "when",
+      "challengeHint": "when",
+      "challengeSolution": [
+        "fun main() {",
+        "    println(when(6%2){0->\"even\"; else->\"odd\"})",
+        "}"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in Kotlin.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "fun main() {",
+        "    data class Point(val x:Int,val y:Int)",
+        "    println(Point(2,3).x)",
+        "}"
+      ],
+      "expectedOutput": "2",
+      "starterCode": [
+        "class Cat"
+      ],
+      "solution": [
+        "fun main() {",
+        "    class Person(val name:String)",
+        "    println(Person(\"Lee\").name)",
+        "}"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "data class",
+      "challengeHint": "data class",
+      "challengeSolution": [
+        "fun main() {",
+        "    data class User(val name:String)",
+        "    println(User(\"Lee\").name)",
+        "}"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in Kotlin.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "fun main() {",
+        "    runCatching{ \"42\".toInt() }.onSuccess{println(it)}.onFailure{println(\"bad\")}",
+        "}"
+      ],
+      "expectedOutput": "42",
+      "starterCode": [
+        "try{}catch(e:Exception){}"
+      ],
+      "solution": [
+        "fun main() {",
+        "    try{throw IllegalStateException(\"x\")}catch(e:Exception){println(\"caught\")}",
+        "}"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "runCatching",
+      "challengeHint": "runCatching",
+      "challengeSolution": [
+        "fun main() {",
+        "    println(runCatching{\"x\".toInt()}.isFailure)",
+        "}"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in Kotlin.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "fun main() {",
+        "    java.io.File(\"n.txt\").writeText(\"hello\")",
+        "    println(java.io.File(\"n.txt\").readText())",
+        "}"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [
+        "java.io.File(\"o.txt\").writeText(\"\")"
+      ],
+      "solution": [
+        "fun main() {",
+        "    java.io.File(\"o.txt\").writeText(\"hi\")",
+        "}"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "writeText",
+      "challengeHint": "File",
+      "challengeSolution": [
+        "fun main() {",
+        "    java.io.File(\"t.txt\").writeText(\"ok\")",
+        "    println(java.io.File(\"t.txt\").readText())",
+        "}"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in Kotlin.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "fun main() {",
+        "    import kotlin.math.sqrt",
+        "    println(sqrt(9.0))",
+        "}"
+      ],
+      "expectedOutput": "3.0",
+      "starterCode": [
+        "import kotlin.math.PI"
+      ],
+      "solution": [
+        "fun main() {",
+        "    import kotlin.math.PI",
+        "    println(PI)",
+        "}"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "import sqrt",
+      "challengeHint": "kotlin.math",
+      "challengeSolution": [
+        "fun main() {",
+        "    import kotlin.math.sqrt",
+        "    println(sqrt(16.0))",
+        "}"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Coroutines",
+      "difficulty": "Advanced",
+      "explanation": "An advanced Kotlin feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "fun main() {",
+        "    val nums=sequenceOf(1,2,3,4).asSequence().filter{it%2==0}.map{it*it}.toList()",
+        "    println(nums)",
+        "}"
+      ],
+      "expectedOutput": "[4, 16]",
+      "starterCode": [
+        "val s=sequenceOf(1,2)"
+      ],
+      "solution": [
+        "fun main() {",
+        "    println(sequenceOf(1,2,3).sum())",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "Sequence map/filter",
+      "challengeHint": "asSequence",
+      "challengeSolution": [
+        "fun main() {",
+        "    println(sequenceOf(1,2,3,4).filter{it>2}.toList())",
+        "}"
+      ]
+    }
+  ],
+  "php": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in PHP.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "<?php",
+        "$count=3;",
+        "$name='Ada';",
+        "echo \"$count $name\\n\";"
+      ],
+      "expectedOutput": "3 Ada",
+      "starterCode": [
+        "$score="
+      ],
+      "solution": [
+        "<?php",
+        "$score=10;",
+        "echo $score;"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "price",
+      "challengeHint": "echo",
+      "challengeSolution": [
+        "<?php",
+        "$price=19.99;",
+        "echo $price;"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in PHP.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "<?php",
+        "$nums=[10,20,30];",
+        "echo $nums[1],\"\\n\";",
+        "$nums[]=40;",
+        "echo count($nums);"
+      ],
+      "expectedOutput": "20\n4",
+      "starterCode": [
+        "$items=[1,2];"
+      ],
+      "solution": [
+        "<?php",
+        "$items=[1,2,3];",
+        "echo end($items);"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "last color",
+      "challengeHint": "end()",
+      "challengeSolution": [
+        "<?php",
+        "$c=['r','g','b']; echo end($c);"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in PHP.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "<?php",
+        "$t=0;",
+        "foreach([1,2,3] as $n){$t+=$n;}",
+        "echo $t;"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [
+        "for($i=0;$i<3;$i++){}"
+      ],
+      "solution": [
+        "<?php",
+        "for($i=1;$i<=3;$i++) echo $i,\"\\n\";"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "1..5",
+      "challengeHint": "for",
+      "challengeSolution": [
+        "<?php",
+        "for($i=1;$i<=5;$i++) echo $i,\"\\n\";"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in PHP.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "<?php",
+        "function add($a,$b){return $a+$b;}",
+        "echo add(2,3);"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [
+        "function d($x){}"
+      ],
+      "solution": [
+        "<?php",
+        "function d($x){return $x*2;}",
+        "echo d(4);"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "greet",
+      "challengeHint": "function",
+      "challengeSolution": [
+        "<?php",
+        "function greet($n){return \"Hello, $n\";}",
+        "echo greet('Sam');"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in PHP.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "<?php",
+        "$s=85;",
+        "echo $s>=90?'A':($s>=80?'B':'C');"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [
+        "$n=4;"
+      ],
+      "solution": [
+        "<?php",
+        "$n=4; echo $n%2==0?'even':'odd';"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "even",
+      "challengeHint": "?:",
+      "challengeSolution": [
+        "<?php",
+        "$n=6; echo $n%2==0?'even':'odd';"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in PHP.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "<?php",
+        "class Dog{public function __construct(public string $name){} public function speak(){return $this->name.' woof';}}",
+        "echo (new Dog('Rex'))->speak();"
+      ],
+      "expectedOutput": "Rex woof",
+      "starterCode": [
+        "class Cat{}"
+      ],
+      "solution": [
+        "<?php",
+        "class Person{public function __construct(public string $name){}}",
+        "echo (new Person('Lee'))->name;"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "class",
+      "challengeHint": "__construct",
+      "challengeSolution": [
+        "<?php",
+        "class User{public function __construct(public string $name){}}",
+        "echo (new User('Lee'))->name;"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in PHP.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "<?php",
+        "try{throw new Exception('fail');}catch(Exception $e){echo $e->getMessage();}"
+      ],
+      "expectedOutput": "fail",
+      "starterCode": [
+        "try{}catch(Exception $e){}"
+      ],
+      "solution": [
+        "<?php",
+        "try{throw new RuntimeException('x');}catch(Throwable $e){echo 'caught';}"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "try/catch",
+      "challengeHint": "Exception",
+      "challengeSolution": [
+        "<?php",
+        "try{(int)'x';}catch(Throwable $e){echo 'bad';}"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in PHP.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "<?php",
+        "file_put_contents('n.txt','hello');",
+        "echo file_get_contents('n.txt');"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [
+        "file_put_contents('o.txt','');"
+      ],
+      "solution": [
+        "<?php",
+        "file_put_contents('o.txt','hi');"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "write/read",
+      "challengeHint": "file_put_contents",
+      "challengeSolution": [
+        "<?php",
+        "file_put_contents('t.txt','ok'); echo file_get_contents('t.txt');"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in PHP.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "<?php",
+        "require_once 'autoload.php';",
+        "echo sqrt(9);"
+      ],
+      "expectedOutput": "3",
+      "starterCode": [
+        "// use namespace"
+      ],
+      "solution": [
+        "<?php",
+        "namespace App; class Hi{} echo Hi::class;"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "namespace",
+      "challengeHint": "namespace",
+      "challengeSolution": [
+        "<?php",
+        "namespace Demo; echo 'ok';"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Traits & Namespaces",
+      "difficulty": "Advanced",
+      "explanation": "An advanced PHP feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "<?php",
+        "trait T{public function hi(){return 'hi';}}",
+        "class C{use T;}",
+        "echo (new C())->hi();"
+      ],
+      "expectedOutput": "hi",
+      "starterCode": [
+        "trait T{}"
+      ],
+      "solution": [
+        "<?php",
+        "trait T{public function id(){return 1;}} class C{use T;} echo (new C())->id();"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "trait",
+      "challengeHint": "use Trait",
+      "challengeSolution": [
+        "<?php",
+        "trait A{function a(){return 'A';}} class X{use A;} echo (new X())->a();"
+      ]
+    }
+  ],
+  "bash": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in Bash.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "#!/usr/bin/env bash",
+        "count=3",
+        "name='Ada'",
+        "echo \"$count $name\""
+      ],
+      "expectedOutput": "3 Ada",
+      "starterCode": [
+        "score="
+      ],
+      "solution": [
+        "#!/usr/bin/env bash",
+        "score=10",
+        "echo $score"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "price",
+      "challengeHint": "echo",
+      "challengeSolution": [
+        "#!/usr/bin/env bash",
+        "price=19.99",
+        "echo $price"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in Bash.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "#!/usr/bin/env bash",
+        "nums=(10 20 30)",
+        "echo ${nums[1]}",
+        "nums+=(40)",
+        "echo ${#nums[@]}"
+      ],
+      "expectedOutput": "20\n4",
+      "starterCode": [
+        "arr=(1 2)"
+      ],
+      "solution": [
+        "#!/usr/bin/env bash",
+        "arr=(1 2 3)",
+        "echo ${arr[-1]}"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "last item",
+      "challengeHint": "${arr[-1]}",
+      "challengeSolution": [
+        "#!/usr/bin/env bash",
+        "c=(r g b)",
+        "echo ${c[-1]}"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in Bash.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "#!/usr/bin/env bash",
+        "t=0",
+        "for n in 1 2 3; do t=$((t+n)); done",
+        "echo $t"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [
+        "for i in {1..3}; do :; done"
+      ],
+      "solution": [
+        "#!/usr/bin/env bash",
+        "for i in {1..3}; do echo $i; done"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "1..5",
+      "challengeHint": "brace expansion",
+      "challengeSolution": [
+        "#!/usr/bin/env bash",
+        "for i in {1..5}; do echo $i; done"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in Bash.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "#!/usr/bin/env bash",
+        "add(){ echo $(( $1 + $2 )); }",
+        "add 2 3"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [
+        "d(){ :; }"
+      ],
+      "solution": [
+        "#!/usr/bin/env bash",
+        "d(){ echo $(( $1*2 )); }",
+        "d 4"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "greet fn",
+      "challengeHint": "function",
+      "challengeSolution": [
+        "#!/usr/bin/env bash",
+        "greet(){ echo \"Hello, $1\"; }",
+        "greet Sam"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in Bash.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "#!/usr/bin/env bash",
+        "s=85",
+        "if [ $s -ge 90 ]; then echo A; elif [ $s -ge 80 ]; then echo B; else echo C; fi"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [
+        "n=4"
+      ],
+      "solution": [
+        "#!/usr/bin/env bash",
+        "n=4",
+        "if (( n%2==0 )); then echo even; else echo odd; fi"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "even",
+      "challengeHint": "(( ))",
+      "challengeSolution": [
+        "#!/usr/bin/env bash",
+        "n=6",
+        "if (( n%2==0 )); then echo even; else echo odd; fi"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in Bash.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "#!/usr/bin/env bash",
+        "declare -A user=([name]='Lee')",
+        "echo ${user[name]}"
+      ],
+      "expectedOutput": "Lee",
+      "starterCode": [
+        "declare -A m"
+      ],
+      "solution": [
+        "#!/usr/bin/env bash",
+        "declare -A m=([k]=1); echo ${m[k]}"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "associative array",
+      "challengeHint": "declare -A",
+      "challengeSolution": [
+        "#!/usr/bin/env bash",
+        "declare -A p=([name]='Lee'); echo ${p[name]}"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in Bash.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "#!/usr/bin/env bash",
+        "set -e",
+        "false || echo recovered"
+      ],
+      "expectedOutput": "recovered",
+      "starterCode": [
+        "set -e"
+      ],
+      "solution": [
+        "#!/usr/bin/env bash",
+        "set +e; false; echo exit:$?"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "check exit code",
+      "challengeHint": "$?",
+      "challengeSolution": [
+        "#!/usr/bin/env bash",
+        "false; echo $?"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in Bash.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "#!/usr/bin/env bash",
+        "echo hello > n.txt",
+        "cat n.txt"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [
+        "echo hi > o.txt"
+      ],
+      "solution": [
+        "#!/usr/bin/env bash",
+        "echo hi > o.txt"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "write/read",
+      "challengeHint": "redirect",
+      "challengeSolution": [
+        "#!/usr/bin/env bash",
+        "echo ok > t.txt",
+        "cat t.txt"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in Bash.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "#!/usr/bin/env bash",
+        "source /dev/null 2>/dev/null || true",
+        "echo sourced"
+      ],
+      "expectedOutput": "sourced",
+      "starterCode": [
+        "# source lib.sh"
+      ],
+      "solution": [
+        "#!/usr/bin/env bash",
+        "echo ok"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "source script",
+      "challengeHint": "source",
+      "challengeSolution": [
+        "#!/usr/bin/env bash",
+        "echo 'echo lib' > lib.sh",
+        "source ./lib.sh"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Pipelines & Text Tools",
+      "difficulty": "Advanced",
+      "explanation": "An advanced Bash feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "#!/usr/bin/env bash",
+        "echo 'a b c' | tr ' ' '\\n' | wc -l"
+      ],
+      "expectedOutput": "3",
+      "starterCode": [
+        "echo hi | cat"
+      ],
+      "solution": [
+        "#!/usr/bin/env bash",
+        "echo 1 2 3 | xargs -n1 echo"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "pipeline count",
+      "challengeHint": "pipe",
+      "challengeSolution": [
+        "#!/usr/bin/env bash",
+        "seq 1 5 | paste -sd+ - | bc"
+      ]
+    }
+  ],
+  "r": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in R.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "count <- 3",
+        "name <- 'Ada'",
+        "print(paste(count,name))"
+      ],
+      "expectedOutput": "[1] \"3 Ada\"",
+      "starterCode": [
+        "score <- "
+      ],
+      "solution": [
+        "score <- 10",
+        "print(score)"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "price",
+      "challengeHint": "<-",
+      "challengeSolution": [
+        "price <- 19.99",
+        "print(price)"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in R.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "nums <- c(10,20,30)",
+        "print(nums[2])",
+        "nums <- c(nums,40)",
+        "print(length(nums))"
+      ],
+      "expectedOutput": "[1] 20\n[1] 4",
+      "starterCode": [
+        "items <- c(1,2)"
+      ],
+      "solution": [
+        "items <- c(1,2,3)",
+        "print(tail(items,1))"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "last value",
+      "challengeHint": "tail",
+      "challengeSolution": [
+        "c <- c('r','g','b'); print(tail(c,1))"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in R.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "t <- 0",
+        "for(n in c(1,2,3)) t <- t+n",
+        "print(t)"
+      ],
+      "expectedOutput": "[1] 6",
+      "starterCode": [
+        "for(i in 1:3){}"
+      ],
+      "solution": [
+        "for(i in 1:3) print(i)"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "1:5",
+      "challengeHint": "1:5",
+      "challengeSolution": [
+        "for(i in 1:5) print(i)"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in R.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "add <- function(a,b) a+b",
+        "print(add(2,3))"
+      ],
+      "expectedOutput": "[1] 5",
+      "starterCode": [
+        "d <- function(x){}"
+      ],
+      "solution": [
+        "d <- function(x) x*2",
+        "print(d(4))"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "greet fn",
+      "challengeHint": "function",
+      "challengeSolution": [
+        "greet <- function(n) paste('Hello,',n)",
+        "print(greet('Sam'))"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in R.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "s <- 85",
+        "print(ifelse(s>=90,'A',ifelse(s>=80,'B','C')))"
+      ],
+      "expectedOutput": "[1] \"B\"",
+      "starterCode": [
+        "n <- 4"
+      ],
+      "solution": [
+        "n <- 4",
+        "print(ifelse(n%%2==0,'even','odd'))"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "even",
+      "challengeHint": "ifelse",
+      "challengeSolution": [
+        "n <- 6",
+        "print(ifelse(n%%2==0,'even','odd'))"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in R.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "Person <- setRefClass('Person', fields=list(name='character'))",
+        "p <- Person$new(name='Lee')",
+        "print(p$name)"
+      ],
+      "expectedOutput": "[1] \"Lee\"",
+      "starterCode": [
+        "# S3/S4"
+      ],
+      "solution": [
+        "structure(list(name='Lee'), class='person')",
+        "print(structure(list(name='Lee'), class='person')$name)"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "list object",
+      "challengeHint": "list",
+      "challengeSolution": [
+        "p <- list(name='Lee'); print(p$name)"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in R.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "tryCatch({ as.integer('42') }, error=function(e) 'bad')",
+        "print('ok')"
+      ],
+      "expectedOutput": "[1] \"ok\"",
+      "starterCode": [
+        "tryCatch({}, error=function(e){})"
+      ],
+      "solution": [
+        "tryCatch({stop('x')}, error=function(e) 'caught')"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "tryCatch",
+      "challengeHint": "error=function",
+      "challengeSolution": [
+        "print(tryCatch(as.integer('x'), error=function(e) NA))"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in R.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "writeLines('hello','n.txt')",
+        "print(readLines('n.txt'))"
+      ],
+      "expectedOutput": "[1] \"hello\"",
+      "starterCode": [
+        "writeLines('hi','o.txt')"
+      ],
+      "solution": [
+        "writeLines('hi','o.txt')"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "read/write",
+      "challengeHint": "writeLines",
+      "challengeSolution": [
+        "writeLines('ok','t.txt'); print(readLines('t.txt'))"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in R.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "library(stats)",
+        "print(mean(c(1,2,3)))"
+      ],
+      "expectedOutput": "[1] 2",
+      "starterCode": [
+        "library(base)"
+      ],
+      "solution": [
+        "print(sum(c(1,2,3)))"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "library stats",
+      "challengeHint": "library()",
+      "challengeSolution": [
+        "library(stats); print(median(c(1,3,5)))"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Data Frames",
+      "difficulty": "Advanced",
+      "explanation": "An advanced R feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "df <- data.frame(name=c('Ada','Bob'), score=c(90,85))",
+        "print(df[df$score>=86,])"
+      ],
+      "expectedOutput": "  name score\n1  Ada    90",
+      "starterCode": [
+        "df <- data.frame(x=1:3)"
+      ],
+      "solution": [
+        "df <- data.frame(x=1:2); print(nrow(df))"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "filter data.frame",
+      "challengeHint": "df$col",
+      "challengeSolution": [
+        "df <- data.frame(v=c(1,2,3)); print(subset(df,v>1))"
+      ]
+    }
+  ],
+  "dart": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in Dart.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "void main() {",
+        "  int count=3;",
+        "  String name='Ada';",
+        "  print('$count $name');",
+        "}"
+      ],
+      "expectedOutput": "3 Ada",
+      "starterCode": [
+        "int score="
+      ],
+      "solution": [
+        "void main() {",
+        "  int score=10;",
+        "  print(score);",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "price",
+      "challengeHint": "num/double",
+      "challengeSolution": [
+        "void main() {",
+        "  double price=19.99;",
+        "  print(price);",
+        "}"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in Dart.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "void main() {",
+        "  var nums=[10,20,30];",
+        "  print(nums[1]);",
+        "  nums.add(40);",
+        "  print(nums.length);",
+        "}"
+      ],
+      "expectedOutput": "20\n4",
+      "starterCode": [
+        "var items=[1,2];"
+      ],
+      "solution": [
+        "void main() {",
+        "  var items=[1,2,3];",
+        "  print(items.last);",
+        "}"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "last color",
+      "challengeHint": ".last",
+      "challengeSolution": [
+        "void main() {",
+        "  var c=['r','g','b']; print(c.last);",
+        "}"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in Dart.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "void main() {",
+        "  var t=0;",
+        "  for(final n in [1,2,3]){t+=n;}",
+        "  print(t);",
+        "}"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [
+        "for(var i=0;i<3;i++){}"
+      ],
+      "solution": [
+        "void main() {",
+        "  for(var i=1;i<=3;i++) print(i);",
+        "}"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "1..5",
+      "challengeHint": "for",
+      "challengeSolution": [
+        "void main() {",
+        "  for(var i=1;i<=5;i++) print(i);",
+        "}"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in Dart.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "void main() {",
+        "  int add(int a,int b)=>a+b;",
+        "  print(add(2,3));",
+        "}"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [
+        "int d(int x){}"
+      ],
+      "solution": [
+        "void main() {",
+        "  int d(int x)=>x*2;",
+        "  print(d(4));",
+        "}"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "greet",
+      "challengeHint": "=>",
+      "challengeSolution": [
+        "void main() {",
+        "  String greet(String n)=>'Hello, $n';",
+        "  print(greet('Sam'));",
+        "}"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in Dart.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "void main() {",
+        "  int s=85;",
+        "  print(s>=90?'A':s>=80?'B':'C');",
+        "}"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [
+        "int n=4;"
+      ],
+      "solution": [
+        "void main() {",
+        "  int n=4; print(n.isEven?'even':'odd');",
+        "}"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "even",
+      "challengeHint": "isEven",
+      "challengeSolution": [
+        "void main() {",
+        "  int n=6; print(n.isEven?'even':'odd');",
+        "}"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in Dart.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "void main() {",
+        "  class Dog{final String name; Dog(this.name); String speak()=> '$name woof';}",
+        "  print(Dog('Rex').speak());",
+        "}"
+      ],
+      "expectedOutput": "Rex woof",
+      "starterCode": [
+        "class Cat{}"
+      ],
+      "solution": [
+        "void main() {",
+        "  class Person{final String name; Person(this.name);}",
+        "  print(Person('Lee').name);",
+        "}"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "class",
+      "challengeHint": "constructor",
+      "challengeSolution": [
+        "void main() {",
+        "  class User{final String name; User(this.name);} print(User('Lee').name);",
+        "}"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in Dart.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "void main() {",
+        "  try{throw Exception('fail');}catch(e){print('caught');}",
+        "}"
+      ],
+      "expectedOutput": "caught",
+      "starterCode": [
+        "try{}catch(e){}"
+      ],
+      "solution": [
+        "void main() {",
+        "  try{throw StateError('x');}catch(_){print('caught');}",
+        "}"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "try/catch",
+      "challengeHint": "Exception",
+      "challengeSolution": [
+        "void main() {",
+        "  try{int.parse('x');}catch(_){print('bad');}",
+        "}"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in Dart.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "import 'dart:io';",
+        "void main() {",
+        "  import 'dart:io';",
+        "  File('n.txt').writeAsStringSync('hello');",
+        "  print(File('n.txt').readAsStringSync());",
+        "}"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [
+        "import 'dart:io';"
+      ],
+      "solution": [
+        "import 'dart:io';",
+        "void main() {",
+        "  import 'dart:io'; File('o.txt').writeAsStringSync('hi');",
+        "}"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "write/read",
+      "challengeHint": "dart:io",
+      "challengeSolution": [
+        "import 'dart:io';",
+        "void main() {",
+        "  import 'dart:io'; File('t.txt').writeAsStringSync('ok'); print(File('t.txt').readAsStringSync());",
+        "}"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in Dart.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "import 'dart:math';",
+        "void main() {",
+        "  import 'dart:math';",
+        "  print(sqrt(9));",
+        "}"
+      ],
+      "expectedOutput": "3.0",
+      "starterCode": [
+        "import 'dart:math';"
+      ],
+      "solution": [
+        "import 'dart:math';",
+        "void main() {",
+        "  import 'dart:math'; print(pi);",
+        "}"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "import math",
+      "challengeHint": "dart:math",
+      "challengeSolution": [
+        "import 'dart:math';",
+        "void main() {",
+        "  import 'dart:math'; print(pow(2,3));",
+        "}"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Futures & async/await",
+      "difficulty": "Advanced",
+      "explanation": "An advanced Dart feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "void main() {",
+        "  Future.value(7).then((v)=>print(v));",
+        "}"
+      ],
+      "expectedOutput": "7",
+      "starterCode": [
+        "Future.value(1).then(print);"
+      ],
+      "solution": [
+        "void main() {",
+        "  Future.value(5).then((v)=>print(v));",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "Future.then",
+      "challengeHint": "Future.value",
+      "challengeSolution": [
+        "void main() {",
+        "  Future.value(9).then(print);",
+        "}"
+      ]
+    }
+  ],
+  "scala": [
+    {
+      "id": "variables",
+      "title": "Variables",
+      "difficulty": "Beginner",
+      "explanation": "Variables store named values you can read and update in Scala.",
+      "beginnerExplanation": "A variable is a named value holder.",
+      "keyTerms": [
+        {
+          "term": "Assignment",
+          "definition": "Storing a value in a name."
+        },
+        {
+          "term": "Identifier",
+          "definition": "The variable's name."
+        }
+      ],
+      "codeExample": [
+        "object Main extends App {",
+        "  val count=3",
+        "  var name=\"Ada\"",
+        "  println(s\"$count $name\")",
+        "}"
+      ],
+      "expectedOutput": "3 Ada",
+      "starterCode": [
+        "var score="
+      ],
+      "solution": [
+        "object Main extends App {",
+        "  var score=10",
+        "  println(score)",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using a variable before it exists.",
+        "Reusing names that hide built-ins."
+      ],
+      "challenge": "price",
+      "challengeHint": "val/var",
+      "challengeSolution": [
+        "object Main extends App {",
+        "  val price=19.99",
+        "  println(price)",
+        "}"
+      ]
+    },
+    {
+      "id": "arrays-collections",
+      "title": "Arrays/Collections",
+      "difficulty": "Beginner",
+      "explanation": "Collections group multiple values for batch processing in Scala.",
+      "beginnerExplanation": "Collections hold many values together.",
+      "keyTerms": [
+        {
+          "term": "Element",
+          "definition": "One stored value."
+        },
+        {
+          "term": "Index",
+          "definition": "Position of an element."
+        }
+      ],
+      "codeExample": [
+        "object Main extends App {",
+        "  val nums=Array(10,20,30)",
+        "  println(nums(1))",
+        "  val more=nums :+ 40",
+        "  println(more.length)",
+        "}"
+      ],
+      "expectedOutput": "20\n4",
+      "starterCode": [
+        "val items=Array(1,2)"
+      ],
+      "solution": [
+        "object Main extends App {",
+        "  val items=Array(1,2,3)",
+        "  println(items.last)",
+        "}"
+      ],
+      "commonMistakes": [
+        "Out-of-range access.",
+        "Assuming automatic growth when it does not happen."
+      ],
+      "challenge": "last",
+      "challengeHint": "last",
+      "challengeSolution": [
+        "object Main extends App {",
+        "  println(Array(\"r\",\"g\",\"b\").last)",
+        "}"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Loops",
+      "difficulty": "Beginner",
+      "explanation": "Loops repeat code until a condition changes in Scala.",
+      "beginnerExplanation": "Loops repeat actions.",
+      "keyTerms": [
+        {
+          "term": "Iteration",
+          "definition": "One loop pass."
+        },
+        {
+          "term": "Condition",
+          "definition": "Test controlling the loop."
+        }
+      ],
+      "codeExample": [
+        "object Main extends App {",
+        "  var t=0",
+        "  for(n <- List(1,2,3)) t += n",
+        "  println(t)",
+        "}"
+      ],
+      "expectedOutput": "6",
+      "starterCode": [
+        "for(i <- 1 to 3){}"
+      ],
+      "solution": [
+        "object Main extends App {",
+        "  for(i <- 1 to 3) println(i)",
+        "}"
+      ],
+      "commonMistakes": [
+        "Infinite loops.",
+        "Off-by-one boundaries."
+      ],
+      "challenge": "1 to 5",
+      "challengeHint": "to",
+      "challengeSolution": [
+        "object Main extends App {",
+        "  for(i <- 1 to 5) println(i)",
+        "}"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "difficulty": "Beginner",
+      "explanation": "Functions group reusable logic with inputs and outputs in Scala.",
+      "beginnerExplanation": "Functions are reusable code blocks.",
+      "keyTerms": [
+        {
+          "term": "Parameter",
+          "definition": "Function input."
+        },
+        {
+          "term": "Return",
+          "definition": "Function output."
+        }
+      ],
+      "codeExample": [
+        "object Main extends App {",
+        "  def add(a:Int,b:Int)=a+b",
+        "  println(add(2,3))",
+        "}"
+      ],
+      "expectedOutput": "5",
+      "starterCode": [
+        "def d(x:Int):Int="
+      ],
+      "solution": [
+        "object Main extends App {",
+        "  def d(x:Int)=x*2",
+        "  println(d(4))",
+        "}"
+      ],
+      "commonMistakes": [
+        "Missing returns.",
+        "Wrong argument order."
+      ],
+      "challenge": "greet",
+      "challengeHint": "def",
+      "challengeSolution": [
+        "object Main extends App {",
+        "  def greet(n:String)=s\"Hello, $n\"",
+        "  println(greet(\"Sam\"))",
+        "}"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "explanation": "Conditionals pick code paths based on tests in Scala.",
+      "beginnerExplanation": "If/else makes decisions.",
+      "keyTerms": [
+        {
+          "term": "Branch",
+          "definition": "Selected path."
+        },
+        {
+          "term": "Boolean",
+          "definition": "True/false value."
+        }
+      ],
+      "codeExample": [
+        "object Main extends App {",
+        "  val s=85",
+        "  println(if(s>=90) \"A\" else if(s>=80) \"B\" else \"C\")",
+        "}"
+      ],
+      "expectedOutput": "B",
+      "starterCode": [
+        "val n=4"
+      ],
+      "solution": [
+        "object Main extends App {",
+        "  val n=4",
+        "  println(if(n%2==0) \"even\" else \"odd\")",
+        "}"
+      ],
+      "commonMistakes": [
+        "= vs == confusion.",
+        "Missing default branch."
+      ],
+      "challenge": "even",
+      "challengeHint": "if/else",
+      "challengeSolution": [
+        "object Main extends App {",
+        "  val n=6",
+        "  println(if(n%2==0) \"even\" else \"odd\")",
+        "}"
+      ]
+    },
+    {
+      "id": "classes-objects",
+      "title": "Classes/Structs/Objects",
+      "difficulty": "Intermediate",
+      "explanation": "Types combine data and behavior in Scala.",
+      "beginnerExplanation": "Objects group data and methods.",
+      "keyTerms": [
+        {
+          "term": "Instance",
+          "definition": "A concrete object."
+        },
+        {
+          "term": "Field",
+          "definition": "Data on an object."
+        }
+      ],
+      "codeExample": [
+        "object Main extends App {",
+        "  case class Point(x:Int,y:Int)",
+        "  println(Point(2,3).x)",
+        "}"
+      ],
+      "expectedOutput": "2",
+      "starterCode": [
+        "case class Cat(name:String)"
+      ],
+      "solution": [
+        "object Main extends App {",
+        "  case class Person(name:String)",
+        "  println(Person(\"Lee\").name)",
+        "}"
+      ],
+      "commonMistakes": [
+        "Uninitialized fields.",
+        "Mixing type and instance names."
+      ],
+      "challenge": "case class",
+      "challengeHint": "case class",
+      "challengeSolution": [
+        "object Main extends App {",
+        "  case class User(name:String); println(User(\"Lee\").name)",
+        "}"
+      ]
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "difficulty": "Intermediate",
+      "explanation": "Errors are detected and handled safely in Scala.",
+      "beginnerExplanation": "Handle failures without crashing.",
+      "keyTerms": [
+        {
+          "term": "Exception",
+          "definition": "Runtime failure signal."
+        },
+        {
+          "term": "Recovery",
+          "definition": "Fallback logic."
+        }
+      ],
+      "codeExample": [
+        "object Main extends App {",
+        "  try println(\"42\".toInt) catch { case _: NumberFormatException => println(\"bad\") }",
+        "}"
+      ],
+      "expectedOutput": "42",
+      "starterCode": [
+        "try {} catch { case _ => }"
+      ],
+      "solution": [
+        "object Main extends App {",
+        "  try throw new RuntimeException(\"x\") catch { case _ => println(\"caught\") }",
+        "}"
+      ],
+      "commonMistakes": [
+        "Ignoring failures.",
+        "Overly broad catches."
+      ],
+      "challenge": "try/catch",
+      "challengeHint": "case",
+      "challengeSolution": [
+        "object Main extends App {",
+        "  try \"x\".toInt catch { case _ => println(\"bad\") }",
+        "}"
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File IO",
+      "difficulty": "Intermediate",
+      "explanation": "Programs read and write files in Scala.",
+      "beginnerExplanation": "Files persist data on disk.",
+      "keyTerms": [
+        {
+          "term": "Path",
+          "definition": "File location."
+        },
+        {
+          "term": "Stream",
+          "definition": "Read/write channel."
+        }
+      ],
+      "codeExample": [
+        "import java.nio.file._",
+        "object Main extends App {",
+        "  import java.nio.file.Files",
+        "  import java.nio.file.Paths",
+        "  Files.writeString(Paths.get(\"n.txt\"),\"hello\")",
+        "  println(Files.readString(Paths.get(\"n.txt\")))",
+        "}"
+      ],
+      "expectedOutput": "hello",
+      "starterCode": [
+        "import java.nio.file.Files"
+      ],
+      "solution": [
+        "import java.nio.file._",
+        "object Main extends App {",
+        "  import java.nio.file.Files, java.nio.file.Paths",
+        "  Files.writeString(Paths.get(\"o.txt\"),\"hi\")",
+        "}"
+      ],
+      "commonMistakes": [
+        "Not closing files.",
+        "Skipping success checks."
+      ],
+      "challenge": "Files.writeString",
+      "challengeHint": "java.nio.file",
+      "challengeSolution": [
+        "import java.nio.file._",
+        "object Main extends App {",
+        "  import java.nio.file._",
+        "  Files.writeString(Paths.get(\"t.txt\"),\"ok\"); println(Files.readString(Paths.get(\"t.txt\")))",
+        "}"
+      ]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules/Packages",
+      "difficulty": "Intermediate",
+      "explanation": "Code is split into reusable modules in Scala.",
+      "beginnerExplanation": "Import code from other files.",
+      "keyTerms": [
+        {
+          "term": "Import",
+          "definition": "Bring external code in."
+        },
+        {
+          "term": "Export",
+          "definition": "Expose code publicly."
+        }
+      ],
+      "codeExample": [
+        "import scala.math.sqrt",
+        "object Main extends App {",
+        "  import scala.math.sqrt",
+        "  println(sqrt(9))",
+        "}"
+      ],
+      "expectedOutput": "3.0",
+      "starterCode": [
+        "import scala.math.Pi"
+      ],
+      "solution": [
+        "object Main extends App {",
+        "  import scala.math.Pi",
+        "  println(Pi)",
+        "}"
+      ],
+      "commonMistakes": [
+        "Circular imports.",
+        "Private symbol imports."
+      ],
+      "challenge": "import sqrt",
+      "challengeHint": "scala.math",
+      "challengeSolution": [
+        "import scala.math.sqrt",
+        "object Main extends App {",
+        "  import scala.math.sqrt",
+        "  println(sqrt(16))",
+        "}"
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Pattern Matching",
+      "difficulty": "Advanced",
+      "explanation": "An advanced Scala feature used in production code.",
+      "beginnerExplanation": "Powerful expert-level syntax.",
+      "keyTerms": [
+        {
+          "term": "Idiom",
+          "definition": "Common expert pattern."
+        },
+        {
+          "term": "Safety",
+          "definition": "Bug-prevention rule."
+        }
+      ],
+      "codeExample": [
+        "object Main extends App {",
+        "  def matchNum(n:Int)=n match {case 1=>\"one\" case 2=>\"two\" case _=>\"other\"}",
+        "  println(matchNum(2))",
+        "}"
+      ],
+      "expectedOutput": "two",
+      "starterCode": [
+        "def f(x:Int)=x match {case _ => 0}"
+      ],
+      "solution": [
+        "object Main extends App {",
+        "  println(2 match {case 1 => \"a\" case _ => \"b\"})",
+        "}"
+      ],
+      "commonMistakes": [
+        "Using advanced syntax too early.",
+        "Disabling safety checks."
+      ],
+      "challenge": "pattern match",
+      "challengeHint": "match/case",
+      "challengeSolution": [
+        "object Main extends App {",
+        "  println(\"ok\" match { case s if s.nonEmpty => s.length case _ => 0 })",
+        "}"
+      ]
+    }
+  ]
+};
+
+function asArray(value) {
+  if (value == null || value === '') return [];
+  return Array.isArray(value) ? value : [String(value)];
+}
+
+function youtubeSearchUrl(query) {
+  return `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+}
+
+const LANGUAGE_VIDEO_CHANNELS = {
+  python: ['Corey Schafer', 'Programming with Mosh'],
+  javascript: ['Traversy Media', 'Web Dev Simplified'],
+  typescript: ['Fireship', 'Web Dev Simplified'],
+  c: ['freeCodeCamp.org', 'Neso Academy'],
+  cpp: ['The Cherno', 'freeCodeCamp.org'],
+  csharp: ['IAmTimCorey', 'freeCodeCamp.org'],
+  rust: ['Jon Gjengset', 'No Boilerplate'],
+  go: ['TechWorld with Nana', 'freeCodeCamp.org'],
+  java: ['Bro Code', 'freeCodeCamp.org'],
+  assembly: ['Low Level', 'freeCodeCamp.org'],
+  basic: ['Michael Klements', 'Retro Recipes'],
+  lua: ['The Coding Train', 'freeCodeCamp.org'],
+  ruby: ['GoRails', 'freeCodeCamp.org'],
+  swift: ['Sean Allen', 'CodeWithChris'],
+  kotlin: ['Philipp Lackner', 'freeCodeCamp.org'],
+  php: ['Laracasts', 'Traversy Media'],
+  bash: ['freeCodeCamp.org', 'Learn Linux TV'],
+  r: ['R Programming 101', 'StatQuest'],
+  dart: ['Flutter', 'freeCodeCamp.org'],
+  scala: ['Rock the JVM', 'freeCodeCamp.org'],
+};
+
+const TOPIC_VIDEO_QUERIES = {
+  variables: 'variables basics',
+  'arrays-collections': 'arrays collections basics',
+  loops: 'loops for while',
+  functions: 'functions methods basics',
+  conditionals: 'if else conditionals',
+  'classes-objects': 'classes objects or structs basics',
+  'error-handling': 'error handling exceptions basics',
+  'file-io': 'file input output basics',
+  'modules-packages': 'modules packages imports basics',
+  advanced: 'advanced concepts',
+};
+
+function buildCuratedVideoResources(languageId, languageName, topic) {
+  const channels = LANGUAGE_VIDEO_CHANNELS[languageId] ?? ['freeCodeCamp.org', 'Programming with Mosh'];
+  const topicQuery = TOPIC_VIDEO_QUERIES[topic.id] ?? topic.title;
+  return [
+    {
+      title: `${languageName} ${topic.title} recommended lesson`,
+      url: youtubeSearchUrl(`${languageName} ${topicQuery} ${channels[0]}`),
+      source: channels[0],
+      note: 'Recommended channel search',
+    },
+    {
+      title: `${languageName} ${topic.title} guided practice`,
+      url: youtubeSearchUrl(`${languageName} ${topicQuery} ${channels[1]} exercise`),
+      source: channels[1],
+      note: 'Practice-focused search',
+    },
+  ];
+}
+
+function withVideoResources(languageId, languageName, topic) {
+  return {
+    ...topic,
+    videoResources:
+      topic.videoResources?.length > 0
+        ? topic.videoResources
+        : buildCuratedVideoResources(languageId, languageName, topic),
+  };
+}
+
+function normalizeLegacyTopic(topic, overrides = {}) {
+  const beginner =
+    overrides.beginnerExplanation ??
+    `This lesson covers ${String(topic.title).toLowerCase()} in C.`;
+  return {
+    id: overrides.id ?? topic.id,
+    title: overrides.title ?? topic.title,
+    difficulty: overrides.difficulty ?? topic.difficulty,
+    explanation: overrides.explanation ?? topic.explanation,
+    beginnerExplanation: beginner,
+    keyTerms: topic.keyTerms ?? [],
+    codeExample: asArray(topic.codeExample),
+    expectedOutput: topic.expectedOutput ?? '',
+    starterCode: asArray(topic.starterCode),
+    solution: asArray(topic.solution),
+    commonMistakes: topic.commonMistakes ?? [],
+    challenge: topic.challenge ?? '',
+    challengeHint: topic.challengeHint ?? '',
+    challengeSolution: asArray(topic.challengeSolution),
+    videoResources: topic.videoResources ?? [],
+  };
+}
+
+function buildCTopicsFromLegacy(legacyTopics) {
+  const byId = Object.fromEntries((legacyTopics ?? []).map((t) => [t.id, t]));
+  const pick = (id, overrides = {}) => {
+    const found = Array.isArray(id)
+      ? id.map((key) => byId[key]).find(Boolean)
+      : byId[id];
+    return found ? normalizeLegacyTopic(found, overrides) : null;
+  };
+
+  const conditionals = pick('conditionals') ?? normalizeLegacyTopic({
+    id: 'conditionals',
+    title: 'Conditionals',
+    difficulty: 'Beginner',
+    explanation: 'Conditionals in C use if, else if, and else to branch based on comparisons.',
+    keyTerms: [{ term: 'if', definition: 'Runs code when a condition is true.' }, { term: 'else', definition: 'Runs when prior conditions fail.' }],
+    codeExample: ['int n = 4;', 'if (n % 2 == 0) puts("even");', 'else puts("odd");'],
+    expectedOutput: 'even',
+    starterCode: [],
+    solution: ['int n = 4;', 'if (n % 2 == 0) puts("even");', 'else puts("odd");'],
+    commonMistakes: ['Using = instead of == in conditions.', 'Missing braces causing logic bugs.'],
+    challenge: 'Print "pass" when score >= 60.',
+    challengeHint: 'Use if (score >= 60).',
+    challengeSolution: ['int score = 72;', 'if (score >= 60) puts("pass");'],
+  }, { beginnerExplanation: 'If/else lets C programs choose what to run.' });
+
+  const errorHandling = pick('error-handling') ?? normalizeLegacyTopic({
+    id: 'error-handling',
+    title: 'Error Handling',
+    difficulty: 'Intermediate',
+    explanation: 'C signals errors with return codes and errno; always check results from library calls.',
+    keyTerms: [{ term: 'Return code', definition: '0 often means success; non-zero means failure.' }, { term: 'errno', definition: 'Global error indicator set by many C library functions.' }],
+    codeExample: ['FILE *f = fopen("missing.txt", "r");', 'if (!f) { perror("open failed"); return 1; }'],
+    expectedOutput: 'open failed: No such file or directory',
+    starterCode: [],
+    solution: ['if (0) { fprintf(stderr, "err\\n"); }'],
+    commonMistakes: ['Ignoring return values from fopen/malloc.', 'Not including stdio.h for perror.'],
+    challenge: 'Check fopen result before use.',
+    challengeHint: 'if (!f) perror(...);',
+    challengeSolution: ['FILE *f = fopen("nope.txt", "r");', 'if (!f) perror("open failed");'],
+  }, { beginnerExplanation: 'Always check whether C library calls succeeded.' });
+
+  const modules = pick(['preprocessor', 'modules-packages'], { id: 'modules-packages', title: 'Modules/Packages', beginnerExplanation: 'Headers and includes reuse C code across files.' }) ?? normalizeLegacyTopic({
+    id: 'modules-packages',
+    title: 'Modules/Packages',
+    difficulty: 'Intermediate',
+    explanation: 'C shares code with header/source files and the preprocessor (#include, #define).',
+    keyTerms: [{ term: '#include', definition: 'Pulls declarations from another file.' }, { term: 'Header guard', definition: 'Prevents duplicate inclusion.' }],
+    codeExample: ['#include <stdio.h>', '#define PI 3.14', 'printf("%f\\n", PI);'],
+    expectedOutput: '3.140000',
+    starterCode: [],
+    solution: ['#include <stdio.h>', '#define SIZE 10'],
+    commonMistakes: ['Including .c files instead of headers.', 'Macro side effects without parentheses.'],
+    challenge: 'Define SQUARE(x) safely.',
+    challengeHint: '#define SQUARE(x) ((x)*(x))',
+    challengeSolution: ['#define SQUARE(x) ((x)*(x))', 'printf("%d\\n", SQUARE(4));'],
+  }, { id: 'modules-packages', title: 'Modules/Packages', beginnerExplanation: 'Headers and includes reuse C code across files.' });
+
+  const advanced = pick(['pointers', 'advanced'], { id: 'advanced', title: ADVANCED_TITLES.c, difficulty: 'Advanced', beginnerExplanation: 'Pointers track where data lives in memory.' }) ?? normalizeLegacyTopic({
+    id: 'advanced',
+    title: ADVANCED_TITLES.c,
+    difficulty: 'Advanced',
+    explanation: 'Pointers store addresses so C can manage memory and build low-level data structures.',
+    keyTerms: [{ term: 'Pointer', definition: 'Variable holding an address.' }, { term: 'Dereference', definition: 'Access value at address using *.' }],
+    codeExample: ['int n = 10;', 'int *p = &n;', 'printf("%d\\n", *p);'],
+    expectedOutput: '10',
+    starterCode: [],
+    solution: ['int n = 5;', 'int *p = &n;', 'printf("%d\\n", *p);'],
+    commonMistakes: ['Dereferencing uninitialized pointers.', 'Using pointers after free.'],
+    challenge: 'Declare pointer iptr to int.',
+    challengeHint: 'int *iptr;',
+    challengeSolution: ['int value = 1;', 'int *iptr = &value;', 'printf("%d\\n", *iptr);'],
+  }, { id: 'advanced', title: ADVANCED_TITLES.c, difficulty: 'Advanced', beginnerExplanation: 'Pointers track where data lives in memory.' });
+
+  const ordered = [
+    pick('variables', { title: 'Variables', beginnerExplanation: 'Variables are named typed storage in C.' }),
+    pick(['arrays', 'arrays-collections'], { id: 'arrays-collections', title: 'Arrays/Collections', beginnerExplanation: 'Arrays hold fixed-size sequences in C.' }),
+    pick('loops', { beginnerExplanation: 'Loops repeat code in C using for/while.' }),
+    pick('functions', { beginnerExplanation: 'Functions group reusable steps in C.' }),
+    conditionals,
+    pick(['structs', 'classes-objects'], { id: 'classes-objects', title: 'Classes/Structs/Objects', beginnerExplanation: 'Structs group related fields in C.' }),
+    errorHandling,
+    pick(['fileio', 'file-io'], { id: 'file-io', title: 'File IO', beginnerExplanation: 'C reads/writes files with FILE pointers.' }),
+    modules,
+    advanced,
+  ].filter(Boolean);
+
+  // ensure exactly 10 with fallback from generated C pack if legacy missing
+  if (ordered.length < 10) {
+    return TOPIC_DATA.c ?? ordered;
+  }
+  return ordered.slice(0, 10);
+}
+
+function langRecord(meta, topics) {
+  const [id, name, type_, year, creator, difficulty, color, description, usedFor, funFact, terminalCommands] = meta;
+  return {
+    id,
+    name,
+    type: type_,
+    year,
+    creator,
+    difficulty,
+    description,
+    usedFor,
+    funFact,
+    color,
+    terminalCommands,
+    topics: topics.map((topic) => withVideoResources(id, name, topic)),
+  };
+}
+
+function main() {
+  let legacyC = [];
+  if (fs.existsSync(existingPath)) {
+    try {
+      const existing = JSON.parse(fs.readFileSync(existingPath, 'utf8'));
+      legacyC = existing.find((l) => l.id === 'c')?.topics ?? [];
+    } catch {
+      legacyC = [];
+    }
+  }
+
+  const languages = LANGS.map((meta) => {
+    const id = meta[0];
+    const topics = id === 'c' ? buildCTopicsFromLegacy(legacyC) : TOPIC_DATA[id];
+    if (!topics || topics.length !== 10) {
+      throw new Error(`Language ${id} must have exactly 10 topics, got ${topics?.length ?? 0}`);
+    }
+    return langRecord(meta, topics);
+  });
+
+  if (languages.length !== 20) {
+    throw new Error(`Expected 20 languages, got ${languages.length}`);
+  }
+
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  fs.writeFileSync(outPath, JSON.stringify(languages, null, 2) + '\n', 'utf8');
+
+  const size = fs.statSync(outPath).size;
+  console.log(`Wrote ${outPath}`);
+  console.log(`Languages: ${languages.length}`);
+  console.log(`Topics per language: ${languages[0].topics.length}`);
+  console.log(`File size: ${size} bytes`);
+}
+
+main();

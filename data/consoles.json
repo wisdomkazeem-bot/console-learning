@@ -1,0 +1,631 @@
+[
+  {
+    "id": "nes",
+    "name": "Nintendo Entertainment System",
+    "type": "game",
+    "year": 1985,
+    "cpu": "Ricoh 2A03 (6502-based, 1.79 MHz)",
+    "ram": "2 KB work RAM + 2 KB video RAM",
+    "description": "The NES revived the home console market after the 1983 crash. Its 8-bit hardware and cartridge system made it the gateway for millions of kids to discover programming through homebrew and ROM hacking.",
+    "funFact": "The NES sold over 61 million units worldwide and introduced iconic franchises like Super Mario Bros. and The Legend of Zelda.",
+    "difficulty": "Intermediate",
+    "languages": ["6502 Assembly", "C (with cc65)"],
+    "codingExamples": [
+      {
+        "title": "Hello World on NES",
+        "language": "6502 Assembly",
+        "realWorldUse": "Display text on screen",
+        "code": "; NES Hello World (simplified)\n.segment \"CODE\"\n  LDA #$00      ; Load 0 into accumulator\n  STA $2000     ; Disable rendering\n  LDA #$41      ; ASCII 'A'\n  STA $2007     ; Write to PPU data\n  RTS           ; Return from subroutine",
+        "beginnerExplanation": "Assembly talks directly to the CPU. LDA means 'load a value', STA means 'store it somewhere'. The PPU ($2007) is the chip that draws graphics on your TV.",
+        "explanation": [
+          "LDA #$00 — Load the number 0 into the accumulator (CPU's main register).",
+          "STA $2000 — Store it at memory address $2000 to turn off screen rendering.",
+          "LDA #$41 — Load ASCII code 65, which is the letter 'A'.",
+          "STA $2007 — Send that letter to the Picture Processing Unit to draw it.",
+          "RTS — Return from the current subroutine back to the caller."
+        ]
+      },
+      {
+        "title": "Read Controller Input",
+        "language": "6502 Assembly",
+        "realWorldUse": "Game controls",
+        "code": "; Read NES controller button state\nread_controller:\n  LDA #1\n  STA $4016   ; Strobe controller\n  LDA #0\n  STA $4016   ; End strobe\n  LDA $4016   ; Read button A\n  AND #1      ; Check if pressed\n  BEQ not_pressed\n  ; Button A is held down\nnot_pressed:\n  RTS",
+        "beginnerExplanation": "Controllers send button presses as bits (0 or 1). You 'strobe' the controller port to start reading, then check each bit to see which button is pressed.",
+        "explanation": [
+          "STA $4016 with value 1 starts the controller read cycle.",
+          "STA $4016 with value 0 ends the strobe.",
+          "LDA $4016 reads one button's state from the controller port.",
+          "AND #1 isolates the lowest bit to check if the button is pressed.",
+          "BEQ jumps if the button is NOT pressed (bit is 0)."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "NES homebrew programming tutorial 6502 assembly",
+      "websites": [
+        {
+          "title": "NESdev Wiki",
+          "url": "https://www.nesdev.org/wiki/",
+          "description": "The definitive resource for NES hardware specs, memory maps, and homebrew development."
+        },
+        {
+          "title": "Nerdy Nights NES Tutorials",
+          "url": "https://wiki.nesdev.org/w/index.php/Nerdy_Nights",
+          "description": "Step-by-step beginner-friendly NES programming tutorials."
+        }
+      ]
+    }
+  },
+  {
+    "id": "snes",
+    "name": "Super Nintendo",
+    "type": "game",
+    "year": 1991,
+    "cpu": "Ricoh 5A22 (65C816, 3.58 MHz)",
+    "ram": "128 KB main RAM",
+    "description": "The SNES brought 16-bit graphics and Mode 7 rotation effects to living rooms. Its flexible graphics hardware made it a favorite for RPGs and platformers, and homebrew devs still target it today.",
+    "funFact": "Mode 7 graphics in games like F-Zero and Super Mario Kart were achieved by the SNES transforming a single background layer in real time.",
+    "difficulty": "Advanced",
+    "languages": ["65816 Assembly", "C (with tcc816)"],
+    "codingExamples": [
+      {
+        "title": "Set Screen Mode",
+        "language": "65816 Assembly",
+        "realWorldUse": "Graphics setup",
+        "code": "; SNES: Configure screen display\nSEI           ; Disable interrupts\nCLC           ; Clear carry flag\nXCE           ; Switch to native mode\nREP #$20      ; 16-bit accumulator\nLDA #$2100    ; Screen display register\nSTA $2100     ; Turn screen on\nRTL           ; Return long",
+        "beginnerExplanation": "Before drawing anything, you must configure the SNES graphics chip. SEI stops interrupts, and writing to $2100 controls whether the screen is on or off.",
+        "explanation": [
+          "SEI disables hardware interrupts so setup isn't interrupted.",
+          "XCE switches the CPU from emulation mode to native 65816 mode.",
+          "REP #$20 sets the accumulator to 16-bit width.",
+          "STA $2100 writes to the screen display register to enable output.",
+          "RTL is 'return long' — like RTS but for 65816's wider address space."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "SNES homebrew programming tutorial",
+      "websites": [
+        {
+          "title": "SNESdev Wiki",
+          "url": "https://snes.nesdev.org/wiki/",
+          "description": "Hardware documentation and homebrew guides for Super Nintendo development."
+        },
+        {
+          "title": "Super Nintendo Development Wiki",
+          "url": "https://wiki.superfamicom.org/",
+          "description": "Community wiki covering SNES registers, graphics modes, and sample code."
+        }
+      ]
+    }
+  },
+  {
+    "id": "playstation",
+    "name": "Sony PlayStation",
+    "type": "game",
+    "year": 1994,
+    "cpu": "R3000A (33.8 MHz MIPS)",
+    "ram": "2 MB main RAM + 1 MB VRAM",
+    "description": "The PlayStation brought 3D gaming to the mainstream with CD-ROM storage. Its MIPS CPU and Sony development tools opened console programming to a wider audience of hobbyists and indie devs.",
+    "funFact": "The PlayStation was originally a Nintendo-Sony collaboration that fell apart — Sony then built their own console and changed gaming forever.",
+    "difficulty": "Advanced",
+    "languages": ["C", "MIPS Assembly"],
+    "codingExamples": [
+      {
+        "title": "Initialize Display",
+        "language": "C",
+        "realWorldUse": "Boot screen setup",
+        "code": "#include <sys/types.h>\n#include <libgte.h>\n#include <libgpu.h>\n\nvoid init_display(void) {\n    ResetGraph(0);\n    SetDispMask(1);\n    SetVideoMode(MODE_NTSC);\n    printf(\"PlayStation display ready!\\n\");\n}",
+        "beginnerExplanation": "C is easier than assembly for beginners. ResetGraph clears the screen, SetDispMask turns on display output, and SetVideoMode picks NTSC (US TV standard).",
+        "explanation": [
+          "#include lines pull in Sony's PSX SDK libraries for graphics.",
+          "ResetGraph(0) resets the GPU and clears framebuffer state.",
+          "SetDispMask(1) enables the display so pixels appear on screen.",
+          "SetVideoMode(MODE_NTSC) configures output for North American TVs.",
+          "printf sends a debug message to the development console."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "PlayStation 1 homebrew programming PSn00bSDK",
+      "websites": [
+        {
+          "title": "PSXDEV Wiki",
+          "url": "https://psxdev.net/wiki/",
+          "description": "PlayStation development documentation, SDKs, and community projects."
+        },
+        {
+          "title": "PSn00bSDK",
+          "url": "https://github.com/Lameguy64/PSn00bSDK",
+          "description": "Open-source SDK for building PlayStation homebrew without official Sony tools."
+        }
+      ]
+    }
+  },
+  {
+    "id": "gameboy",
+    "name": "Nintendo Game Boy",
+    "type": "handheld",
+    "year": 1989,
+    "cpu": "Sharp LR35902 (8080-based, 4.19 MHz)",
+    "ram": "8 KB work RAM + 8 KB video RAM",
+    "description": "The original Game Boy put a full game console in your pocket with a monochrome screen. Its simple hardware makes it one of the best platforms for learning retro game programming.",
+    "funFact": "Tetris was bundled with the Game Boy and is credited with much of its early success — over 35 million copies were sold.",
+    "difficulty": "Beginner",
+    "languages": ["GB Assembly", "C (with GBDK)"],
+    "codingExamples": [
+      {
+        "title": "Hello World with GBDK",
+        "language": "C",
+        "realWorldUse": "First Game Boy program",
+        "code": "#include <gb/gb.h>\n\nvoid main(void) {\n    printf(\"Hello, Game Boy!\");\n    while(1) {\n        wait_vbl_done();\n    }\n}",
+        "beginnerExplanation": "GBDK lets you write Game Boy games in C instead of assembly. printf shows text on screen. The while loop keeps the program running and wait_vbl_done syncs with the screen refresh.",
+        "explanation": [
+          "#include <gb/gb.h> imports the Game Boy Development Kit library.",
+          "void main(void) is the entry point — where your program starts.",
+          "printf displays text on the Game Boy's screen.",
+          "while(1) creates an infinite loop so the game doesn't exit.",
+          "wait_vbl_done() waits for the vertical blank — one screen frame."
+        ]
+      },
+      {
+        "title": "Move a Sprite",
+        "language": "C",
+        "realWorldUse": "Character movement",
+        "code": "#include <gb/gb.h>\n\nvoid main(void) {\n    UINT8 x = 80, y = 72;\n    set_sprite_tile(0, 0);\n    while(1) {\n        move_sprite(0, x, y);\n        x++;\n        if (x > 160) x = 0;\n        wait_vbl_done();\n    }\n}",
+        "beginnerExplanation": "Sprites are movable images on screen. We set a tile for sprite 0, then move it one pixel right each frame. When it goes off-screen, we reset x to 0.",
+        "explanation": [
+          "UINT8 stores small whole numbers (0-255) for x and y positions.",
+          "set_sprite_tile(0, 0) assigns tile graphic 0 to sprite number 0.",
+          "move_sprite(0, x, y) places sprite 0 at coordinates (x, y).",
+          "x++ moves the sprite one pixel to the right each frame.",
+          "if (x > 160) x = 0 wraps the sprite back to the left edge."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Game Boy programming GBDK tutorial beginner",
+      "websites": [
+        {
+          "title": "GBDK Documentation",
+          "url": "https://gbdk.sourceforge.net/",
+          "description": "Official docs for the Game Boy Development Kit — write C games for Game Boy."
+        },
+        {
+          "title": "Pan Docs",
+          "url": "https://gbdev.io/pandocs/",
+          "description": "Complete technical reference for every Game Boy hardware register."
+        }
+      ]
+    }
+  },
+  {
+    "id": "nintendo-ds",
+    "name": "Nintendo DS",
+    "type": "handheld",
+    "year": 2004,
+    "cpu": "ARM9 (67 MHz) + ARM7 (33 MHz)",
+    "ram": "4 MB main RAM + 656 KB VRAM",
+    "description": "The DS featured dual screens, a touchscreen, and wireless play. Homebrew developers use libnds and devkitARM to create games and apps that run from flash carts.",
+    "funFact": "The DS stylus and touchscreen inspired a whole genre of puzzle and brain-training games that appealed to non-traditional gamers.",
+    "difficulty": "Intermediate",
+    "languages": ["C", "C++"],
+    "codingExamples": [
+      {
+        "title": "Touchscreen Input",
+        "language": "C",
+        "realWorldUse": "Touch controls",
+        "code": "#include <nds.h>\n\nint main(void) {\n    consoleDemoInit();\n    while(1) {\n        scanKeys();\n        if (keysHeld() & KEY_TOUCH) {\n            touchPosition touch;\n            touchRead(&touch);\n            iprintf(\"Touched: %d, %d\\n\",\n                    touch.px, touch.py);\n        }\n        swiWaitForVBlank();\n    }\n}",
+        "beginnerExplanation": "The DS touchscreen works like a phone screen. scanKeys() checks input, KEY_TOUCH detects a finger press, and touchRead gets the exact x,y coordinates.",
+        "explanation": [
+          "consoleDemoInit() sets up text output on the bottom screen.",
+          "scanKeys() reads all input devices including buttons and touch.",
+          "keysHeld() & KEY_TOUCH checks if the screen is being touched.",
+          "touchRead(&touch) stores the touch coordinates in a struct.",
+          "swiWaitForVBlank() syncs the loop to the display refresh rate."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Nintendo DS homebrew programming libnds tutorial",
+      "websites": [
+        {
+          "title": "devkitPro",
+          "url": "https://devkitpro.org/",
+          "description": "Toolchain and libraries for Nintendo DS, 3DS, and other console homebrew."
+        },
+        {
+          "title": "DS Homebrew Guide",
+          "url": "https://ds-homebrew.com/",
+          "description": "Community hub for DS homebrew apps, tools, and getting started guides."
+        }
+      ]
+    }
+  },
+  {
+    "id": "steam-deck",
+    "name": "Steam Deck",
+    "type": "handheld",
+    "year": 2022,
+    "cpu": "AMD Zen 2 (4 cores, 2.4–3.5 GHz)",
+    "ram": "16 GB LPDDR5",
+    "description": "The Steam Deck is a handheld PC running SteamOS (Linux). You can develop games with Godot, Unity, or native C/C++ and deploy directly — it's the most open modern handheld for coding.",
+    "funFact": "The Steam Deck runs a full Linux desktop in Desktop Mode, so you can install VS Code, Python, and any dev tools right on the device.",
+    "difficulty": "Beginner",
+    "languages": ["Python", "C#", "GDScript", "C++"],
+    "codingExamples": [
+      {
+        "title": "Simple Python Game Loop",
+        "language": "Python",
+        "realWorldUse": "Indie game prototype",
+        "code": "import pygame\n\npygame.init()\nscreen = pygame.display.set_mode((800, 480))\nclock = pygame.time.Clock()\n\nrunning = True\nwhile running:\n    for event in pygame.event.get():\n        if event.type == pygame.QUIT:\n            running = False\n    screen.fill((20, 20, 40))\n    pygame.display.flip()\n    clock.tick(60)\n\npygame.quit()",
+        "beginnerExplanation": "Pygame is perfect for beginners. You create a window, run a loop that checks for quit events, fill the screen with a color, and refresh at 60 frames per second.",
+        "explanation": [
+          "pygame.init() starts all pygame modules.",
+          "set_mode((800, 480)) opens an 800×480 window — Steam Deck's native resolution.",
+          "The for loop checks events — like the player closing the window.",
+          "screen.fill((20, 20, 40)) paints the background dark blue.",
+          "clock.tick(60) limits the game to 60 frames per second."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Steam Deck game development tutorial Godot",
+      "websites": [
+        {
+          "title": "Steamworks Documentation",
+          "url": "https://partner.steamgames.com/doc/home",
+          "description": "Official Steam publishing and Steam Deck optimization guides."
+        },
+        {
+          "title": "Godot Engine",
+          "url": "https://godotengine.org/",
+          "description": "Free, open-source game engine with excellent Steam Deck export support."
+        }
+      ]
+    }
+  },
+  {
+    "id": "raspberry-pi",
+    "name": "Raspberry Pi",
+    "type": "network/wifi",
+    "year": 2012,
+    "cpu": "Broadcom ARM (varies by model, up to 2.4 GHz quad-core)",
+    "ram": "1–8 GB depending on model",
+    "description": "The Raspberry Pi is a credit-card-sized computer with built-in WiFi on most models. It's the go-to platform for learning Python, networking, IoT projects, and Linux system programming.",
+    "funFact": "Over 50 million Raspberry Pi boards have been sold, making it one of the best-selling computers of all time.",
+    "difficulty": "Beginner",
+    "languages": ["Python", "Bash", "C"],
+    "codingExamples": [
+      {
+        "title": "Blink an LED",
+        "language": "Python",
+        "realWorldUse": "Hardware I/O basics",
+        "code": "import RPi.GPIO as GPIO\nimport time\n\nLED_PIN = 18\nGPIO.setmode(GPIO.BCM)\nGPIO.setup(LED_PIN, GPIO.OUT)\n\ntry:\n    while True:\n        GPIO.output(LED_PIN, GPIO.HIGH)\n        time.sleep(1)\n        GPIO.output(LED_PIN, GPIO.LOW)\n        time.sleep(1)\nfinally:\n    GPIO.cleanup()",
+        "beginnerExplanation": "This is the 'Hello World' of hardware! You connect an LED to pin 18, then turn it on for 1 second and off for 1 second in a loop. GPIO.cleanup() safely releases the pin when done.",
+        "explanation": [
+          "GPIO.setmode(GPIO.BCM) uses Broadcom pin numbering.",
+          "GPIO.setup(LED_PIN, GPIO.OUT) configures pin 18 as an output.",
+          "GPIO.HIGH turns the LED on (3.3V), GPIO.LOW turns it off.",
+          "time.sleep(1) pauses for one second between on and off.",
+          "finally: GPIO.cleanup() runs even on error to free the pin."
+        ]
+      },
+      {
+        "title": "WiFi Web Server",
+        "language": "Python",
+        "realWorldUse": "IoT dashboard",
+        "code": "from flask import Flask\n\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return '<h1>Pi is online!</h1>'\n\nif __name__ == '__main__':\n    app.run(host='0.0.0.0', port=5000)",
+        "beginnerExplanation": "Flask turns your Pi into a tiny web server. Any device on your WiFi network can visit the Pi's IP address and see 'Pi is online!' — great for IoT dashboards.",
+        "explanation": [
+          "Flask is a lightweight Python web framework.",
+          "@app.route('/') defines what happens when someone visits the homepage.",
+          "return '<h1>Pi is online!</h1>' sends HTML back to the browser.",
+          "host='0.0.0.0' makes the server reachable from other devices on the network.",
+          "port=5000 is the network port the server listens on."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Raspberry Pi beginner programming tutorial Python",
+      "websites": [
+        {
+          "title": "Raspberry Pi Official Docs",
+          "url": "https://www.raspberrypi.com/documentation/",
+          "description": "Official guides for setup, GPIO, cameras, and networking."
+        },
+        {
+          "title": "GPIO Zero",
+          "url": "https://gpiozero.readthedocs.io/",
+          "description": "Beginner-friendly Python library for controlling GPIO pins."
+        }
+      ]
+    }
+  },
+  {
+    "id": "esp32",
+    "name": "ESP32 WiFi Module",
+    "type": "network/wifi",
+    "year": 2016,
+    "cpu": "Xtensa LX6 dual-core (240 MHz)",
+    "ram": "520 KB SRAM",
+    "description": "The ESP32 is a tiny microcontroller with built-in WiFi and Bluetooth. It's perfect for IoT projects — smart home sensors, web servers, and wireless communication — at very low cost.",
+    "funFact": "ESP32 boards cost around $5–10 and can run a full web server while reading temperature sensors — all on a chip smaller than a postage stamp.",
+    "difficulty": "Beginner",
+    "languages": ["C++ (Arduino)", "MicroPython"],
+    "codingExamples": [
+      {
+        "title": "Connect to WiFi",
+        "language": "C++ (Arduino)",
+        "realWorldUse": "IoT connectivity",
+        "code": "#include <WiFi.h>\n\nconst char* ssid = \"YourNetwork\";\nconst char* password = \"YourPassword\";\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.begin(ssid, password);\n  while (WiFi.status() != WL_CONNECTED) {\n    delay(500);\n    Serial.print(\".\");\n  }\n  Serial.println(\"\\nWiFi connected!\");\n}\n\nvoid loop() {}",
+        "beginnerExplanation": "Arduino-style code is great for beginners. setup() runs once at start to connect to WiFi. The while loop waits until connected, printing dots. loop() runs forever (empty here).",
+        "explanation": [
+          "#include <WiFi.h> imports the ESP32 WiFi library.",
+          "ssid and password are your home network credentials.",
+          "WiFi.begin() starts the connection process.",
+          "while loop waits until WiFi.status() returns WL_CONNECTED.",
+          "void loop() {} is required but empty — runs after setup forever."
+        ]
+      },
+      {
+        "title": "Read Temperature Sensor",
+        "language": "MicroPython",
+        "realWorldUse": "Sensor data",
+        "code": "from machine import Pin\nimport dht\nimport time\n\nsensor = dht.DHT22(Pin(4))\n\nwhile True:\n    try:\n        sensor.measure()\n        print(f\"Temp: {sensor.temperature()}C\")\n        print(f\"Humidity: {sensor.humidity()}%\")\n    except OSError:\n        print(\"Sensor read failed\")\n    time.sleep(2)",
+        "beginnerExplanation": "MicroPython lets you write Python on microcontrollers! A DHT22 sensor measures temperature and humidity. We read it every 2 seconds and print the values.",
+        "explanation": [
+          "dht.DHT22(Pin(4)) connects a DHT22 sensor to GPIO pin 4.",
+          "sensor.measure() triggers a temperature/humidity reading.",
+          "sensor.temperature() returns the current temperature in Celsius.",
+          "except OSError handles failed sensor reads gracefully.",
+          "time.sleep(2) waits 2 seconds between readings."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "ESP32 Arduino tutorial beginner WiFi",
+      "websites": [
+        {
+          "title": "ESP32 Arduino Core",
+          "url": "https://docs.espressif.com/projects/arduino-esp32/en/latest/",
+          "description": "Official Arduino framework documentation for ESP32 development."
+        },
+        {
+          "title": "Random Nerd Tutorials",
+          "url": "https://randomnerdtutorials.com/esp32/",
+          "description": "Beginner-friendly ESP32 project tutorials with wiring diagrams."
+        }
+      ]
+    }
+  },
+  {
+    "id": "commodore-64",
+    "name": "Commodore 64",
+    "type": "computer",
+    "year": 1982,
+    "cpu": "MOS 6510 (1 MHz)",
+    "ram": "64 KB (38 KB available for BASIC)",
+    "description": "The C64 was the best-selling single computer model ever. You turned it on and immediately got a BASIC prompt — millions of people learned to code by typing programs from magazines.",
+    "funFact": "The C64's SID sound chip is still used by musicians today. Its distinctive chip-tune sound defined 1980s game and demo music.",
+    "difficulty": "Beginner",
+    "languages": ["BASIC", "6502 Assembly"],
+    "codingExamples": [
+      {
+        "title": "Hello World in BASIC",
+        "language": "BASIC",
+        "realWorldUse": "First program ever for many coders",
+        "code": "10 PRINT \"HELLO, COMMODORE 64!\"\n20 PRINT \"LEARNING TO CODE IS FUN\"\n30 FOR I = 1 TO 5\n40   PRINT \"LINE \"; I\n50 NEXT I\n60 END",
+        "beginnerExplanation": "BASIC was designed so anyone could code. Each line has a number. PRINT shows text. FOR/NEXT creates a loop that counts from 1 to 5. Type RUN to execute!",
+        "explanation": [
+          "Line numbers (10, 20, 30...) let you insert new lines between existing ones.",
+          "PRINT displays text on screen — quotes hold the message.",
+          "FOR I = 1 TO 5 starts a loop; I counts from 1 to 5.",
+          "NEXT I goes back to the FOR line until I reaches 5.",
+          "END stops the program."
+        ]
+      },
+      {
+        "title": "Colorful Text",
+        "language": "BASIC",
+        "realWorldUse": "Screen graphics",
+        "code": "10 FOR C = 1 TO 8\n20   POKE 53280, C\n30   PRINT CHR$(147);\n40   PRINT \"COLOR \"; C\n50   FOR D = 1 TO 500: NEXT D\n60 NEXT C\n70 POKE 53280, 6",
+        "beginnerExplanation": "POKE writes a value directly into memory. Address 53280 controls border color (1-8). CHR$(147) clears the screen. The inner loop creates a delay so you can see each color.",
+        "explanation": [
+          "POKE 53280, C changes the border color to value C (1 through 8).",
+          "CHR$(147) is a control code that clears the screen.",
+          "FOR D = 1 TO 500: NEXT D is a simple delay loop.",
+          "The outer loop cycles through all 8 C64 colors.",
+          "POKE 53280, 6 resets the border to blue at the end."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Commodore 64 BASIC programming tutorial beginner",
+      "websites": [
+        {
+          "title": "C64 Wiki",
+          "url": "https://www.c64-wiki.com/",
+          "description": "Comprehensive Commodore 64 encyclopedia with BASIC and hardware info."
+        },
+        {
+          "title": "Commodore 64 BASIC V2 Manual",
+          "url": "https://www.commodore.ca/manuals/c64_users_guide/c64-users_guide.pdf",
+          "description": "The original user guide that taught a generation to program."
+        }
+      ]
+    }
+  },
+  {
+    "id": "apple-ii",
+    "name": "Apple II",
+    "type": "computer",
+    "year": 1977,
+    "cpu": "MOS 6502 (1 MHz)",
+    "ram": "4 KB (expandable to 48 KB)",
+    "description": "The Apple II was one of the first successful personal computers. Its open architecture and Applesoft BASIC made it a classroom staple and launched countless programming careers.",
+    "funFact": "VisiCalc, the first spreadsheet program, was written for the Apple II in 1979 and is credited with making personal computers essential business tools.",
+    "difficulty": "Beginner",
+    "languages": ["Applesoft BASIC", "6502 Assembly"],
+    "codingExamples": [
+      {
+        "title": "Guess the Number Game",
+        "language": "Applesoft BASIC",
+        "realWorldUse": "Interactive programs",
+        "code": "10 SECRET = INT(RND(1) * 100) + 1\n20 PRINT \"GUESS A NUMBER 1-100\"\n30 INPUT GUESS\n40 IF GUESS = SECRET THEN PRINT \"YOU WIN!\": END\n50 IF GUESS < SECRET THEN PRINT \"TOO LOW\"\n60 IF GUESS > SECRET THEN PRINT \"TOO HIGH\"\n70 GOTO 30",
+        "beginnerExplanation": "This classic game picks a random number and asks you to guess. RND creates randomness, INPUT gets your guess, and IF statements check if you're right, too high, or too low.",
+        "explanation": [
+          "RND(1) generates a random decimal; INT() rounds down.",
+          "INPUT GUESS waits for the player to type a number.",
+          "IF GUESS = SECRET checks for a correct guess.",
+          "IF GUESS < SECRET gives a 'too low' hint.",
+          "GOTO 30 loops back to ask for another guess."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Apple II BASIC programming tutorial",
+      "websites": [
+        {
+          "title": "Apple II Documentation Project",
+          "url": "https://www.apple-iigs.info/",
+          "description": "Preserved manuals, software, and programming references for Apple II."
+        },
+        {
+          "title": "Virtual Apple II",
+          "url": "https://www.virtualapple.org/",
+          "description": "Run Apple II software in your browser — great for trying BASIC programs."
+        }
+      ]
+    }
+  },
+  {
+    "id": "pac-man-arcade",
+    "name": "Pac-Man Arcade Cabinet",
+    "type": "arcade",
+    "year": 1980,
+    "cpu": "Zilog Z80 (3.072 MHz)",
+    "ram": "16 KB",
+    "description": "Pac-Man's arcade board is a masterclass in efficient game design. The Z80 CPU, simple graphics hardware, and tight memory constraints forced developers to write clever, optimized code.",
+    "funFact": "Pac-Man was designed to appeal to women and couples — a deliberate break from the space-shooter arcade games that dominated the late 1970s.",
+    "difficulty": "Advanced",
+    "languages": ["Z80 Assembly"],
+    "codingExamples": [
+      {
+        "title": "Z80 Hello World",
+        "language": "Z80 Assembly",
+        "realWorldUse": "Arcade boot code",
+        "code": "; Z80 Assembly - Output to screen\n        LD  A, 'H'     ; Load 'H' into A register\n        CALL $0038     ; Call ROM print routine\n        LD  A, 'I'     ; Load 'I'\n        CALL $0038     ; Print it\n        HALT           ; Stop CPU\n        JR  $          ; Infinite loop",
+        "beginnerExplanation": "The Z80 CPU uses registers like A to hold values. CALL jumps to a built-in ROM routine that prints a character. HALT stops the CPU; JR $ loops forever as a safety net.",
+        "explanation": [
+          "LD A, 'H' loads the ASCII character H into the A register.",
+          "CALL $0038 calls the monitor's character-print routine.",
+          "Each CALL prints one character to the screen.",
+          "HALT stops the processor until the next interrupt.",
+          "JR $ jumps to the current address — an infinite loop."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Z80 assembly programming arcade tutorial",
+      "websites": [
+        {
+          "title": "Pac-Man Dossier",
+          "url": "https://pacman.holenet.info/",
+          "description": "In-depth technical analysis of Pac-Man's game logic and ghost AI."
+        },
+        {
+          "title": "Z80 Instruction Set",
+          "url": "https://z80.info/wiki/doku.php",
+          "description": "Complete Z80 assembly language reference and tutorials."
+        }
+      ]
+    }
+  },
+  {
+    "id": "street-fighter-arcade",
+    "name": "Street Fighter II Arcade",
+    "type": "arcade",
+    "year": 1991,
+    "cpu": "Motorola 68000 (12 MHz) + Z80 (3.579 MHz)",
+    "ram": "256 KB main + 192 KB graphics",
+    "description": "Street Fighter II's CPS-1 arcade board used a 68000 for game logic and a Z80 for sound. Fighting games demand precise frame timing — making this excellent for learning real-time programming.",
+    "funFact": "Street Fighter II arcade cabinets earned an estimated $10 billion in revenue — one of the highest-grossing games ever.",
+    "difficulty": "Advanced",
+    "languages": ["68000 Assembly", "C"],
+    "codingExamples": [
+      {
+        "title": "Frame Counter",
+        "language": "68000 Assembly",
+        "realWorldUse": "Game timing",
+        "code": "; 68000 - Increment frame counter each VBlank\n        SECTION CODE\nStart:  MOVE.L  #0, D0        ; Frame counter in D0\nLoop:   ADDQ.L  #1, D0        ; Add 1 to counter\n        CMP.L   #60, D0        ; 60 frames = 1 second\n        BLT.S   WaitVBlank     ; Branch if less than 60\n        MOVE.L  #0, D0         ; Reset counter\nWaitVBlank:\n        ; Wait for vertical blank interrupt\n        BRA.S   Loop           ; Repeat forever",
+        "beginnerExplanation": "Fighting games run at 60 frames per second. This code counts frames in register D0. When it hits 60 (one second), it resets. Everything in fighting games is synced to this frame counter.",
+        "explanation": [
+          "MOVE.L #0, D0 initializes data register D0 to zero.",
+          "ADDQ.L #1, D0 adds 1 to the frame counter each loop.",
+          "CMP.L #60, D0 compares the counter to 60 frames.",
+          "BLT.S WaitVBlank branches if counter is less than 60.",
+          "BRA.S Loop jumps back to create the main game loop."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "CPS-1 arcade board programming 68000 assembly",
+      "websites": [
+        {
+          "title": "Capcom CPS-1 Hardware",
+          "url": "https://www.system16.com/hardware.php?id=714",
+          "description": "Technical specs for the CPS-1 board used by Street Fighter II."
+        },
+        {
+          "title": "FightCade Documentation",
+          "url": "https://github.com/Fightcade/fightcade-fbneo",
+          "description": "Open-source arcade emulator with CPS-1 support for studying game code."
+        }
+      ]
+    }
+  },
+  {
+    "id": "xbox",
+    "name": "Microsoft Xbox",
+    "type": "game",
+    "year": 2001,
+    "cpu": "Intel Pentium III (733 MHz)",
+    "ram": "64 MB DDR SDRAM",
+    "description": "The original Xbox was essentially a PC in a console shell — Intel CPU, NVIDIA GPU, and a hard drive. This made it unusually accessible for homebrew and indie development.",
+    "funFact": "The Xbox was Microsoft's first game console. Bill Gates personally announced it and the 'X' stands for DirectX, Microsoft's graphics API.",
+    "difficulty": "Intermediate",
+    "languages": ["C", "C++", "C# (XNA)"],
+    "codingExamples": [
+      {
+        "title": "Clear the Screen",
+        "language": "C",
+        "realWorldUse": "Graphics initialization",
+        "code": "#include <hal/video.h>\n\nvoid main() {\n    XVideoSetMode(640, 480, 32, REFRESH_DEFAULT);\n    while(1) {\n        XVideoSetBackColor(0xFF000040);\n        XVideoWaitForVBlank();\n    }\n}",
+        "beginnerExplanation": "Xbox homebrew uses C with special libraries. XVideoSetMode picks 640×480 resolution. XVideoSetBackColor fills the screen dark blue. The loop waits for each frame.",
+        "explanation": [
+          "XVideoSetMode configures 640×480 at 32-bit color depth.",
+          "REFRESH_DEFAULT uses the standard 60Hz refresh rate.",
+          "XVideoSetBackColor(0xFF000040) sets a dark blue background.",
+          "0xFF000040 is a hex color: alpha, red, green, blue.",
+          "XVideoWaitForVBlank() syncs to the display refresh."
+        ]
+      }
+    ],
+    "resources": {
+      "youtubeQuery": "Original Xbox homebrew development tutorial",
+      "websites": [
+        {
+          "title": "Xbox Dev Wiki",
+          "url": "https://xboxdevwiki.net/",
+          "description": "Hardware documentation and homebrew development resources for Xbox."
+        },
+        {
+          "title": "nxdk (New Xbox Development Kit)",
+          "url": "https://github.com/XboxDev/nxdk",
+          "description": "Open-source development kit for creating Xbox homebrew games."
+        }
+      ]
+    }
+  }
+]

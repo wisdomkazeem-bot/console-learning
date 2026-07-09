@@ -1,26 +1,150 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --retro-bg: #0d0d1a;
+  --retro-surface: #1a1a2e;
+  --retro-border: #2d2d4a;
+  --retro-text: #e0e0f0;
+  --retro-muted: #8888aa;
+  --retro-cyan: #00f0f0;
+  --retro-green: #00ff88;
+  --retro-yellow: #ffee00;
+  --retro-red: #ff4466;
+  --retro-purple: #cc66ff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-retro-bg: var(--retro-bg);
+  --color-retro-surface: var(--retro-surface);
+  --color-retro-border: var(--retro-border);
+  --color-retro-text: var(--retro-text);
+  --color-retro-muted: var(--retro-muted);
+  --color-retro-cyan: var(--retro-cyan);
+  --color-retro-green: var(--retro-green);
+  --color-retro-yellow: var(--retro-yellow);
+  --color-retro-red: var(--retro-red);
+  --color-retro-purple: var(--retro-purple);
+  --shadow-pixel-glow: 0 0 20px rgba(0, 240, 240, 0.15);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  image-rendering: pixelated;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--retro-bg);
+  color: var(--retro-text);
+  font-family: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
+  min-height: 100vh;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.font-pixel {
+  font-family: var(--font-pixel), "Press Start 2P", monospace;
+}
+
+.pixel-border {
+  border: 3px solid var(--retro-border);
+  box-shadow:
+    inset -3px -3px 0 0 rgba(0, 0, 0, 0.3),
+    inset 3px 3px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+.pixel-card {
+  border: 3px solid var(--retro-border);
+  background: var(--retro-surface);
+  padding: 1.25rem;
+  box-shadow:
+    4px 4px 0 0 rgba(0, 0, 0, 0.4),
+    inset -2px -2px 0 0 rgba(0, 0, 0, 0.2),
+    inset 2px 2px 0 0 rgba(255, 255, 255, 0.03);
+}
+
+.pixel-tag {
+  border: 2px solid currentColor;
+  padding: 2px 6px;
+  display: inline-block;
+}
+
+.pixel-btn {
+  font-family: var(--font-pixel), "Press Start 2P", monospace;
+  font-size: 10px;
+  padding: 12px 20px;
+  border: 3px solid var(--retro-cyan);
+  background: var(--retro-surface);
+  color: var(--retro-cyan);
+  cursor: pointer;
+  box-shadow: 4px 4px 0 0 var(--retro-cyan);
+  transition: all 0.1s;
+}
+
+.pixel-btn:hover {
+  background: var(--retro-cyan);
+  color: var(--retro-bg);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 0 var(--retro-cyan);
+}
+
+.pixel-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.pixel-btn-sm {
+  font-family: var(--font-pixel), "Press Start 2P", monospace;
+  padding: 6px 12px;
+  border: 2px solid var(--retro-muted);
+  background: var(--retro-bg);
+  color: var(--retro-muted);
+  cursor: pointer;
+  transition: all 0.1s;
+  display: inline-block;
+}
+
+.pixel-btn-sm:hover {
+  border-color: var(--retro-green);
+  color: var(--retro-green);
+}
+
+.pixel-btn-active {
+  background: var(--retro-cyan) !important;
+  color: var(--retro-bg) !important;
+  border-color: var(--retro-cyan) !important;
+  box-shadow: 2px 2px 0 0 var(--retro-cyan) !important;
+}
+
+.shadow-pixel-glow {
+  box-shadow:
+    4px 4px 0 0 rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(0, 240, 240, 0.15);
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink::after {
+  content: "█";
+  animation: blink 1s step-end infinite;
+  color: var(--retro-green);
 }
